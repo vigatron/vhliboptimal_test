@@ -5,7 +5,7 @@
 
 using namespace vhliboptimal;
 
-const QImage & GetOptimalQImage();
+const QImage & GetOptimalBWQImage();
 
 
 /** 
@@ -20,34 +20,21 @@ void IFACE_OPTIMAL_GetLinePixels(
     uint16_t srcy
 ) {
 
-    // static std::vector<uint8_t> r;
-    // // settings changed ( cellsize ) - reallocate buffer
-    // if(r.empty() || r.size() != bytescnt) { r = std::vector<uint8_t>(bytescnt); }
-
-    const QImage & img = GetOptimalQImage();
-    //     QImage::Format fmt = img.format();
+    const QImage & img = GetOptimalBWQImage();
+    QImage::Format fmt = img.format();
 
     // Out of Y ?
-    if( srcy >= img.height() ) {
+    if( srcy >= img.height() || fmt != QImage::Format_Grayscale8) {
         std::memset(dstptr, 0, bytescnt);
         return;
     }
 
     const uint8_t *line = img.scanLine(srcy);
-    int depth = img.depth();
-    int bytesPerPixel = depth / CHAR_BIT;
     int bytesAvail = img.width() - srcx;
     uint8_t c;
 
     for(int i=0; i < bytescnt; i++) {
-
-        // RGBA > 256 B&W, яркость по формуле NTSC
-        if(i < bytesAvail) {
-            const uint8_t *pixel = line + ((i + srcx) * bytesPerPixel);
-            c = static_cast<uint8_t>(0.299*pixel[2] + 0.587*pixel[1] + 0.114*pixel[0]);
-        } else {
-            c = 0;
-        }
+        c = i < bytesAvail ? line[srcx+i]:0;
         dstptr[i] = c;
     }
 

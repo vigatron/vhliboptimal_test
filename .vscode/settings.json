@@ -6,10 +6,10 @@
         "args": [
             // "../data/testpic1.jpg",
             // "../data/testpic2.jpg",
-            // "../data/testimage3r1080p.jpg",
-            "../data/testimage4r1080p.jpg"
-        ],
-        "miDebuggerArgs": "--quiet -ex 'set debuginfod enabled off'",
+            "../data/testimage3r1080p.jpg"
+            // "../data/testimage4r1080p.jpg"
+        ]
+        // , "miDebuggerArgs": "--quiet -ex 'set debuginfod enabled off'",
     },
 
     "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
