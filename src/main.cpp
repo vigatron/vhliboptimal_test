@@ -9,6 +9,7 @@
 #include "vhtimerstamp.hpp"
 
 #include <QImage>
+#include <QPainter>
 #include <QFileInfo>
 
 
@@ -98,6 +99,35 @@ void generateOutPic() {
     imgdst = QImage(imgsrc.width(), imgsrc.height(), imgsrc.format());
     imgdst.fill(Qt::black);
 
+    {
+        QPainter painter(&imgdst);
+        painter.setPen(QColor(0, 200, 0));
+        painter.setBrush(QColor(0, 96, 0));
+
+        for(int i = 0; i < detector.GetObjectsCount(); i++) {
+            const vhliboptimal::VHOptimalFigure & obj = detector.GetObject(i);
+            const vhliboptimal::CellsMatrix & cmtx = detector.GetCMatrix();
+            const strect rect = obj.PosAbs(cmtx);
+
+            int w = rect.x2 - rect.x1 + 1;
+            int h = rect.y2 - rect.y1 + 1;
+            painter.drawRect(rect.x1, rect.y1, w, h);
+        }
+
+        painter.end();
+    }
+
+    {
+        for(int y = 0; y < imgsrc.height(); y++) {
+            for(int x = 0; x < imgsrc.width(); x++) {
+                QRgb pxl = imgbw8.pixel(x, y);
+                if(qBlue(pxl)>200)
+                    imgdst.setPixel(x, y, pxl);
+            }
+        }
+    }
+    
+
 }
 
 /**
@@ -132,7 +162,7 @@ verr runtest(const std::string & fname) {
     imgbw8 = imgsrc.convertToFormat(QImage::Format_Grayscale8);
 
     long long tssumm = 0;
-    int tscnt  = 16;
+    int tscnt  = 8;
     for(int i=0;i < tscnt;i++) {
         if(iteration()) { tssumm = 0; break; }
         tssumm += ts.result_ms();
@@ -160,9 +190,3 @@ int main(int argc, char *argv[]) {
 
     return 1;
 }
-
-// for(int i = 0; i < detector.GetObjectsCount(); i++) {
-//     const vhliboptimal::VHOptimalFigure & obj = detector.GetObject(i);
-//     const vhliboptimal::CellsMatrix & cmtx = detector.GetCMatrix();
-//     obj.Border(cmtx, IFACE_OPTIMAL_SetPos);
-// }
