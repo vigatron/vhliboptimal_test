@@ -5,69 +5,65 @@
 
 using namespace vhliboptimal;
 
-const QImage & GetOptimalQImage();
+const QImage & GetOptimalBWQImage();
 
 
 /** 
- * Load pixels line starting from (x,y)
+ * 
  */
-const std::vector<uint8_t> & IFACE_OPTIMAL_GetLinePixels(uint16_t pxlx, uint16_t pxly, uint16_t cnt) {
+void IFACE_OPTIMAL_GetLinePixels(
+    void *userData,
+    uint8_t *dstptr,
+    uint16_t bytescnt,
+    uint16_t srcid,
+    uint16_t srcx,
+    uint16_t srcy
+) {
 
-    static std::vector<uint8_t> r;
+    const QImage & img = GetOptimalBWQImage();
+    QImage::Format fmt = img.format();
 
-    if(r.empty()) {
-        r = std::vector<uint8_t>(cnt);
+    // Out of Y ?
+    if( srcy >= img.height() || fmt != QImage::Format_Grayscale8) {
+        std::memset(dstptr, 0, bytescnt);
+        return;
     }
 
-    const QImage & img = GetOptimalQImage();
+    const uint8_t *line = img.scanLine(srcy);
+    int bytesAvail = img.width() - srcx;
+    uint8_t c;
 
-    int pxlsInLineAvail = img.width() - pxlx;
-    int bytesRead = (cnt > pxlsInLineAvail) ? pxlsInLineAvail : cnt;
-
-    if(pxly < img.height()) {
-
-        const uint8_t *line = img.scanLine(pxly);
-        QImage::Format fmt = img.format();
-        int depth = img.depth();
-        int bytesPerPixel = depth / CHAR_BIT;
-
-        for(int i=0; i<bytesRead;i++) {
-
-            // RGBA
-            const uint8_t *pixel = line + ((i+pxlx) * bytesPerPixel);
-
-            // яркость по формуле NTSC
-            uint8_t gray = static_cast<uint8_t>(0.299*pixel[2] + 0.587*pixel[1] + 0.114*pixel[0]);
-            r[i] = gray;
-        }
+    for(int i=0; i < bytescnt; i++) {
+        c = i < bytesAvail ? line[srcx+i]:0;
+        dstptr[i] = c;
     }
 
-    for (uint8_t val : r) {
-        if (val != 0) {
-            asm("nop"); // Нашли ненулевой элемент, сразу выходим
-        }
-    }
-
-    return r;
 }
 
 /**
  * 
  */
-void IFACE_OPTIMAL_SetPos(
+void IFACE_OPTIMAL_Border(
+    void *userData,
     uint8_t cmd,
-    uint8_t dirh,
+    uint8_t dirh, 
     uint8_t dirv,
     uint16_t cellx,
-    uint16_t celly,
-    uint16_t pxlx,
-    uint16_t pxly)
-{
-    if(cmd == VHOptimalFigure::cmdStart) std::cout << std::endl;
+    uint16_t celly, 
+    uint16_t imgx,
+    uint16_t imgy
+) {
 
-    std::string msg = std::format(
-        "cmd={} dirh={} dirv={} cx:cy={}:{} x:y={}:{}",
-        cmd, dirh, dirv, cellx, celly, pxlx,pxly);
+}
 
-    std::cout << msg << std::endl;
+/**
+ * 
+ */
+void IFACE_OPTIMAL_Content(
+    void *userData,
+    uint32_t cell1,
+    uint32_t cell2,
+    uint8_t dir
+) {
+
 }

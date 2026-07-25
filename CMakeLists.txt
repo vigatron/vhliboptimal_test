@@ -16,12 +16,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 find_package(Qt6 REQUIRED Core Widgets Gui)
 
 add_compile_definitions(SAVE_RESULTS=0)
-
-# git submodule init
-# git add .gitmodules src/extmods/vhlibplatform src/extmods/vhliboptimal
-# git submodule update --init
-# git submodule update --init --recursive --remote
-
+# add_compile_options(-O3 -march=native -mavx2 -mbmi)
+add_compile_options(-O3)
 
 add_subdirectory(src/extmods/vhlibplatform)
 add_subdirectory(src/extmods/vhliboptimal)
