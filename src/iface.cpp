@@ -54,11 +54,6 @@ void IFACE_OPTIMAL_Border(
     uint16_t imgy
 ) {
 
-    // if(cmd == VHOptimalFigure::cmdStart) std::cout << std::endl;
-    // std::string msg = std::format(
-    //     "cmd={} dirh={} dirv={} cx:cy={}:{} x:y={}:{}",
-    //     cmd, dirh, dirv, cellx, celly, pxlx,pxly);
-    // std::cout << msg << std::endl;
 }
 
 /**
