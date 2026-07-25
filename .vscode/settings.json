@@ -4,8 +4,10 @@
     "cmake.debugConfig": {
         // "targetArchitecture": "x86_64",
         "args": [
-            "../data/testpic1.jpg"
-            // "../data/testpic2.jpg"
+            // "../data/testpic1.jpg",
+            // "../data/testpic2.jpg",
+            // "../data/testimage3r1080p.jpg",
+            "../data/testimage4r1080p.jpg"
         ],
         "miDebuggerArgs": "--quiet -ex 'set debuginfod enabled off'",
     },

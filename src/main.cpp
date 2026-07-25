@@ -1,25 +1,13 @@
 #include "vhplatform.hpp"
 #include "vhliboptimal.hpp"
 
+#include "iface.hpp"
+
 #include <QImage>
 
 
 static QImage imgsrc;
 
-
-const std::vector<uint8_t> & IFACE_OPTIMAL_GetLinePixels(
-    uint16_t pxlx,
-    uint16_t pxly,
-    uint16_t cnt);
-
-void IFACE_OPTIMAL_SetPos(
-    uint8_t cmd,
-    uint8_t dirh,
-    uint8_t dirv,
-    uint16_t cellx,
-    uint16_t celly,
-    uint16_t pxlx,
-    uint16_t pxly);
 
 /**
  * 
@@ -74,24 +62,33 @@ verr runtest(const std::string & fname) {
     const vhliboptimal::stConfig cfg = {
         .imageWidth     = (uint16_t)imgsrc.width(),
         .imageHeight    = (uint16_t)imgsrc.height(),
-        .cellsize       = 16,
         .spccnt         = 0,
-        .minColorVal    = 128
+        .cellsize       = 2,
+        .minColorVal    = 128,
+        .min_obj_width  = 4,
+        .min_obj_height = 4,
+        .max_obj_width  = F1K * 4,
+        .max_obj_height = F1K * 4,
+        .loglevel       = vhliboptimal::LOG_LEVEL_BASE
     };
 
-    detector.SetLogLevel(vhliboptimal::LOG_LEVEL_EXT);
+    verr flag1 = detector.Setup(
+        cfg,
+        IFACE_OPTIMAL_GetLinePixels,
+        IFACE_OPTIMAL_Border,
+        IFACE_OPTIMAL_Content );
 
-    verr flag1 = detector.Setup(cfg, IFACE_OPTIMAL_GetLinePixels, IFACE_OPTIMAL_SetPos);
     if(flag1) return verrmsg(1, "Invalid settings");
 
-    verr flag2 = detector.Run();
+    int imgsrc = 0;
+    verr flag2 = detector.Run(imgsrc);
     if(flag2) return verrmsg(2, "Shape contour detection failed");
 
-    for(int i = 0; i < detector.GetObjectsCount(); i++) {
-        const vhliboptimal::VHOptimalFigure & obj = detector.GetObject(i);
-        const vhliboptimal::CellsMatrix & cmtx = detector.GetCMatrix();
-        obj.Border(cmtx, IFACE_OPTIMAL_SetPos);
-    }
+    // for(int i = 0; i < detector.GetObjectsCount(); i++) {
+    //     const vhliboptimal::VHOptimalFigure & obj = detector.GetObject(i);
+    //     const vhliboptimal::CellsMatrix & cmtx = detector.GetCMatrix();
+    //     obj.Border(cmtx, IFACE_OPTIMAL_SetPos);
+    // }
 
     return vok;
 }
