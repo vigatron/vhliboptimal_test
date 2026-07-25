@@ -1,0 +1,16 @@
+{
+
+
+    "cmake.debugConfig": {
+        // "targetArchitecture": "x86_64",
+        "args": [
+            "../data/testpic1.jpg"
+            // "../data/testpic2.jpg"
+        ],
+        "miDebuggerArgs": "--quiet -ex 'set debuginfod enabled off'",
+    },
+
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
+    "files.associations": { "cstdint": "cpp" }
+
+}

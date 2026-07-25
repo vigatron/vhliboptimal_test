@@ -1,0 +1,8 @@
+[submodule "src/extmods/vhlibplatform"]
+	path = src/extmods/vhlibplatform
+	url = https://github.com/vigatron/vhlibplatform
+	branch = main
+[submodule "src/extmods/vhliboptimal"]
+	path = src/extmods/vhliboptimal
+	url = https://github.com/vigatron/vhliboptimal
+	branch = main
