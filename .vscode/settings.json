@@ -6,8 +6,8 @@
         "args": [
             // "../data/testimage1r4096.jpg"
             // "../data/testimage2r4096.jpg",
-            // "../data/testimage3r1080p.jpg"
-            "../data/testimage4r1080p.jpg"
+            "../data/testimage3r1080p.jpg"
+            // "../data/testimage4r1080p.jpg"
         ]
         // , "miDebuggerArgs": "--quiet -ex 'set debuginfod enabled off'",
     },

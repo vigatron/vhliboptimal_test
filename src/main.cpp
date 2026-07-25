@@ -61,7 +61,7 @@ verr iteration() {
         .imageWidth     = (uint16_t)imgsrc.width(),
         .imageHeight    = (uint16_t)imgsrc.height(),
         .spccnt         = 0,
-        .cellsize       = 2,
+        .cellsize       = 8,
         .minColorVal    = 200,
         .min_obj_width  = 2,
         .min_obj_height = 2,
