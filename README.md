@@ -5,9 +5,13 @@
 ![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Cross--platform-lightgrey.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Version](https://img.shields.io/badge/Version-0.7.2--beta-orange.svg)
+![Author](https://img.shields.io/badge/Author-V01G04A81-brown.svg)
 
 
-Tested library performance : vhliboptimal 0.7.2 https://github.com/vigatron/vhliboptimal
+## Testing library for shape contour detection and image outline recognition
+
+Dependencies:
+* vhliboptimal 0.7.2 https://github.com/vigatron/vhliboptimal
 
 
 ##### Example 1: Image size 4096*4096
@@ -102,21 +106,24 @@ Pass count: 8
 
 
 File Name: data/testimage1r4096.jpg
-Picture Props: W=4096 H=4096, Matrix Props: <cellsw=1024 cellsh=1024> total=1048576 cellsize=4 buffersize 131072 bytes
+Picture Props: W=4096 H=4096, Matrix Props: <cellsw=1024 cellsh=1024> total=1048576 cellsize=4 buffersize=131072 bytes
 Found 6 objects
 Average: 635 ms/frame
 
 File Name: data/testimage2r4096.jpg
-Picture Props: W=4096 H=4096, Matrix Props: <cellsw=1024 cellsh=1024> total=1048576 cellsize=4 buffersize 131072 bytes
+Picture Props: W=4096 H=4096, Matrix Props: <cellsw=1024 cellsh=1024> total=1048576 cellsize=4 buffersize=131072 bytes
 Found 3 objects
 Average: 337 ms/frame
 
 File Name: data/testimage3r1080p.jpg
-Picture Props: W=1920 H=1080, Matrix Props: <cellsw=960 cellsh=540> total=518400 cellsize=2 buffersize 64800 bytes
+Picture Props: W=1920 H=1080, Matrix Props: <cellsw=960 cellsh=540> total=518400 cellsize=2 buffersize=64800 bytes
 Found 9 objects
 Average: 142 ms/frame
 
 File Name: data/testimage4r1080p.jpg
-Picture Props: W=1920 H=1080,  Matrix Props: <cellsw=960 cellsh=540> total=518400 cellsize=2 buffer size 64800 bytes
+Picture Props: W=1920 H=1080,  Matrix Props: <cellsw=960 cellsh=540> total=518400 cellsize=2 buffer size=64800 bytes
 Found 2141 objects
 Average: 2586 ms/frame
+
+
+© 2026 V01G04A81 / Viktor Glebov
