@@ -18,7 +18,7 @@
 #endif
 
 
-#if VHLIB_OPTIMAL_VERSION_HEX != 702
+#if VHLIB_OPTIMAL_VERSION_HEX != 703
 #error "Depends on vhliboptimal library"
 #endif
 
@@ -61,7 +61,7 @@ verr iteration() {
         .imageWidth     = (uint16_t)imgsrc.width(),
         .imageHeight    = (uint16_t)imgsrc.height(),
         .spccnt         = 0,
-        .cellsize       = 8,
+        .cellsize       = 2,
         .minColorVal    = 200,
         .min_obj_width  = 2,
         .min_obj_height = 2,
