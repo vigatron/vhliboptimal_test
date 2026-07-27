@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 set(CMAKE_PROJECT_NAME test_lib_optimal)
 
-project(${CMAKE_PROJECT_NAME} VERSION 0.0.1 LANGUAGES CXX)
+project(${CMAKE_PROJECT_NAME} VERSION 0.0.2 LANGUAGES CXX)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -13,11 +13,15 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-find_package(Qt6 REQUIRED Core Widgets Gui)
+find_package(Qt5 REQUIRED Core Widgets Gui)
 
 add_compile_definitions(SAVE_RESULTS=0)
+
+# Intel i5-1135G7
 add_compile_options(-O3 -march=native -mavx2 -mbmi)
-# add_compile_options(-O3)
+
+# AMD FX-8300
+# add_compile_options(-O3 -mavx -mbmi)
 
 add_subdirectory(src/extmods/vhlibplatform)
 add_subdirectory(src/extmods/vhliboptimal)
@@ -26,7 +30,7 @@ add_subdirectory(src/extmods/vhliboptimal)
 # MAIN APP
 # ----------------------------------------------
 include_directories(
-    /usr/include/x86_64-linux-gnu/qt6/
+    /usr/include/x86_64-linux-gnu/qt5/
     src
     src/mods
     src/extmods
@@ -41,7 +45,7 @@ file(GLOB_RECURSE source_list_mods
 add_executable(${CMAKE_PROJECT_NAME} ${source_list_mods})
 
 target_link_libraries( ${CMAKE_PROJECT_NAME} PUBLIC
-    Qt6::Core Qt6::Widgets Qt6::Gui
+    Qt5::Core Qt5::Widgets Qt5::Gui
     vhlib_platform
     vhlib_optimal
 )

@@ -7,6 +7,8 @@
 
 #include "iface.hpp"
 #include "vhtimerstamp.hpp"
+#include "vhargs.hpp"
+#include "benchmark.hpp"
 
 #include <QImage>
 #include <QPainter>
@@ -17,8 +19,7 @@
 #error "Depends on vhlibplatform library"
 #endif
 
-
-#if VHLIB_OPTIMAL_VERSION_HEX != 702
+#if VHLIB_OPTIMAL_VERSION_MAJOR !=0 || VHLIB_OPTIMAL_VERSION_MINOR != 7
 #error "Depends on vhliboptimal library"
 #endif
 
@@ -28,6 +29,8 @@ using namespace vhliboptimal;
 static QImage imgsrc;
 static QImage imgdst;
 static QImage imgbw8;
+
+stBenchmarkParams bench;
 
 //
 vhliboptimal::VHLibOptimal detector;
@@ -42,26 +45,14 @@ const QImage & GetOptimalBWQImage() {
     return imgbw8;
 };
 
-/**
- * 
- */
-std::string vharg(int argn, int argc, char *argv[]) {
-    std::string r;
 
-    if(argn + 2 <= argc) {
-        r = std::string(argv[argn+1]);
-    }
-
-    return r;
-}
-
-verr iteration() {
+verr iteration(uint8_t cellsize) {
 
     const vhliboptimal::stConfig cfg = {
         .imageWidth     = (uint16_t)imgsrc.width(),
         .imageHeight    = (uint16_t)imgsrc.height(),
         .spccnt         = 0,
-        .cellsize       = 8,
+        .cellsize       = cellsize,
         .minColorVal    = 200,
         .min_obj_width  = 2,
         .min_obj_height = 2,
@@ -79,6 +70,8 @@ verr iteration() {
     if(flag1)
         return verrmsg(1, "Invalid settings");
 
+    detector.SetSortMode(0);
+
     int imgsrc = 0;
     
     ts.start();
@@ -87,6 +80,16 @@ verr iteration() {
 
     if(flag2)
         return verrmsg(2, "Shape contour detection failed");
+
+    const CellsMatrix & cmtx = detector.GetCMatrix();
+
+    bench.imageWidth    = cfg.imageWidth;
+    bench.imageHeight   = cfg.imageHeight;
+    bench.cellsw        = cmtx.CellsX();
+    bench.cellsh        = cmtx.CellsY();
+    bench.cellst        = cmtx.CellsT();
+    bench.buffsize      = cmtx.BitMaskSizeBytes();
+    bench.objscnt       = detector.GetObjectsCount();
 
     return vok;
 }
@@ -150,8 +153,9 @@ void saveResults(const std::string & srcfname) {
 /**
  * 
  */
-verr runtest(const std::string & fname) {
+verr runtest(const std::string & fname, int cellsize) {
 
+    // 1. Read source image and convert to Grayscale
     VHLibOptimalLogger::lineout("File Name: " + fname);
 
     bool flagl = imgsrc.load(QString::fromStdString(fname));
@@ -161,18 +165,48 @@ verr runtest(const std::string & fname) {
 
     imgbw8 = imgsrc.convertToFormat(QImage::Format_Grayscale8);
 
-    long long tssumm = 0;
-    int tscnt  = 8;
-    for(int i=0;i < tscnt;i++) {
-        if(iteration()) { tssumm = 0; break; }
-        tssumm += ts.result_ms();
-        std::cout << "Elapsed: " << ts.result_ms() << " ms" << std::endl;
+
+    // 2. Run benchmark tests
+
+    bench.filename      = fname;
+    bench.cellsize      = cellsize;
+    
+    int passcnt       = 16;
+
+    bench.tsavg         = 0;
+    bench.tsmin         = 0;
+    bench.tsmax         = 0;
+
+    long arrResults[passcnt] = {0};
+
+    for(int i=0; i < passcnt;i++) {
+
+        // Exception ?
+        if(iteration(cellsize)) break;
+
+        arrResults[i] = ts.result_ms();
+        std::cout << "Elapsed: " << arrResults[i] << " ms" << std::endl;
+
+        if(!i) {
+            bench.tsmin = arrResults[i];
+            bench.tsmax = arrResults[i];
+            bench.tsavg = arrResults[i];
+        } else {
+            if(arrResults[i] < bench.tsmin) bench.tsmin = arrResults[i];
+            if(arrResults[i] > bench.tsmax) bench.tsmax = arrResults[i];
+            bench.tsavg += arrResults[i];
+        }
     }
 
-    std::cout << "Average: " << tssumm / tscnt << " ms/frame" << std::endl;
+    bench.tsavg /= passcnt;
+    std::cout << "Average: " << bench.tsavg << " ms/frame" << std::endl;
 
+    // 3. Save reslts
+    SaveBenchmark(bench);
     generateOutPic();
     saveResults(fname);
+
+    std::cout << "Done" << std::endl;
 
     return vok;
 }
@@ -182,10 +216,13 @@ verr runtest(const std::string & fname) {
  */
 int main(int argc, char *argv[]) {
 
-    std::string fname = vharg(0, argc, argv);
+    std::string     paramFileName   = vhargstr(0, argc, argv);
+    int             paramCellSize   = vhargint(1, argc, argv);
 
-    if(!fname.empty()) {
-        return runtest(fname);
+    if(paramCellSize == -1) { paramCellSize = 2; }
+
+    if(!paramFileName.empty()) {
+        return runtest(paramFileName, paramCellSize);
     }
 
     return 1;
