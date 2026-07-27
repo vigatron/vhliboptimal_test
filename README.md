@@ -113,47 +113,6 @@ https://github.com/vigatron/vhliboptimal
 
 <br>
 
-##### Example 2
-
-File Name: data/testimage2r4096.jpg
-Image Props: W=4096 H=4096, Matrix Props: <cellsw=1024 cellsh=1024> total=1048576 cellsize=4 buffersize=131072 bytes
-Found 3 objects
-Average: 142 ms/frame
-
-File Name: data/testimage2r4096.jpg
-Image Props: W=4096 H=4096, Matrix Props: <cellsw=512 cellsh=512> total=262144 cellsize=8 buffersize=32768 bytes
-Found 3 objects
-Average: 47 ms/frame
-
-File Name: ../data/testimage2r4096.jpg
-Image Props: W=4096 H=4096, Matrix Props: <cellsw=256 cellsh=256> total=65536 cellsize=16 buffersize=8192 bytes
-Found 3 objects
-Average: 23 ms/frame
-
-##### Example 3
-
-File Name: data/testimage3r1080p.jpg
-Image Props: W=1920 H=1080, Matrix Props: <cellsw=960 cellsh=540> total=518400 cellsize=2 buffersize=64800 bytes
-Found 9 objects
-Average: 61 ms/frame
-
-File Name: ../data/testimage3r1080p.jpg
-Image Props: W=1920 H=1080, Matrix Props: <cellsw=480 cellsh=270> total=129600 cellsize=4 buffersize=16200 bytes
-Found 9 objects
-Average: 18 ms/frame
-
-File Name: ../data/testimage3r1080p.jpg
-Image Props: W=1920 H=1080, Matrix Props: <cellsw=240 cellsh=135> total=32400 cellsize=8 buffersize=4050 bytes
-Found 9 objects
-Average: 5 ms/frame
-
-##### Example 4
-
-File Name: data/testimage4r1080p.jpg
-Image Props: W=1920 H=1080, Matrix Props: <cellsw=960 cellsh=540> total=518400 cellsize=2 buffersize=64800 bytes
-Found 2141 objects
-Average: 1193 ms/frame
-
 
 ### Benchmark Results 2
 
@@ -162,58 +121,43 @@ Average: 1193 ms/frame
 | CPU Model name      | CPU Model name: AMD FX(tm)-8300 Eight-Core Processor |
 | Compile Options     | -O3 -mavx -mbmi |
 
+<br>
 
-| Param               | Description |
-|---------------------|-------------|
-| CPU Model name      | CPU Model name: AMD FX(tm)-8300 Eight-Core Processor |
-| Compile Options     | -O3 -mavx -mbmi |
-
-
-Compile Options: -O3
-
-
-
-##### Example 1
-
-File Name: data/testimage1r4096.jpg
-Image Props: W=4096 H=4096, Matrix Props: <cellsw=1024 cellsh=1024> total=1048576 cellsize=4 buffersize=131072 bytes
-Found 6 objects
-Average: 635 ms/frame
-
-##### Example 2
-
-File Name: data/testimage2r4096.jpg
-Image Props: W=4096 H=4096, Matrix Props: <cellsw=1024 cellsh=1024> total=1048576 cellsize=4 buffersize=131072 bytes
-Found 3 objects
-Average: 337 ms/frame
-
-##### Example 3
-
-File Name: data/testimage3r1080p.jpg
-Image Props: W=1920 H=1080, Matrix Props: <cellsw=960 cellsh=540> total=518400 cellsize=2 buffersize=64800 bytes
-Found 9 objects
-Average: 142 ms/frame
-
-##### Example 4
-
-File Name: data/testimage4r1080p.jpg
-Image Props: W=1920 H=1080,  Matrix Props: <cellsw=960 cellsh=540> total=518400 cellsize=2 buffersize=64800 bytes
-Found 2141 objects
-Average: 2586 ms/frame
-
-
-# New Test
-
-
-| filename | imageWidth<br>(pixels) | imageHeight<br>(pixels) | cellsize<br>(pixels) | cellsw<br>(cells) | cellsh<br>(cells) | total<br>(cells) | buffsize<br>(bytes) | pass<br>count | tsavg<br>(ms) | tsmin<br>(ms) | tsmax<br>(ms)  |
+| filename | imageWidth<br>(pixels) | imageHeight<br>(pixels) | cellsize<br>(pixels) | cellsw<br>(cells) | cellsh<br>(cells) | total<br>(cells) | buffsize<br>(bytes) | objects<br>count | tsavg<br>(ms) | tsmin<br>(ms) | tsmax<br>(ms)  |
 |----------|------------|-------------|----------|--------|--------|--------|----------|---------|-------|-------|-------|
-| testimage3r1080p.jpg | 1920 | 1080 | 4 | 480 | 270 | 129600 | 16200 | 16 | 17 | 17 | 18 |
+| testimage1r4096.jpg | 4096 | 4096 | 4 | 1024 | 1024 | 1048576 | 131072 | 6 | 372 | 356 | 424 |
+| testimage1r4096.jpg | 4096 | 4096 | 8 | 512 | 512 | 262144 | 32768 | 6 | 139 | 138 | 140 |
+| testimage1r4096.jpg | 4096 | 4096 | 16 | 256 | 256 | 65536 | 8192 | 6 | 61 | 61 | 62 |
+| testimage1r4096.jpg | 4096 | 4096 | 32 | 128 | 128 | 16384 | 2048 | 6 | 56 | 55 | 60 |
 
-# New Test
+<br>
 
-
-| filename | imageWidth<br>(pixels) | imageHeight<br>(pixels) | cellsize<br>(pixels) | cellsw<br>(cells) | cellsh<br>(cells) | total<br>(cells) | buffsize<br>(bytes) | pass<br>count | tsavg<br>(ms) | tsmin<br>(ms) | tsmax<br>(ms)  |
+| filename | imageWidth<br>(pixels) | imageHeight<br>(pixels) | cellsize<br>(pixels) | cellsw<br>(cells) | cellsh<br>(cells) | total<br>(cells) | buffsize<br>(bytes) | objects<br>count | tsavg<br>(ms) | tsmin<br>(ms) | tsmax<br>(ms)  |
 |----------|------------|-------------|----------|--------|--------|--------|----------|---------|-------|-------|-------|
-| testimage3r1080p.jpg | 1920 | 1080 | 4 | 480 | 270 | 129600 | 16200 | 16 | 17 | 17 | 18 |
+| testimage2r4096.jpg | 4096 | 4096 | 4 | 1024 | 1024 | 1048576 | 131072 | 3 | 406 | 405 | 407 |
+| testimage2r4096.jpg | 4096 | 4096 | 8 | 512 | 512 | 262144 | 32768 | 3 | 108 | 107 | 111 |
+| testimage2r4096.jpg | 4096 | 4096 | 16 | 256 | 256 | 65536 | 8192 | 3 | 50 | 50 | 52 |
+| testimage2r4096.jpg | 4096 | 4096 | 32 | 128 | 128 | 16384 | 2048 | 3 | 41 | 41 | 43 |
+
+<br>
+
+| filename | imageWidth<br>(pixels) | imageHeight<br>(pixels) | cellsize<br>(pixels) | cellsw<br>(cells) | cellsh<br>(cells) | total<br>(cells) | buffsize<br>(bytes) | objects<br>count | tsavg<br>(ms) | tsmin<br>(ms) | tsmax<br>(ms)  |
+|----------|------------|-------------|----------|--------|--------|--------|----------|---------|-------|-------|-------|
+| testimage3r1080p.jpg | 1920 | 1080 | 2 | 960 | 540 | 518400 | 64800 | 9 | 123 | 120 | 127 |
+| testimage3r1080p.jpg | 1920 | 1080 | 4 | 480 | 270 | 129600 | 16200 | 9 | 30 | 30 | 32 |
+| testimage3r1080p.jpg | 1920 | 1080 | 8 | 240 | 135 | 32400 | 4050 | 9 | 10 | 10 | 10 |
+| testimage3r1080p.jpg | 1920 | 1080 | 16 | 120 | 68 | 8160 | 1020 | 9 | 4 | 4 | 7 |
+
+<br>
+
+| filename | imageWidth<br>(pixels) | imageHeight<br>(pixels) | cellsize<br>(pixels) | cellsw<br>(cells) | cellsh<br>(cells) | total<br>(cells) | buffsize<br>(bytes) | objects<br>count | tsavg<br>(ms) | tsmin<br>(ms) | tsmax<br>(ms)  |
+|----------|------------|-------------|----------|--------|--------|--------|----------|---------|-------|-------|-------|
+| testimage4r1080p.jpg | 1920 | 1080 | 1 | 1920 | 1080 | 2073600 | 259200 | 2357 | 10351 | 10320 | 10369 |
+| testimage4r1080p.jpg | 1920 | 1080 | 2 | 960 | 540 | 518400 | 64800 | 2141 | 2350 | 2348 | 2365 |
+
+
+<br>
+
+
 
 © 2026 V01G04A81 / Viktor Glebov
