@@ -5,7 +5,6 @@
 ![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Cross--platform-lightgrey.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Version](https://img.shields.io/badge/Version-0.0.2--beta-orange.svg)
-![Version](https://img.shields.io/badge/Version-0.0.2--beta-orange.svg)
 ![Author](https://img.shields.io/badge/Author-V01G04A81-brown.svg)
 
 
@@ -120,6 +119,8 @@ https://github.com/vigatron/vhliboptimal
 |---------------------|-------------|
 | CPU Model name      | CPU Model name: AMD FX(tm)-8300 Eight-Core Processor |
 | Compile Options     | -O3 -mavx -mbmi |
+| Pass count          | 16 |
+
 
 <br>
 
