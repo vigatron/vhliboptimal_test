@@ -5,6 +5,7 @@
 ![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Cross--platform-lightgrey.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Version](https://img.shields.io/badge/Version-0.0.2--beta-orange.svg)
+![Version](https://img.shields.io/badge/Version-0.0.2--beta-orange.svg)
 ![Author](https://img.shields.io/badge/Author-V01G04A81-brown.svg)
 
 
@@ -162,7 +163,14 @@ Average: 1193 ms/frame
 | Compile Options     | -O3 -mavx -mbmi |
 
 
+| Param               | Description |
+|---------------------|-------------|
+| CPU Model name      | CPU Model name: AMD FX(tm)-8300 Eight-Core Processor |
+| Compile Options     | -O3 -mavx -mbmi |
+
+
 Compile Options: -O3
+
 
 
 ##### Example 1
@@ -193,6 +201,13 @@ Image Props: W=1920 H=1080,  Matrix Props: <cellsw=960 cellsh=540> total=518400 
 Found 2141 objects
 Average: 2586 ms/frame
 
+
+# New Test
+
+
+| filename | imageWidth<br>(pixels) | imageHeight<br>(pixels) | cellsize<br>(pixels) | cellsw<br>(cells) | cellsh<br>(cells) | total<br>(cells) | buffsize<br>(bytes) | pass<br>count | tsavg<br>(ms) | tsmin<br>(ms) | tsmax<br>(ms)  |
+|----------|------------|-------------|----------|--------|--------|--------|----------|---------|-------|-------|-------|
+| testimage3r1080p.jpg | 1920 | 1080 | 4 | 480 | 270 | 129600 | 16200 | 16 | 17 | 17 | 18 |
 
 # New Test
 
