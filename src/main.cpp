@@ -102,22 +102,52 @@ void generateOutPic() {
     imgdst = QImage(imgsrc.width(), imgsrc.height(), imgsrc.format());
     imgdst.fill(Qt::black);
 
-    {
-        QPainter painter(&imgdst);
-        painter.setPen(QColor(0, 200, 0));
-        painter.setBrush(QColor(0, 96, 0));
+    int pwdth = (imgsrc.width() / 1000) + 1;
 
-        for(int i = 0; i < detector.GetObjectsCount(); i++) {
-            const vhliboptimal::VHOptimalFigure & obj = detector.GetObject(i);
+    {
+
+        for(int fign = 0; fign < detector.GetObjectsCount(); fign++) {
+
+            const vhliboptimal::VHOptimalFigure & obj = detector.GetObject(fign);
             const vhliboptimal::CellsMatrix & cmtx = detector.GetCMatrix();
             const strect rect = obj.PosAbs(cmtx);
 
-            int w = rect.x2 - rect.x1 + 1;
-            int h = rect.y2 - rect.y1 + 1;
-            painter.drawRect(rect.x1, rect.y1, w, h);
+            // Fill cells
+            {
+                QPainter painter(&imgdst);
+
+                painter.setPen(QColor(0, 0, 192));
+                painter.setBrush(QColor(0, 0, 100));
+
+                for(int spann=0; spann < obj.SpansCount(); spann++) {
+                    const vhliboptimal::stspan & span = obj.Span(spann);
+
+                    for(int celln=span.n;celln < (span.n + span.l); celln++) {
+                        auto [cx, cy] = cmtx.CellXY(celln);
+                        int cs = cmtx.CellSize();
+                        painter.drawRect(cx * cs, cy * cs, cs, cs);
+                    }
+                }
+
+                painter.end();
+            }
+
+            // max size
+            {
+                QPainter painter(&imgdst);
+
+                painter.setPen( QPen(QColor(0, 255, 0), pwdth));
+                painter.setBrush(Qt::NoBrush);
+
+                int w = rect.x2 - rect.x1 + 1;
+                int h = rect.y2 - rect.y1 + 1;
+                painter.drawRect(rect.x1, rect.y1, w, h);
+
+                painter.end();
+            }
+
         }
 
-        painter.end();
     }
 
     {

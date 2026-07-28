@@ -15,7 +15,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(Qt5 REQUIRED Core Widgets Gui)
 
-add_compile_definitions(SAVE_RESULTS=0)
+add_compile_definitions(SAVE_RESULTS=1)
 
 add_subdirectory(src/extmods/vhlibplatform)
 add_subdirectory(src/extmods/vhliboptimal)
