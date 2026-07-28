@@ -15,7 +15,7 @@ Dependencies:
 https://github.com/vigatron/vhliboptimal
 
 
-##### Example 1: Image size 4096*4096 Letters and Geometric shape
+##### Example 1: Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
 
 <table>
   <tr>
@@ -28,7 +28,7 @@ https://github.com/vigatron/vhliboptimal
   </tr>
 </table>
 
-##### Example 2: Image size 4096*4096 Letters and Geometric shape
+##### Example 2: Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
 
 <table>
   <tr>
@@ -41,7 +41,7 @@ https://github.com/vigatron/vhliboptimal
   </tr>
 </table>
 
-##### Example 3: Image size 1920*1080 (1080p) Shapes
+##### Example 3: Image size: 1920*1080 (1080p) Shapes (Default)
 
 <table>
   <tr>
@@ -54,7 +54,7 @@ https://github.com/vigatron/vhliboptimal
   </tr>
 </table>
 
-##### Example 4: Image size 1920*1080 (1080p) Text Block
+##### Example 4: Image size: 1920*1080 (1080p) Synthetic Dense Text Block (Extreme Stress Test)
 
 <table>
   <tr>
@@ -159,6 +159,52 @@ https://github.com/vigatron/vhliboptimal
 
 <br>
 
+### Benchmark Results 3
+
+| Param               | Description |
+|---------------------|-------------|
+| CPU Model name      | Orange Pi PC Plus (Allwinner H3, ARM Cortex-A7, ARMv7-A, 32-bit) |
+| Compile Options     | -O3 -mfpu=neon -mfloat-abi=hard |
+| Pass count          | 16 |
+
+
+<br>
+
+| filename | imageWidth<br>(pixels) | imageHeight<br>(pixels) | cellsize<br>(pixels) | cellsw<br>(cells) | cellsh<br>(cells) | total<br>(cells) | buffsize<br>(bytes) | objects<br>count | tsavg<br>(ms) | tsmin<br>(ms) | tsmax<br>(ms)  |
+|----------|------------|-------------|----------|--------|--------|--------|----------|---------|-------|-------|-------|
+| testimage1r4096.jpg | 4096 | 4096 | 4 | 1024 | 1024 | 1048576 | 131072 | 6 | 2320 | 2317 | 2341 |
+| testimage1r4096.jpg | 4096 | 4096 | 8 | 512 | 512 | 262144 | 32768 | 6 | 799 | 798 | 801 |
+| testimage1r4096.jpg | 4096 | 4096 | 16 | 256 | 256 | 65536 | 8192 | 6 | 350 | 350 | 352 |
+| testimage1r4096.jpg | 4096 | 4096 | 32 | 128 | 128 | 16384 | 2048 | 6 | 217 | 214 | 231 |
+
+<br>
+
+| filename | imageWidth<br>(pixels) | imageHeight<br>(pixels) | cellsize<br>(pixels) | cellsw<br>(cells) | cellsh<br>(cells) | total<br>(cells) | buffsize<br>(bytes) | objects<br>count | tsavg<br>(ms) | tsmin<br>(ms) | tsmax<br>(ms)  |
+|----------|------------|-------------|----------|--------|--------|--------|----------|---------|-------|-------|-------|
+| testimage2r4096.jpg | 4096 | 4096 | 4 | 1024 | 1024 | 1048576 | 131072 | 3 | 2507 | 2506 | 2510 |
+| testimage2r4096.jpg | 4096 | 4096 | 8 | 512 | 512 | 262144 | 32768 | 3 | 650 | 650 | 652 |
+| testimage2r4096.jpg | 4096 | 4096 | 16 | 256 | 256 | 65536 | 8192 | 3 | 297 | 297 | 298 |
+| testimage2r4096.jpg | 4096 | 4096 | 32 | 128 | 128 | 16384 | 2048 | 3 | 191 | 191 | 192 |
+
+
+<br>
+
+| filename | imageWidth<br>(pixels) | imageHeight<br>(pixels) | cellsize<br>(pixels) | cellsw<br>(cells) | cellsh<br>(cells) | total<br>(cells) | buffsize<br>(bytes) | objects<br>count | tsavg<br>(ms) | tsmin<br>(ms) | tsmax<br>(ms)  |
+|----------|------------|-------------|----------|--------|--------|--------|----------|---------|-------|-------|-------|
+| testimage3r1080p.jpg | 1920 | 1080 | 2 | 960 | 540 | 518400 | 64800 | 9 | 788 | 788 | 789 |
+| testimage3r1080p.jpg | 1920 | 1080 | 4 | 480 | 270 | 129600 | 16200 | 9 | 198 | 198 | 199 |
+| testimage3r1080p.jpg | 1920 | 1080 | 8 | 240 | 135 | 32400 | 4050 | 9 | 66 | 64 | 85 |
+| testimage3r1080p.jpg | 1920 | 1080 | 16 | 120 | 68 | 8160 | 1020 | 9 | 30 | 30 | 31 |
+
+
+<br>
+
+| filename | imageWidth<br>(pixels) | imageHeight<br>(pixels) | cellsize<br>(pixels) | cellsw<br>(cells) | cellsh<br>(cells) | total<br>(cells) | buffsize<br>(bytes) | objects<br>count | tsavg<br>(ms) | tsmin<br>(ms) | tsmax<br>(ms)  |
+|----------|------------|-------------|----------|--------|--------|--------|----------|---------|-------|-------|-------|
+| testimage4r1080p.jpg | 1920 | 1080 | 1 | 1920 | 1080 | 2073600 | 259200 | 2357 | 58986 | 58977 | 59025 |
+| testimage4r1080p.jpg | 1920 | 1080 | 2 | 960 | 540 | 518400 | 64800 | 2141 | 13306 | 13304 | 13312 |
+
+<br>
 
 ## Сборка проекта под разные платформы
 
