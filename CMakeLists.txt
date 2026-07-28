@@ -1,12 +1,12 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 
 set(CMAKE_PROJECT_NAME test_lib_optimal)
 
-project(${CMAKE_PROJECT_NAME} VERSION 0.0.2 LANGUAGES CXX)
+project(${CMAKE_PROJECT_NAME} VERSION 0.0.3 LANGUAGES CXX)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
@@ -17,12 +17,6 @@ find_package(Qt5 REQUIRED Core Widgets Gui)
 
 add_compile_definitions(SAVE_RESULTS=0)
 
-# Intel i5-1135G7
-add_compile_options(-O3 -march=native -mavx2 -mbmi)
-
-# AMD FX-8300
-# add_compile_options(-O3 -mavx -mbmi)
-
 add_subdirectory(src/extmods/vhlibplatform)
 add_subdirectory(src/extmods/vhliboptimal)
 
@@ -30,12 +24,10 @@ add_subdirectory(src/extmods/vhliboptimal)
 # MAIN APP
 # ----------------------------------------------
 include_directories(
-    /usr/include/x86_64-linux-gnu/qt5/
     src
     src/mods
     src/extmods
 )
-
 
 file(GLOB_RECURSE source_list_mods
     src/*

@@ -13,6 +13,16 @@
         // , "miDebuggerArgs": "--quiet -ex 'set debuginfod enabled off'",
     },
 
+    // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-intel.cmake" },
+    // "cmake.buildDirectory": "${workspaceFolder}/build-intel",
+
+    // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-amd.cmake" },
+    // "cmake.buildDirectory": "${workspaceFolder}/build-amd",
+
+    // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-opi-pc-plus.cmake" },
+    // "cmake.buildDirectory": "${workspaceFolder}/build-arm",
+
+
     "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
     "files.associations": { "cstdint": "cpp" }
 
