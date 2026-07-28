@@ -1,4 +1,4 @@
-build
+build*
 tmp
 tests/*.jpg
 tests/*.md

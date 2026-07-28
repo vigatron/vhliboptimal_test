@@ -4,7 +4,7 @@
 ![CMake](https://img.shields.io/badge/Build-CMake-1f4f9c.svg)
 ![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Cross--platform-lightgrey.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Version](https://img.shields.io/badge/Version-0.0.2--beta-orange.svg)
+![Version](https://img.shields.io/badge/Version-0.0.3--beta-orange.svg)
 ![Author](https://img.shields.io/badge/Author-V01G04A81-brown.svg)
 
 
@@ -159,6 +159,32 @@ https://github.com/vigatron/vhliboptimal
 
 <br>
 
+
+## Сборка проекта под разные платформы
+
+### Intel i5-1135G7
+
+```bash
+mkdir build-intel && cd build-intel
+cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain-intel.cmake ..
+make -j$(nproc)
+```
+
+### AMD FX-8300
+
+```bash
+mkdir build-amd && cd build-amd
+cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain-amd.cmake ..
+make -j$(nproc)
+```
+
+### Orange Pi PC Plus (ARM Cortex-A7)
+
+```bash
+mkdir build-arm && cd build-arm
+cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain-opi-pc-plus.cmake ..
+make -j$(nproc)
+```
 
 
 © 2026 V01G04A81 / Viktor Glebov
