@@ -5,6 +5,11 @@
 #include <string>
 
 
+static std::string fields[] = {
+    "1",
+    "2"
+};
+
 verr SaveBenchmark(const stBenchmarkParams & bench) {
 
     // Basename Source File
@@ -13,45 +18,65 @@ verr SaveBenchmark(const stBenchmarkParams & bench) {
 
     // Markdown File
     std::filesystem::path path_mrk(bench.filename);
-    std::string pfx = "_" + std::to_string(bench.cellsize);
     std::string ext = ".md";
-    std::string fnameMarkdown = path_mrk.stem().filename().string() + pfx + ext;
+    std::string fnameMarkdown = path_mrk.stem().filename().string() + ext;
 
-    std::cout << "Results file: " << fnameMarkdown << std::endl;
+    // Выходной поток
+    std::ofstream ofs;
 
-    std::ofstream ofs(fnameMarkdown);
-    if (!ofs) return 1;
+    // Create or append ?
+    if (!std::filesystem::exists(fnameMarkdown)) {
+        std::cout << "Creating Results file: " << fnameMarkdown << std::endl;
 
-    // Заголовок таблицы — имена полей
-    ofs << "| filename "
-        << "| imageWidth<br>(pixels) "
-        << "| imageHeight<br>(pixels) "
-        << "| cellsize<br>(pixels) "
-        << "| cellsw<br>(cells) "
-        << "| cellsh<br>(cells) "
-        << "| total<br>(cells) "
-        << "| buffsize<br>(bytes) "
-        << "| objects<br>count "
-        << "| tsavg<br>(ms) "
-        << "| tsmin<br>(ms) "
-        << "| tsmax<br>(ms) "
-        << " |\n";
+        ofs.open(fnameMarkdown, std::ios::out);
+        if (!ofs) return verror(1);
 
-    ofs << "|----------|------------|-------------|----------|--------|--------|--------|----------|---------|-------|-------|-------|\n";
+        // Заголовок таблицы — имена полей
+        ofs << "| filename "
+            << "| imageWidth / imageHeight<br>(pixels) "
+            << "| cellsize<br>(pixels) "
+            << "| cellsw<br>(cells) "
+            << "| cellsh<br>(cells) "
+            << "| total<br>(cells) "
+            << "| buffsize<br>(bytes) "
+            << "| objects<br>count "
+            << "| tsmin / tsavg / tsmax (ms) "
+            << " |\n";
+
+        ofs << "|----------"
+            << "|----------"
+            << "|----------"
+            << "|----------"
+            << "|----------"
+            << "|----------"
+            << "|----------"
+            << "|----------"
+            << "|----------"
+            << "|\n";
+
+    } else {
+        std::cout << "Appending Results file: " << fnameMarkdown << std::endl;
+        if (!ofs) return verror(1);
+
+        ofs.open(fnameMarkdown, std::ios::app);
+    }
+
+    std::string str_resolution = std::to_string(bench.imageWidth) + " x " + std::to_string(bench.imageHeight);
+
+    std::string strtm = std::to_string(bench.tsmin) + " / ";
+    strtm += std::to_string(bench.tsavg) + " / ";
+    strtm += std::to_string(bench.tsmax);
 
     // Строка таблицы — значения
     ofs << "| "  << fnameSource
-        << " | " << bench.imageWidth
-        << " | " << bench.imageHeight
+        << " | " << str_resolution
         << " | " << bench.cellsize
         << " | " << bench.cellsw
         << " | " << bench.cellsh
         << " | " << bench.cellst
         << " | " << bench.buffsize
         << " | " << bench.objscnt
-        << " | " << bench.tsavg
-        << " | " << bench.tsmin
-        << " | " << bench.tsmax
+        << " | " << strtm
         << " |\n";
 
     ofs.close();

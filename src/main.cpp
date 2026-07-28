@@ -204,7 +204,10 @@ verr runtest(const std::string & fname, int cellsize) {
     // 3. Save reslts
     SaveBenchmark(bench);
     generateOutPic();
+    
+    #if SAVE_RESULTS > 0
     saveResults(fname);
+    #endif
 
     std::cout << "Done" << std::endl;
 
