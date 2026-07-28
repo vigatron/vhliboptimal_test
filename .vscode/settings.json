@@ -4,17 +4,19 @@
     "cmake.debugConfig": {
         // "targetArchitecture": "x86_64",
         "args": [
-            // "../data/testimage1r4096.jpg", "2"
+            "../data/testimage1r4096.jpg", "2"
             // "../data/testimage2r4096.jpg",
             // "../data/testimage3r1080p.jpg", "4"
-            "../data/testimage4r1080p.jpg", "2"
+            // "../data/testimage4r1080p.jpg", "2"
+            // "../data/testimage5rvga.jpg", "2"
         ]
 
         // , "miDebuggerArgs": "--quiet -ex 'set debuginfod enabled off'",
     },
 
-    // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-intel.cmake" },
-    // "cmake.buildDirectory": "${workspaceFolder}/build-intel",
+    "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-intel.cmake" },
+    "cmake.buildDirectory": "${workspaceFolder}/build-intel",
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/build-intel/compile_commands.json",
 
     // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-amd.cmake" },
     // "cmake.buildDirectory": "${workspaceFolder}/build-amd",
@@ -23,7 +25,6 @@
     // "cmake.buildDirectory": "${workspaceFolder}/build-arm",
 
 
-    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
     "files.associations": { "cstdint": "cpp" }
 
 }
