@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 set(CMAKE_PROJECT_NAME test_lib_optimal)
 
-project(${CMAKE_PROJECT_NAME} VERSION 0.0.3 LANGUAGES CXX)
+project(${CMAKE_PROJECT_NAME} VERSION 0.0.5 LANGUAGES CXX)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -41,6 +41,11 @@ target_link_libraries( ${CMAKE_PROJECT_NAME} PUBLIC
     vhlib_platform
     vhlib_optimal
 )
+
+target_compile_definitions(vhlib_platform PUBLIC 
+    VHLIBOPTIMAL_TEST_PASS_COUNT=16
+)
+
 
 # add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
 # 	COMMAND cp "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}" "$ENV{HOME}/bin/${CMAKE_PROJECT_NAME}" )

@@ -19,7 +19,7 @@
 #error "Depends on vhlibplatform library"
 #endif
 
-#if VHLIB_OPTIMAL_VERSION_MAJOR !=0 || VHLIB_OPTIMAL_VERSION_MINOR != 7
+#if VHLIB_OPTIMAL_VERSION_MAJOR !=0 || VHLIB_OPTIMAL_VERSION_MINOR != 8
 #error "Depends on vhliboptimal library"
 #endif
 
@@ -30,13 +30,19 @@ static QImage imgsrc;
 static QImage imgdst;
 static QImage imgbw8;
 
-stBenchmarkParams bench;
+// Benchmark related pass
+TSArray     arrtsSampling;
+TSArray     arrtsScanning;
+
+extern TimerStamp  tsSampling;      // IFACE Callbacks
+extern TimerStamp  tsScanning;      // IFACE Callbacks
+
+// Benchmark related summary
+stBenchmarkParams benchResults;
+
 
 //
 vhliboptimal::VHLibOptimal detector;
-
-//
-TimerStamp ts;
 
 /**
  * 
@@ -65,7 +71,9 @@ verr iteration(uint8_t cellsize) {
         cfg,
         IFACE_OPTIMAL_GetLinePixels,
         IFACE_OPTIMAL_Border,
-        IFACE_OPTIMAL_Content );
+        IFACE_OPTIMAL_Content,
+        IFACE_OPTIMAL_Benchmark
+     );
 
     if(flag1)
         return verrmsg(1, "Invalid settings");
@@ -74,22 +82,20 @@ verr iteration(uint8_t cellsize) {
 
     int imgsrc = 0;
     
-    ts.start();
     verr flag2 = detector.Run(imgsrc);
-    ts.stop();
 
     if(flag2)
         return verrmsg(2, "Shape contour detection failed");
 
     const CellsMatrix & cmtx = detector.GetCMatrix();
 
-    bench.imageWidth    = cfg.imageWidth;
-    bench.imageHeight   = cfg.imageHeight;
-    bench.cellsw        = cmtx.CellsX();
-    bench.cellsh        = cmtx.CellsY();
-    bench.cellst        = cmtx.CellsT();
-    bench.buffsize      = cmtx.BitMaskSizeBytes();
-    bench.objscnt       = detector.GetObjectsCount();
+    benchResults.imageWidth    = cfg.imageWidth;
+    benchResults.imageHeight   = cfg.imageHeight;
+    benchResults.cellsw        = cmtx.CellsX();
+    benchResults.cellsh        = cmtx.CellsY();
+    benchResults.cellst        = cmtx.CellsT();
+    benchResults.buffsize      = cmtx.BitMaskSizeBytes();
+    benchResults.objscnt       = detector.GetObjectsCount();
 
     return vok;
 }
@@ -198,41 +204,45 @@ verr runtest(const std::string & fname, int cellsize) {
 
     // 2. Run benchmark tests
 
-    bench.filename      = fname;
-    bench.cellsize      = cellsize;
-    
-    int passcnt       = 16;
+    benchResults.filename      = fname;
+    benchResults.cellsize      = cellsize;
 
-    bench.tsavg         = 0;
-    bench.tsmin         = 0;
-    bench.tsmax         = 0;
 
-    long arrResults[passcnt] = {0};
-
-    for(int i=0; i < passcnt;i++) {
+    for(int i=0; i < VHLIBOPTIMAL_TEST_PASS_COUNT;i++) {
 
         // Exception ?
         if(iteration(cellsize)) break;
 
-        arrResults[i] = ts.result_ms();
-        std::cout << "Elapsed: " << arrResults[i] << " ms" << std::endl;
+        int t1 = tsSampling.result_ms();
+        arrtsSampling.add(t1);
 
-        if(!i) {
-            bench.tsmin = arrResults[i];
-            bench.tsmax = arrResults[i];
-            bench.tsavg = arrResults[i];
-        } else {
-            if(arrResults[i] < bench.tsmin) bench.tsmin = arrResults[i];
-            if(arrResults[i] > bench.tsmax) bench.tsmax = arrResults[i];
-            bench.tsavg += arrResults[i];
-        }
+        int t2 = tsScanning.result_ms();
+        arrtsScanning.add(t2);
+
+        std::cout << "> Sampling: " << t1 << "ms, Scanning: " << t2 << "ms" << std::endl << std::endl;
     }
 
-    bench.tsavg /= passcnt;
-    std::cout << "Average: " << bench.tsavg << " ms/frame" << std::endl;
 
-    // 3. Save reslts
-    SaveBenchmark(bench);
+    benchResults.ts_smp_min         = arrtsSampling.resultmin();
+    benchResults.ts_smp_avg         = arrtsSampling.result();
+    benchResults.ts_smp_max         = arrtsSampling.resultmax();
+
+    benchResults.ts_scn_min         = arrtsScanning.resultmin();
+    benchResults.ts_scn_avg         = arrtsScanning.result();
+    benchResults.ts_scn_max         = arrtsScanning.resultmax();
+
+    benchResults.ts_fin_min         = benchResults.ts_smp_min + benchResults.ts_scn_min;
+    benchResults.ts_fin_avg         = benchResults.ts_smp_avg + benchResults.ts_scn_avg;
+    benchResults.ts_fin_max         = benchResults.ts_smp_max + benchResults.ts_scn_max;
+
+    std::cout << "Min (ms): " << benchResults.ts_fin_min << " ms/frame" << std::endl;
+    std::cout << "Avg (ms): " << benchResults.ts_fin_avg << " ms/frame" << std::endl;
+    std::cout << "Max (ms): " << benchResults.ts_fin_max << " ms/frame" << std::endl;
+
+    // 3. Save results
+    SaveBenchmark(benchResults);
+    
+    // 4. Generate and save images
     generateOutPic();
     
     #if SAVE_RESULTS > 0

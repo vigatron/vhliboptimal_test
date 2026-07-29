@@ -1,6 +1,9 @@
 #!/bin/bash
 
-BUILD_DIR=${BUILD_DIR:-../build}
+rm -f *.md
+rm -f *.jpg
+
+BUILD_DIR=${BUILD_DIR:-../build-intel}
 
 $BUILD_DIR/test_lib_optimal ../data/testimage1r4096.jpg 4
 $BUILD_DIR/test_lib_optimal ../data/testimage1r4096.jpg 8

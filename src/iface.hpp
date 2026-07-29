@@ -28,3 +28,9 @@ void IFACE_OPTIMAL_Content(
     uint32_t cell2,
     uint8_t dir
 );
+
+void IFACE_OPTIMAL_Benchmark(
+    void *userData,
+    int cmd,
+    int param
+);
