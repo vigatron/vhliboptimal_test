@@ -26,15 +26,23 @@ add_subdirectory(src/extmods/vhliboptimal)
 include_directories(
     src
     src/mods
+    src/mods/iface
+    src/mods/args
+    src/mods/benchmark
     src/extmods
 )
 
 file(GLOB_RECURSE source_list_mods
     src/*
     src/mods/*
+    src/mods/iface/*
 )
 
-add_executable(${CMAKE_PROJECT_NAME} ${source_list_mods})
+add_executable(${CMAKE_PROJECT_NAME} ${source_list_mods}
+    src/mods/iface/iface_mem.cpp
+    src/mods/args/vhargs.cpp
+    src/mods/benchmark/benchmark.cpp
+)
 
 target_link_libraries( ${CMAKE_PROJECT_NAME} PUBLIC
     Qt5::Core Qt5::Widgets Qt5::Gui

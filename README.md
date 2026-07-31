@@ -37,6 +37,9 @@ https://github.com/vigatron/vhliboptimal
 | 4K UHD    | 3840 × 2160     | 16:9         |
 
 
+800 * 600 = 480 000 / 60 000 bytes
+
+
 ---
 
 ##### Example 1: Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
