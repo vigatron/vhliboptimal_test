@@ -12,12 +12,6 @@ static std::vector<VHOptimalFigure>         arrObjects;
 // spanlen [31 .. 21] + spanid  [20 ..  0]
 static std::vector<uint32_t>                arrSpans;
 
-//
-static std::vector<uint8_t>                 buffArrSrc;
-
-//
-static std::vector<uint8_t>                 buffArrDst;
-
 
 /**
  *
@@ -28,19 +22,7 @@ void VHLIB_OPTIMAL_IFACE_FrameReset() {
     vhliboptimal::arrSpans          .reserve    ( VHOPTIMAL_SPANS_MAX    );
 
     vhliboptimal::arrObjects    .clear();
-
     vhliboptimal::arrSpans      .clear();
-
-    //
-    uint32_t w = 1 << VHOPTIMAL_GRID_X_LEVEL;
-    uint32_t h = 1 << VHOPTIMAL_GRID_Y_LEVEL;
-    uint32_t s = (w>>3) * h;
-
-    //
-    buffArrSrc.assign(s, 0);
-
-    //
-    buffArrDst.assign(s, 0);
 
 }
 
@@ -109,19 +91,6 @@ const int VHLIB_OPTIMAL_IFACE_GetSpansCount() {
     return arrSpans.size();
 }
 
-/**
- * 
- */
-uint8_t * VHLIB_OPTIMAL_IFACE_BitFieldSrcPtr() {
-    return buffArrSrc.data();
-}
-
-/**
- * 
- */
-uint8_t * VHLIB_OPTIMAL_IFACE_BitFieldDstPtr() {
-    return buffArrDst.data();
-}
 
 };
 

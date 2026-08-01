@@ -9,8 +9,6 @@
 #include "imgdst/imgdst.hpp"
 
 
-// using namespace vhliboptimal;
-
 
 VHImageSource                   imgSource;
 VHImageDestination              imgDest;
@@ -32,13 +30,13 @@ stBenchmarkParams benchResults;
 /**
  * 
  */
-verr iteration(uint8_t cellsize) {
+verr iteration(uint8_t levelcs) {
 
 
     const vhliboptimal::stConfig cfg = {
 
         .spccnt         = 0,
-        .cellsize       = cellsize,
+        .levelcs        = levelcs,
         .minColorVal    = 200,
 
         // Min/Max object size filter
@@ -48,23 +46,34 @@ verr iteration(uint8_t cellsize) {
         .max_obj_height = F1K * 4,
 
         .sortMode       = 0,
-        .loglevel       = vhliboptimal::LOG_LEVEL_EXT
+        .loglevel       = VHLIB_OPTIMAL_LOG_LEVEL
     };
 
     verr flag1 = detector.Setup(
         cfg,
         IFACE_OPTIMAL_Border,
         IFACE_OPTIMAL_Content,
-        IFACE_OPTIMAL_Benchmark
-    );
+        IFACE_OPTIMAL_Benchmark );
 
     if(flag1)
         return verrmsg(1, "Invalid settings");
 
-    exit(1);
-
+    // Convert Original Image to BitField
     // Prepare Frame : Downsampling
-    // FillSrcGrid(uint8_t *ptr, size_t bufflen)
+    if(
+        imgSource.convert(
+
+            0, 0,
+            detector.GetCMatrix().CellsX(),
+            detector.GetCMatrix().CellsY(),
+            levelcs,
+
+            detector.GetCMatrix(),
+            detector.BitFieldSrc(),
+            detector.FilterLevel() )
+        ) {
+            return verrmsg(3, "Source image conversion issues");
+        }
 
     verr flag2 = detector.Run();
 
@@ -88,7 +97,7 @@ verr iteration(uint8_t cellsize) {
 /**
  * 
  */
-verr runtest(const std::string & fname, int cellsize) {
+verr runtest(const std::string & fname, int levelcs) {
 
     {
         std::string msg = "File Name: " + fname;
@@ -101,38 +110,23 @@ verr runtest(const std::string & fname, int cellsize) {
     }
 
     // 2. Memory allocation
-    std::vector<uint8_t> memblock;
-    size_t membytes = detector.MemoryLayout().CalcMemory();
+    size_t membytes = detector.CalcMemory();
     asrts(membytes >    1 * F1K, 1, "VHLibOptimal::CalcMemory()");
     asrts(membytes <  512 * F1K, 1, "VHLibOptimal::CalcMemory()");
-    memblock.assign(membytes, 0);
-    if(detector.MemoryLayout().SetupMemory(memblock.data(), memblock.size())) {
+    std::vector<uint8_t> memblock(membytes, 0);
+    if(detector.SetupMemory(memblock.data(), memblock.size())) {
         return verrmsg(2, "VHLibOptimal::SetupMemory()");
     }
 
-    exit(1);
-
-    #ifdef VHLIB_OPTIMAL_GRID_LX
-    asm("nop");
-    #endif
-
-    // 3. Convert Original Image to BitField
-    if(imgSource.convert(
-        cellsize)
-    ) {
-        return verrmsg(3, "Source image conversion issues");
-    }
-
-
-    // 2. Run benchmark tests
+    // 3. Run benchmark tests
 
     benchResults.filename      = fname;
-    benchResults.cellsize      = cellsize;
+    benchResults.cellsize      = 1 << levelcs;
 
     for(int i=0; i < VHLIBOPTIMAL_TEST_PASS_COUNT;i++) {
 
         // Exception ?
-        if(iteration(cellsize)) break;
+        if(iteration(levelcs)) break;
 
         int t1 = tsSampling.result_ms();
         arrtsSampling.add(t1);
@@ -191,7 +185,7 @@ int main(int argc, char *argv[]) {
     if(paramCellSize == -1) { paramCellSize = 2; }
 
     if(!paramFileName.empty()) {
-        return runtest(paramFileName, paramCellSize);
+        return runtest(paramFileName, __builtin_ctz(paramCellSize));
     }
 
     return 1;

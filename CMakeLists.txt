@@ -54,14 +54,19 @@ target_link_libraries( ${CMAKE_PROJECT_NAME} PUBLIC
 )
 
 # ----------------------------------------------
-target_compile_definitions(vhlib_optimal PUBLIC 
+target_compile_definitions(vhlib_optimal PUBLIC
     VHLIBOPTIMAL_TEST_PASS_COUNT=16
-    VHLIB_OPTIMAL_EMBEDDED=1
+    VHLIB_OPTIMAL_EMBEDDED=1    # Embedded version
     VHLIB_OPTIMAL_STL=0
-    VHLIB_OPTIMAL_GRID_FIXED=1
-    VHLIB_OPTIMAL_GRID_LX=8
-    VHLIB_OPTIMAL_GRID_LY=8
 
+    VHLIB_OPTIMAL_GRID_FIXED=1
+    VHLIB_OPTIMAL_GRID_LX=10     # 7:128 / 8:256 / 9: 512 / 10: 1024 pxls
+    VHLIB_OPTIMAL_GRID_LY=10     # 7:128 / 8:256 / 9: 512 / 10: 1024 pxls
+
+    VHLIB_OPTIMAL_OBJS_MAX=128
+    VHLIB_OPTIMAL_SPNS_MAX=4096
+
+    VHLIB_OPTIMAL_LOG_LEVEL=1
 )
 
 

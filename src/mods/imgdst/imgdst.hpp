@@ -53,7 +53,7 @@ class VHImageDestination {
 
                             for(int celln=cellid; celln < (cellid + spanwd); celln++) {
                                 auto [cx, cy] = cmtx.CellXY(celln);
-                                int cs = detector.CellSize();
+                                int cs = detector.CellSZ();
                                 painter.drawRect(cx * cs, cy * cs, cs, cs);
                             }
                         }
@@ -65,7 +65,7 @@ class VHImageDestination {
                     const vhliboptimal::VHArea & area = obj.Area();
                     {
                         auto [cx, cy] = cmtx.CellXY(area.cellid);
-                        int cs = detector.CellSize();
+                        int cs = detector.CellSZ();
                         int x = cx * cs;
                         int y = cy * cs;
                         int w = area.cntx * cs;
