@@ -1,5 +1,4 @@
 #include "iface.hpp"
-#include "vhliboptimalstructs.hpp"
 #include "vhliboptimal.hpp"
 
 

@@ -2,15 +2,6 @@
 
 #include "vhplatform.hpp"
 
-void IFACE_OPTIMAL_GetLinePixels(
-    void *userData,
-    uint8_t *dstptr,
-    uint16_t bytescnt,
-    uint16_t srcid,
-    uint16_t srcx,
-    uint16_t srcy
-);
-
 void IFACE_OPTIMAL_Border(
     void *userData,
     uint8_t cmd,

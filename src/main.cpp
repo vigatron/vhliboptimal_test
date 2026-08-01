@@ -1,34 +1,21 @@
-#include "vhplatform.hpp"
-#include "version_vhplatform.h"
-
-#include "vhliboptimal.hpp"
-#include "log/log.hpp"
-#include "version_vhliboptimal.h"
+#include "main.hpp"
 
 #include "iface.hpp"
 #include "vhtimerstamp.hpp"
 #include "vhargs.hpp"
 #include "benchmark.hpp"
 
-#include <QImage>
-#include <QPainter>
-#include <QFileInfo>
-
-
-#if VHLIB_PLATFORM_VERSION_MAJOR != 0 || VHLIB_PLATFORM_VERSION_MINOR != 4
-#error "Depends on vhlibplatform library"
-#endif
-
-#if VHLIB_OPTIMAL_VERSION_MAJOR !=0 || VHLIB_OPTIMAL_VERSION_MINOR != 8
-#error "Depends on vhliboptimal library"
-#endif
+#include "imgsrc/imgsrc.hpp"
+#include "imgdst/imgdst.hpp"
 
 
 // using namespace vhliboptimal;
 
-static QImage imgsrc;
-static QImage imgdst;
-static QImage imgbw8;
+
+VHImageSource                   imgSource;
+VHImageDestination              imgDest;
+
+vhliboptimal::VHLibOptimal      detector;
 
 // Benchmark related pass
 TSArray     arrtsSampling;
@@ -40,43 +27,32 @@ extern TimerStamp  tsScanning;      // IFACE Callbacks
 // Benchmark related summary
 stBenchmarkParams benchResults;
 
-//
-vhliboptimal::VHLibOptimal detector;
 
-
-extern void VHLIB_OPTIMAL_IFACE_MemInit();
-extern void VHLIB_OPTIMAL_IFACE_MemReset();
-
-/**
- * 
- */
-const QImage & GetOptimalBWQImage() {
-    return imgbw8;
-};
 
 /**
  * 
  */
 verr iteration(uint8_t cellsize) {
 
-    const vhliboptimal::stConfig cfg = {
 
-        .imageWidth     = (uint16_t)imgsrc.width(),
-        .imageHeight    = (uint16_t)imgsrc.height(),
+    const vhliboptimal::stConfig cfg = {
 
         .spccnt         = 0,
         .cellsize       = cellsize,
         .minColorVal    = 200,
+
+        // Min/Max object size filter
         .min_obj_width  = 2,
         .min_obj_height = 2,
         .max_obj_width  = F1K * 4,
         .max_obj_height = F1K * 4,
+
+        .sortMode       = 0,
         .loglevel       = vhliboptimal::LOG_LEVEL_EXT
     };
 
     verr flag1 = detector.Setup(
         cfg,
-        IFACE_OPTIMAL_GetLinePixels,
         IFACE_OPTIMAL_Border,
         IFACE_OPTIMAL_Content,
         IFACE_OPTIMAL_Benchmark
@@ -85,19 +61,20 @@ verr iteration(uint8_t cellsize) {
     if(flag1)
         return verrmsg(1, "Invalid settings");
 
-    detector.SetSortMode(0);
+    exit(1);
 
-    int imgsrc = 0;
-    
-    verr flag2 = detector.Run(imgsrc);
+    // Prepare Frame : Downsampling
+    // FillSrcGrid(uint8_t *ptr, size_t bufflen)
+
+    verr flag2 = detector.Run();
 
     if(flag2)
         return verrmsg(2, "Shape contour detection failed");
 
     const vhliboptimal::CellsMatrix & cmtx = detector.GetCMatrix();
 
-    benchResults.imageWidth    = cfg.imageWidth;
-    benchResults.imageHeight   = cfg.imageHeight;
+    benchResults.imageWidth    = imgSource.GetBWImage().width();
+    benchResults.imageHeight   = imgSource.GetBWImage().height();
     benchResults.cellsw        = cmtx.CellsX();
     benchResults.cellsh        = cmtx.CellsY();
     benchResults.cellst        = cmtx.CellsT();
@@ -107,130 +84,50 @@ verr iteration(uint8_t cellsize) {
     return vok;
 }
 
-/**
- * 
- */
-void generateOutPic() {
-
-    imgdst = QImage(imgsrc.width(), imgsrc.height(), imgsrc.format());
-    imgdst.fill(Qt::black);
-
-    int pwdth = (imgsrc.width() / 1000) + 1;
-
-    QColor colorpen = QColor(0, 0, 192);
-    QColor colorbrs = QColor(0, 0, 100);
-
-    {
-
-        for(int fign = 0; fign < detector.GetObjectsCount(); fign++) {
-
-            const vhliboptimal::VHOptimalFigure & obj = detector.GetObject(fign);
-            const vhliboptimal::CellsMatrix & cmtx = detector.GetCMatrix();
-
-            // Fill cells
-            {
-                QPainter painter(&imgdst);
-
-                painter.setPen  (colorpen);
-                painter.setBrush(colorbrs);
-
-                for(int spann=0; spann < obj.SpansCount(); spann++) {
-                    const vhliboptimal::spanword word = obj.Span(spann);
-                    int cellid = vhliboptimal::get_span_id    (word);
-                    int spanwd = vhliboptimal::get_span_len   (word);
-
-                    for(int celln=cellid; celln < (cellid + spanwd); celln++) {
-                        auto [cx, cy] = cmtx.CellXY(celln);
-                        int cs = detector.CellSize();
-                        painter.drawRect(cx * cs, cy * cs, cs, cs);
-                    }
-                }
-
-                painter.end();
-            }
-
-            // max size
-            const vhliboptimal::VHArea & area = obj.Area();
-            {
-                auto [cx, cy] = cmtx.CellXY(area.cellid);
-                int cs = detector.CellSize();
-                int x = cx * cs;
-                int y = cy * cs;
-                int w = area.cntx * cs;
-                int h = area.cnty * cs;
-
-                QPainter painter(&imgdst);
-
-                painter.setPen( QPen(QColor(0, 255, 0), pwdth));
-                painter.setBrush(Qt::NoBrush);
-                painter.drawRect(x, y, w, h);
-
-                painter.end();
-            }
-
-        }
-
-    }
-
-    {
-        for(int y = 0; y < imgsrc.height(); y++) {
-            for(int x = 0; x < imgsrc.width(); x++) {
-                QRgb pxl = imgbw8.pixel(x, y);
-                if(qBlue(pxl)>200)
-                    imgdst.setPixel(x, y, pxl);
-            }
-        }
-    }
-    
-
-}
-
-/**
- * 
- */
-void saveResults(const std::string & srcfname) {
-
-    QFileInfo info(QString::fromStdString(srcfname));
-
-    QString file1 = info.baseName() + "_src.jpg";
-    QString file2 = info.baseName() + "_bw8.jpg";
-    QString file3 = info.baseName() + "_out.jpg";
-
-    imgsrc.save(file1, "jpg", 50);
-    imgbw8.save(file2, "jpg", 50);
-    imgdst.save(file3, "jpg", 50);
-
-}
 
 /**
  * 
  */
 verr runtest(const std::string & fname, int cellsize) {
 
-
-    // 1. Read source image and convert to Grayscale
     {
         std::string msg = "File Name: " + fname;
-        vhliboptimal::VHLibOptimalLogger::lineout(msg.c_str());
+        vhliboptimal::log::lineout(msg.c_str());
     }
 
-    bool flagl = imgsrc.load(QString::fromStdString(fname));
-    if(!flagl) {
+    // 1. Read source image and convert to Grayscale
+    if(imgSource.load(fname)) {
         return verrmsg(1, "Invalid image file:" + fname);
     }
 
-    imgbw8 = imgsrc.convertToFormat(QImage::Format_Grayscale8);
+    // 2. Memory allocation
+    std::vector<uint8_t> memblock;
+    size_t membytes = detector.MemoryLayout().CalcMemory();
+    asrts(membytes >    1 * F1K, 1, "VHLibOptimal::CalcMemory()");
+    asrts(membytes <  512 * F1K, 1, "VHLibOptimal::CalcMemory()");
+    memblock.assign(membytes, 0);
+    if(detector.MemoryLayout().SetupMemory(memblock.data(), memblock.size())) {
+        return verrmsg(2, "VHLibOptimal::SetupMemory()");
+    }
 
-    // 
-    size_t membytes = vhliboptimal::VHLibOptimal::CalcMemory();
-    
     exit(1);
+
+    #ifdef VHLIB_OPTIMAL_GRID_LX
+    asm("nop");
+    #endif
+
+    // 3. Convert Original Image to BitField
+    if(imgSource.convert(
+        cellsize)
+    ) {
+        return verrmsg(3, "Source image conversion issues");
+    }
+
 
     // 2. Run benchmark tests
 
     benchResults.filename      = fname;
     benchResults.cellsize      = cellsize;
-
 
     for(int i=0; i < VHLIBOPTIMAL_TEST_PASS_COUNT;i++) {
 
@@ -267,10 +164,15 @@ verr runtest(const std::string & fname, int cellsize) {
     SaveBenchmark(benchResults);
     
     // 4. Generate and save images
-    generateOutPic();
     
     #if SAVE_RESULTS > 0
-    saveResults(fname);
+    imgSource.saveResults(fname);
+
+    {
+        QFileInfo info(QString::fromStdString(fname));
+        QString fnameout = info.baseName() + "_out.jpg";
+        imgDest.generateOutPic(imgSource.GetImage(), detector, fnameout);
+    }
     #endif
 
     std::cout << "Done" << std::endl;

@@ -8,42 +8,9 @@
 
 using namespace vhliboptimal;
 
-const QImage & GetOptimalBWQImage();
 
 TimerStamp  tsSampling;
 TimerStamp  tsScanning;
-
-/** 
- * 
- */
-void IFACE_OPTIMAL_GetLinePixels(
-    void *userData,
-    uint8_t *dstptr,
-    uint16_t bytescnt,
-    uint16_t srcid,
-    uint16_t srcx,
-    uint16_t srcy
-) {
-
-    const QImage & img = GetOptimalBWQImage();
-    QImage::Format fmt = img.format();
-
-    // Out of Y ?
-    if( srcy >= img.height() || fmt != QImage::Format_Grayscale8) {
-        std::memset(dstptr, 0, bytescnt);
-        return;
-    }
-
-    const uint8_t *line = img.scanLine(srcy);
-    int bytesAvail = img.width() - srcx;
-    uint8_t c;
-
-    for(int i=0; i < bytescnt; i++) {
-        c = i < bytesAvail ? line[srcx+i]:0;
-        dstptr[i] = c;
-    }
-
-}
 
 /**
  * 
