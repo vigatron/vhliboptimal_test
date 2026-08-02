@@ -8,22 +8,22 @@
             // "../data/testimage2r4096.jpg",
             // "../data/testimage3r1080p.jpg", "4"
             // "../data/testimage4r1080p.jpg", "2"
-            "../data/testimage5rvga.jpg", "1"
+            // "../data/testimage5rvga.jpg", "1",
+            "../data/testimage6rsvga.jpg", "1"
         ]
 
         // , "miDebuggerArgs": "--quiet -ex 'set debuginfod enabled off'",
     },
 
-    "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-intel.cmake" },
-    "cmake.buildDirectory": "${workspaceFolder}/build-intel",
-    "C_Cpp.default.compileCommands": "${workspaceFolder}/build-intel/compile_commands.json",
+    // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-intel.cmake" },
+    // "cmake.buildDirectory": "${workspaceFolder}/build-intel",
+    // "C_Cpp.default.compileCommands": "${workspaceFolder}/build-intel/compile_commands.json",
 
     // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-amd.cmake" },
     // "cmake.buildDirectory": "${workspaceFolder}/build-amd",
 
     // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-opi-pc-plus.cmake" },
     // "cmake.buildDirectory": "${workspaceFolder}/build-arm",
-
 
     "files.associations": { "cstdint": "cpp" }
 

@@ -2,7 +2,6 @@
 #include "vhliboptimal.hpp"
 
 
-
 namespace vhliboptimal {
 
 // Массив фигур

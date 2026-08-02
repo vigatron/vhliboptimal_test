@@ -82,11 +82,15 @@ verr iteration(uint8_t levelcs) {
 
     const vhliboptimal::CellsMatrix & cmtx = detector.GetCMatrix();
 
+    // Размер картинки в пикселях, длинна
+    // Размер картинки в пикселях, высота
     benchResults.imageWidth    = imgSource.GetBWImage().width();
     benchResults.imageHeight   = imgSource.GetBWImage().height();
+
     benchResults.cellsw        = cmtx.CellsX();
     benchResults.cellsh        = cmtx.CellsY();
     benchResults.cellst        = cmtx.CellsT();
+
     benchResults.buffsize      = cmtx.BitMaskSizeBytes();
     benchResults.objscnt       = detector.GetObjectsCount();
 

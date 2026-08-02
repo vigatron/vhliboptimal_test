@@ -84,6 +84,7 @@ class VHImageDestination {
 
             }
 
+            // Original image over rects
             {
                 for(int y = 0; y < imgsrc.height(); y++) {
                     for(int x = 0; x < imgsrc.width(); x++) {
