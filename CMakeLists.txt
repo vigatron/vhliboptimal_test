@@ -41,7 +41,6 @@ file(GLOB_RECURSE source_list_mods
 
 # ----------------------------------------------
 add_executable(${CMAKE_PROJECT_NAME} ${source_list_mods}
-    src/mods/iface/iface_mem.cpp
     src/mods/args/vhargs.cpp
     src/mods/benchmark/benchmark.cpp
 )
@@ -60,12 +59,13 @@ target_compile_definitions(vhlib_optimal PUBLIC
     VHLIB_OPTIMAL_STL=0
 
     VHLIB_OPTIMAL_GRID_FIXED=1
-    VHLIB_OPTIMAL_GRID_LX=10     # 7:128 / 8:256 / 9: 512 / 10: 1024 pxls
-    VHLIB_OPTIMAL_GRID_LY=10     # 7:128 / 8:256 / 9: 512 / 10: 1024 pxls
+    VHLIB_OPTIMAL_GRID_LX=9     # 7:128 / 8:256 / 9: 512 / 10: 1024 pxls
+    VHLIB_OPTIMAL_GRID_LY=9     # 7:128 / 8:256 / 9: 512 / 10: 1024 pxls
 
     VHLIB_OPTIMAL_OBJS_MAX=128
     VHLIB_OPTIMAL_SPNS_MAX=4096
 
+    VHLIB_OPTIMAL_DEBUG=0
     VHLIB_OPTIMAL_LOG_LEVEL=1
 )
 

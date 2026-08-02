@@ -92,7 +92,7 @@ verr iteration(uint8_t levelcs) {
     benchResults.cellst        = cmtx.CellsT();
 
     benchResults.buffsize      = cmtx.BitMaskSizeBytes();
-    benchResults.objscnt       = detector.GetObjectsCount();
+    benchResults.objscnt       = detector.ObjectsCount();
 
     return vok;
 }
@@ -183,14 +183,14 @@ verr runtest(const std::string & fname, int levelcs) {
  */
 int main(int argc, char *argv[]) {
 
-    std::string     paramFileName   = vhargstr(0, argc, argv);
-    int             paramCellSize   = vhargint(1, argc, argv);
+    // First parameter: FileName
+    std::string paramFileName = vhargstr(0, argc, argv);
+    if(paramFileName.empty())
+        return 1;
 
+    // Second param GridSize
+    int paramCellSize = vhargint(1, argc, argv);
     if(paramCellSize == -1) { paramCellSize = 2; }
 
-    if(!paramFileName.empty()) {
-        return runtest(paramFileName, __builtin_ctz(paramCellSize));
-    }
-
-    return 1;
+    return runtest(paramFileName, __builtin_ctz(paramCellSize));
 }

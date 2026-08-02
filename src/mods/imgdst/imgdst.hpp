@@ -34,9 +34,9 @@ class VHImageDestination {
 
             {
 
-                for(int fign = 0; fign < detector.GetObjectsCount(); fign++) {
+                for(int fign = 0; fign < detector.ObjectsCount(); fign++) {
 
-                    const vhliboptimal::VHOptimalFigure & obj = detector.GetObject(fign);
+                    const vhliboptimal::VHOptimalFigure & obj = detector.Object(fign);
                     const vhliboptimal::CellsMatrix & cmtx = detector.GetCMatrix();
 
                     // Fill cells
@@ -46,8 +46,9 @@ class VHImageDestination {
                         painter.setPen  (colorpen);
                         painter.setBrush(colorbrs);
 
-                        for(int spann=0; spann < obj.SpansCount(); spann++) {
-                            const vhliboptimal::spanword word = obj.Span(spann);
+                        for(uint32_t spann=0; spann < obj.SpansCount(); spann++) {
+                            uint32_t globalidx = obj.StartSpanIDX() + spann;
+                            const vhliboptimal::spanword word = detector.GetGlobalSpan(globalidx);
                             int cellid = vhliboptimal::get_span_id    (word);
                             int spanwd = vhliboptimal::get_span_len   (word);
 

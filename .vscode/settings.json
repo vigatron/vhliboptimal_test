@@ -9,7 +9,7 @@
             // "../data/testimage3r1080p.jpg", "4"
             // "../data/testimage4r1080p.jpg", "2"
             // "../data/testimage5rvga.jpg", "1",
-            "../data/testimage6rsvga.jpg", "1"
+            "../data/testimage6rsvga.jpg", "2"
         ]
 
         // , "miDebuggerArgs": "--quiet -ex 'set debuginfod enabled off'",

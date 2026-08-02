@@ -11,12 +11,12 @@ struct stBenchmarkParams {
 
     int             cellsize;
 
-    int             cellsw;
-    int             cellsh;
-    int             cellst;
-    int             buffsize;
+    uint32_t        cellsw;
+    uint32_t        cellsh;
+    uint32_t        cellst;
+    uint32_t        buffsize;
 
-    int             objscnt;
+    uint16_t        objscnt;
 
     // Sampling
     long            ts_smp_min;
