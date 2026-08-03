@@ -9,8 +9,8 @@
 using namespace vhliboptimal;
 
 
-TimerStamp  tsSampling;
-TimerStamp  tsScanning;
+extern TimerStamp  tsSampling;
+extern TimerStamp  tsScanning;
 
 /**
  * 

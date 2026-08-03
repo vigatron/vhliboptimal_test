@@ -24,7 +24,7 @@ class VHImageDestination {
             const QString & fileout )
         {
 
-            imgdst = QImage(imgsrc.width(), imgsrc.height(), imgsrc.format());
+            imgdst = QImage(imgsrc.width(), imgsrc.height(), QImage::Format_RGB32);
             imgdst.fill(Qt::black);
 
             int pwdth = (imgsrc.width() / 1000) + 1;

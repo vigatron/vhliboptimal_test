@@ -1,15 +1,16 @@
 {
 
-
     "cmake.debugConfig": {
         // "targetArchitecture": "x86_64",
         "args": [
-            // "../data/testimage1r4096.jpg", "2"
-            // "../data/testimage2r4096.jpg",
-            // "../data/testimage3r1080p.jpg", "4"
-            // "../data/testimage4r1080p.jpg", "2"
-            // "../data/testimage5rvga.jpg", "1",
-            "../data/testimage6rsvga.jpg", "2"
+            // "../data/original/testimage1r4096.jpg", "2"
+            // "../data/original/testimage2r4096.jpg",
+            // "../data/original/testimage3r1080p.jpg", "4"
+            // "../data/original/testimage4r1080p.jpg", "2"
+            // "../data/original/testimage5rvga.jpg", "1",
+            // "../data/original/testimage6rsvga.jpg", "1", "128"
+            "../data/512/example1.bmp", "1"
+
         ]
 
         // , "miDebuggerArgs": "--quiet -ex 'set debuginfod enabled off'",

@@ -1,6 +1,5 @@
 #include "main.hpp"
 
-#include "iface.hpp"
 #include "vhtimerstamp.hpp"
 #include "vhargs.hpp"
 #include "benchmark.hpp"
@@ -8,55 +7,73 @@
 #include "imgsrc/imgsrc.hpp"
 #include "imgdst/imgdst.hpp"
 
+#include "setup.hpp"
 
+
+vhliboptimal::VHLibOptimal      detector;
 
 VHImageSource                   imgSource;
 VHImageDestination              imgDest;
 
-vhliboptimal::VHLibOptimal      detector;
 
-// Benchmark related pass
+// Benchmark related
 TSArray     arrtsSampling;
+
 TSArray     arrtsScanning;
 
-extern TimerStamp  tsSampling;      // IFACE Callbacks
-extern TimerStamp  tsScanning;      // IFACE Callbacks
+// Measured when called with callback / IFACE Callbacks
+TimerStamp  tsSampling;
 
-// Benchmark related summary
+// Measured when called with callback / IFACE Callbacks
+TimerStamp  tsScanning;
+
+// Benchmark related .md report / summary
 stBenchmarkParams benchResults;
 
 
+void fillMarkdownSrcImg(
+    const std::string & fname,
+    uint8_t levelcs
+) {
+
+    const vhliboptimal::CellsMatrix & cmtx = detector.GetCMatrix();
+
+    // Размер картинки в пикселях, длинна
+    benchResults.imageWidth    = imgSource.GetBWImage().width();
+
+    // Размер картинки в пикселях, высота
+    benchResults.imageHeight   = imgSource.GetBWImage().height();
+
+    benchResults.cellsw        = cmtx.CellsX();
+    benchResults.cellsh        = cmtx.CellsY();
+    benchResults.cellst        = cmtx.CellsT();
+
+    benchResults.buffsize      = cmtx.BitMaskSizeBytes();
+    benchResults.objscnt       = detector.ObjectsCount();
+
+    benchResults.filename      = fname;
+    benchResults.cellsize      = 1 << levelcs;
+
+    // Benchmark results
+    benchResults.ts_smp_min         = arrtsSampling.resultmin();
+    benchResults.ts_smp_avg         = arrtsSampling.result();
+    benchResults.ts_smp_max         = arrtsSampling.resultmax();
+
+    benchResults.ts_scn_min         = arrtsScanning.resultmin();
+    benchResults.ts_scn_avg         = arrtsScanning.result();
+    benchResults.ts_scn_max         = arrtsScanning.resultmax();
+
+    benchResults.ts_fin_min         = benchResults.ts_smp_min + benchResults.ts_scn_min;
+    benchResults.ts_fin_avg         = benchResults.ts_smp_avg + benchResults.ts_scn_avg;
+    benchResults.ts_fin_max         = benchResults.ts_smp_max + benchResults.ts_scn_max;
+
+}
 
 /**
  * 
  */
 verr iteration(uint8_t levelcs) {
 
-
-    const vhliboptimal::stConfig cfg = {
-
-        .spccnt         = 0,
-        .levelcs        = levelcs,
-        .minColorVal    = 200,
-
-        // Min/Max object size filter
-        .min_obj_width  = 2,
-        .min_obj_height = 2,
-        .max_obj_width  = F1K * 4,
-        .max_obj_height = F1K * 4,
-
-        .sortMode       = 0,
-        .loglevel       = VHLIB_OPTIMAL_LOG_LEVEL
-    };
-
-    verr flag1 = detector.Setup(
-        cfg,
-        IFACE_OPTIMAL_Border,
-        IFACE_OPTIMAL_Content,
-        IFACE_OPTIMAL_Benchmark );
-
-    if(flag1)
-        return verrmsg(1, "Invalid settings");
 
     // Convert Original Image to BitField
     // Prepare Frame : Downsampling
@@ -80,20 +97,6 @@ verr iteration(uint8_t levelcs) {
     if(flag2)
         return verrmsg(2, "Shape contour detection failed");
 
-    const vhliboptimal::CellsMatrix & cmtx = detector.GetCMatrix();
-
-    // Размер картинки в пикселях, длинна
-    // Размер картинки в пикселях, высота
-    benchResults.imageWidth    = imgSource.GetBWImage().width();
-    benchResults.imageHeight   = imgSource.GetBWImage().height();
-
-    benchResults.cellsw        = cmtx.CellsX();
-    benchResults.cellsh        = cmtx.CellsY();
-    benchResults.cellst        = cmtx.CellsT();
-
-    benchResults.buffsize      = cmtx.BitMaskSizeBytes();
-    benchResults.objscnt       = detector.ObjectsCount();
-
     return vok;
 }
 
@@ -113,21 +116,11 @@ verr runtest(const std::string & fname, int levelcs) {
         return verrmsg(1, "Invalid image file:" + fname);
     }
 
-    // 2. Memory allocation
-    size_t membytes = detector.CalcMemory();
-    asrts(membytes >    1 * F1K, 1, "VHLibOptimal::CalcMemory()");
-    asrts(membytes <  512 * F1K, 1, "VHLibOptimal::CalcMemory()");
-    std::vector<uint8_t> memblock(membytes, 0);
-    if(detector.SetupMemory(memblock.data(), memblock.size())) {
-        return verrmsg(2, "VHLibOptimal::SetupMemory()");
-    }
+    // Memory allocation & Grid settings
+    if(VHLIBOptimalSetup(levelcs))
+        return verrmsg(2, "VHLIBOptimalSetup() failed");
 
-    // 3. Run benchmark tests
-
-    benchResults.filename      = fname;
-    benchResults.cellsize      = 1 << levelcs;
-
-    for(int i=0; i < VHLIBOPTIMAL_TEST_PASS_COUNT;i++) {
+    for(int i=0; i < VHAPP_OPTIMAL_TEST_PASS_COUNT;i++) {
 
         // Exception ?
         if(iteration(levelcs)) break;
@@ -138,21 +131,13 @@ verr runtest(const std::string & fname, int levelcs) {
         int t2 = tsScanning.result_ms();
         arrtsScanning.add(t2);
 
-        std::cout << "> Sampling: " << t1 << "ms, Scanning: " << t2 << "ms" << std::endl << std::endl;
+        std::cout
+            << "> Sampling: " << t1 << "ms"
+            <<", Scanning: " << t2 << "ms"
+            << std::endl << std::endl;
     }
 
-
-    benchResults.ts_smp_min         = arrtsSampling.resultmin();
-    benchResults.ts_smp_avg         = arrtsSampling.result();
-    benchResults.ts_smp_max         = arrtsSampling.resultmax();
-
-    benchResults.ts_scn_min         = arrtsScanning.resultmin();
-    benchResults.ts_scn_avg         = arrtsScanning.result();
-    benchResults.ts_scn_max         = arrtsScanning.resultmax();
-
-    benchResults.ts_fin_min         = benchResults.ts_smp_min + benchResults.ts_scn_min;
-    benchResults.ts_fin_avg         = benchResults.ts_smp_avg + benchResults.ts_scn_avg;
-    benchResults.ts_fin_max         = benchResults.ts_smp_max + benchResults.ts_scn_max;
+    fillMarkdownSrcImg(fname, levelcs);
 
     std::cout << "Min (ms): " << benchResults.ts_fin_min << " ms/frame" << std::endl;
     std::cout << "Avg (ms): " << benchResults.ts_fin_avg << " ms/frame" << std::endl;
@@ -187,6 +172,11 @@ int main(int argc, char *argv[]) {
     std::string paramFileName = vhargstr(0, argc, argv);
     if(paramFileName.empty())
         return 1;
+
+    #ifdef VHAPP_OPTIMAL_TEST_CONVERT_BMP
+    int test_convert_bmp(const QString & fname);
+    return test_convert_bmp(QString::fromStdString(paramFileName));
+    #endif
 
     // Second param GridSize
     int paramCellSize = vhargint(1, argc, argv);

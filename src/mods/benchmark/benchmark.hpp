@@ -57,7 +57,7 @@ class TSArray {
         int resultmax() { return max; }
 
     private:
-        static constexpr int passes_count = VHLIBOPTIMAL_TEST_PASS_COUNT;
+        static constexpr int passes_count = VHAPP_OPTIMAL_TEST_PASS_COUNT;
 
         int     idx;
         long    summ;

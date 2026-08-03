@@ -13,7 +13,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-find_package(Qt5 REQUIRED Core Widgets Gui)
+find_package(Qt6 REQUIRED Core Widgets Gui)
 
 add_compile_definitions(SAVE_RESULTS=1)
 
@@ -43,30 +43,51 @@ file(GLOB_RECURSE source_list_mods
 add_executable(${CMAKE_PROJECT_NAME} ${source_list_mods}
     src/mods/args/vhargs.cpp
     src/mods/benchmark/benchmark.cpp
+    src/mods/bmpbw.cpp
+    src/pics/srcdata.cpp
 )
 
 # ----------------------------------------------
 target_link_libraries( ${CMAKE_PROJECT_NAME} PUBLIC
-    Qt5::Core Qt5::Widgets Qt5::Gui
+    Qt6::Core Qt6::Widgets Qt6::Gui
     vhlib_platform
     vhlib_optimal
 )
 
 # ----------------------------------------------
 target_compile_definitions(vhlib_optimal PUBLIC
-    VHLIBOPTIMAL_TEST_PASS_COUNT=16
-    VHLIB_OPTIMAL_EMBEDDED=1    # Embedded version
+
+    # Uncomment for .jpg > .bmp (1-bit) conversion
+    # VHAPP_OPTIMAL_TEST_CONVERT_BMP
+
+    # Application Settings
+    VHAPP_OPTIMAL_TEST_PASS_COUNT=16
+
+    VHAPP_OPTIMAL_TEST_FLTVAL=200
+
+    # ------------------------------------------------------------
+    # VHLIBOptimal Related
+    # ------------------------------------------------------------
+
+    # Embedded version
+    # VHLIB_OPTIMAL_EMBEDDED
+
     VHLIB_OPTIMAL_STL=0
 
-    VHLIB_OPTIMAL_GRID_FIXED=1
-    VHLIB_OPTIMAL_GRID_LX=9     # 7:128 / 8:256 / 9: 512 / 10: 1024 pxls
-    VHLIB_OPTIMAL_GRID_LY=9     # 7:128 / 8:256 / 9: 512 / 10: 1024 pxls
+    # ------------------------------------------------------------
+    # FIXED GRID Option
+    # ------------------------------------------------------------
+    # 7:128 / 8:256 / 9: 512 / 10: 1024 / 11: 2048 / 12: 4096 pxls
+    VHLIB_OPTIMAL_GRID_FIXED
+    VHLIB_OPTIMAL_GRID_LX=9
+    VHLIB_OPTIMAL_GRID_LY=9
 
     VHLIB_OPTIMAL_OBJS_MAX=128
-    VHLIB_OPTIMAL_SPNS_MAX=4096
+    VHLIB_OPTIMAL_SPNS_MAX=8192
 
-    VHLIB_OPTIMAL_DEBUG=0
     VHLIB_OPTIMAL_LOG_LEVEL=1
+
+    # VHLIB_OPTIMAL_DEBUG
 )
 
 
