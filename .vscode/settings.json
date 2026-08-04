@@ -16,6 +16,15 @@
         // , "miDebuggerArgs": "--quiet -ex 'set debuginfod enabled off'",
     },
 
+    "cmake.configureSettings"       : {
+        "CMAKE_TOOLCHAIN_FILE" : "${workspaceFolder}/toolchains/toolchain-native-dbg.cmake" },
+
+    "cmake.configureArgs"           : ["-DBUILD_TARGET=native"],
+
+    "cmake.buildDirectory"          : "${workspaceFolder}/build-native-dbg",
+
+    "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-native-dbg/compile_commands.json",
+
     // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-intel.cmake" },
     // "cmake.buildDirectory": "${workspaceFolder}/build-intel",
     // "C_Cpp.default.compileCommands": "${workspaceFolder}/build-intel/compile_commands.json",

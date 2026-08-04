@@ -20,15 +20,18 @@ verr VHLIBOptimalSetup(uint8_t levelcs) {
     if(r) return verrmsg(1, "VHLIBOptimalSetup() memory allocation issue");
 
 
+    //
     const vhliboptimal::stConfig cfg = {
 
         .spccnt         = 0,
         .levelcs        = levelcs,
         .minColorVal    = VHAPP_OPTIMAL_TEST_FLTVAL,
 
-        // Min/Max object size filter
+        // Min object size filter
         .min_obj_width  = 2,
         .min_obj_height = 2,
+
+        // Max object size filter
         .max_obj_width  = F1K * 4,
         .max_obj_height = F1K * 4,
 

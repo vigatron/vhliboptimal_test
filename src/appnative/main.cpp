@@ -10,11 +10,13 @@
 #include "setup.hpp"
 
 
+// Global variables
+
 vhliboptimal::VHLibOptimal      detector;
 
 VHImageSource                   imgSource;
-VHImageDestination              imgDest;
 
+VHImageDestination              imgDest;
 
 // Benchmark related
 TSArray     arrtsSampling;
@@ -31,10 +33,10 @@ TimerStamp  tsScanning;
 stBenchmarkParams benchResults;
 
 
-void fillMarkdownSrcImg(
-    const std::string & fname,
-    uint8_t levelcs
-) {
+/**
+ * 
+ */
+void fillMarkdownSrcImg(const std::string & fname,uint8_t levelcs) {
 
     const vhliboptimal::CellsMatrix & cmtx = detector.GetCMatrix();
 
@@ -69,47 +71,15 @@ void fillMarkdownSrcImg(
 
 }
 
-/**
- * 
- */
-verr iteration(uint8_t levelcs) {
-
-
-    // Convert Original Image to BitField
-    // Prepare Frame : Downsampling
-    if(
-        imgSource.convert(
-
-            0, 0,
-            detector.GetCMatrix().CellsX(),
-            detector.GetCMatrix().CellsY(),
-            levelcs,
-
-            detector.GetCMatrix(),
-            detector.BitFieldSrc(),
-            detector.FilterLevel() )
-        ) {
-            return verrmsg(3, "Source image conversion issues");
-        }
-
-    verr flag2 = detector.Run();
-
-    if(flag2)
-        return verrmsg(2, "Shape contour detection failed");
-
-    return vok;
-}
-
 
 /**
  * 
  */
 verr runtest(const std::string & fname, int levelcs) {
 
-    {
-        std::string msg = "File Name: " + fname;
-        vhliboptimal::log::lineout(msg.c_str());
-    }
+    // Dump filename
+    vhliboptimal::log::partout("File Name: ");
+    vhliboptimal::log::lineout(fname.c_str());
 
     // 1. Read source image and convert to Grayscale
     if(imgSource.load(fname)) {
@@ -120,10 +90,28 @@ verr runtest(const std::string & fname, int levelcs) {
     if(VHLIBOptimalSetup(levelcs))
         return verrmsg(2, "VHLIBOptimalSetup() failed");
 
+    // Prepare Frame: Convert Original Image to BitField ( Downsampling or Bit-to-bit transfer)
+    int startx = 0, starty = 0;
+    uint16_t cellsx = detector.GetCMatrix().CellsX();
+    uint16_t cellsy = detector.GetCMatrix().CellsY();
+
+    if( imgSource.convert(
+            startx, starty,
+            cellsx, cellsy, levelcs,
+            detector.GetCMatrix(),
+            detector.BitFieldSrc(),
+            detector.FilterLevel()) ) {
+                return verrmsg(3, "Source image conversion issues"); }
+
+    // Multiple cycles for average measurements values
     for(int i=0; i < VHAPP_OPTIMAL_TEST_PASS_COUNT;i++) {
 
         // Exception ?
-        if(iteration(levelcs)) break;
+        verr flagDetectionResults = detector.Run();
+        if(flagDetectionResults) {
+            verrmsg(2, "Shape contour detection failed");
+            break;
+        }
 
         int t1 = tsSampling.result_ms();
         arrtsSampling.add(t1);
