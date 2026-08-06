@@ -10,9 +10,11 @@
     // LED#2    PC2
     // LED#3    PC3
 
-    #define LED_PORT            GPIOC
-    #define LED_PIN             0
-    #define LED_INIT()          __HAL_RCC_GPIOC_CLK_ENABLE()
+    #define     LED_PORT        GPIOC
+    #define     LED_PIN         0
+    #define     LED_INIT()      __HAL_RCC_GPIOC_CLK_ENABLE()
+    #define     LED_ON()        LED_PORT->BSRR = (1<<(LED_PIN+16))
+    #define     LED_OFF()       LED_PORT->BSRR = (1<<LED_PIN)
 
 #elif defined(TARGET_STM32F4DISCOVERY)
 
@@ -39,9 +41,11 @@
 #elif defined(TARGET_CMB32H750HDM)
 
     // CMB32H750HDM         PD3 / PD2 / PCU12
-    #define LED_PORT            GPIOD
-    #define LED_PIN             3
-    #define LED_INIT()          __HAL_RCC_GPIOD_CLK_ENABLE()
+    #define     LED_PORT        GPIOD
+    #define     LED_PIN         3
+    #define     LED_INIT()      __HAL_RCC_GPIOD_CLK_ENABLE()
+    #define     LED_ON()        LED_PORT->BSRR = (1<<(LED_PIN+16))
+    #define     LED_OFF()       LED_PORT->BSRR = (1<<LED_PIN)
 
 #else
 

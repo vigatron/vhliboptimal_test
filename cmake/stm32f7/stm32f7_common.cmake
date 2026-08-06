@@ -32,7 +32,6 @@ set(USB_User_Src
     ${APP_STM32_DIR}/platformstm32f746/USB_DEVICE/App/usbd_cdc_if.c
 )
 
-
 set(HAL_DRIVERS_FILES
     ${HAL_DRIVER_DIR}/Src/stm32f7xx_hal_tim.c
     ${HAL_DRIVER_DIR}/Src/stm32f7xx_hal_tim_ex.c
@@ -80,7 +79,7 @@ set(STM32_CORE_FILES
     "${SYS_CORE_DIR}/freertos.c"
     "${SYS_CORE_DIR}/syscalls.c"
     "${SYS_CORE_DIR}/sysmem.c"
-    "${SYS_CORE_DIR}/system746.cpp"
+    "${SYS_CORE_DIR}/systemf746.cpp"
 
     "${SYS_CORE_DIR}/stm32f7xx_hal_msp.c"
     "${SYS_CORE_DIR}/stm32f7xx_hal_timebase_tim.c"

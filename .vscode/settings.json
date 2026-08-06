@@ -51,12 +51,19 @@
     // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-WAVESHARECORE7XXI/compile_commands.json",
     // // ****************************************************************************************************
 
-
-    // *** STM32Cube_FW_H7_V1.13.0
+    // // *** CMB32H750HDM - STM32H750VBT6
+    // "cmake.configureArgs"           : [
+    //     "-DBUILD_TARGET=CMB32H750HDM",
+    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32h750.cmake",
+    //     "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_H7_V1.13.0" ],
+    // "cmake.buildDirectory"          : "${workspaceFolder}/build-CMB32H750HDM",
+    // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-CMB32H750HDM/compile_commands.json",
+    // // ****************************************************************************************************
 
     // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-intel.cmake" },
     // "cmake.buildDirectory": "${workspaceFolder}/build-intel",
     // "C_Cpp.default.compileCommands": "${workspaceFolder}/build-intel/compile_commands.json",
+    // // ****************************************************************************************************
 
     // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-amd.cmake" },
     // "cmake.buildDirectory": "${workspaceFolder}/build-amd",

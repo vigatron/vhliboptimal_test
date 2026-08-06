@@ -1,13 +1,11 @@
 #include "main.h"
 #include "cmsis_os.h"
 
-// #include "led.hpp"
-
 /**
   * @brief System Clock Configuration
   * @retval None
   */
-void SystemClock_Config(void)
+extern "C" void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
@@ -60,7 +58,7 @@ void SystemClock_Config(void)
   * @param  htim : TIM handle
   * @retval None
   */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+extern "C" void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
   if (htim->Instance == TIM1) {
     HAL_IncTick();
   }
