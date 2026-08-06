@@ -1,0 +1,5 @@
+set(MCU_FAMILY          "STM32H7")
+set(MCU_DEF             "STM32H750xx")
+set(STARTUP_FILE        "startup_stm32h750xx.s")
+set(HAL_DRIVER_DIR      "STM32H7xx_HAL_Driver")
+set(DEVICE_INC_DIR      "STM32H7xx")
