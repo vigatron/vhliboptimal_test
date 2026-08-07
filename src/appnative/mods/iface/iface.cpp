@@ -59,7 +59,11 @@ void IFACE_OPTIMAL_Benchmark(
             break;
 
         case eCmdBenchmarkScan:
-            if(!param) tsScanning.start(); else tsScanning.stop();
+            if(!param)
+                tsScanning.start();
+            else
+                tsScanning.stop();
+
             break;
 
         case eCmdBenchmarkSubfuncFigure:

@@ -9,19 +9,32 @@
 
 #include "setup.hpp"
 
+#include "testcontainer.hpp"
+
+#include "timer/timeaverager.hpp"
+
+#include "report.hpp"
+
+
+// * TestLibraryContainer *
+// Test single file (passed as parameter)
+// Test linked 512x512 B&W examples 1-7
+TestLibraryContainer            testContainer;
 
 // Global variables
-
 vhliboptimal::VHLibOptimal      detector;
 
+//
 VHImageSource                   imgSource;
 
+//
 VHImageDestination              imgDest;
 
-// Benchmark related
-TSArray     arrtsSampling;
+// Benchmark: sampling related
+TimerAverager     arrtsSampling;
 
-TSArray     arrtsScanning;
+// Benchmark: scan related
+TimerAverager     arrtsScanning;
 
 // Measured when called with callback / IFACE Callbacks
 TimerStamp  tsSampling;
@@ -29,55 +42,13 @@ TimerStamp  tsSampling;
 // Measured when called with callback / IFACE Callbacks
 TimerStamp  tsScanning;
 
-// Benchmark related .md report / summary
-stBenchmarkParams benchResults;
-
-
-/**
- * 
- */
-void fillMarkdownSrcImg(const std::string & fname,uint8_t levelcs) {
-
-    const vhliboptimal::CellsMatrix & cmtx = detector.GetCMatrix();
-
-    // Размер картинки в пикселях, длинна
-    benchResults.imageWidth    = imgSource.GetBWImage().width();
-
-    // Размер картинки в пикселях, высота
-    benchResults.imageHeight   = imgSource.GetBWImage().height();
-
-    benchResults.cellsw        = cmtx.CellsX();
-    benchResults.cellsh        = cmtx.CellsY();
-    benchResults.cellst        = cmtx.CellsT();
-
-    benchResults.buffsize      = cmtx.BitMaskSizeBytes();
-    benchResults.objscnt       = detector.ObjectsCount();
-
-    benchResults.filename      = fname;
-    benchResults.cellsize      = 1 << levelcs;
-
-    // Benchmark results
-    benchResults.ts_smp_min         = arrtsSampling.resultmin();
-    benchResults.ts_smp_avg         = arrtsSampling.result();
-    benchResults.ts_smp_max         = arrtsSampling.resultmax();
-
-    benchResults.ts_scn_min         = arrtsScanning.resultmin();
-    benchResults.ts_scn_avg         = arrtsScanning.result();
-    benchResults.ts_scn_max         = arrtsScanning.resultmax();
-
-    benchResults.ts_fin_min         = benchResults.ts_smp_min + benchResults.ts_scn_min;
-    benchResults.ts_fin_avg         = benchResults.ts_smp_avg + benchResults.ts_scn_avg;
-    benchResults.ts_fin_max         = benchResults.ts_smp_max + benchResults.ts_scn_max;
-
-}
-
 
 /**
  * 
  */
 verr runtest(const std::string & fname, int levelcs) {
 
-    // Dump filename
+    // filename to console
     vhliboptimal::log::partout("File Name: ");
     vhliboptimal::log::lineout(fname.c_str());
 
@@ -90,10 +61,13 @@ verr runtest(const std::string & fname, int levelcs) {
     if(VHLIBOptimalSetup(levelcs))
         return verrmsg(2, "VHLIBOptimalSetup() failed");
 
-    // Prepare Frame: Convert Original Image to BitField ( Downsampling or Bit-to-bit transfer)
+    // Prepare Frame:
+    //  Convert Original Image to BitField
+    //  (Downsampling or Bit-to-bit transfer)
     int startx = 0, starty = 0;
-    uint16_t cellsx = detector.GetCMatrix().CellsX();
-    uint16_t cellsy = detector.GetCMatrix().CellsY();
+    const vhliboptimal::CellsMatrix & cmtx = detector.GetCMatrix();
+    uint16_t cellsx = cmtx.CellsX();
+    uint16_t cellsy = cmtx.CellsY();
 
     if( imgSource.convert(
             startx, starty,
@@ -113,31 +87,33 @@ verr runtest(const std::string & fname, int levelcs) {
             break;
         }
 
-        int t1 = tsSampling.result_ms();
-        arrtsSampling.add(t1);
+        int t_samp_us = tsSampling.result_us();
+        arrtsSampling.add(t_samp_us);
+        std::cout << "> " << "Sampling: " << t_samp_us << "uSec" << std::endl;
 
-        int t2 = tsScanning.result_ms();
-        arrtsScanning.add(t2);
-
-        std::cout
-            << "> Sampling: " << t1 << "ms"
-            <<", Scanning: " << t2 << "ms"
-            << std::endl << std::endl;
+        int t_scan_us = tsScanning.result_us();
+        arrtsScanning.add(t_scan_us);
+        std::cout << "> " << "Scanning: " << t_scan_us << "uSec" << std::endl;
     }
 
-    fillMarkdownSrcImg(fname, levelcs);
+    // Generate table
+    gobjReport.SetFileName(fname);
+    gobjReport.SetImgProps(imgSource.GetBWImage().width(), imgSource.GetBWImage().height() );
+    gobjReport.SetMisc(cmtx, levelcs, detector.ObjectsCount());
+    gobjReport.SetTimings(arrtsSampling, arrtsScanning);
+    gobjReport.SaveResults();
 
-    std::cout << "Min (ms): " << benchResults.ts_fin_min << " ms/frame" << std::endl;
-    std::cout << "Avg (ms): " << benchResults.ts_fin_avg << " ms/frame" << std::endl;
-    std::cout << "Max (ms): " << benchResults.ts_fin_max << " ms/frame" << std::endl;
-
-    // 3. Save results
-    SaveBenchmark(benchResults);
-    
-    // 4. Generate and save images
-    
     #if SAVE_RESULTS > 0
-    imgSource.saveResults(fname);
+    // 4. Generate and save images
+    {
+        QFileInfo info(QString::fromStdString(fname));
+
+        QString fnameOrigImage = info.baseName() + "_src.jpg";
+        imgSource.saveOrigImage(fnameOrigImage.toStdString());
+
+        QString fnameBWImage = info.baseName() + "_bw8.jpg";
+        imgSource.saveBWImage(fnameBWImage.toStdString());
+    }
 
     {
         QFileInfo info(QString::fromStdString(fname));
@@ -155,6 +131,9 @@ verr runtest(const std::string & fname, int levelcs) {
  * 
  */
 int main(int argc, char *argv[]) {
+
+    // A) Command line file       : Autosize to grid
+    // B) Embedded .bmp example   : Autosize to grid
 
     // First parameter: FileName
     std::string paramFileName = vhargstr(0, argc, argv);

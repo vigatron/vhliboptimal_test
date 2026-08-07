@@ -27,21 +27,15 @@ class VHImageSource {
          * 
          */
         verr convert(
-
-            // Source window props
-            int gfxstartx, int gfxstarty,
-
-            // Cells count & scale
-            size_t cntx, size_t cnty, uint8_t levelcs,
-
-            // Grid props
-            const vhliboptimal::CellsMatrix & cmtx,
-
-            // Bitfield
-            vhliboptimal::BitField & bfld,
-
-            uint8_t filterLevel
-        ) {
+            int gfxstartx,      // Source window props X
+            int gfxstarty,      // Source window props Y
+            size_t cntx,        // Cells count & scale
+            size_t cnty,        // Cells count & scale
+            uint8_t levelcs,    // Cells count & scale
+            const vhliboptimal::CellsMatrix & cmtx, // Grid props
+            vhliboptimal::BitField & bfld,  // Bitfield
+            uint8_t filterLevel )
+            {
 
             // Check image format
             QImage::Format fmt = imgbw8.format();
@@ -95,16 +89,15 @@ class VHImageSource {
         /**
          * 
          */
-        void saveResults(const std::string & srcfname) {
+        void saveOrigImage(const std::string & fnameout) {
+            imgsrc.save(QString::fromStdString(fnameout), "jpg", 50);
+        }
 
-            QFileInfo info(QString::fromStdString(srcfname));
-
-            QString file1 = info.baseName() + "_src.jpg";
-            QString file2 = info.baseName() + "_bw8.jpg";
-
-            imgsrc.save(file1, "jpg", 50);
-            imgbw8.save(file2, "jpg", 50);
-
+        /**
+         * 
+         */
+        void saveBWImage(const std::string & fnameout) {
+            imgbw8.save(QString::fromStdString(fnameout), "jpg", 50);
         }
 
     private:
