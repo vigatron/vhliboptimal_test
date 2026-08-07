@@ -9,13 +9,12 @@ find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui)
 
 add_executable(${PROJECT_NAME}
     src/appnative/main.cpp
-    src/appnative/setup.cpp
-    src/appnative/report.cpp
     src/appnative/mods/args/vhargs.cpp
     src/appnative/mods/benchmark/benchmark.cpp
     src/appnative/mods/bmpbw.cpp
     src/appnative/mods/iface/iface.cpp
     src/appnative/mods/iface/iface_log.cpp
+    src/appnative/mods/report/report.cpp
     src/pics/srcdata.cpp
 )
 

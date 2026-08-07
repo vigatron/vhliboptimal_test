@@ -1,16 +1,11 @@
 #include "vhplatform.hpp"
 #include "vhliboptimal.hpp"
+#include "testcontainer/testcontainer.hpp"
 
-#include "vhtimerstamp.hpp"
-#include "benchmark.hpp"
-
-#include <QImage>
 
 using namespace vhliboptimal;
 
-
-extern TimerStamp  tsSampling;
-extern TimerStamp  tsScanning;
+extern TestLibraryContainer testContainer;
 
 /**
  * 
@@ -43,32 +38,6 @@ void IFACE_OPTIMAL_Content(
 /**
  * 
  */
-void IFACE_OPTIMAL_Benchmark(
-    void *userData,
-    int cmd,
-    int param
-) {
-
-    switch(cmd) {
-
-        case eCmdBenchmarkMemalloc:
-            break;
-
-        case eCmdBenchmarkSampling:
-            if(!param) tsSampling.start(); else tsSampling.stop();
-            break;
-
-        case eCmdBenchmarkScan:
-            if(!param)
-                tsScanning.start();
-            else
-                tsScanning.stop();
-
-            break;
-
-        case eCmdBenchmarkSubfuncFigure:
-            break;
-
-        default: { }
-    }
+void IFACE_OPTIMAL_Benchmark(void *userData, int cmd, int param) {
+    testContainer.connectCallbackBenchmark(userData, cmd, param );
 }

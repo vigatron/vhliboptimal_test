@@ -5,7 +5,6 @@
 
 #include "vhliboptimal.hpp"
 #include "version_vhliboptimal.h"
-#include "log/log.hpp"
 
 #if VHLIB_PLATFORM_VERSION_MAJOR != 0 || VHLIB_PLATFORM_VERSION_MINOR != 4
 #error "Depends on vhlibplatform library"
