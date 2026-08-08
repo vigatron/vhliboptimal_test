@@ -42,7 +42,7 @@ class VHImageSource {
             if(fmt != QImage::Format_Grayscale8) return verrmsg(1, "B&W SRC Image format only");
 
             // Clearing previous
-            bfld.Clear(cmtx);
+            bfld.ClearArea(cmtx);
 
             // Border always '0'
             size_t maxx = cmtx.CellsX() - 1;
@@ -68,6 +68,9 @@ class VHImageSource {
                     }
                 }
             }
+
+            // Clearing border
+            bfld.ClearBorder(cmtx);
 
             return vok;
         }

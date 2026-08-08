@@ -35,7 +35,11 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     vhlib_optimal
 )
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE SAVE_RESULTS=1)
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+    VHLIBOPTIMAL_TEST_EMBEDDEDBMPID=0
+    VHLIBOPTIMAL_TEST_PASS_COUNT=1
+    SAVE_RESULTS=1
+)
 
 # add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
 # 	COMMAND cp "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}" "$ENV{HOME}/bin/${CMAKE_PROJECT_NAME}" )

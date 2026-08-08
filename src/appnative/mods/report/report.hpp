@@ -61,12 +61,12 @@ class VHReportGenerator {
 
             // Sampling
             ts_smp_min    = arrtsSampling.resultmin();
-            ts_smp_avg    = arrtsSampling.result(VHAPP_OPTIMAL_TEST_PASS_COUNT);
+            ts_smp_avg    = arrtsSampling.result(VHLIBOPTIMAL_TEST_PASS_COUNT);
             ts_smp_max    = arrtsSampling.resultmax();
 
             // Scanning
             ts_scn_min    = arrtsScanning.resultmin();
-            ts_scn_avg    = arrtsScanning.result(VHAPP_OPTIMAL_TEST_PASS_COUNT);
+            ts_scn_avg    = arrtsScanning.result(VHLIBOPTIMAL_TEST_PASS_COUNT);
             ts_scn_max    = arrtsScanning.resultmax();
 
             // Summ

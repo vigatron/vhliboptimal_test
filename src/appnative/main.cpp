@@ -20,38 +20,47 @@ TestLibraryContainer testContainer;
  */
 int main(int argc, char *argv[]) {
 
+    QImage testImage;
 
-
-    struct stConfig {
-        std::string fname;
-        uint16_t offssx;
-        uint16_t offssy;
-        uint16_t width;
-        uint16_t height;
-
-    };
-
-    // Parse Command line file
-
-
-    // B) Embedded .bmp example   : Autosize to grid
-
-    // First parameter: FileName
+    // Parameter #1 - FileName
     std::string paramFileName = vhargstr(0, argc, argv);
-    if(paramFileName.empty())
-        return 1;
+    if(paramFileName.size()) {
 
-    #ifdef VHAPP_OPTIMAL_TEST_CONVERT_BMP
-    int test_convert_bmp(const QString & fname);
-    return test_convert_bmp(QString::fromStdString(paramFileName));
-    #endif
+        // filename to console
+        vhliboptimal::log::partout("File Name: ");
+        vhliboptimal::log::lineout(paramFileName.c_str());
 
-    // Second param GridSize
-    int paramCellSize = vhargint(1, argc, argv);
+        // Read source image
+        QString fname = QString::fromStdString(paramFileName);
+        bool flagtry = testImage.load(fname);
+        if(!flagtry)
+            return verrmsg(1, "Invalid filename: " + paramFileName);
+        
+        // Convert to Grayscale ?
+    }
+
+    // Parameter #2 - GridSize
+    uint8_t paramCellSize = vhargint(1, argc, argv);
     if(paramCellSize == -1) { paramCellSize = 2; }
 
 
-    verr result = testContainer.runtest(paramFileName, __builtin_ctz(paramCellSize));
+    // Parse Command line file
+    TestLibraryContainer::stContainerConfig cfg = {
+        .bmparr     = embedded_bmp_data(),
+        .bmpsize    = embedded_bmp_size(),
+        .offssx     = 0,
+        .offssy     = 0,
+        .width      = 0,
+        .height     = 0,
+        .levelcs    = (uint8_t) __builtin_ctz(paramCellSize)
+    };
+
+    //
+    verr result = testContainer.StartTest(cfg);
+    if(result)  std::cout << "Error: " << result;
+    else        std::cout << "Done";
+
+    std::cout << std::endl;
 
     return result;
 }

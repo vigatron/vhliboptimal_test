@@ -25,7 +25,6 @@ target_compile_definitions(vhlib_optimal PUBLIC
     # VHAPP_OPTIMAL_TEST_CONVERT_BMP
 
     # Application Settings
-    VHAPP_OPTIMAL_TEST_PASS_COUNT=1
     VHAPP_OPTIMAL_TEST_FLTVAL=200
 
     # ------------------------------------------------------------

@@ -14,23 +14,71 @@
 
 #include "log/log.hpp"
 
-// #include "timer/vhtimerstamp.hpp"
-// #include "benchmark.hpp"
-// #include <QImage>
+// Reference to embedded picture
+uint8_t *   embedded_bmp_data();
+uint32_t    embedded_bmp_size();
 
 
 class TestLibraryContainer {
 
     public:
 
-        verr TestSingleFile(const std::string & filename) {
+        struct stContainerConfig {
+            std::string fname;
+            uint8_t *bmparr;
+            uint32_t bmpsize;
+            uint16_t offssx;
+            uint16_t offssy;
+            uint16_t width;
+            uint16_t height;
+            uint8_t  levelcs;
+        };
 
-            return verror(1);
-        }
+        /**
+         * 
+         */
+        // const std::string & fname, int levelcs
+        verr StartTest(const stContainerConfig & cfg) {
 
-        verr TestInternalExamples() {
+            // Memory allocation & Grid settings
+            // TODO: Check alignment if need 
+            if(VHLIBOptimalSetup(cfg.levelcs))
+                return verrmsg(2, "VHLIBOptimalSetup() failed");
 
-            return verror(1);
+            // Multiple cycles for average measurements values
+            for(int i=0; i < VHLIBOPTIMAL_TEST_PASS_COUNT;i++) {
+
+                detector.BitFieldSrc().ClearArea(detector.GetCMatrix());
+
+                // Transfer source image bitfield
+                for(uint32_t i = 0; i < cfg.bmpsize; i++) {
+                    verr r = detector.BMPParserByte(cfg.bmparr[i], cfg.levelcs);
+                    if(r) return r;
+                }
+
+                detector.BitFieldSrc().ClearBorder(detector.GetCMatrix());
+
+                // Exception ?
+                verr flagDetectionResults = detector.Run();
+                if(flagDetectionResults) {
+                    verrmsg(2, "Shape contour detection failed");
+                    break;
+                }
+
+                int t_samp_us = tsSampling.result_us();
+                arrtsSampling.add(t_samp_us);
+                std::cout << "> " << "Sampling: " << t_samp_us << "uSec" << std::endl;
+
+                int t_scan_us = tsScanning.result_us();
+                arrtsScanning.add(t_scan_us);
+                std::cout << "> " << "Scanning: " << t_scan_us << "uSec" << std::endl;
+            }
+
+            GenerateReport(cfg);
+
+            std::cout << "Done" << std::endl;
+
+            return vok;
         }
 
         /**
@@ -66,87 +114,6 @@ class TestLibraryContainer {
         /**
          * 
          */
-        verr runtest(const std::string & fname, int levelcs) {
-
-            // filename to console
-            vhliboptimal::log::partout("File Name: ");
-            vhliboptimal::log::lineout(fname.c_str());
-
-            // 1. Read source image and convert to Grayscale
-            if(imgSource.load(fname)) {
-                return verrmsg(1, "Invalid image file:" + fname);
-            }
-
-            // Memory allocation & Grid settings
-            if(VHLIBOptimalSetup(levelcs))
-                return verrmsg(2, "VHLIBOptimalSetup() failed");
-
-            // Prepare Frame:
-            //  Convert Original Image to BitField
-            //  (Downsampling or Bit-to-bit transfer)
-            int startx = 0, starty = 0;
-            const vhliboptimal::CellsMatrix & cmtx = detector.GetCMatrix();
-            uint16_t cellsx = cmtx.CellsX();
-            uint16_t cellsy = cmtx.CellsY();
-
-            if( imgSource.convert(
-                    startx, starty,
-                    cellsx, cellsy, levelcs,
-                    detector.GetCMatrix(),
-                    detector.BitFieldSrc(),
-                    detector.FilterLevel()) ) {
-                        return verrmsg(3, "Source image conversion issues"); }
-
-            // Multiple cycles for average measurements values
-            for(int i=0; i < VHAPP_OPTIMAL_TEST_PASS_COUNT;i++) {
-
-                // Exception ?
-                verr flagDetectionResults = detector.Run();
-                if(flagDetectionResults) {
-                    verrmsg(2, "Shape contour detection failed");
-                    break;
-                }
-
-                int t_samp_us = tsSampling.result_us();
-                arrtsSampling.add(t_samp_us);
-                std::cout << "> " << "Sampling: " << t_samp_us << "uSec" << std::endl;
-
-                int t_scan_us = tsScanning.result_us();
-                arrtsScanning.add(t_scan_us);
-                std::cout << "> " << "Scanning: " << t_scan_us << "uSec" << std::endl;
-            }
-
-            // Generate table
-            gobjReport.SetFileName(fname);
-            gobjReport.SetImgProps(imgSource.GetBWImage().width(), imgSource.GetBWImage().height() );
-            gobjReport.SetMisc(cmtx, levelcs, detector.ObjectsCount());
-            gobjReport.SetTimings(arrtsSampling, arrtsScanning);
-            gobjReport.SaveResults();
-
-            #if SAVE_RESULTS > 0
-            // 4. Generate and save images
-            {
-                QFileInfo info(QString::fromStdString(fname));
-
-                QString fnameOrigImage = info.baseName() + "_src.jpg";
-                imgSource.saveOrigImage(fnameOrigImage.toStdString());
-
-                QString fnameBWImage = info.baseName() + "_bw8.jpg";
-                imgSource.saveBWImage(fnameBWImage.toStdString());
-            }
-
-            {
-                QFileInfo info(QString::fromStdString(fname));
-                QString fnameout = info.baseName() + "_out.jpg";
-                imgDest.generateOutPic(imgSource.GetImage(), detector, fnameout);
-            }
-            #endif
-
-            std::cout << "Done" << std::endl;
-
-            return vok;
-        }
-
         verr VHLIBOptimalSetup(uint8_t levelcs) {
 
             // 2. Memory allocation
@@ -155,10 +122,9 @@ class TestLibraryContainer {
             asrts(membytes <  512 * F1K, 1, "VHLibOptimal::CalcMemory()");
 
             // Allocate memory with std::vector<uint8_t>
-            memblock.assign(membytes, 0);
-            verr r = detector.SetupMemory(memblock.data(), memblock.size());
+            memBlockAligned.assign(membytes, 0);
+            verr r = detector.SetupMemory(memBlockAligned.data(), memBlockAligned.size());
             if(r) return verrmsg(1, "VHLIBOptimalSetup() memory allocation issue");
-
 
             //
             const vhliboptimal::stConfig cfg = {
@@ -188,7 +154,6 @@ class TestLibraryContainer {
             if(flag1)
                 return verrmsg(1, "Invalid settings");
 
-
             // Return initialization status
             return vok;
         }
@@ -217,7 +182,56 @@ class TestLibraryContainer {
         TimerStamp                      tsScanning;
 
         //
-        std::vector<uint8_t>            memblock;
+        std::vector<uint8_t>            memBlockAligned;
 
+
+        /**
+         *
+         */
+        void GenerateReport(const stContainerConfig & cfg) {
+            const vhliboptimal::CellsMatrix & cmtx = detector.GetCMatrix();
+            gobjReport.SetFileName(cfg.fname);
+            gobjReport.SetImgProps(imgSource.GetBWImage().width(), imgSource.GetBWImage().height() );
+            gobjReport.SetMisc(cmtx, cfg.levelcs, detector.ObjectsCount());
+            gobjReport.SetTimings(arrtsSampling, arrtsScanning);
+            gobjReport.SaveResults();
+        }
 
 };
+
+    // #ifdef VHAPP_OPTIMAL_TEST_CONVERT_BMP
+    // int test_convert_bmp(const QString & fname);
+    // return test_convert_bmp(QString::fromStdString(paramFileName));
+    // #endif
+
+    // // Prepare Frame:
+    // //  Convert Original Image to BitField
+    // //  (Downsampling or Bit-to-bit transfer)
+    // int startx = 0, starty = 0;
+    // 
+    // uint16_t cellsx = cmtx.CellsX();
+    // uint16_t cellsy = cmtx.CellsY();
+
+    // if( imgSource.convert(
+    //         startx, starty, cellsx, cellsy, levelcs,
+    //         detector.GetCMatrix(), detector.BitFieldSrc(), detector.FilterLevel()) ) {
+    //             return verrmsg(3, "Source image conversion issues"); }
+
+    // #if SAVE_RESULTS > 0
+    // // 4. Generate and save images
+    // {
+    //     QFileInfo info(QString::fromStdString(fname));
+
+    //     QString fnameOrigImage = info.baseName() + "_src.jpg";
+    //     imgSource.saveOrigImage(fnameOrigImage.toStdString());
+
+    //     QString fnameBWImage = info.baseName() + "_bw8.jpg";
+    //     imgSource.saveBWImage(fnameBWImage.toStdString());
+    // }
+
+    // {
+    //     QFileInfo info(QString::fromStdString(fname));
+    //     QString fnameout = info.baseName() + "_out.jpg";
+    //     imgDest.generateOutPic(imgSource.GetImage(), detector, fnameout);
+    // }
+    // #endif
