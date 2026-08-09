@@ -35,6 +35,7 @@ target_link_libraries(${TARGET_ELF} PRIVATE
 )
 
 target_compile_definitions(${TARGET_ELF} PRIVATE
+    BUILD_TARGET_NAME=${BUILD_TARGET}
     TARGET_${BUILD_TARGET}
     HSE_VALUE=${HSE_VALUE}
     ${MCU_DEF}

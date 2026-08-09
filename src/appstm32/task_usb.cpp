@@ -6,6 +6,13 @@
 #include "classes/cmdlinebuff.hpp"
 
 
+// --- Двухэтапный макрос для превращения любого токена в строку ---
+#define STRINGIFY_NX(a)         #a
+#define STRINGIFY(a)            STRINGIFY_NX(a)
+
+#define BUILD_TARGET_STR        STRINGIFY(BUILD_TARGET_NAME)
+
+
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
 VHCommandLineBuffer cmdLine;
@@ -24,13 +31,27 @@ static constexpr char strnl             []  = {0x0D, 0x0A, 0x00};
 bool flagPacketAvail = false;
 
 /**
+ * Redirect printf to USBs
+ */
+extern "C" int _write(int file, char *ptr, int len) {
+
+    while(hUsbDeviceFS.dev_state != USBD_STATE_CONFIGURED) { osDelay(1); }
+
+    USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef*)hUsbDeviceFS.pClassData;
+    while(hcdc->TxState != 0) {
+        osDelay(1); 
+    }
+
+    CDC_Transmit_FS((uint8_t *)ptr, len);
+    return len;
+}
+
+/**
  * 
  */
 void SendText(const char * txt) {
 
-    while(hUsbDeviceFS.dev_state != USBD_STATE_CONFIGURED) {
-        osDelay(1);
-    }
+    while(hUsbDeviceFS.dev_state != USBD_STATE_CONFIGURED) { osDelay(1); }
 
     USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef*)hUsbDeviceFS.pClassData;
     while(hcdc->TxState != 0) {
@@ -102,7 +123,10 @@ void StartUSBTask(void *argument) {
 
     osDelay(1500);
 
-    SendText(strWelcome);
+    SendTextLine(strnl);
+    SendTextLine(strWelcome);
+    SendTextLine(BUILD_TARGET_STR);
+    printf("OLOLO %d\n", 123);
     SendText(strnl);
     SendText(strlinePrompt);
 
