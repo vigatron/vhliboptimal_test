@@ -21,6 +21,8 @@ add_executable(${TARGET_ELF}
     ${APP_STM32_DIR}/global.cpp
     ${APP_STM32_DIR}/detector.cpp
     ${APP_STM32_DIR}/callbacks/callbacks.cpp
+    ${APP_STM32_DIR}/benchmark/benchmark.cpp
+    ${APP_STM32_DIR}/sysinfo/sysinfo.cpp
 
     src/pics/srcimgdata.cpp
 )

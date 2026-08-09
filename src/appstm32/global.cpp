@@ -2,13 +2,23 @@
 #include "cmsis_os.h"
 #include "usb_device.h"
 
+//
+#include "vhliboptimal.hpp"
+
+//
 #include "classes/cmdlinebuff.hpp"
 
-#include "vhliboptimal.hpp"
+//
+#include "benchmark/benchmark.hpp"
 
 
 VHCommandLineBuffer cmdLine;
 
+//
+VHTimeStamp tsSampling;
+VHTimeStamp tsScanning;
+
+//
 static constexpr char strlineInfo       []  = "Processing System Info ...";
 static constexpr char strlineMem        []  = "MEM@XXXX";
 
@@ -18,6 +28,12 @@ void SendText(const char * txt);
 void SendTextLine(const char * txt);
 
 verr VHLIBOptimalRun();
+
+
+
+void VHAppInitGlobalVars() {
+    VHTimeStamp::Init();
+}
 
 /**
  * 

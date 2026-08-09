@@ -26,7 +26,7 @@ void StartUSBTask(void *argument);
 
 // Board related
 void VHBoardInit();
-
+void VHAppInitGlobalVars();
 
 /**
   * @brief  The application entry point.
@@ -35,6 +35,7 @@ void VHBoardInit();
 int main(void)
 {
     VHBoardInit();
+    VHAppInitGlobalVars();
 
     /* Init scheduler */
     osKernelInitialize();

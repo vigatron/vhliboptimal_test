@@ -2,6 +2,10 @@
 #include "callbacks/callbacks.hpp"
 #include "platform/platform.hpp"
 
+//
+#include "cmsis_os.h"
+#include "benchmark/benchmark.hpp"
+
 // Source Image (embedded)
 #include "../pics/srcimgdata.hpp"
 
@@ -16,12 +20,14 @@ static uint8_t mem_buffer_spans    [CFG_MEMSIZE_BYTES_Spans];
 
 VHLibOptimal      detector;
 
+extern VHTimeStamp tsSampling;
+extern VHTimeStamp tsScanning;
 
 static const stConfig sCfg = {
 
     // Misc
     .spccnt         = 0,
-    .levelcs        = __builtin_ctz(4),
+    .levelcs        = __builtin_ctz(VHLIB_OPTIMAL_GRID_SZ),
     .minColorVal    = VHAPP_OPTIMAL_TEST_FLTVAL,
 
     // Min object size filter
@@ -96,5 +102,11 @@ verr VHLIBOptimalRun() {
         return verrmsg(2, "Shape contour detection failed");
     }
     
+    unsigned int timer_clk  = (unsigned int) tsScanning.ResultTick();
+    unsigned int timer_us   = timer_clk / (SystemCoreClock / 1000000.0f);
+
+    printf("%-20s : %u\n", "Clocks  elapsed", timer_clk);
+    printf("%-20s : %u\n", "Elapsed in uSec", timer_us);
+
     return vok;
 }

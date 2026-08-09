@@ -1,4 +1,12 @@
 #include "callbacks.hpp"
+#include "vhliboptimal.hpp"
+
+#include "benchmark/benchmark.hpp"
+
+using namespace vhliboptimal;
+
+extern VHTimeStamp tsSampling;
+extern VHTimeStamp tsScanning;
 
 /**
  * 
@@ -36,5 +44,19 @@ void IFACE_OPTIMAL_Benchmark(
     int cmd,
     int param
 ) {
+
+    if(cmd == eCmdBenchmarkSampling) {
+
+    } else if(cmd == eCmdBenchmarkScan) {
+
+        if(!param) { 
+            tsScanning.Start();
+        } else {
+            tsScanning.Stop();
+        }
+
+    } else {
+
+    }
 
 }
