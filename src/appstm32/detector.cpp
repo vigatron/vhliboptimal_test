@@ -78,17 +78,19 @@ verr VHLIBOptimalRun() {
 
     printf("Starting test ...\n");
 
+    // Transfer source image bitfield
     detector.BitFieldSrc().ClearArea(detector.GetCMatrix());
 
-    // Transfer source image bitfield
+    detector.BMPParserReset();
+
     for(uint32_t i = 0; i < embedded_bmp_size(); i++) {
         verr r = detector.BMPParserByte(embedded_bmp_data()[i], sCfg.levelcs);
-        if(r) return r;
+        if(r != vok) return verrmsg(105, "Source Image sampling error");
     }
 
     detector.BitFieldSrc().ClearBorder(detector.GetCMatrix());
 
-    // Exception ?
+    // Start detection process
     verr flagDetectionResults = detector.Run();
     if(flagDetectionResults) {
         return verrmsg(2, "Shape contour detection failed");
