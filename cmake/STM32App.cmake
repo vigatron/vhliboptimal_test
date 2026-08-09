@@ -8,13 +8,15 @@ set(TARGET_ELF "${PROJECT_NAME}_${BUILD_TARGET}.elf")
 
 add_executable(${TARGET_ELF}
     ${STARTUP_FILE}
-    ${APP_STM32_DIR}/main.cpp
     ${STM32_CORE_FILES}
     ${HAL_DRIVERS_FILES}
     ${USB_User_Src}
     ${USB_Device_Library_Src}
     ${FreeRTOS_Src}
 
+    ${APP_STM32_DIR}/emain.cpp
+    ${APP_STM32_DIR}/task_def.cpp
+    ${APP_STM32_DIR}/task_usb.cpp
     src/pics/srcdata.cpp
 )
 

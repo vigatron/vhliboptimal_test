@@ -1,6 +1,6 @@
 // xxd -cols 16 -i image.bmp > image_data.h
 
-#include "vhplatform.hpp"
+#include <cstdint>
 
 
 #if VHLIBOPTIMAL_TEST_EMBEDDEDBMPID == 0

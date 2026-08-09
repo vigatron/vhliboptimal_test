@@ -1,58 +1,31 @@
 #include "main.h"
 #include "cmsis_os.h"
-#include "usb_device.h"
 
 #include "classes/led.hpp"
 
 osThreadId_t defaultTaskHandle;
+osThreadId_t usbTaskHandle;
+
+
 const osThreadAttr_t defaultTask_attributes = {
   .name = "defaultTask",
   .stack_size = 512 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 
+const osThreadAttr_t usbTask_attributes = {
+  .name = "usbTask",
+  .stack_size = 512 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
+// Tasks references
+void StartDefaultTask(void *argument);
+void StartUSBTask(void *argument);
+
+
 // Board related
 void VHBoardInit();
-
-
-/* USER CODE BEGIN Header_StartDefaultTask */
-/**
-  * @brief  Function implementing the defaultTask thread.
-  * @param  argument: Not used
-  * @retval None
-  */
-/* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void *argument)
-{
-    /* init code for USB_DEVICE */
-    MX_USB_DEVICE_Init();
-
-    VHSYSLED::Init();
-    VHSYSLED::Off();
-
-    /* Infinite loop */
-    for(;;)
-    {
-
-        // First part
-        VHSYSLED::On();     osDelay(250);
-        VHSYSLED::Off();    osDelay(250);
-
-        // Second 500 ms
-        VHSYSLED::On();     osDelay(250);
-        VHSYSLED::Off();    osDelay(250);
-
-        // First part
-        VHSYSLED::On();     osDelay( 20);
-        VHSYSLED::Off();    osDelay(480);
-
-        // Second 500 ms
-        VHSYSLED::On();     osDelay( 20);
-        VHSYSLED::Off();    osDelay(480);
-
-    }
-
-}
 
 
 /**
@@ -67,8 +40,8 @@ int main(void)
     osKernelInitialize();
 
     /* Create the thread(s) */
-    /* creation of defaultTask */
-    defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+    defaultTaskHandle   = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+    usbTaskHandle       = osThreadNew(StartUSBTask, NULL, &usbTask_attributes);
 
     /* Start scheduler */
     osKernelStart();
@@ -76,12 +49,7 @@ int main(void)
     /* We should never get here as control is now taken by the scheduler */
 
     /* Infinite loop */
-    /* USER CODE BEGIN WHILE */
-    while (1)
-    {
-
-    }
-    /* USER CODE END 3 */
+    while (1) { }
 }
 
 // Функция задержки, устойчивая к оптимизации компилятора
@@ -92,8 +60,6 @@ void Soft_Delay(volatile uint32_t count)
         __NOP(); // Вставка ассемблерной инструкции "No Operation"
     }
 }
-/* USER CODE END 4 */
-
 
 /**
   * @brief  This function is executed in case of error occurrence.
@@ -101,21 +67,19 @@ void Soft_Delay(volatile uint32_t count)
   */
 void Error_Handler(void)
 {
-  /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
-  __disable_irq();
-  while (1)
-  {
-    
-    for(int i=0;i<5;i++) {
-        Soft_Delay(1000000); VHSYSLED::On();
-        Soft_Delay(1000000); VHSYSLED::Off();
-    }
-    
-    Soft_Delay(9000000);
+    /* User can add his own implementation to report the HAL error return state */
+    __disable_irq();
+    while (1)
+    {
 
-  }
-  /* USER CODE END Error_Handler_Debug */
+        for(int i=0;i<5;i++) {
+            Soft_Delay(1000000); VHSYSLED::On();
+            Soft_Delay(1000000); VHSYSLED::Off();
+        }
+        
+        Soft_Delay(9000000);
+
+    }
 }
 #ifdef USE_FULL_ASSERT
 /**

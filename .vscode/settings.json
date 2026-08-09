@@ -24,8 +24,11 @@
         // , "miDebuggerArgs": "--quiet -ex 'set debuginfod enabled off'",
     },
 
-    // Debug
-    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
+    // ****************************************************************************************************
+    // PC-Debug
+    // "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
+    // ****************************************************************************************************
+
 
     // ****************************************************************************************************
     // "cmake.configureSettings"       : { "CMAKE_TOOLCHAIN_FILE" : "${workspaceFolder}/toolchains/toolchain-native-dbg.cmake" },
@@ -43,14 +46,14 @@
     // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-CMB32F407HDM/compile_commands.json",
     // // ****************************************************************************************************
 
-    // // *** STM32DISCO
-    // "cmake.configureArgs"           : [
-    //     "-DBUILD_TARGET=STM32F4DISCOVERY",
-    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32f407.cmake",
-    //     "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_F4_V1.28.3" ],
-    // "cmake.buildDirectory"          : "${workspaceFolder}/build-STM32F4DISCOVERY",
-    // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-STM32F4DISCOVERY/compile_commands.json",
-    // // ****************************************************************************************************
+    // *** STM32DISCO
+    "cmake.configureArgs"           : [
+        "-DBUILD_TARGET=STM32F4DISCOVERY",
+        "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32f407.cmake",
+        "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_F4_V1.28.3" ],
+    "cmake.buildDirectory"          : "${workspaceFolder}/build-STM32F4DISCOVERY",
+    "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-STM32F4DISCOVERY/compile_commands.json",
+    // ****************************************************************************************************
 
     // // *** WAVESHARECORE7XXI - STM32F746IGT6
     // "cmake.configureArgs"           : [
