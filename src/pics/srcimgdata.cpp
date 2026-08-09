@@ -1,7 +1,6 @@
 // xxd -cols 16 -i image.bmp > image_data.h
 
-#include <cstdint>
-
+#include "srcimgdata.hpp"
 
 #if VHLIBOPTIMAL_TEST_EMBEDDEDBMPID == 0
 

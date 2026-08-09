@@ -5,6 +5,9 @@
 
 #include "classes/cmdlinebuff.hpp"
 
+#include "version_vhliboptimal.h"
+#include "platform/platform.hpp"
+
 
 // --- Двухэтапный макрос для превращения любого токена в строку ---
 #define STRINGIFY_NX(a)         #a
@@ -12,104 +15,35 @@
 
 #define BUILD_TARGET_STR        STRINGIFY(BUILD_TARGET_NAME)
 
+static constexpr char strWelcome        []  = "Welcome!";
 
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
-VHCommandLineBuffer cmdLine;
+extern VHCommandLineBuffer cmdLine;
 
-static constexpr char strWelcome        []  = "Welcome";
+void SendText(const char * txt);
+void SendTextLine(const char * txt);
 
-static constexpr char strlineInfo       []  = "Processing System Info ...";
-static constexpr char strlineExec       []  = "Starting test ...";
-static constexpr char strlineMem        []  = "MEM@XXXX";
+void execcmd();
 
-static constexpr char strlineUnknown    []  = "? Unknown command";
-static constexpr char strlinePrompt     []  = ">";
-static constexpr char strnl             []  = {0x0D, 0x0A, 0x00};
+//
+verr VHLIBOptimalSetup();
 
-
-bool flagPacketAvail = false;
-
-/**
- * Redirect printf to USBs
- */
-extern "C" int _write(int file, char *ptr, int len) {
-
-    while(hUsbDeviceFS.dev_state != USBD_STATE_CONFIGURED) { osDelay(1); }
-
-    USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef*)hUsbDeviceFS.pClassData;
-    while(hcdc->TxState != 0) {
-        osDelay(1); 
-    }
-
-    CDC_Transmit_FS((uint8_t *)ptr, len);
-    return len;
-}
 
 /**
  * 
  */
-void SendText(const char * txt) {
+static void SysInfo() {
 
-    while(hUsbDeviceFS.dev_state != USBD_STATE_CONFIGURED) { osDelay(1); }
-
-    USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef*)hUsbDeviceFS.pClassData;
-    while(hcdc->TxState != 0) {
-        osDelay(1); 
-    }
-
-    size_t slen = strlen(txt);
-    CDC_Transmit_FS((uint8_t *)txt, slen);
-}
-
-/**
- * 
- */
-void SendTextLine(const char * txt) {
-
-    SendText(txt);
-    SendText(strnl);
-}
-
-/**
- * 
- */
-void execcmd() {
-
-    SendText(strnl);
-
-    // 
-    if(cmdLine.iscmd(VHCommandLineBuffer::cmdi))        { 
-        SendTextLine(strlineInfo);
-    } else if(cmdLine.iscmd(VHCommandLineBuffer::cmde)) {
-        SendTextLine(strlineExec);
-    } else if(cmdLine.iscmd(VHCommandLineBuffer::cmdm)) {
-        SendTextLine(strlineMem);
-    } else if(!cmdLine.data()[0]) {
-        // Empty line
-    } else {
-        SendTextLine(strlineUnknown);
-    }
-
-    cmdLine.reset();
-    SendText(strlinePrompt);
-
-}
-
-/**
- * 
- */
-extern "C" void BRIDGE_CDC_Receive_FS(uint8_t* Buf, uint32_t *Len) {
-
-    for(uint32_t i=0; i < *Len; i++ ) {
-        
-        cmdLine.add(Buf[i]);
-        if(cmdLine.avail()) {
-            flagPacketAvail = true;
-        } else {
-            CDC_Transmit_FS(Buf + i, 1);
-        }
-    }
+    printf("\r\n\n");
+    printf("-------------------------------------------------\n");
+    printf("Application  : VHLIBOptimal_test\n");
+    printf("Platform     : %s\n", BUILD_TARGET_STR);
+    printf("VHLIBOptimal : v%d.%d.%d\n",
+        VHLIB_OPTIMAL_VERSION_MAJOR,
+        VHLIB_OPTIMAL_VERSION_MINOR,
+        VHLIB_OPTIMAL_VERSION_PATCH);
+    printf("-------------------------------------------------\n");
 
 }
 
@@ -123,24 +57,24 @@ void StartUSBTask(void *argument) {
 
     osDelay(1500);
 
-    SendTextLine(strnl);
-    SendTextLine(strWelcome);
-    SendTextLine(BUILD_TARGET_STR);
-    printf("OLOLO %d\n", 123);
-    SendText(strnl);
-    SendText(strlinePrompt);
+    SysInfo();
+
+    if(VHLIBOptimalSetup()) {
+        verrmsg(103, "VHLIBOptimalSetup() failed!");
+        while(1) { osDelay(1); }
+    }
+
+    printf("\n%s\n\n", strWelcome);
 
     for(;;) {
 
-        osDelay(1);
+        printf(">"); fflush(stdout);
 
-        if (hUsbDeviceFS.dev_state != USBD_STATE_CONFIGURED) 
-            continue;
-
-        if(flagPacketAvail) {
-            execcmd();
-            flagPacketAvail = false;
+        while(!cmdLine.avail()) {
+            osDelay(1);
         }
+
+        execcmd();
 
     }
 }

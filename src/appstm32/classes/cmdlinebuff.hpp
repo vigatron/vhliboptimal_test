@@ -9,6 +9,7 @@ class VHCommandLineBuffer {
         VHCommandLineBuffer() : _pos(0) {}
 
         void reset() { _pos = 0; _avail = false; }
+
         bool avail() { return _avail; }
 
         void add(uint8_t byteval) {

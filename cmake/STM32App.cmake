@@ -17,7 +17,12 @@ add_executable(${TARGET_ELF}
     ${APP_STM32_DIR}/emain.cpp
     ${APP_STM32_DIR}/task_def.cpp
     ${APP_STM32_DIR}/task_usb.cpp
-    src/pics/srcdata.cpp
+    ${APP_STM32_DIR}/sysvcp.cpp
+    ${APP_STM32_DIR}/global.cpp
+    ${APP_STM32_DIR}/detector.cpp
+    ${APP_STM32_DIR}/callbacks/callbacks.cpp
+
+    src/pics/srcimgdata.cpp
 )
 
 
