@@ -39,7 +39,6 @@ https://github.com/vigatron/vhliboptimal_test
 * [Benchmark on WaveShare Core7XXI STM32F746 @ 216Mhz](docs/rev0p8p0/bench_wavesharecore7xxi.md)
 * [Benchmark on CMB32H750HDM STM32H750 @ 480Mhz](docs/rev0p8p0/bench_cmb32h750hdm.md)
 
-
 #### Benchmarks Results rev 0.7.5
 * [Benchmark on Intel i5-1135G7 @ 2.40GHz](docs/bench/rev0p7p5/bench_intel_i5-1135G7.md)
 * [Benchmark on AMD FX-8300 @ 3.30Ghz](docs/bench/rev0p7p5/bench_amd_fx8300.md)

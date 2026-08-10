@@ -38,7 +38,9 @@ target_include_directories(${TARGET_ELF} PRIVATE
 )
 
 target_link_libraries(${TARGET_ELF} PRIVATE
+    -Wl,--whole-archive
     vhlib_optimal
+    -Wl,--no-whole-archive
 )
 
 target_compile_definitions(${TARGET_ELF} PRIVATE

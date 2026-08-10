@@ -27,6 +27,8 @@ target_compile_definitions(vhlib_optimal PUBLIC
     # Application Settings
     VHAPP_OPTIMAL_TEST_FLTVAL=200
 
+    VHLIBOPTIMAL_TEST_EMBEDDEDBMPID=1
+
     # ------------------------------------------------------------
     # VHLIBOptimal Related
     # ------------------------------------------------------------
@@ -41,19 +43,19 @@ target_compile_definitions(vhlib_optimal PUBLIC
     # 7:128 / 8:256 / 9: 512 / 10: 1024 / 11: 2048 / 12: 4096 pxls
     VHLIB_OPTIMAL_GRID_FIXED
 
-    VHLIB_OPTIMAL_GRID_LX=9     # 256
-    VHLIB_OPTIMAL_GRID_LY=9     # 256
-    VHLIB_OPTIMAL_GRID_SZ=1     # divider 1
+    VHLIB_OPTIMAL_GRID_LX=9       # 512
+    VHLIB_OPTIMAL_GRID_LY=9       # 512
+    VHLIB_OPTIMAL_GRID_SZ=1       # divider 1
 
     # VHLIB_OPTIMAL_GRID_LX=8     # 256
     # VHLIB_OPTIMAL_GRID_LY=8     # 256
     # VHLIB_OPTIMAL_GRID_SZ=2     # divider 2
 
-    # VHLIB_OPTIMAL_GRID_LX=7     # 256
-    # VHLIB_OPTIMAL_GRID_LY=7     # 256
+    # VHLIB_OPTIMAL_GRID_LX=7     # 128
+    # VHLIB_OPTIMAL_GRID_LY=7     # 128
     # VHLIB_OPTIMAL_GRID_SZ=4     # divider 4
 
-    VHLIB_OPTIMAL_OBJS_MAX=128
+    VHLIB_OPTIMAL_OBJS_MAX=256
     VHLIB_OPTIMAL_SPNS_MAX=4096
 
     VHLIB_OPTIMAL_LOG_LEVEL=1
