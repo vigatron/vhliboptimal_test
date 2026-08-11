@@ -9,6 +9,8 @@
 // Source Image (embedded)
 #include "../pics/srcimgdata.hpp"
 
+#include "vhrle7b.hpp"
+
 using namespace vhliboptimal;
 
 // Переменная или буфер в CCM RAM
@@ -77,6 +79,27 @@ verr VHLIBOptimalSetup() {
 
 }
 
+static verr unpack_image(uint16_t imgid) {
+
+    VHRLE7b rle;
+
+    const uint8_t * prle        = VHTestImagesArray::embedded_bmp_data(imgid);
+    const uint32_t  blocksz     = VHTestImagesArray::embedded_bmp_size(imgid);
+    uint8_t *       ptrdst      = VHTestImagesArray::TempPicPtr();
+    uint32_t        sizedst     = VHTestImagesArray::TempPicMaxBufferSize();
+
+    verr testrle = rle.check(prle, blocksz);
+    printf("Image #%d check integrity status: %s \n", imgid, testrle ? "FAILED" : "OK");
+
+    if(testrle)
+        return testrle;
+
+    verr retunpack = rle.unpack(prle, blocksz, ptrdst, sizedst);
+    printf("Image #%d unpack result status: %s \n", imgid, retunpack ? "FAILED" : "OK");
+
+    return retunpack;
+}
+
 /**
  * 
  */
@@ -84,13 +107,28 @@ verr VHLIBOptimalRun() {
 
     printf("Starting test ...\n");
 
+    for(uint16_t imgid = 1; imgid <= 7; imgid++) {
+        verr vtest = unpack_image(imgid);
+        if(vtest) {
+            while(1) { osDelay(1); }
+        }
+    }
+
+    unpack_image(1);
+
+    const uint8_t * pbmp = VHTestImagesArray::TempPicPtr();
+
+
     // Transfer source image bitfield
     detector.BitFieldSrc().ClearArea(detector.GetCMatrix());
 
     detector.BMPParserReset();
 
-    for(uint32_t i = 0; i < embedded_bmp_size(); i++) {
-        verr r = detector.BMPParserByte(embedded_bmp_data()[i], sCfg.levelcs);
+    const BMPFileHeader * pbmphdr = (BMPFileHeader *)pbmp;
+
+    for(uint32_t i = 0; i < pbmphdr->file_size; i++) {
+        uint8_t bval = pbmp[i];
+        verr r = detector.BMPParserByte(bval, sCfg.levelcs);
         if(r != vok) return verrmsg(105, "Source Image sampling error");
     }
 

@@ -17,6 +17,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 # Подключаем модули библиотеки
 add_subdirectory(src/extmods/vhlibplatform)
 add_subdirectory(src/extmods/vhliboptimal)
+add_subdirectory(src/extmods/vhlibrle7b)
 
 # ----------------------------------------------
 target_compile_definitions(vhlib_optimal PUBLIC
@@ -58,7 +59,7 @@ target_compile_definitions(vhlib_optimal PUBLIC
     VHLIB_OPTIMAL_OBJS_MAX=256
     VHLIB_OPTIMAL_SPNS_MAX=4096
 
-    VHLIB_OPTIMAL_LOG_LEVEL=1
+    VHLIB_OPTIMAL_LOG_LEVEL=2
 
     # VHLIB_OPTIMAL_DEBUG
 )
