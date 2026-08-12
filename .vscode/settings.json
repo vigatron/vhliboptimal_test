@@ -25,11 +25,10 @@
     },
 
     // ****************************************************************************************************
+    // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchains/toolchain-native.cmake" },
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
+
     // PC-Debug
-    // "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
-    // ****************************************************************************************************
-
-
     // ****************************************************************************************************
     // "cmake.configureSettings"       : { "CMAKE_TOOLCHAIN_FILE" : "${workspaceFolder}/toolchains/toolchain-native-dbg.cmake" },
     // "cmake.configureArgs"           : ["-DBUILD_TARGET=native"],
@@ -47,12 +46,12 @@
     // // ****************************************************************************************************
 
     // *** STM32DISCO
-    "cmake.configureArgs"           : [
-        "-DBUILD_TARGET=STM32F4DISCOVERY",
-        "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32f407.cmake",
-        "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_F4_V1.28.3" ],
-    "cmake.buildDirectory"          : "${workspaceFolder}/build-STM32F4DISCOVERY",
-    "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-STM32F4DISCOVERY/compile_commands.json",
+    // "cmake.configureArgs"           : [
+    //     "-DBUILD_TARGET=STM32F4DISCOVERY",
+    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32f407.cmake",
+    //     "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_F4_V1.28.3" ],
+    // "cmake.buildDirectory"          : "${workspaceFolder}/build-STM32F4DISCOVERY",
+    // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-STM32F4DISCOVERY/compile_commands.json",
     // ****************************************************************************************************
 
     // // *** WAVESHARECORE7XXI - STM32F746IGT6
@@ -73,6 +72,7 @@
     // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-CMB32H750HDM/compile_commands.json",
     // // ****************************************************************************************************
 
+    // ****************************************************************************************************
     // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-intel.cmake" },
     // "cmake.buildDirectory": "${workspaceFolder}/build-intel",
     // "C_Cpp.default.compileCommands": "${workspaceFolder}/build-intel/compile_commands.json",
@@ -80,6 +80,7 @@
 
     // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-amd.cmake" },
     // "cmake.buildDirectory": "${workspaceFolder}/build-amd",
+    // // ****************************************************************************************************
 
     // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-opi-pc-plus.cmake" },
     // "cmake.buildDirectory": "${workspaceFolder}/build-arm",

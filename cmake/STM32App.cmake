@@ -29,6 +29,7 @@ add_executable(${TARGET_ELF}
 
 
 target_include_directories(${TARGET_ELF} PRIVATE
+    "${CMAKE_CURRENT_BINARY_DIR}"
     ${APP_STM32_DIR}
     ${APP_STM32_DIR}/classes
     ${HAL_DRIVER_DIR}/Inc
@@ -45,6 +46,7 @@ target_link_libraries(${TARGET_ELF} PRIVATE
 )
 
 target_compile_definitions(${TARGET_ELF} PRIVATE
+    VHPLATFORM_STM32
     BUILD_TARGET_NAME=${BUILD_TARGET}
     TARGET_${BUILD_TARGET}
     HSE_VALUE=${HSE_VALUE}

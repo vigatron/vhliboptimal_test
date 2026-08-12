@@ -15,10 +15,6 @@
 VHCommandLineBuffer cmdLine;
 
 //
-VHTimeStamp tsSampling;
-VHTimeStamp tsScanning;
-
-//
 static constexpr char strlineInfo       []  = "Processing System Info ...";
 static constexpr char strlineMem        []  = "MEM@XXXX";
 

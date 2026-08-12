@@ -9,19 +9,34 @@ find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui)
 
 add_executable(${PROJECT_NAME}
     src/appnative/main.cpp
+
     src/appnative/mods/args/vhargs.cpp
     src/appnative/mods/benchmark/benchmark.cpp
     src/appnative/mods/bmpbw.cpp
-    src/appnative/mods/iface/iface.cpp
     src/appnative/mods/iface/iface_log.cpp
     src/appnative/mods/report/report.cpp
-    src/pics/srcdata.cpp
+
+    src/globalmods/timer/vhtimerstamp.cpp
+    src/globalmods/pics/srcimgdata.cpp
+    src/globalmods/testcontainer/testcontainer.cpp
+    src/globalmods/callbacks/callbacks.cpp
+    src/globalmods/sysinfo/sysinfo_pc.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
+
+    "${CMAKE_CURRENT_BINARY_DIR}"
     src/appnative
+
+    src/extmods
+
+    src/globalmods
+    src/globalmods/testcontainer
+
     src/appnative/mods
     src/appnative/mods/iface
+    src/appnative/mods/imgsrc
+    src/appnative/mods/imgdst
     src/appnative/mods/args
     src/appnative/mods/benchmark
     src/appnative/extmods
@@ -32,10 +47,15 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt6::Widgets 
     Qt6::Gui
     vhlib_platform
+    vhlib_rle7b
     vhlib_optimal
 )
 
+# Application Settings
 target_compile_definitions(${PROJECT_NAME} PRIVATE
+    VHPLATFORM_PC
+    VHAPP_OPTIMAL_TEST_FLTVAL=200
+    VHLIBOPTIMAL_TEST_EMBEDDEDBMPID=1
     VHLIBOPTIMAL_TEST_PASS_COUNT=1
     SAVE_RESULTS=1
 )

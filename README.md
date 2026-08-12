@@ -85,4 +85,24 @@ Link to original jpg and resized bmp images:
 
 ---
 
+### Embedded Images Tests - 
+
+Original            1       2       3       4       5       6       7
+
+GRID_512x512        512
+GRID_256x256        256
+GRID_128x128        128
+
+
+
+example1.vhrle > example1.bmp   512x512     > 512 (8:8 / 1:1) > 256 (16:16 / 2:2) > 128 (32:32 / 4:4)
+example2.vhrle > example1.bmp   512x512
+example3.vhrle > example1.bmp   ? x ?
+example4.vhrle > example1.bmp   ? x ?
+example5.vhrle > example1.bmp   ? x ?
+example6.vhrle > example1.bmp   ? x ?
+example7.vhrle > example1.bmp   ? x ?
+
+---
+
 © 2026 V01G04A81 / Viktor Glebov

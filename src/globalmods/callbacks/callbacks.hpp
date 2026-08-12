@@ -1,11 +1,7 @@
-#include "vhplatform.hpp"
-#include "vhliboptimal.hpp"
-#include "testcontainer/testcontainer.hpp"
+#pragma once
 
+#include <cstdint>
 
-using namespace vhliboptimal;
-
-extern TestLibraryContainer testContainer;
 
 /**
  * 
@@ -19,9 +15,7 @@ void IFACE_OPTIMAL_Border(
     uint16_t celly, 
     uint16_t imgx,
     uint16_t imgy
-) {
-
-}
+);
 
 /**
  * 
@@ -31,13 +25,15 @@ void IFACE_OPTIMAL_Content(
     uint32_t cell1,
     uint32_t cell2,
     uint8_t dir
-) {
+);
 
-}
 
 /**
  * 
  */
-void IFACE_OPTIMAL_Benchmark(void *userData, int cmd, int param) {
-    testContainer.connectCallbackBenchmark(userData, cmd, param );
-}
+void IFACE_OPTIMAL_Benchmark(
+    void *userData,
+    int cmd,
+    int param
+);
+

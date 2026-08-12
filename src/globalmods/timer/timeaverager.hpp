@@ -1,6 +1,6 @@
 #pragma once
 
-#include "vhplatform.hpp"
+#include <cstdint>
 
 class TimerAverager {
 
