@@ -55,18 +55,22 @@ class TestLibraryContainer {
         /**
          * 
          */
-        verr    VHLIBOptimalSetup();
+        verr    VHLIBOptimalSetup       ();
 
         /**
          * 
          */
-        verr    CopyAndScale(uint16_t imageid, uint8_t sclevel);
+        verr    CopyAndScale            (uint16_t imageid, uint8_t sclevel);
 
         /**
          * 
          */
-        verr    TestImage(uint16_t imageid, uint8_t levelcs);
+        verr    TestImageAverage        (uint16_t imageid, uint8_t levelcs);
 
+        /**
+         * 
+         */
+        verr    TestImageIteration      (uint16_t imageid, uint8_t levelcs);
 
 };
 

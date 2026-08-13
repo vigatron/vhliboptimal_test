@@ -65,9 +65,10 @@ verr TestLibraryContainer::CopyAndScale(uint16_t imageid, uint8_t levelcs) {
 /**
  * 
  */
-verr TestLibraryContainer::TestImage(uint16_t imageid, uint8_t levelcs) {
+verr TestLibraryContainer::TestImageIteration(uint16_t imageid, uint8_t levelcs) {
 
-    CopyAndScale(imageid, levelcs);
+    if(vok != CopyAndScale(imageid, levelcs))
+        return verrmsg(3, "Scaller error");
 
     // Exception ?
     verr flagDetectionResults = detector.Run();
@@ -75,13 +76,45 @@ verr TestLibraryContainer::TestImage(uint16_t imageid, uint8_t levelcs) {
         return verrmsg(2, "Shape contour detection failed");
     }
 
+    uint16_t objcount   = detector.ObjectsCount();
+    uint32_t spncount1  = detector.GlobalSpansCount();
+    uint32_t spncount2  = detector.CalcSpansTotal();
+
+
     int t_samp_us = tsSampling.result_us();
     arrtsSampling.add(t_samp_us);
 
     int t_scan_us = tsScanning.result_us();
     arrtsScanning.add(t_scan_us);
 
-    printf("> Sampling: %-10d uSec  Scanning: %-10d uSec \n", t_samp_us, t_scan_us);
+    printf(" Sampling: %5d uSec  Scanning: %5d uSec  ", t_samp_us, t_scan_us);
+    log::partout("Found "); log::partint(objcount); log::partout(" objects");
+    log::partout(", Spans "); log::partint(spncount1);
+    log::partout("( Rnt check ");
+    log::partint(spncount2);
+    log::lineout(")");
+
+    return vok;
+}
+
+
+/**
+ * 
+ */
+verr TestLibraryContainer::TestImageAverage(uint16_t imageid, uint8_t levelcs) {
+
+    #ifdef TEST_SHOW_SRC_BITFIELD
+    if(vok != CopyAndScale(imageid, levelcs))
+        return verrmsg(3, "Scaller error");
+
+    detector.DumpBitfield();
+    #endif
+
+    // Multiple cycles for average measurements values
+    for(int i=0; i < VHLIBOPTIMAL_TEST_PASS_COUNT;i++) {
+        printf("Iteration %2d of %d: ", i + 1, VHLIBOPTIMAL_TEST_PASS_COUNT);
+        TestImageIteration(imageid, levelcs);
+    }
 
     return vok;
 }
@@ -96,6 +129,9 @@ verr TestLibraryContainer::StartTests() {
 
     printf("Starting test ...  \n");
 
+    // SCALE Factor
+    uint8_t levelcs = 9 - VHLIB_OPTIMAL_GRID_LX;
+
     // Check integrity before start & Warmup
     if(VHTestImagesArray::CheckIntegrity())
         return verror(1);
@@ -103,14 +139,19 @@ verr TestLibraryContainer::StartTests() {
     // Source Images array info
     VHTestImagesArray::CheckResolutions();
 
-    //
-    if(VHLIBOptimalSetup()) 
+    // Setup memory layout & callbacks
+    if(VHLIBOptimalSetup())
         return verrmsg(2, "VHLIBOptimalSetup() failed");
 
-    // Multiple cycles for average measurements values
-    for(int i=0; i < VHLIBOPTIMAL_TEST_PASS_COUNT;i++) {
-        uint8_t levelcs = 9 - VHLIB_OPTIMAL_GRID_LX;
-        TestImage(i+1, levelcs);
+    // Testing all images from embedded set
+    uint16_t firstid    = VHTestImagesArray::GetFirstID();
+    uint16_t lastid     = VHTestImagesArray::GetLastID();
+
+    for(uint16_t imgid = firstid; imgid <= lastid; imgid++) {
+        printf("\n*** Testing image #%d of %d\n", imgid, lastid);
+        verr vtest = TestImageAverage(imgid, levelcs);
+        if(vok != vtest)
+            return verrmsg(102, "Test failed");
     }
 
     // GenerateReport(cfg);
@@ -194,25 +235,13 @@ verr TestLibraryContainer::VHLIBOptimalSetup() {
     // Show Memory layout
     detector.MemoryLayout().ShowMemoryStat();
 
-
     // Return initialization status
     return vok;
 }
 
 
 #ifdef __CMT
-/**
- * 
- */
-verr VHLIBOptimalSetup() {
 
-
-    return vok;
-
-}
-
-
-using namespace vhliboptimal;
 
 
 /**
