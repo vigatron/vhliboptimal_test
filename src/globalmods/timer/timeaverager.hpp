@@ -6,7 +6,12 @@ class TimerAverager {
 
     public:
 
-        TimerAverager() : idx(0), summ(0) {
+        TimerAverager() {
+            reset();
+        }
+
+        void reset() {
+            idx = 0; min = 0; max = 0; summ = 0;
         }
 
         void add(int v) {

@@ -67,10 +67,13 @@ verr TestLibraryContainer::CopyAndScale(uint16_t imageid, uint8_t levelcs) {
  */
 verr TestLibraryContainer::TestImageIteration(uint16_t imageid, uint8_t levelcs) {
 
+    // Sampling
+    tsSampling.start();
     if(vok != CopyAndScale(imageid, levelcs))
         return verrmsg(3, "Scaller error");
+    tsSampling.stop();
 
-    // Exception ?
+    // Scanning
     verr flagDetectionResults = detector.Run();
     if(flagDetectionResults) {
         return verrmsg(2, "Shape contour detection failed");
@@ -110,11 +113,34 @@ verr TestLibraryContainer::TestImageAverage(uint16_t imageid, uint8_t levelcs) {
     detector.DumpBitfield();
     #endif
 
+    arrtsSampling.reset();
+    arrtsScanning.reset();
+
     // Multiple cycles for average measurements values
     for(int i=0; i < VHLIBOPTIMAL_TEST_PASS_COUNT;i++) {
         printf("Iteration %2d of %d: ", i + 1, VHLIBOPTIMAL_TEST_PASS_COUNT);
         TestImageIteration(imageid, levelcs);
     }
+
+    // Sampling
+    int ts_smp_min    = arrtsSampling.resultmin();
+    int ts_smp_avg    = arrtsSampling.result(VHLIBOPTIMAL_TEST_PASS_COUNT);
+    int ts_smp_max    = arrtsSampling.resultmax();
+
+    // Scanning
+    int ts_scn_min    = arrtsScanning.resultmin();
+    int ts_scn_avg    = arrtsScanning.result(VHLIBOPTIMAL_TEST_PASS_COUNT);
+    int ts_scn_max    = arrtsScanning.resultmax();
+
+    // Summ
+    int ts_fin_min    = ts_smp_min + ts_scn_min;
+    int ts_fin_avg    = ts_smp_avg + ts_scn_avg;
+    int ts_fin_max    = ts_smp_max + ts_scn_max;
+
+    // Status
+    printf("Sampling (uSec) tsmin / tsavg / tsmax  %6d / %6d / %6d \n", ts_smp_min, ts_smp_avg, ts_smp_max);
+    printf("Scanning (uSec) tsmin / tsavg / tsmax  %6d / %6d / %6d \n", ts_scn_min, ts_scn_avg, ts_scn_max);
+    printf("Total    (uSec) tsmin / tsavg / tsmax  %6d / %6d / %6d \n", ts_fin_min, ts_fin_avg, ts_fin_max);
 
     return vok;
 }
@@ -156,7 +182,7 @@ verr TestLibraryContainer::StartTests() {
 
     // GenerateReport(cfg);
 
-    printf("Done!\n");
+    printf("All tests completed\n");
 
     return vok;
 }

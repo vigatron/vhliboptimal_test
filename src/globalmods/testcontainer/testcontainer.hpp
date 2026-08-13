@@ -74,11 +74,6 @@ class TestLibraryContainer {
 
 };
 
-//
-// VHImageSource                   imgSource;
-
-//
-// VHImageDestination              imgDest;
 
 
     // #ifdef VHAPP_OPTIMAL_TEST_CONVERT_BMP
@@ -123,24 +118,13 @@ class TestLibraryContainer {
 
 
 
-// // Parse Command line file
-// TestLibraryContainer::stContainerConfig cfg = {
-//     .bmparr     = memblock_data(),
-//     .bmpsize    = memblock_size(),
-//     .offssx     = 0,
-//     .offssy     = 0,
-//     .width      = 0,
-//     .height     = 0,
-//     .levelcs    = (uint8_t) __builtin_ctz(paramCellSize)
-// };
 
-
-#ifdef VHCOMMENT
-#include "imgsrc/imgsrc.hpp"
-#include "imgdst/imgdst.hpp"
-#endif
 
 #ifdef VH_COMMENT_PLATFORM_PC
+
+#include "imgsrc/imgsrc.hpp"
+#include "imgdst/imgdst.hpp"
+
 
 struct stContainerConfig {
     std::string fname;
@@ -152,6 +136,22 @@ struct stContainerConfig {
     uint16_t height;
     uint8_t  levelcs;
 };
+
+// Parse Command line file
+TestLibraryContainer::stContainerConfig cfg = {
+    .bmparr     = memblock_data(),
+    .bmpsize    = memblock_size(),
+    .offssx     = 0,
+    .offssy     = 0,
+    .width      = 0,
+    .height     = 0,
+    .levelcs    = (uint8_t) __builtin_ctz(paramCellSize)
+};
+
+
+VHImageSource                   imgSource;
+
+VHImageDestination              imgDest;
 
 //
 std::vector<uint8_t>            memBlockAligned;
