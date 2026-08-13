@@ -1,6 +1,5 @@
 #pragma once
 
-// CMake автоматически заменит @CMAKE_CXX_FLAGS@ на реальное значение
 #define CMAKE_CXX_FLAGS_STR "@CMAKE_CXX_FLAGS@"
 
 #define VHAPP_VHLIBOPTIMAL_TEST_VERSION_MAJOR @PROJECT_VERSION_MAJOR@

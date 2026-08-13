@@ -1,4 +1,4 @@
-# toolchain-native-dbg.cmake
+# toolchain-dbg.cmake
 
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR x86_64)

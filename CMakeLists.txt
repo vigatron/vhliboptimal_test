@@ -24,6 +24,12 @@ add_subdirectory(src/extmods/vhlibplatform)
 add_subdirectory(src/extmods/vhliboptimal)
 add_subdirectory(src/extmods/vhlibrle7b)
 
+# # Объединяем глобальные флаги
+# string(JOIN " " MY_ALL_FLAGS
+#     "${CMAKE_CXX_FLAGS}"
+#     "${CMAKE_CXX_FLAGS_DEBUG}"
+# )
+
 # ----------------------------------------------
 target_compile_definitions(vhlib_optimal PUBLIC
 

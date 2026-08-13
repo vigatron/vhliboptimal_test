@@ -3,8 +3,8 @@
 
 #include "benchmark.hpp"
 
-#include "imgsrc/imgsrc.hpp"
-#include "imgdst/imgdst.hpp"
+#include "mods/imgsrc/imgsrc.hpp"
+#include "mods/imgdst/imgdst.hpp"
 
 #include "report.hpp"
 

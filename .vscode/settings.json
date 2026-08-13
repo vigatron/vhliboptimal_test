@@ -20,21 +20,19 @@
             // "../data/512/example7.bmp", "1"
 
         ]
-
-        // , "miDebuggerArgs": "--quiet -ex 'set debuginfod enabled off'",
     },
 
+    // Optimized
     // ****************************************************************************************************
-    "cmake.configureSettings"          : { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchains/toolchain-native.cmake" },
-    "cmake.configureArgs"              : ["-DBUILD_TARGET=native"],
-    "C_Cpp.default.compileCommands"    : "${workspaceFolder}/build/compile_commands.json",
+    // "cmake.configureSettings"          : { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchains/toolchain-native.cmake" },
+    // "cmake.configureArgs"              : ["-DBUILD_TARGET=native"],
+    // "C_Cpp.default.compileCommands"    : "${workspaceFolder}/build/compile_commands.json",
 
     // PC-Debug
     // ****************************************************************************************************
-    // "cmake.configureSettings"       : { "CMAKE_TOOLCHAIN_FILE" : "${workspaceFolder}/toolchains/toolchain-native-dbg.cmake" },
-    // "cmake.configureArgs"           : ["-DBUILD_TARGET=native"],
-    // "cmake.buildDirectory"          : "${workspaceFolder}/build-native-dbg",
-    // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-native-dbg/compile_commands.json",
+    "cmake.configureSettings"       : { "CMAKE_TOOLCHAIN_FILE" : "${workspaceFolder}/toolchains/toolchain-dbg.cmake" },
+    "cmake.buildDirectory"          : "${workspaceFolder}/build-dbg",
+    "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-dbg/compile_commands.json",
     // ****************************************************************************************************
 
     // // *** CMB32F407HDM
