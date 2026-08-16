@@ -19,7 +19,6 @@ add_executable(${PROJECT_NAME}
     src/globalmods/timer/vhtimerstamp.cpp
     src/globalmods/pics/srcimgdata.cpp
     src/globalmods/testcontainer/testcontainer.cpp
-    src/globalmods/callbacks/callbacks.cpp
     src/globalmods/sysinfo/sysinfo_pc.cpp
 )
 

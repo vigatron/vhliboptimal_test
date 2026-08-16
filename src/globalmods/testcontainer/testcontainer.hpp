@@ -9,8 +9,6 @@
 #include "timer/timeaverager.hpp"
 #include "report/report.hpp"
 
-#include "callbacks/callbacks.hpp"
-
 #include "log/log.hpp"
 
 
@@ -28,11 +26,35 @@ class TestLibraryContainer {
          */
         verr StartTests();
 
+
+
         /**
          * 
          */
-        void connectCallbackBenchmark(void *userData, int cmd, int param);
+        static void CALLBACK_VHLIBOPTIMAL_Border(
+            void *caller,
+            uint8_t cmd,
+            uint8_t dirh, 
+            uint8_t dirv,
+            uint16_t cellx,
+            uint16_t celly);
 
+        /**
+         * 
+         */
+        static void CALLBACK_VHLIBOPTIMAL_Content(
+            void *caller,
+            uint32_t cell1,
+            uint32_t cell2,
+            uint8_t dir);
+
+        /**
+         * 
+         */
+        static void CALLBACK_VHLIBOPTIMAL_Benchmark(
+            void *caller,
+            int cmd,
+            int param);
 
     private:
 
@@ -71,6 +93,31 @@ class TestLibraryContainer {
          * 
          */
         verr    TestImageIteration      (uint16_t imageid, uint8_t levelcs);
+
+        /**
+         * 
+         */
+        void CallbackBorder(
+            uint8_t cmd,
+            uint8_t dirh, 
+            uint8_t dirv,
+            uint16_t cellx,
+            uint16_t celly);
+
+        /**
+         * 
+         */
+        void CallbackContent(
+            uint32_t cell1,
+            uint32_t cell2,
+            uint8_t dir);
+
+        /**
+         * 
+         */
+        void CallbackBenchmark(
+            int cmd,
+            int param);
 
 };
 
