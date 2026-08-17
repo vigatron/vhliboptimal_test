@@ -129,6 +129,8 @@ verr TestLibraryContainer::TestImageAverage(uint16_t imageid, uint8_t levelcs)
     log::partint(spncount2);
     log::lineout(")");
 
+    asrts(spncount1 == spncount2, 100, "Spans Rnt check failed");
+
     // Sampling
     int ts_smp_min = arrtsSampling.resultmin();
     int ts_smp_avg = arrtsSampling.result(VHLIBOPTIMAL_TEST_PASS_COUNT);
@@ -163,7 +165,7 @@ verr TestLibraryContainer::StartTests()
 
     // Testing all images from embedded set
     uint16_t firstid = VHTestImagesArray::GetFirstID();
-    uint16_t lastid = VHTestImagesArray::GetLastID();
+    uint16_t lastid  = VHTestImagesArray::GetLastID();
 
     // SCALE Factor
     uint8_t levelcs = 9 - VHLIB_OPTIMAL_GRID_LX;

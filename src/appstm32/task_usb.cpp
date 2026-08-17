@@ -9,7 +9,6 @@
 #include "sysinfo/sysinfo.hpp"
 #include "testcontainer/testcontainer.hpp"
 
-static constexpr char strWelcome        []  = "Welcome!";
 
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
@@ -21,7 +20,6 @@ void SendText(const char * txt);
 void SendTextLine(const char * txt);
 
 void execcmd();
-
 
 
 /**
@@ -39,6 +37,7 @@ void StartUSBTask(void *argument) {
         while(1) { osDelay(1); }
     }
 
+    static constexpr char strWelcome []  = "Welcome!";
     printf("\n%s\n\n", strWelcome);
 
     for(;;) {

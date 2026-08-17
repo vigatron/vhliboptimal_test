@@ -18,8 +18,9 @@ add_executable(${PROJECT_NAME}
 
     src/globalmods/timer/vhtimerstamp.cpp
     src/globalmods/pics/srcimgdata.cpp
+    src/globalmods/sysinfo/sysinfo.cpp
+
     src/globalmods/testcontainer/testcontainer.cpp
-    src/globalmods/sysinfo/sysinfo_pc.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE

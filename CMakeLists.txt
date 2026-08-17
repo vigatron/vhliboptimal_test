@@ -7,6 +7,8 @@ set_property(CACHE BUILD_TARGET PROPERTY STRINGS ${ALLOWED_TARGETS})
 
 project(test_lib_optimal VERSION 0.0.5 LANGUAGES C CXX ASM)
 
+set(APP_VERSION_SUFFIX "-beta")
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -36,13 +38,13 @@ target_compile_definitions(vhlib_optimal PUBLIC
     # ------------------------------------------------------------
     # VHLIBOptimal Related
     # ------------------------------------------------------------
-
+    VHLIB_OPTIMAL_PREFIX="beta"
     # Embedded version
     # VHLIB_OPTIMAL_EMBEDDED
     VHLIB_OPTIMAL_STL=0
 
-    VHLIB_OPTIMAL_OBJS_MAX=256
-    VHLIB_OPTIMAL_SPNS_MAX=4096
+    VHLIB_OPTIMAL_OBJS_MAX=800
+    VHLIB_OPTIMAL_SPNS_MAX=10000
 
     # ------------------------------------------------------------
     # FIXED GRID Option
@@ -51,8 +53,8 @@ target_compile_definitions(vhlib_optimal PUBLIC
     VHLIB_OPTIMAL_GRID_FIXED
 
     # 9: 512x512 : 32K Grid : LEVELCS=0
-    # VHLIB_OPTIMAL_GRID_LX=9       # 512
-    # VHLIB_OPTIMAL_GRID_LY=9       # 512
+    VHLIB_OPTIMAL_GRID_LX=9       # 512
+    VHLIB_OPTIMAL_GRID_LY=9       # 512
 
     # 8: 256x256 :  8K Grid : LEVELCS=1
     # VHLIB_OPTIMAL_GRID_LX=8     # 256

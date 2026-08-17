@@ -53,6 +53,10 @@ verr ProcessInputFile(int argc, char *argv[]) {
 int main(int argc, char *argv[]) {
 
     //
+    verr retInit = testContainer.Init();
+    if(retInit)
+        return verrmsg(100, "Initialization Error");
+    //
     verr result = testContainer.StartTests();
     if(result)  std::cout << "Error: " << result;
     else        std::cout << "Done";

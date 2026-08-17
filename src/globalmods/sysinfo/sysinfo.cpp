@@ -5,6 +5,7 @@
 #include "version_vhliboptimal.h"
 #include "version_vhliboptimal_test.h"
 
+#include "vhliboptimal.hpp"
 
 #ifdef VHPLATFORM_PC
 #include <iostream>
@@ -99,28 +100,6 @@ std::string get_exact_cpu_model()
 #endif
 
 
-static void print_versions() {
-
-    printf("%-20s v%d.%d.%d\n",
-           "VHLIB_OPTIMAL_TEST",
-           VHAPP_VHLIBOPTIMAL_TEST_VERSION_MAJOR,
-           VHAPP_VHLIBOPTIMAL_TEST_VERSION_MINOR,
-           VHAPP_VHLIBOPTIMAL_TEST_VERSION_PATCH);
-
-    printf("%-20s v%d.%d.%d\n",
-           "VHLIB_OPTIMAL",
-           VHLIB_OPTIMAL_VERSION_MAJOR,
-           VHLIB_OPTIMAL_VERSION_MINOR,
-           VHLIB_OPTIMAL_VERSION_PATCH);
-
-    printf("%-20s v%d.%d.%d\n",
-           "VHLIB_RLE7b",
-           VHLIB_RLE7B_VERSION_MAJOR,
-           VHLIB_RLE7B_VERSION_MINOR,
-           VHLIB_RLE7B_VERSION_PATCH);
-
-}
-
 #ifdef VHPLATFORM_STM32
 
 /* Символы линкера для расчета RAM (STM32CubeIDE / GCC) */
@@ -172,10 +151,6 @@ static void Print_App_Info() {
     printf("Platform          : %s @ %d Mhz\n",
         BUILD_TARGET_STR,
         (int) SystemCoreClock / 1000000);
-    printf("VHLIBOptimal      : v%d.%d.%d\n",
-        VHLIB_OPTIMAL_VERSION_MAJOR,
-        VHLIB_OPTIMAL_VERSION_MINOR,
-        VHLIB_OPTIMAL_VERSION_PATCH);
     printf("---------------------------------------------------\n");
 
 }
@@ -229,6 +204,27 @@ void Print_STM32_Info(void)
 #endif
 
 
+static void print_versions() {
+
+    printf("%-20s v%d.%d.%d\n",
+           "VHLIB_OPTIMAL_TEST",
+           VHAPP_VHLIBOPTIMAL_TEST_VERSION_MAJOR,
+           VHAPP_VHLIBOPTIMAL_TEST_VERSION_MINOR,
+           VHAPP_VHLIBOPTIMAL_TEST_VERSION_PATCH);
+
+    printf("%-20s %s\n",
+        "VHLIB_OPTIMAL",
+        vhliboptimal::VHLibOptimal::VersionString());
+
+    printf("%-20s v%d.%d.%d\n",
+           "VHLIB_RLE7b",
+           VHLIB_RLE7B_VERSION_MAJOR,
+           VHLIB_RLE7B_VERSION_MINOR,
+           VHLIB_RLE7B_VERSION_PATCH);
+
+}
+
+
 /**
  *
  */
@@ -236,14 +232,13 @@ void VHSYSInfo::SysInfo()
 {
 
     printf("\n*** Application Info\n");
+    printf("%-24s: %-20s\n", "Build options", CMAKE_CXX_FLAGS_STR);
     print_versions();
 
-    #ifdef VHPLATFORM_PC
-
     printf("\n*** System Info ***\n");
-    printf("%-24s: %-20s\n", "CPU Model", get_exact_cpu_model().c_str());
-    printf("%-24s: %-20s\n", "Build options", CMAKE_CXX_FLAGS_STR);
 
+    #ifdef VHPLATFORM_PC
+    printf("%-24s: %-20s\n", "CPU Model", get_exact_cpu_model().c_str());
     #endif
 
     #ifdef VHPLATFORM_STM32
