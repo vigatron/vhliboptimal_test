@@ -9,10 +9,16 @@
 #include "classes/cmdlinebuff.hpp"
 
 //
-#include "benchmark/benchmark.hpp"
+#include "timer/vhtimerstamp.hpp"
 
+//
+#include "testcontainer/testcontainer.hpp"
 
+//
 VHCommandLineBuffer cmdLine;
+
+//
+TestLibraryContainer testContainer;
 
 //
 static constexpr char strlineInfo       []  = "Processing System Info ...";
@@ -23,12 +29,9 @@ static constexpr char strlineUnknown    []  = "? Unknown command";
 void SendText(const char * txt);
 void SendTextLine(const char * txt);
 
-verr VHLIBOptimalRun();
-
-
 
 void VHAppInitGlobalVars() {
-    VHTimeStamp::Init();
+    VHTimerStamp::init();
 }
 
 /**
@@ -45,7 +48,14 @@ void execcmd() {
 
     } else if(cmdLine.iscmd(VHCommandLineBuffer::cmde)) {
 
-        VHLIBOptimalRun();
+        verr result = testContainer.StartTests();
+        printf("testContainer.StartTests() -");
+        if(!result) {
+            printf("Done\n"); }
+        else {
+            printf("Error: %d\n", (int)result);
+        }
+
 
     } else if(cmdLine.iscmd(VHCommandLineBuffer::cmdm)) {
 

@@ -91,7 +91,7 @@ verr VHTestImagesArray::unpack(uint16_t imageid) {
 
     const uint8_t             * prle        = memblock_data(imageid);
     const uint32_t              blocksz     = memblock_size(imageid);
-    const VHRLE7b::sthdr      * phdr        = (const VHRLE7b::sthdr *)prle;
+    // const VHRLE7b::sthdr      * phdr        = (const VHRLE7b::sthdr *)prle;
 
     uint8_t *                   ptrdst      = TempPtr();
     uint32_t                    sizedst     = TempMaxBufferSize();
@@ -121,9 +121,11 @@ verr VHTestImagesArray::check_memblock(uint16_t blkid) {
 
     printf("memblock #%d:  %5d bytes  CRC=%4X / Unpacked  %5d bytes CRC=%4X  status=%s\n",
         blkid,
-        (int)blocksz, phdr->crc32rle,
+        (int)blocksz,
+        (int)phdr->crc32rle,
         (int)phdr->srcsize,
-        phdr->crc32src, strstat );
+        (int)phdr->crc32src,
+        strstat );
 
     return testrle;
 }

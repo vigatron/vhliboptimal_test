@@ -7,7 +7,7 @@
 
 #include "platform/platform.hpp"
 #include "sysinfo/sysinfo.hpp"
-
+#include "testcontainer/testcontainer.hpp"
 
 static constexpr char strWelcome        []  = "Welcome!";
 
@@ -15,13 +15,13 @@ extern USBD_HandleTypeDef hUsbDeviceFS;
 
 extern VHCommandLineBuffer cmdLine;
 
+extern TestLibraryContainer testContainer;
+
 void SendText(const char * txt);
 void SendTextLine(const char * txt);
 
 void execcmd();
 
-//
-verr VHLIBOptimalSetup();
 
 
 /**
@@ -34,10 +34,8 @@ void StartUSBTask(void *argument) {
 
     osDelay(1500);
 
-    VHSYSInfo::SysInfo();
-
-    if(VHLIBOptimalSetup()) {
-        verrmsg(103, "VHLIBOptimalSetup() failed!");
+    if(testContainer.Init()) {
+        verrmsg(2, "VHLIBOptimalSetup() failed");
         while(1) { osDelay(1); }
     }
 

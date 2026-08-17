@@ -1,7 +1,11 @@
 # Ищем системные файлы C и драйверы HAL для конкретного семейства
 
+message(STATUS "")
 message(STATUS "CUBEMX_PATH: ${CUBEMX_PATH}")
+message(STATUS "")
 message(STATUS "STM32_CORE_FILES: ${STM32_CORE_FILES}")
+message(STATUS "")
+message(STATUS "APP_INCLUDE_DIRS: ${APP_INCLUDE_DIRS}")
 
 
 set(TARGET_ELF "${PROJECT_NAME}_${BUILD_TARGET}.elf")
@@ -19,21 +23,25 @@ add_executable(${TARGET_ELF}
     ${APP_STM32_DIR}/task_usb.cpp
     ${APP_STM32_DIR}/sysvcp.cpp
     ${APP_STM32_DIR}/global.cpp
-    ${APP_STM32_DIR}/detector.cpp
-    ${APP_STM32_DIR}/callbacks/callbacks.cpp
-    ${APP_STM32_DIR}/benchmark/benchmark.cpp
-    ${APP_STM32_DIR}/sysinfo/sysinfo.cpp
 
-    src/pics/srcimgdata.cpp
+    src/globalmods/sysinfo/sysinfo.cpp
+    src/globalmods/timer/vhtimerstamp.cpp
+    src/globalmods/pics/srcimgdata.cpp
+    src/globalmods/testcontainer/testcontainer.cpp
 )
 
 
 target_include_directories(${TARGET_ELF} PRIVATE
     "${CMAKE_CURRENT_BINARY_DIR}"
+
     ${APP_STM32_DIR}
     ${APP_STM32_DIR}/classes
     ${HAL_DRIVER_DIR}/Inc
     ${HAL_DRIVER_DIR}/Inc/Legacy
+
+    src/extmods
+
+    src/globalmods
 
     ${APP_INCLUDE_DIRS}
 )
@@ -42,6 +50,7 @@ target_link_libraries(${TARGET_ELF} PRIVATE
     -Wl,--whole-archive
     vhlib_optimal
     -Wl,--no-whole-archive
+    vhlib_platform
     vhlib_rle7b
 )
 

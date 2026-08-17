@@ -86,8 +86,6 @@ verr TestLibraryContainer::TestImageIteration(uint16_t imageid, uint8_t levelcs)
     printf(" Sampling: %5d uSec  Scanning: %5d uSec \n", t_samp_us, t_scan_us);
 
 #ifdef __CMT
-    unsigned int timer_clk = (unsigned int)tsScanning.ResultTick();
-    unsigned int timer_us = timer_clk / (SystemCoreClock / 1000000.0f);
     printf("%-20s : %u\n", "Clocks  elapsed", timer_clk);
     printf("%-20s : %u\n", "Elapsed in uSec", timer_us);
 #endif
@@ -160,28 +158,15 @@ verr TestLibraryContainer::TestImageAverage(uint16_t imageid, uint8_t levelcs)
  */
 verr TestLibraryContainer::StartTests()
 {
-
-    VHSYSInfo::SysInfo();
-
-    printf("Starting test ...  \n");
-
-    // SCALE Factor
-    uint8_t levelcs = 9 - VHLIB_OPTIMAL_GRID_LX;
-
-    // Check integrity before start & Warmup
-    if (VHTestImagesArray::CheckIntegrity())
-        return verror(1);
-
-    // Source Images array info
-    VHTestImagesArray::CheckResolutions();
-
-    // Setup memory layout & callbacks
-    if (VHLIBOptimalSetup())
-        return verrmsg(2, "VHLIBOptimalSetup() failed");
+    if(!detector.isInitialized())
+        return verrmsg(102, "VHLIB_OPTIMAL is not initialized");
 
     // Testing all images from embedded set
     uint16_t firstid = VHTestImagesArray::GetFirstID();
     uint16_t lastid = VHTestImagesArray::GetLastID();
+
+    // SCALE Factor
+    uint8_t levelcs = 9 - VHLIB_OPTIMAL_GRID_LX;
 
     for (uint16_t imgid = firstid; imgid <= lastid; imgid++)
     {
@@ -199,10 +184,20 @@ verr TestLibraryContainer::StartTests()
 }
 
 /**
- *
+ * Setup memory layout & callbacks
  */
-verr TestLibraryContainer::VHLIBOptimalSetup()
+verr TestLibraryContainer::Init()
 {
+    VHSYSInfo::SysInfo();
+
+    printf("Starting test ...  \n");
+
+    // Check integrity before start & Warmup
+    if (VHTestImagesArray::CheckIntegrity())
+        return verror(1);
+
+    // Source Images array info
+    VHTestImagesArray::CheckResolutions();
 
     //
     vhliboptimal::stConfig cfg = {

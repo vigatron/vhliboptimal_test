@@ -1,12 +1,8 @@
-#include "vhtimerstamp.hpp"
+#include "timer/vhtimerstamp.hpp"
 
 
 
 #ifdef VHPLATFORM_PC
-
-VHTimerStamp::VHTimerStamp() {
-
-}
 
 void VHTimerStamp::start() {
     clock_gettime(CLOCK_MONOTONIC_RAW, &start_time);
@@ -36,25 +32,11 @@ long long VHTimerStamp::result_ms() {
 
 #ifdef VHPLATFORM_STM32
 
-class VHTimeStamp {
-
-    public:
-
-        static void Init();
-        void Start();
-        void Stop();
-        uint32_t ResultTick();
-
-    private:
-        uint32_t start;
-        uint32_t stop;
-};
-
 
 /**
  * 
  */
-void VHTimeStamp::Init() {
+void VHTimerStamp::init() {
 
     // 1. Включаем TRC (Trace)
     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
@@ -73,24 +55,39 @@ void VHTimeStamp::Init() {
 /**
  * 
  */
-void VHTimeStamp::Start() {
-    start = DWT->CYCCNT;
+void VHTimerStamp::start() {
+    _start = DWT->CYCCNT;
 }
 
 /**
  * 
  */
-void VHTimeStamp::Stop() {
-    stop = DWT->CYCCNT;
+void VHTimerStamp::stop() {
+    _stop = DWT->CYCCNT;
 }
 
 /**
  * 
  */
-uint32_t VHTimeStamp::ResultTick() {
-    return start < stop ? (stop - start) : ((UINT32_MAX - start) + stop);
+uint32_t VHTimerStamp::result_ticks() {
+    return _start < _stop ? (_stop - _start) : ((UINT32_MAX - _start) + _stop);
 }
 
+/**
+ * 
+ */
+uint32_t VHTimerStamp::result_us() {
+    uint32_t timer_clks = result_ticks();
+    unsigned int timer_us = timer_clks / (SystemCoreClock / 1000000.0f);
+    return timer_us;
+}
+
+/**
+ * 
+ */
+uint32_t VHTimerStamp::result_ms() {
+    return result_us() / 1000;
+}
 
 #endif
 
