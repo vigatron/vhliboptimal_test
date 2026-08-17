@@ -45,6 +45,12 @@ void execcmd() {
     if(cmdLine.iscmd(VHCommandLineBuffer::cmdi)) {
 
         SendTextLine(strlineInfo);
+        VHTimerStamp tstmp;
+        tstmp.start();
+        HAL_Delay(10);
+        tstmp.stop();
+
+        printf("VHTimeStamp for 10ms = %d\n", (int)tstmp.result_ms());
 
     } else if(cmdLine.iscmd(VHCommandLineBuffer::cmde)) {
 

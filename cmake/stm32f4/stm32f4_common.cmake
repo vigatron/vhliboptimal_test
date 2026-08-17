@@ -79,7 +79,7 @@ set(STM32_CORE_FILES
     "${SYS_CORE_DIR}/freertos.c"
     "${SYS_CORE_DIR}/syscalls.c"
     "${SYS_CORE_DIR}/sysmem.c"
-    "${SYS_CORE_DIR}/system407.cpp"
+    "${SYS_CORE_DIR}/systemf407.cpp"
 
     "${SYS_CORE_DIR}/stm32f4xx_hal_msp.c"
     "${SYS_CORE_DIR}/stm32f4xx_hal_timebase_tim.c"

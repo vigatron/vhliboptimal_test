@@ -1,6 +1,8 @@
 #include "timer/vhtimerstamp.hpp"
-
-
+#include "main.h"
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
 
 #ifdef VHPLATFORM_PC
 
@@ -38,15 +40,25 @@ long long VHTimerStamp::result_ms() {
  */
 void VHTimerStamp::init() {
 
+    #if defined(__CORTEX_M) && (__CORTEX_M == 7U)
+    // 1. Включаем тактирование отладочного блока DBGMCU напрямую через регистр
+    DBGMCU->CR |= DBGMCU_CR_DBG_SLEEP | DBGMCU_CR_DBG_STOP | DBGMCU_CR_DBG_STANDBY;
+    #endif
+
     // 1. Включаем TRC (Trace)
     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
 
     // 2. Снимаем защиту записи в DWT (ОБЯЗАТЕЛЬНО для Cortex-M7 / F7 и H7)
     #if defined(__CORTEX_M) && (__CORTEX_M == 7U)
-        DWT->LAR = 0xC5ACCE15; 
+        #ifndef DWT_LAR_KEY
+        #define DWT_LAR_KEY 0xC5ACCE55U
+        #endif
+
+        DWT->LAR = DWT_LAR_KEY;
     #endif
 
     // 3. Обнуляем и запускаем счетчик
+    DWT->CTRL &= ~DWT_CTRL_CYCCNTENA_Msk;
     DWT->CYCCNT = 0;
     DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
     
@@ -70,7 +82,7 @@ void VHTimerStamp::stop() {
  * 
  */
 uint32_t VHTimerStamp::result_ticks() {
-    return _start < _stop ? (_stop - _start) : ((UINT32_MAX - _start) + _stop);
+    return _start <= _stop ? (_stop - _start) : ((UINT32_MAX - _start) + _stop);
 }
 
 /**
