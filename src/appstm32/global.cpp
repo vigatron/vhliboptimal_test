@@ -49,7 +49,7 @@ void execcmd() {
     } else if(cmdLine.iscmd(VHCommandLineBuffer::cmde)) {
 
         verr result = testContainer.StartTests();
-        printf("testContainer.StartTests() -");
+        printf("testContainer() ");
         if(!result) {
             printf("Done\n"); }
         else {

@@ -52,15 +52,15 @@ target_compile_definitions(vhlib_optimal PUBLIC
     # ------------------------------------------------------------
     VHLIB_OPTIMAL_GRID_FIXED
 
-    # 9: 512x512 : 32K Grid : LEVELCS=0
-    VHLIB_OPTIMAL_GRID_LX=9       # 512
-    VHLIB_OPTIMAL_GRID_LY=9       # 512
+    # # 9: 512x512 : 32K Grid : LEVELCS=0
+    # VHLIB_OPTIMAL_GRID_LX=9       # 512
+    # VHLIB_OPTIMAL_GRID_LY=9       # 512
 
-    # 8: 256x256 :  8K Grid : LEVELCS=1
+    # # 8: 256x256 :  8K Grid : LEVELCS=1
     # VHLIB_OPTIMAL_GRID_LX=8     # 256
     # VHLIB_OPTIMAL_GRID_LY=8     # 256
 
-    # 7: 128x128 :  2K Grid : LEVELCS=2
+    # # 7: 128x128 :  2K Grid : LEVELCS=2
     # VHLIB_OPTIMAL_GRID_LX=7     # 128
     # VHLIB_OPTIMAL_GRID_LY=7     # 128
 

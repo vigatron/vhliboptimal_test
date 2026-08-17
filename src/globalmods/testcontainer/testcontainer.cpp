@@ -8,6 +8,10 @@
 // Source Image (embedded)
 #include "pics/srcimgdata.hpp"
 
+namespace vhliboptimal {
+    extern void asrts(bool cond, int module, const char * msg);
+};
+
 using namespace vhliboptimal;
 
 //
@@ -24,6 +28,8 @@ VHATTR_CCMRAM static uint8_t mem_buffer_grid_src[CFG_MEMSIZE_BYTES_PerGrid];
 VHATTR_CCMRAM static uint8_t mem_buffer_grid_dst[CFG_MEMSIZE_BYTES_PerGrid];
 static uint8_t mem_buffer_objects[CFG_MEMSIZE_BYTES_Objects];
 static uint8_t mem_buffer_spans[CFG_MEMSIZE_BYTES_Spans];
+
+
 
 /**
  *
@@ -180,7 +186,7 @@ verr TestLibraryContainer::StartTests()
 
     // GenerateReport(cfg);
 
-    printf("All tests completed\n");
+    printf("\nAll tests completed\n");
 
     return vok;
 }

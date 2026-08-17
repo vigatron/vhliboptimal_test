@@ -151,7 +151,7 @@ verr VHTestImagesArray::CheckIntegrity() {
  */
 verr VHTestImagesArray::CheckResolutions() {
 
-    printf("\nResolutions:\n");
+    printf("\nTest image set:\n");
 
     for(uint16_t blkid = GetFirstID(); blkid <= GetLastID(); blkid++) {
         
@@ -166,7 +166,10 @@ verr VHTestImagesArray::CheckResolutions() {
             height = phdr->height;
         }
 
-        printf("Image #%d: %4d x %4d\n", blkid, width, height);
+        uint8_t sc = GetScaller(blkid);
+
+        printf("BMP (1-bit) B&W Image #%d: %4d x %4d (Original %4d x %4d)\n",
+            blkid, width, height, width * sc, height * sc);
     }
 
     return vok;

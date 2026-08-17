@@ -22,7 +22,23 @@ class VHTestImagesArray {
 
         static verr              unpack(uint16_t blkid);
 
+
     private:
 
         static verr             check_memblock(uint16_t id);
+
+        static uint8_t           GetScaller(uint16_t imgid) { 
+
+            switch(imgid) {
+                case 1: return 8;
+                case 2: return 8;
+                case 3: return 4;
+                case 4: return 4;
+                case 5: return 2;
+                case 6: return 2;
+                case 7: return 4;
+            }
+            return 0;
+        }
+
 };

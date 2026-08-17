@@ -203,7 +203,9 @@ void Print_STM32_Info(void)
 
 #endif
 
-
+/**
+ *
+ */
 static void print_versions() {
 
     printf("%-20s v%d.%d.%d\n",
@@ -223,7 +225,6 @@ static void print_versions() {
            VHLIB_RLE7B_VERSION_PATCH);
 
 }
-
 
 /**
  *

@@ -14,21 +14,45 @@ set(CMAKE_CXX_STANDARD 17)
 # Важно: отключаем проверку запуска тестового бинаря
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
-# MCU specific flags
-set(TARGET_FLAGS "-mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard ")
-set(VH_CXX_FLAGS "-flto -ffast-math -fsingle-precision-constant -fomit-frame-pointer -fno-common -fdevirtualize-at-ltrans -fvisibility-inlines-hidden")
+# # MCU specific flags
+# set(TARGET_FLAGS "-mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard ")
+# set(VH_CXX_FLAGS "-flto -ffast-math -fsingle-precision-constant -fomit-frame-pointer -fno-common -fdevirtualize-at-ltrans -fvisibility-inlines-hidden")
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${TARGET_FLAGS}")
-set(CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp -MMD -MP")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fdata-sections -ffunction-sections -fstack-usage")
+# set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${TARGET_FLAGS}")
+# set(CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp -MMD -MP")
+# set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fdata-sections -ffunction-sections -fstack-usage")
 
-set(CMAKE_C_FLAGS_DEBUG "-O0 -g3")
-set(CMAKE_C_FLAGS_RELEASE "-Os -g0")
+# set(CMAKE_C_FLAGS_DEBUG "-O0 -g3")
+# set(CMAKE_C_FLAGS_RELEASE "-Os -g0")
 
-set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0")
+# set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3")
+# set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} ${VH_CXX_FLAGS} -fno-rtti -fno-exceptions -fno-threadsafe-statics")
+# message(STATUS "CXX FLAGS BEFORE VH-FIX ${CMAKE_CXX_FLAGS}")
+
+# set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} ${VH_CXX_FLAGS} -fno-rtti -fno-exceptions -fno-threadsafe-statics")
+
+
+
+# 1. Общие флаги архитектуры и платформы (для C и C++)
+set(TARGET_FLAGS "-mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard")
+
+# 2. Общие базовые флаги C и C++
+set(CMAKE_C_FLAGS "${TARGET_FLAGS} -Wall -fdata-sections -ffunction-sections -fstack-usage" CACHE STRING "" FORCE)
+set(CMAKE_CXX_FLAGS "${TARGET_FLAGS} -Wall -fdata-sections -ffunction-sections -fstack-usage -fno-rtti -fno-exceptions -fno-threadsafe-statics" CACHE STRING "" FORCE)
+
+# 3. Флаги специфичные для типов сборок (Debug / Release)
+set(CMAKE_C_FLAGS_DEBUG "-O0 -g3" CACHE STRING "" FORCE)
+set(CMAKE_C_FLAGS_RELEASE "-Os -g0" CACHE STRING "" FORCE)
+
+set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3" CACHE STRING "" FORCE)
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0 -flto -ffast-math -fsingle-precision-constant -fomit-frame-pointer -fno-common -fdevirtualize-at-ltrans -fvisibility-inlines-hidden" CACHE STRING "" FORCE)
+
+# 4. Проверка (выведет актуальные значения)
+message(STATUS "Base CXX Flags: ${CMAKE_CXX_FLAGS}")
+message(STATUS "Release CXX Flags: ${CMAKE_CXX_FLAGS_RELEASE}")
+
+set(VH_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_RELEASE}")
 
 set(CMAKE_EXE_LINKER_FLAGS "${TARGET_FLAGS}")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -T ${CMAKE_SOURCE_DIR}/src/appstm32/platformstm32f407/STM32F407xx_FLASH.ld")
