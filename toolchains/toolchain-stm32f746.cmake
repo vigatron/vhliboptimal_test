@@ -44,14 +44,14 @@ add_compile_options(
 set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} -x assembler-with-cpp")
 
 # 
-set(COMMON_PERF_FLAGS "-fsingle-precision-constant -fomit-frame-pointer -fno-math-errno -fno-trapping-math -fno-common -fdevirtualize-at-ltrans")
+set(COMMON_PERF_FLAGS "-fsingle-precision-constant -fomit-frame-pointer -fno-math-errno -fno-trapping-math -fno-common")
 
 #
 set(CMAKE_C_FLAGS_DEBUG "-O0 -g3")
 set(CMAKE_C_FLAGS_RELEASE "-O3 -g0 ${COMMON_PERF_FLAGS}") 
 
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0 -flto ${COMMON_PERF_FLAGS}")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0 -flto ${COMMON_PERF_FLAGS} -fdevirtualize-at-ltrans")
 
 message(STATUS "Base CXX Flags: ${CMAKE_CXX_FLAGS}")
 message(STATUS "Release CXX Flags: ${CMAKE_CXX_FLAGS_RELEASE}")

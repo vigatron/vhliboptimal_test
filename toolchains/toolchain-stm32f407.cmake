@@ -14,8 +14,7 @@ set(CMAKE_CXX_STANDARD 17)
 # Важно: отключаем проверку запуска тестового бинаря
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
-#
-add_compile_options(
+set(VHBASE_ARM_OPTIONS
     -mcpu=cortex-m4
     -mfpu=fpv4-sp-d16
     -mfloat-abi=hard
@@ -24,6 +23,9 @@ add_compile_options(
     -ffunction-sections
     -fstack-usage
 )
+
+#
+add_compile_options(${VHBASE_ARM_OPTIONS})
 
 #
 add_compile_definitions(
@@ -44,19 +46,22 @@ add_compile_options(
 set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} -x assembler-with-cpp")
 
 # 
-set(COMMON_PERF_FLAGS "-fsingle-precision-constant -fomit-frame-pointer -fno-math-errno -fno-trapping-math -fno-common -fdevirtualize-at-ltrans")
+set(COMMON_PERF_FLAGS "-fsingle-precision-constant -fomit-frame-pointer -fno-math-errno -fno-trapping-math -fno-common")
 
-# 3. Флаги специфичные для типов сборок (Debug / Release)
+#
 set(CMAKE_C_FLAGS_DEBUG "-O0 -g3")
 set(CMAKE_C_FLAGS_RELEASE "-O3 -g0 ${COMMON_PERF_FLAGS}" )
 
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0 -flto ${COMMON_PERF_FLAGS}")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0 -flto ${COMMON_PERF_FLAGS} -fdevirtualize-at-ltrans")
 
+string(REPLACE ";" " " VHBASE_ARM_OPTIONS_CLEAN "${VHBASE_ARM_OPTIONS}")
+set(VH_CXX_FLAGS "${VHBASE_ARM_OPTIONS_CLEAN} ${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_RELEASE}")
+
+#
 message(STATUS "Base CXX Flags: ${CMAKE_CXX_FLAGS}")
 message(STATUS "Release CXX Flags: ${CMAKE_CXX_FLAGS_RELEASE}")
-
-set(VH_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_RELEASE}")
+message(STATUS "VH_CXX_FLAGS: ${VH_CXX_FLAGS}")
 
 #
 set(CMAKE_EXE_LINKER_FLAGS_INIT "--specs=nano.specs")

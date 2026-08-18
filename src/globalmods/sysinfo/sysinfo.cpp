@@ -187,7 +187,7 @@ void Print_STM32_Info(void)
     uid[2] = HAL_GetUIDw2();
 
     // 6. Output via printf
-    printf("\r\n\r\n");
+    printf("\r\n");
     printf("================ MCU INFO =====================");
     printf("\r\n");
     printf("MCU Family      : %s\r\n", MCU_FAMILY);
@@ -237,7 +237,7 @@ void VHSYSInfo::SysInfo()
 {
 
     printf("\n*** Application Info\n");
-    printf("%-24s: %-20s\n", "Build options", CMAKE_CXX_FLAGS_STR);
+    printf("%-20s %-20s\n", "Build options", CMAKE_CXX_FLAGS_STR);
     print_versions();
 
     printf("\n*** System Info ***\n");
