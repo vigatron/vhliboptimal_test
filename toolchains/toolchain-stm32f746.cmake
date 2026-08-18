@@ -15,32 +15,60 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
 # MCU specific flags
-set(TARGET_FLAGS "-mcpu=cortex-m7 -mfpu=fpv5-sp-d16 -mfloat-abi=hard ")
+# set(TARGET_FLAGS "-mcpu=cortex-m7 -mfpu=fpv5-sp-d16 -mfloat-abi=hard ")
 
-set(MCU_FAMILY "STM32F7")
-set(MCU_DEF "STM32F746xx")
-set(VHDEFS "-D${MCU_FAMILY} -D${MCU_DEF} -DUSE_HAL_DRIVER")
+add_compile_options(
+    -mcpu=cortex-m7
+#    -mthumb
+    -mfpu=fpv5-sp-d16
+    -mfloat-abi=hard
+    -Wall
+    -fdata-sections
+    -ffunction-sections
+    -fstack-usage
+)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${TARGET_FLAGS} ${VHDEFS}")
-set(CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp -MMD -MP")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fdata-sections -ffunction-sections -fstack-usage")
+add_compile_definitions(
+    STM32F7
+    STM32F746xx
+    USE_HAL_DRIVER
+)
+
+add_compile_options(
+    $<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>
+    $<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions>
+    $<$<COMPILE_LANGUAGE:CXX>:-fno-threadsafe-statics>
+    $<$<COMPILE_LANGUAGE:CXX>:-fvisibility-inlines-hidden>
+)
+
+set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} -x assembler-with-cpp")
+
+# 
+set(COMMON_PERF_FLAGS "-fsingle-precision-constant -fomit-frame-pointer -fno-math-errno -fno-trapping-math")
 
 set(CMAKE_C_FLAGS_DEBUG "-O0 -g3")
-set(CMAKE_C_FLAGS_RELEASE "-Os -g0")
+set(CMAKE_C_FLAGS_RELEASE "-O3 -g0 ${COMMON_PERF_FLAGS}") 
 
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0 -flto")
-
-set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fno-rtti -fno-exceptions -fno-threadsafe-statics")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0 -flto ${COMMON_PERF_FLAGS}")
 
 message(STATUS "Base CXX Flags: ${CMAKE_CXX_FLAGS}")
 message(STATUS "Release CXX Flags: ${CMAKE_CXX_FLAGS_RELEASE}")
 
 set(VH_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_RELEASE}")
 
-set(CMAKE_EXE_LINKER_FLAGS "${TARGET_FLAGS}")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -T ${CMAKE_SOURCE_DIR}/src/appstm32/platformstm32f746/STM32F746xx_FLASH.ld")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --specs=nano.specs")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Map=${CMAKE_PROJECT_NAME}.map -Wl,--gc-sections")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--print-memory-usage")
+set(CMAKE_EXE_LINKER_FLAGS_INIT "--specs=nano.specs")
+
+add_link_options(
+    -O3
+    -flto
+    -mcpu=cortex-m7
+    -mfpu=fpv5-sp-d16
+    -mfloat-abi=hard
+    -T${CMAKE_SOURCE_DIR}/src/appstm32/platformstm32f746/STM32F746xx_FLASH.ld
+    -Wl,--gc-sections
+    -Wl,-Map=${CMAKE_PROJECT_NAME}.map
+    -Wl,--print-memory-usage
+)
+
 set(TOOLCHAIN_LINK_LIBRARIES "m")

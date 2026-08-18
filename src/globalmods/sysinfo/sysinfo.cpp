@@ -102,10 +102,21 @@ std::string get_exact_cpu_model()
 
 #ifdef VHPLATFORM_STM32
 
-/* Символы линкера для расчета RAM (STM32CubeIDE / GCC) */
-extern uint32_t _estack;
-extern uint32_t _sdata;
+// Экспорт символов из LinkerScript.ld
+extern uint32_t _sram_main_start;
+extern uint32_t _sram_main_size;
+extern uint32_t _sram_main_used_end;
 
+/**
+ * 
+ */
+static uint32_t Get_MainSRAM_Used_KB() {
+    return ( (uint32_t)&_sram_main_used_end - (uint32_t)&_sram_main_start) >> 10;
+}
+
+static uint32_t Get_MainSram_Total_KB() {
+    return (uint32_t)&_sram_main_size >> 10;
+}
 
 /* Определение суммарного физического объема SRAM по Device ID */
 static uint32_t Get_Total_SRAM_KB(uint32_t dev_id)
@@ -135,7 +146,8 @@ static uint32_t Get_Total_SRAM_KB(uint32_t dev_id)
         case 0x450: return 1024; // H742/743/753/750 (AXI SRAM + DTCM + ITCM + SRAM1..4)
         case 0x480: return 1408; // H723/733/725/735
 
-        default: return 0; // Для неизвестных/нерассмотренных DEV_ID
+        default:
+            return 0; // Для неизвестных/нерассмотренных DEV_ID
     }
 }
 
@@ -155,7 +167,9 @@ static void Print_App_Info() {
 
 }
 
-
+/**
+ * 
+ */
 void Print_STM32_Info(void)
 {
     // 1. Считываем Device ID и Revision ID через HAL
@@ -172,16 +186,6 @@ void Print_STM32_Info(void)
     uid[1] = HAL_GetUIDw1();
     uid[2] = HAL_GetUIDw2();
 
-    // 4. Main Linker SRAM Size
-    uint32_t linker_sram_bytes = (uint32_t)&_estack - (uint32_t)&_sdata;
-    uint32_t linker_sram_kb = linker_sram_bytes / 1024;
-
-    // 5. Total Hardware SRAM
-    uint32_t total_sram_kb = Get_Total_SRAM_KB(dev_id);
-    if (total_sram_kb == 0) {
-        total_sram_kb = linker_sram_kb; // Fallback если DEV_ID не занесен в таблицу
-    }
-
     // 6. Output via printf
     printf("\r\n\r\n");
     printf("================ MCU INFO =====================");
@@ -190,15 +194,15 @@ void Print_STM32_Info(void)
     printf("Device ID       : 0x%03X\r\n", (unsigned int)dev_id);
     printf("Revision ID     : 0x%04X\r\n", (unsigned int)rev_id);
     printf("Flash Size      : %u KB\r\n", flash_kb);
-    printf("Total RAM       : %u KB\r\n", (unsigned int)total_sram_kb);
-    printf("Main SRAM       : %u KB\r\n", (unsigned int)linker_sram_kb);
+    printf("Total RAM       : %u KB\r\n", (unsigned int)Get_Total_SRAM_KB(dev_id));
+    printf("Main SRAM Total : %u KB\r\n", (unsigned int)Get_MainSram_Total_KB());
+    printf("Main SRAM Used  : %u KB\r\n", (unsigned int)Get_MainSRAM_Used_KB());
     printf("Unique ID (UID) : %08X-%08X-%08X\r\n", 
            (unsigned int)uid[0], (unsigned int)uid[1], (unsigned int)uid[2]);
     printf("===============================================");
     printf("\r\n");
 
 }
-
 
 
 #endif

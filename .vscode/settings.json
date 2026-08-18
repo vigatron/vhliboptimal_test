@@ -66,25 +66,25 @@
     // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-STM32F4DISCOVERY/compile_commands.json",
     // // ****************************************************************************************************
 
-    // // *** WAVESHARECORE7XXI - STM32F746IGT6
-    // "cmake.configureArgs"           : [
-    //     "-DBUILD_TARGET=WAVESHARECORE7XXI",
-    //     "-DCMAKE_BUILD_TYPE=Release",
-    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32f746.cmake",
-    //     "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_F7_V1.17.4" ],
-    // "cmake.buildDirectory"          : "${workspaceFolder}/build-WAVESHARECORE7XXI",
-    // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-WAVESHARECORE7XXI/compile_commands.json",
-    // // ****************************************************************************************************
-
-    // *** CMB32H750HDM - STM32H750VBT6
+    // *** WAVESHARECORE7XXI - STM32F746IGT6
     "cmake.configureArgs"           : [
-        "-DBUILD_TARGET=CMB32H750HDM",
+        "-DBUILD_TARGET=WAVESHARECORE7XXI",
         "-DCMAKE_BUILD_TYPE=Release",
-        "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32h750.cmake",
-        "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_H7_V1.13.0" ],
-    "cmake.buildDirectory"          : "${workspaceFolder}/build-CMB32H750HDM",
-    "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-CMB32H750HDM/compile_commands.json",
+        "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32f746.cmake",
+        "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_F7_V1.17.4" ],
+    "cmake.buildDirectory"          : "${workspaceFolder}/build-WAVESHARECORE7XXI",
+    "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-WAVESHARECORE7XXI/compile_commands.json",
     // ****************************************************************************************************
+
+    // // *** CMB32H750HDM - STM32H750VBT6
+    // "cmake.configureArgs"           : [
+    //     "-DBUILD_TARGET=CMB32H750HDM",
+    //     "-DCMAKE_BUILD_TYPE=Release",
+    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32h750.cmake",
+    //     "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_H7_V1.13.0" ],
+    // "cmake.buildDirectory"          : "${workspaceFolder}/build-CMB32H750HDM",
+    // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-CMB32H750HDM/compile_commands.json",
+    // // ****************************************************************************************************
 
     // ****************************************************************************************************
     // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-intel.cmake" },
