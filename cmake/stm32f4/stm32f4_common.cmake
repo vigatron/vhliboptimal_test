@@ -1,6 +1,3 @@
-set(MCU_FAMILY          "STM32F4")
-set(MCU_DEF             "STM32F407xx")
-
 set(STARTUP_FILE        "${APP_STM32_DIR}/platformstm32f407/startup_stm32f407xx.s")
 set(SYS_CORE_DIR        "${APP_STM32_DIR}/platformstm32f407/Core/Src")
 set(HAL_DRIVER_DIR      "${CUBEMX_PATH}/Drivers/STM32F4xx_HAL_Driver")
@@ -31,7 +28,6 @@ set(USB_User_Src
     ${APP_STM32_DIR}/platformstm32f407/USB_DEVICE/App/usbd_desc.c
     ${APP_STM32_DIR}/platformstm32f407/USB_DEVICE/App/usbd_cdc_if.c
 )
-
 
 set(HAL_DRIVERS_FILES
     ${HAL_DRIVER_DIR}/Src/stm32f4xx_hal.c

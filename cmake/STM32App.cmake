@@ -54,14 +54,13 @@ target_link_libraries(${TARGET_ELF} PRIVATE
     vhlib_rle7b
 )
 
-target_compile_definitions(${TARGET_ELF} PRIVATE
+target_compile_definitions(${TARGET_ELF} PUBLIC
     VHPLATFORM_STM32
     VHLIBOPTIMAL_TEST_PASS_COUNT=16
     BUILD_TARGET_NAME=${BUILD_TARGET}
     TARGET_${BUILD_TARGET}
     HSE_VALUE=${HSE_VALUE}
-    ${MCU_DEF}
-    USE_HAL_DRIVER
+
 )
 
 # --- Выбор команды прошивки по молчанию для каждого таргета ---

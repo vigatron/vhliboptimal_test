@@ -17,12 +17,17 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 # MCU specific flags
 set(TARGET_FLAGS "-mcpu=cortex-m7 -mfpu=fpv5-sp-d16 -mfloat-abi=hard ")
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${TARGET_FLAGS}")
+set(MCU_FAMILY "STM32F7")
+set(MCU_DEF "STM32F746xx")
+set(VHDEFS "-D${MCU_FAMILY} -D${MCU_DEF} -DUSE_HAL_DRIVER")
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${TARGET_FLAGS} ${VHDEFS}")
 set(CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp -MMD -MP")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fdata-sections -ffunction-sections -fstack-usage")
 
 set(CMAKE_C_FLAGS_DEBUG "-O0 -g3")
 set(CMAKE_C_FLAGS_RELEASE "-Os -g0")
+
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0 -flto")
 
@@ -32,7 +37,6 @@ message(STATUS "Base CXX Flags: ${CMAKE_CXX_FLAGS}")
 message(STATUS "Release CXX Flags: ${CMAKE_CXX_FLAGS_RELEASE}")
 
 set(VH_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_RELEASE}")
-
 
 set(CMAKE_EXE_LINKER_FLAGS "${TARGET_FLAGS}")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -T ${CMAKE_SOURCE_DIR}/src/appstm32/platformstm32f746/STM32F746xx_FLASH.ld")

@@ -14,18 +14,10 @@ namespace vhliboptimal {
 
 using namespace vhliboptimal;
 
-//
-#ifdef VHPLATFORM_PC
-#define VHATTR_CCMRAM
-#endif
+// dedicated BitFields GRID Buffer @ CCM RAM on STM32
+VHLIB_OPTIMAL_DCACHE    static uint8_t mem_buffer_grid_src[CFG_MEMSIZE_BYTES_PerGrid];
+VHLIB_OPTIMAL_DCACHE    static uint8_t mem_buffer_grid_dst[CFG_MEMSIZE_BYTES_PerGrid];
 
-#ifdef VHPLATFORM_STM32
-#define VHATTR_CCMRAM __attribute__((section(".ccmram")))
-#endif
-
-// Buffer for BitFields / CCM RAM dedicated on STM32
-VHATTR_CCMRAM static uint8_t mem_buffer_grid_src[CFG_MEMSIZE_BYTES_PerGrid];
-VHATTR_CCMRAM static uint8_t mem_buffer_grid_dst[CFG_MEMSIZE_BYTES_PerGrid];
 static uint8_t mem_buffer_objects[CFG_MEMSIZE_BYTES_Objects];
 static uint8_t mem_buffer_spans[CFG_MEMSIZE_BYTES_Spans];
 

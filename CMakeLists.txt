@@ -39,8 +39,10 @@ target_compile_definitions(vhlib_optimal PUBLIC
     # VHLIBOptimal Related
     # ------------------------------------------------------------
     VHLIB_OPTIMAL_PREFIX="beta"
+    # VHLIB_OPTIMAL_USE_ICACHE
+    VHLIB_OPTIMAL_USE_DCACHE
+
     # Embedded version
-    # VHLIB_OPTIMAL_EMBEDDED
     VHLIB_OPTIMAL_STL=0
 
     VHLIB_OPTIMAL_OBJS_MAX=800
@@ -73,6 +75,6 @@ target_compile_definitions(vhlib_optimal PUBLIC
 if(BUILD_TARGET STREQUAL "native")
     include(NativeApp)
 else()
-    include(BoardConfig)
+    include(STM32BoardConfig)
     include(STM32App)
 endif()

@@ -1,6 +1,3 @@
-set(MCU_FAMILY          "STM32F7")
-set(MCU_DEF             "STM32F746xx")
-
 set(STARTUP_FILE        "${APP_STM32_DIR}/platformstm32f746/startup_stm32f746xx.s")
 set(SYS_CORE_DIR        "${APP_STM32_DIR}/platformstm32f746/Core/Src")
 set(HAL_DRIVER_DIR      "${CUBEMX_PATH}/Drivers/STM32F7xx_HAL_Driver")

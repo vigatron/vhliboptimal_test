@@ -17,6 +17,10 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 # 1. Общие флаги архитектуры и платформы (для C и C++)
 set(TARGET_FLAGS "-mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard")
 
+set(MCU_FAMILY "STM32F4")
+set(MCU_DEF "STM32F407xx")
+set(VHDEFS "-D${MCU_FAMILY} -D${MCU_DEF} -DUSE_HAL_DRIVER")
+
 # 2. Общие базовые флаги C и C++
 set(CMAKE_C_FLAGS "${TARGET_FLAGS} -Wall -fdata-sections -ffunction-sections -fstack-usage" CACHE STRING "" FORCE)
 set(CMAKE_CXX_FLAGS "${TARGET_FLAGS} -Wall -fdata-sections -ffunction-sections -fstack-usage -fno-rtti -fno-exceptions -fno-threadsafe-statics" CACHE STRING "" FORCE)

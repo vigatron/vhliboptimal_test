@@ -55,8 +55,13 @@ ENTRY(Reset_Handler)
 /* Specify the memory areas */
 MEMORY
 {
-RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 320K
-FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 1024K
+    /* RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 320K */
+
+    ITCMRAM (xrw) : ORIGIN = 0x00000000, LENGTH = 16K
+    DTCMRAM (xrw) : ORIGIN = 0x20000000, LENGTH = 64K
+    RAM     (xrw) : ORIGIN = 0x20010000, LENGTH = 240K
+
+    FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 1024K
 }
 
 /* Highest address of the user mode stack */
@@ -93,6 +98,15 @@ SECTIONS
     . = ALIGN(4);
     _etext = .;        /* define a global symbols at end of code */
   } >FLASH
+
+    /* Added by V01G04A81 */
+    .itcm_text :
+    {
+        . = ALIGN(4);
+        *(.itcm_text)
+        *(.itcm_text*)
+        . = ALIGN(4);
+    } >ITCMRAM AT>FLASH
 
   /* Constant data goes into FLASH */
   .rodata :
@@ -163,6 +177,23 @@ SECTIONS
 
     . = ALIGN(4);
   } >RAM AT> FLASH
+
+    /* Added by V01G04A81 */
+    .dtcm_data :
+    {
+        . = ALIGN(4);
+        *(.dtcm_data)
+        *(.dtcm_data*)
+        . = ALIGN(4);
+    } >DTCMRAM AT>FLASH
+
+    .dtcm_bss (NOLOAD) :
+    {
+        . = ALIGN(4);
+        *(.dtcm_bss*)
+        *(.dtcm_data*)
+        . = ALIGN(4);
+    } >DTCMRAM
 
  /* Initialized TLS data section */
   .tdata : ALIGN(4)

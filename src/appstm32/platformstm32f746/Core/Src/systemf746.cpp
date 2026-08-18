@@ -151,4 +151,9 @@ void VHBoardInit() {
     /* Initialize all configured peripherals */
     VHSYS_MX_GPIO_Init();
 
+    //
+    SCB_EnableICache();
+
+    //
+    SCB_EnableDCache();
 }
