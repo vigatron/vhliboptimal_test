@@ -30,12 +30,22 @@ https://github.com/vigatron/vhliboptimal_test
 
 <br>
 
+#### Platforms
+* Intel i5-1135G7 @ 2.40GHz
+* AMD FX-8300 @ 3.30Ghz
+* Orange PC Plus ARM Cortex-A7 @ 1.20Ghz
+* STM32F407 @ 168Mhz
+* STM32F746 @ 210Mhz
+* STM32H750 @ 480Mhz
+* Planned test: *ESP32 Xtensa LX6 @ 240Mhz*
+* Planned test: *Raspberry Pi  Model B+ V1.2 @ 700Mhz*
+
 #### Benchmark Results rev 0.8.0
 
 * [Benchmark on Intel i5-1135G7 @ 2.40GHz](docs/rev0p8p0/bench_intel_i5-1135G7.md)
 * [Benchmark on AMD FX-8300 @ 3.30Ghz](docs/rev0p8p0/bench_amd_fx8300.md)
 * [Benchmark on Orange PC Plus ARM Cortex-A7](docs/rev0p8p0/bench_opi_pc_plus.md)
-* [Benchmark on CMB32F407HDM (or STM32F4DISCO) STM32F407 @ 160Mhz](docs/rev0p8p0/bench_cmb32f407hdm.md)
+* [Benchmark on CMB32F407HDM (or STM32F4DISCO) STM32F407 @ 168Mhz](docs/rev0p8p0/bench_cmb32f407hdm.md)
 * [Benchmark on WaveShare Core7XXI STM32F746 @ 216Mhz](docs/rev0p8p0/bench_wavesharecore7xxi.md)
 * [Benchmark on CMB32H750HDM STM32H750 @ 480Mhz](docs/rev0p8p0/bench_cmb32h750hdm.md)
 

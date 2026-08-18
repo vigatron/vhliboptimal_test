@@ -38,17 +38,49 @@ long long VHTimerStamp::result_ms() {
 /**
  * 
  */
+// void VHTimerStamp::init() {
+
+//     #if defined(__CORTEX_M) && (__CORTEX_M == 7U)
+//     // 1. Включаем тактирование отладочного блока DBGMCU напрямую через регистр
+//     DBGMCU->CR |= DBGMCU_CR_DBG_SLEEP | DBGMCU_CR_DBG_STOP | DBGMCU_CR_DBG_STANDBY;
+//     #endif
+
+//     // 1. Включаем TRC (Trace)
+//     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
+
+//     // 2. Снимаем защиту записи в DWT (ОБЯЗАТЕЛЬНО для Cortex-M7 / F7 и H7)
+//     #if defined(__CORTEX_M) && (__CORTEX_M == 7U)
+//         #ifndef DWT_LAR_KEY
+//         #define DWT_LAR_KEY 0xC5ACCE55U
+//         #endif
+
+//         DWT->LAR = DWT_LAR_KEY;
+//     #endif
+
+//     // 3. Обнуляем и запускаем счетчик
+//     DWT->CTRL &= ~DWT_CTRL_CYCCNTENA_Msk;
+//     DWT->CYCCNT = 0;
+//     DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
+// }
+
+/**
+ * 
+ */
 void VHTimerStamp::init() {
 
-    #if defined(__CORTEX_M) && (__CORTEX_M == 7U)
-    // 1. Включаем тактирование отладочного блока DBGMCU напрямую через регистр
-    DBGMCU->CR |= DBGMCU_CR_DBG_SLEEP | DBGMCU_CR_DBG_STOP | DBGMCU_CR_DBG_STANDBY;
+    // 1. Включение отладки в режимах пониженного энергопотребления
+    #if defined(STM32H7) || defined(STM32H750xx)
+        // Для STM32H7 используем доменные регистры DBGMCU
+        DBGMCU->CR |= DBGMCU_CR_DBG_SLEEPD1 | DBGMCU_CR_DBG_STOPD1 | DBGMCU_CR_DBG_STANDBYD1;
+    #elif defined(__CORTEX_M) && (__CORTEX_M == 7U)
+        // Для STM32F7 и других Cortex-M7
+        DBGMCU->CR |= DBGMCU_CR_DBG_SLEEP | DBGMCU_CR_DBG_STOP | DBGMCU_CR_DBG_STANDBY;
     #endif
 
-    // 1. Включаем TRC (Trace)
+    // 2. Включаем TRC (Trace)
     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
 
-    // 2. Снимаем защиту записи в DWT (ОБЯЗАТЕЛЬНО для Cortex-M7 / F7 и H7)
+    // 3. Разблокировка DWT (Lock Access Register)
     #if defined(__CORTEX_M) && (__CORTEX_M == 7U)
         #ifndef DWT_LAR_KEY
         #define DWT_LAR_KEY 0xC5ACCE55U
@@ -57,11 +89,10 @@ void VHTimerStamp::init() {
         DWT->LAR = DWT_LAR_KEY;
     #endif
 
-    // 3. Обнуляем и запускаем счетчик
+    // 4. Сброс и запуск счетчика циклов DWT CYCCNT
     DWT->CTRL &= ~DWT_CTRL_CYCCNTENA_Msk;
     DWT->CYCCNT = 0;
     DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
-    
 }
 
 /**

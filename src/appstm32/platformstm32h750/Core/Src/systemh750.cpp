@@ -167,6 +167,12 @@ void VHBoardInit() {
 
     MPU_Config();
 
+    /* ВключениеInstruction Cache (I-Cache) */
+    SCB_EnableICache();
+
+    /* Включение Data Cache (D-Cache) */
+    SCB_EnableDCache();
+
     /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
     HAL_Init();
 

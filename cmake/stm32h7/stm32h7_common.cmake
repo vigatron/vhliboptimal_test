@@ -1,6 +1,3 @@
-set(MCU_FAMILY          "STM32H7")
-set(MCU_DEF             "STM32H750xx")
-
 set(STARTUP_FILE        "${APP_STM32_DIR}/platformstm32h750/startup_stm32h750xx.s")
 set(SYS_CORE_DIR        "${APP_STM32_DIR}/platformstm32h750/Core/Src")
 set(HAL_DRIVER_DIR      "${CUBEMX_PATH}/Drivers/STM32H7xx_HAL_Driver")
@@ -78,8 +75,6 @@ set(FreeRTOS_Src
     ${CUBEMX_PATH}/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
     ${CUBEMX_PATH}/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c
 )
-
-
 
 set(STM32_CORE_FILES
 

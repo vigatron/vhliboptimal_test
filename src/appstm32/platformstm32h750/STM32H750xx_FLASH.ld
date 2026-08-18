@@ -55,20 +55,23 @@ ENTRY(Reset_Handler)
 /* Specify the memory areas */
 MEMORY
 {
-DTCMRAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 128K
-RAM (xrw)      : ORIGIN = 0x24000000, LENGTH = 512K
-RAM_D2 (xrw)      : ORIGIN = 0x30000000, LENGTH = 288K
-RAM_D3 (xrw)      : ORIGIN = 0x38000000, LENGTH = 64K
-ITCMRAM (xrw)      : ORIGIN = 0x00000000, LENGTH = 64K
-FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 128K
+DTCMRAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 128K
+RAM (xrw)           : ORIGIN = 0x24000000, LENGTH = 512K
+RAM_D2 (xrw)        : ORIGIN = 0x30000000, LENGTH = 288K
+RAM_D3 (xrw)        : ORIGIN = 0x38000000, LENGTH = 64K
+ITCMRAM (xrw)       : ORIGIN = 0x00000000, LENGTH = 64K
+FLASH (rx)          : ORIGIN = 0x8000000, LENGTH = 128K
 }
 
 /* Highest address of the user mode stack */
 _estack = ORIGIN(DTCMRAM) + LENGTH(DTCMRAM);    /* end of RAM */
-_sstack = _estack - _Min_Stack_Size;
+
 /* Generate a link error if heap and stack don't fit into RAM */
-_Min_Heap_Size = 0x800;      /* required amount of heap  */
-_Min_Stack_Size = 0x1000; /* required amount of stack */
+_Min_Heap_Size = 0x800;         /* required amount of heap  */
+_Min_Stack_Size = 0x1000;       /* required amount of stack */
+
+_sstack = _estack - _Min_Stack_Size;
+
 
 /* Define output sections */
 SECTIONS
@@ -152,8 +155,13 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH
 
-  /* used by the startup to initialize data */
-  _sidata = LOADADDR(.data);
+    /* Специфичная секция для DTCM */
+    .dtcm_bss (NOLOAD) : ALIGN(4)
+    {
+        *(.dtcm_bss)
+        *(.dtcm_bss*)
+        . = ALIGN(4);
+    } >DTCMRAM
 
   /* Initialized data sections goes into RAM, load LMA copy after code */
   .data :
@@ -166,7 +174,7 @@ SECTIONS
     *(.RamFunc*)       /* .RamFunc* sections */
 
     . = ALIGN(4);
-  } >DTCMRAM AT> FLASH
+  } >RAM AT> FLASH
 
  /* Initialized TLS data section */
   .tdata : ALIGN(4)
@@ -176,7 +184,10 @@ SECTIONS
     _edata = .;        /* define a global symbol at data end */
     PROVIDE(__data_end = .);
     PROVIDE(__tdata_end = .);
-  } >DTCMRAM AT> FLASH
+  } >RAM AT> FLASH
+
+  /* used by the startup to initialize data */
+  _sidata = LOADADDR(.data);
 
   PROVIDE( __tdata_start = ADDR(.tdata) );
   PROVIDE( __tdata_size = __tdata_end - __tdata_start );
@@ -191,6 +202,7 @@ SECTIONS
   PROVIDE( __data_source = LOADADDR(.data) );
   PROVIDE( __data_source_end = __tdata_source_end );
   PROVIDE( __data_source_size = __data_source_end - __data_source );
+
   /* Uninitialized data section */
   .tbss (NOLOAD) : ALIGN(4)
   {
@@ -200,7 +212,7 @@ SECTIONS
     *(.tbss .tbss.*)
     . = ALIGN(4);
     PROVIDE( __tbss_end = . );
-  } >DTCMRAM
+  } >RAM
 
   PROVIDE( __tbss_start = ADDR(.tbss) );
   PROVIDE( __tbss_size = __tbss_end - __tbss_start );
@@ -224,7 +236,8 @@ SECTIONS
     _ebss = .;         /* define a global symbol at bss end */
     __bss_end__ = _ebss;
       PROVIDE( __bss_end = .);
-  } >DTCMRAM
+  } >RAM
+
   PROVIDE( __non_tls_bss_start = ADDR(.bss) );
 
   PROVIDE( __bss_start = __tbss_start );
@@ -237,10 +250,8 @@ SECTIONS
     PROVIDE ( end = . );
     PROVIDE ( _end = . );
     . = . + _Min_Heap_Size;
-    . = . + _Min_Stack_Size;
     . = ALIGN(8);
-  } >DTCMRAM
-
+  } >RAM
 
 
   /* Remove information from the standard libraries */
