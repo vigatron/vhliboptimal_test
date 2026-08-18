@@ -8,18 +8,15 @@ set(CMAKE_ASM_COMPILER  ${TOOLCHAIN_PATH}arm-none-eabi-gcc)
 set(CMAKE_OBJCOPY       ${TOOLCHAIN_PATH}arm-none-eabi-objcopy)
 set(CMAKE_OBJDUMP       ${TOOLCHAIN_PATH}arm-none-eabi-objdump)
 
-# Cube Folder
+#
 set(CMAKE_CXX_STANDARD 17)
 
 # Важно: отключаем проверку запуска тестового бинаря
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
-# MCU specific flags
-# set(TARGET_FLAGS "-mcpu=cortex-m7 -mfpu=fpv5-sp-d16 -mfloat-abi=hard ")
-
+#
 add_compile_options(
     -mcpu=cortex-m7
-#    -mthumb
     -mfpu=fpv5-sp-d16
     -mfloat-abi=hard
     -Wall
@@ -28,12 +25,14 @@ add_compile_options(
     -fstack-usage
 )
 
+#
 add_compile_definitions(
     STM32F7
     STM32F746xx
     USE_HAL_DRIVER
 )
 
+#
 add_compile_options(
     $<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>
     $<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions>
@@ -41,11 +40,13 @@ add_compile_options(
     $<$<COMPILE_LANGUAGE:CXX>:-fvisibility-inlines-hidden>
 )
 
+#
 set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} -x assembler-with-cpp")
 
 # 
-set(COMMON_PERF_FLAGS "-fsingle-precision-constant -fomit-frame-pointer -fno-math-errno -fno-trapping-math")
+set(COMMON_PERF_FLAGS "-fsingle-precision-constant -fomit-frame-pointer -fno-math-errno -fno-trapping-math -fno-common -fdevirtualize-at-ltrans")
 
+#
 set(CMAKE_C_FLAGS_DEBUG "-O0 -g3")
 set(CMAKE_C_FLAGS_RELEASE "-O3 -g0 ${COMMON_PERF_FLAGS}") 
 
@@ -57,8 +58,10 @@ message(STATUS "Release CXX Flags: ${CMAKE_CXX_FLAGS_RELEASE}")
 
 set(VH_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_RELEASE}")
 
+#
 set(CMAKE_EXE_LINKER_FLAGS_INIT "--specs=nano.specs")
 
+#
 add_link_options(
     -O3
     -flto
@@ -71,4 +74,5 @@ add_link_options(
     -Wl,--print-memory-usage
 )
 
+#
 set(TOOLCHAIN_LINK_LIBRARIES "m")

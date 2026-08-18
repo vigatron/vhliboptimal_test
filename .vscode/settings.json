@@ -50,31 +50,32 @@
     // // *** CMB32F407HDM
     // "cmake.configureArgs"           : [
     //     "-DBUILD_TARGET=CMB32F407HDM",
+    //     "-DCMAKE_BUILD_TYPE=Release",
     //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32f407.cmake",
     //     "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_F4_V1.28.3" ],
     // "cmake.buildDirectory"          : "${workspaceFolder}/build-CMB32F407HDM",
     // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-CMB32F407HDM/compile_commands.json",
     // // ****************************************************************************************************
 
-    // // *** STM32DISCO
-    // "cmake.configureArgs"           : [
-    //     "-DBUILD_TARGET=STM32F4DISCOVERY",
-    //     "-DCMAKE_BUILD_TYPE=Release",
-    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32f407.cmake",
-    //     "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_F4_V1.28.3" ],
-    // "cmake.buildDirectory"          : "${workspaceFolder}/build-STM32F4DISCOVERY",
-    // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-STM32F4DISCOVERY/compile_commands.json",
-    // // ****************************************************************************************************
-
-    // *** WAVESHARECORE7XXI - STM32F746IGT6
+    // *** STM32DISCO
     "cmake.configureArgs"           : [
-        "-DBUILD_TARGET=WAVESHARECORE7XXI",
+        "-DBUILD_TARGET=STM32F4DISCOVERY",
         "-DCMAKE_BUILD_TYPE=Release",
-        "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32f746.cmake",
-        "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_F7_V1.17.4" ],
-    "cmake.buildDirectory"          : "${workspaceFolder}/build-WAVESHARECORE7XXI",
-    "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-WAVESHARECORE7XXI/compile_commands.json",
+        "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32f407.cmake",
+        "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_F4_V1.28.3" ],
+    "cmake.buildDirectory"          : "${workspaceFolder}/build-STM32F4DISCOVERY",
+    "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-STM32F4DISCOVERY/compile_commands.json",
     // ****************************************************************************************************
+
+    // // *** WAVESHARECORE7XXI - STM32F746IGT6
+    // "cmake.configureArgs"           : [
+    //     "-DBUILD_TARGET=WAVESHARECORE7XXI",
+    //     "-DCMAKE_BUILD_TYPE=Release",
+    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32f746.cmake",
+    //     "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_F7_V1.17.4" ],
+    // "cmake.buildDirectory"          : "${workspaceFolder}/build-WAVESHARECORE7XXI",
+    // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-WAVESHARECORE7XXI/compile_commands.json",
+    // // ****************************************************************************************************
 
     // // *** CMB32H750HDM - STM32H750VBT6
     // "cmake.configureArgs"           : [

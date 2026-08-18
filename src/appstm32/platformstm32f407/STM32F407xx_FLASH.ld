@@ -55,17 +55,25 @@ ENTRY(Reset_Handler)
 /* Specify the memory areas */
 MEMORY
 {
-RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 128K
-CCMRAM (xrw)      : ORIGIN = 0x10000000, LENGTH = 64K
-FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 1024K
+    CCMRAM (xrw)        : ORIGIN = 0x10000000, LENGTH = 64K
+    RAM (xrw)           : ORIGIN = 0x20000000, LENGTH = 128K
+
+    FLASH (rx)          : ORIGIN = 0x08000000, LENGTH = 1024K
 }
 
 /* Highest address of the user mode stack */
 _estack = ORIGIN(RAM) + LENGTH(RAM);    /* end of RAM */
-_sstack = _estack - _Min_Stack_Size;
+
 /* Generate a link error if heap and stack don't fit into RAM */
-_Min_Heap_Size = 0x200;      /* required amount of heap  */
-_Min_Stack_Size = 0x400; /* required amount of stack */
+_Min_Heap_Size  = 0x400;     /* required amount of heap  */
+_Min_Stack_Size = 0x800;     /* required amount of stack */
+
+_sstack = _estack - _Min_Stack_Size;
+
+/* Границы Main SRAM */
+_sram_main_start = ORIGIN(RAM);
+_sram_main_size  = LENGTH(RAM);
+
 
 /* Define output sections */
 SECTIONS
@@ -241,6 +249,7 @@ SECTIONS
     __bss_end__ = _ebss;
       PROVIDE( __bss_end = .);
   } >RAM
+
   PROVIDE( __non_tls_bss_start = ADDR(.bss) );
 
   PROVIDE( __bss_start = __tbss_start );
@@ -257,7 +266,9 @@ SECTIONS
     . = ALIGN(8);
   } >RAM
 
-
+/* МАРКЕР: Конец всех занятых статически данных в Main SRAM */
+  . = ALIGN(4);
+  _sram_main_used_end = .;
 
   /* Remove information from the standard libraries */
   /DISCARD/ :
