@@ -1,24 +1,27 @@
 message(STATUS "Configuring for native build with Qt6")
 
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTORCC ON)
+# set(CMAKE_AUTOMOC ON)
+# set(CMAKE_AUTOUIC ON)
+# set(CMAKE_AUTORCC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui)
+# find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui)
 
 
 add_executable(${PROJECT_NAME}
     src/appnative/main.cpp
 
-    src/appnative/mods/args/vhargs.cpp
-    src/appnative/mods/benchmark/benchmark.cpp
-    src/appnative/mods/bmpbw.cpp
-    src/appnative/mods/iface/iface_log.cpp
-    src/appnative/mods/report/report.cpp
 
     src/globalmods/timer/vhtimerstamp.cpp
     src/globalmods/pics/srcimgdata.cpp
     src/globalmods/sysinfo/sysinfo.cpp
+
+    # src/appnative/mods/bmpbw.cpp
+    # src/appnative/mods/report/report.cpp
+    # src/appnative/mods/args/vhargs.cpp
+    # src/appnative/mods/benchmark/benchmark.cpp
+    
+    # No Qt6 Dependencies
+    src/appnative/mods/iface/iface_log.cpp
 
     src/globalmods/testcontainer/testcontainer.cpp
 )
@@ -43,9 +46,9 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    Qt6::Core 
-    Qt6::Widgets 
-    Qt6::Gui
+    # Qt6::Core 
+    # Qt6::Widgets 
+    # Qt6::Gui
     vhlib_platform
     vhlib_rle7b
     vhlib_optimal
@@ -54,6 +57,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 # Application Settings
 target_compile_definitions(${PROJECT_NAME} PRIVATE
     VHPLATFORM_PC
+    APP_VERSION_SUFFIX="${APP_VERSION_SUFFIX_STR}"
     VHLIBOPTIMAL_TEST_PASS_COUNT=16
     VHLIBOPTIMAL_TEST_FLTVAL=200
     VHLIBOPTIMAL_TEST_EMBEDDEDBMPID=1

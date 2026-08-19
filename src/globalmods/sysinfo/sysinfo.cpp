@@ -207,16 +207,23 @@ void Print_STM32_Info(void)
 
 #endif
 
+#ifdef APP_VERSION_SUFFIX
+static const char *strAPP_SUFFIX = APP_VERSION_SUFFIX;
+#else
+static const char *strAPP_SUFFIX = "";
+#endif
+
 /**
  *
  */
 static void print_versions() {
 
-    printf("%-20s v%d.%d.%d\n",
-           "VHLIB_OPTIMAL_TEST",
-           VHAPP_VHLIBOPTIMAL_TEST_VERSION_MAJOR,
-           VHAPP_VHLIBOPTIMAL_TEST_VERSION_MINOR,
-           VHAPP_VHLIBOPTIMAL_TEST_VERSION_PATCH);
+    printf("%-20s v%d.%d.%d%s\n",
+            "VHLIB_OPTIMAL_TEST",
+            VHAPP_VHLIBOPTIMAL_TEST_VERSION_MAJOR,
+            VHAPP_VHLIBOPTIMAL_TEST_VERSION_MINOR,
+            VHAPP_VHLIBOPTIMAL_TEST_VERSION_PATCH,
+            strAPP_SUFFIX );
 
     printf("%-20s %s\n",
         "VHLIB_OPTIMAL",

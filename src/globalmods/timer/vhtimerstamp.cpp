@@ -1,8 +1,4 @@
 #include "timer/vhtimerstamp.hpp"
-#include "main.h"
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <string.h>
 
 #ifdef VHPLATFORM_PC
 
@@ -34,6 +30,7 @@ long long VHTimerStamp::result_ms() {
 
 #ifdef VHPLATFORM_STM32
 
+#include "main.h"
 
 /**
  * 
