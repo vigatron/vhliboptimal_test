@@ -8,5 +8,5 @@
 	branch = main
 [submodule "src/extmods/vhlibrle7b"]
 	path = src/extmods/vhlibrle7b
-	url = git@github.com:vigatron/vhlibrle7b.git
+	url = https://github.com/vigatron/vhlibrle7b
 	branch = main
