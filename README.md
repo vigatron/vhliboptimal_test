@@ -11,6 +11,52 @@
 
 ## Test suite for shape contour detection and image outline recognition
 
+
+---
+
+
+<table>
+  <tr align="center" valign="middle">
+    <td>
+      <img src="results/testimage1r4096_out.jpg" alt="out" height="200px" width="300px"/>
+    </td>
+    <td>
+      <img src="results/testimage2r4096_out.jpg" alt="out" height="200px" width="300px"/>
+    </td>
+    <td>
+      <img src="results/testimage3r1080p_out.jpg" alt="out" height="200px" width="auto"/>
+    </td>
+    <td>
+      <img src="results/testimage4r1080p_out.jpg" alt="out" height="160px" width="auto"/>
+    </td>
+    <td>
+      <img src="results/testimage5rvga_out.jpg" alt="out" height="160px" width="auto"/>
+    </td>
+    <td>
+      <img src="results/testimage6rsvga_out.jpg" alt="out" height="160px" width="auto"/>
+    </td>
+    <td>
+      <img src="results/testimage7r720p_out.jpg" alt="out" height="160px" width="auto"/>
+    </td>
+  </tr>
+</table>
+
+
+* Example 1: Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
+
+* Example 2: Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
+
+* Example 3: Image size: 1920*1080 (1080p) Shapes
+
+* Example 4: Image size: 1920*1080 (1080p) Synthetic Dense Text Block (Extreme Stress Test)
+
+* Example 5: Image size: 640*480 (VGA) Shapes
+
+* Example 6: Image size: 800*600 (SVGA) Text
+
+* Example 7: Image size: 1280 × 720 (HD 720p) Shapes & Text
+
+
 ---
 
 #### Dependencies
@@ -95,23 +141,11 @@ Link to original jpg and resized bmp images:
 
 ---
 
-### Embedded Images Tests - 
+#### GRID Configuration / Image Tests
 
-Original            1       2       3       4       5       6       7
-
-GRID_512x512        512
-GRID_256x256        256
-GRID_128x128        128
-
-
-
-example1.vhrle > example1.bmp   512x512     > 512 (8:8 / 1:1) > 256 (16:16 / 2:2) > 128 (32:32 / 4:4)
-example2.vhrle > example1.bmp   512x512
-example3.vhrle > example1.bmp   ? x ?
-example4.vhrle > example1.bmp   ? x ?
-example5.vhrle > example1.bmp   ? x ?
-example6.vhrle > example1.bmp   ? x ?
-example7.vhrle > example1.bmp   ? x ?
+* GRID_512x512        SCALE_LV = 9 (512)
+* GRID_256x256        SCALE_LV = 8 (256)
+* GRID_128x128        SCALE_LV = 7 (128)
 
 ---
 
