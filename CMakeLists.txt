@@ -26,27 +26,22 @@ add_subdirectory(src/extmods/vhlibplatform)
 add_subdirectory(src/extmods/vhliboptimal)
 add_subdirectory(src/extmods/vhlibrle7b)
 
-# # Объединяем глобальные флаги
-# string(JOIN " " MY_ALL_FLAGS
-#     "${CMAKE_CXX_FLAGS}"
-#     "${CMAKE_CXX_FLAGS_DEBUG}"
-# )
 
-# ----------------------------------------------
-target_compile_definitions(vhlib_optimal PUBLIC
+# ------------------------------------------------------------
+# VHLIBOptimal Related
+# (объявляем общие дефайны, которые не зависят от таргета)
+# ------------------------------------------------------------
 
-    # ------------------------------------------------------------
-    # VHLIBOptimal Related
-    # ------------------------------------------------------------
+set(VHLIB_OPTIMAL_DEFS
+
     VHLIB_OPTIMAL_PREFIX="beta"
-    # VHLIB_OPTIMAL_USE_ICACHE
-    VHLIB_OPTIMAL_USE_DCACHE
+
+    VHLIB_OPTIMAL_STL=0
+    VHLIB_OPTIMAL_OBJS_MAX=800
+    VHLIB_OPTIMAL_SPNS_MAX=10000
 
     # Embedded version
     VHLIB_OPTIMAL_STL=0
-
-    VHLIB_OPTIMAL_OBJS_MAX=800
-    VHLIB_OPTIMAL_SPNS_MAX=10000
 
     # ------------------------------------------------------------
     # FIXED GRID Option
@@ -67,9 +62,43 @@ target_compile_definitions(vhlib_optimal PUBLIC
     # VHLIB_OPTIMAL_GRID_LY=7     # 128
 
     VHLIB_OPTIMAL_LOG_LEVEL=1
-
     # VHLIB_OPTIMAL_DEBUG
+
 )
+
+
+
+# 2. Наполняем специфичные для платформ флаги кэша
+if(BUILD_TARGET STREQUAL "native")
+    # Для ПК обычно эти секции не нужны, можно оставить пустым или задать свои
+
+# *** STM32F407
+elseif(BUILD_TARGET STREQUAL "CMB32F407HDM" OR BUILD_TARGET STREQUAL "STM32F4DISCOVERY")
+    list(APPEND VHLIB_OPTIMAL_DEFS 
+        # VHLIB_OPTIMAL_USE_ICACHE="ramfunc"
+        VHLIB_OPTIMAL_USE_DCACHE=".ccmram"
+    )
+
+# *** STM32F746
+elseif(BUILD_TARGET STREQUAL "WAVESHARECORE7XXI")
+    list(APPEND VHLIB_OPTIMAL_DEFS
+        # VHLIB_OPTIMAL_USE_ICACHE=".itcm_text"
+        VHLIB_OPTIMAL_USE_DCACHE=".dtcm_bss"
+    )
+
+# *** STM32H750
+elseif(BUILD_TARGET STREQUAL "CMB32H750HDM")
+    list(APPEND VHLIB_OPTIMAL_DEFS
+        # VHLIB_OPTIMAL_USE_ICACHE=".itcm_text"
+        VHLIB_OPTIMAL_USE_DCACHE=".dtcm_bss"
+    )
+else()
+    message(WARNING "Unknown BUILD_TARGET: ${BUILD_TARGET}. Cache settings not applied.")
+endif()
+
+
+# ----------------------------------------------
+target_compile_definitions(vhlib_optimal PUBLIC ${VHLIB_OPTIMAL_DEFS} )
 
 #
 if(BUILD_TARGET STREQUAL "native")
