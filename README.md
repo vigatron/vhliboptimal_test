@@ -12,8 +12,7 @@
 ## Test suite for shape contour detection and image outline recognition
 
 
----
-
+<br>
 
 <table>
   <tr align="center" valign="middle">
@@ -41,23 +40,20 @@
   </tr>
 </table>
 
+<br>
 
-* Example 1: Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
+#### Test Images Examples
 
-* Example 2: Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
-
-* Example 3: Image size: 1920*1080 (1080p) Shapes
-
-* Example 4: Image size: 1920*1080 (1080p) Synthetic Dense Text Block (Extreme Stress Test)
-
-* Example 5: Image size: 640*480 (VGA) Shapes
-
-* Example 6: Image size: 800*600 (SVGA) Text
-
-* Example 7: Image size: 1280 × 720 (HD 720p) Shapes & Text
+* **Example #1:**  Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
+* **Example #2:**  Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
+* **Example #3:**  Image size: 1920*1080 (1080p) Shapes
+* **Example #4:**  Image size: 1920*1080 (1080p) Synthetic Dense Text Block (Extreme Stress Test)
+* **Example #5:**  Image size: 640*480 (VGA) Shapes
+* **Example #6:**  Image size: 800*600 (SVGA) Text
+* **Example #7:**  Image size: 1280*720 (HD 720p) Shapes & Text
 
 
----
+<br>
 
 #### Dependencies
 
@@ -67,7 +63,6 @@ https://github.com/vigatron/vhlibplatform
 
 * vhliboptimal 0.8.0-beta (optimization in progress)  
 https://github.com/vigatron/vhliboptimal
-
 
 <br>
 
@@ -86,6 +81,8 @@ https://github.com/vigatron/vhliboptimal_test
 * Planned test: *ESP32 Xtensa LX6 @ 240Mhz*
 * Planned test: *Raspberry Pi  Model B+ V1.2 @ 700Mhz*
 
+<br>
+
 #### Benchmark Results rev 0.8.0
 
 * [Benchmark on Intel i5-1135G7 @ 2.40GHz](docs/rev0p8p0/bench_intel_i5-1135G7.md)
@@ -100,21 +97,13 @@ https://github.com/vigatron/vhliboptimal_test
 * [Benchmark on AMD FX-8300 @ 3.30Ghz](docs/bench/rev0p7p5/bench_amd_fx8300.md)
 * [Benchmark on Orange PC Plus ARM Cortex-A7](docs/bench/rev0p7p5/bench_opi_pc_plus.md)
 
+<br>
+
 #### Build & Run
 
 * [Project compilation for different target platforms](docs/build_and_run.md)
 
 <br>
-
-#### Test Images Examples
-
-* **Example #1:**  Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
-* **Example #2:**  Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
-* **Example #3:**  Image size: 1920*1080 (1080p) Shapes
-* **Example #4:**  Image size: 1920*1080 (1080p) Synthetic Dense Text Block (Extreme Stress Test)
-* **Example #5:**  Image size: 640*480 (VGA) Shapes
-* **Example #6:**  Image size: 800*600 (SVGA) Text
-* **Example #7:**  Image size: 1280*720 (HD 720p) Shapes & Text
 
 
 Link to original jpg and resized bmp images:  
