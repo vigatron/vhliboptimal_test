@@ -12,6 +12,17 @@
 ## Test suite for shape contour detection and image outline recognition
 
 
+### Test Images Examples
+
+* **Example #1:**  Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
+* **Example #2:**  Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
+* **Example #3:**  Image size: 1920*1080 (1080p) Shapes
+* **Example #4:**  Image size: 1920*1080 (1080p) Synthetic Dense Text Block (Extreme Stress Test)
+* **Example #5:**  Image size: 640*480 (VGA) Shapes
+* **Example #6:**  Image size: 800*600 (SVGA) Text
+* **Example #7:**  Image size: 1280*720 (HD 720p) Shapes & Text
+
+
 <br>
 
 <table>
@@ -42,71 +53,66 @@
 
 <br>
 
-#### Test Images Examples
-
-* **Example #1:**  Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
-* **Example #2:**  Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
-* **Example #3:**  Image size: 1920*1080 (1080p) Shapes
-* **Example #4:**  Image size: 1920*1080 (1080p) Synthetic Dense Text Block (Extreme Stress Test)
-* **Example #5:**  Image size: 640*480 (VGA) Shapes
-* **Example #6:**  Image size: 800*600 (SVGA) Text
-* **Example #7:**  Image size: 1280*720 (HD 720p) Shapes & Text
-
 
 <br>
 
-#### Dependencies
+### Tested Platforms
 
+| Platform / Board             | CPU / MCU        | Arch      | Freq      |
+|------------------------------|------------------|-----------|-----------|
+| ASUS Vivobook                | Intel i5-1135G7  | x86_64    | 2.40 GHz  |
+| AMD Based Desktop            | AMD FX-8300      | x86_64    | 3.30 GHz  |
+| Orange Pi PC Plus            | ARM Cortex-A7    | ARMv7-A   | 1.20 GHz  |
+| Raspberry Pi Model B+ V1.2   | ARM1176JZF-S     | ARMv6     | 700 MHz   |
+| CMB32F407HDMIR3              | STM32F407        | Cortex-M4 | 168 MHz   |
+| WAVESHARE CORE7XXI           | STM32F746        | Cortex-M7 | 210 MHz   |
+| CMB32H750HDMIR1              | STM32H750        | Cortex-M7 | 480 MHz   |
 
-* vhlibplatform 0.4.2  
-https://github.com/vigatron/vhlibplatform
-
-* vhliboptimal 0.8.0-beta (optimization in progress)  
-https://github.com/vigatron/vhliboptimal
-
-<br>
-
-#### Project Sorce code
-https://github.com/vigatron/vhliboptimal_test
-
-<br>
-
-#### Platforms
-* Intel i5-1135G7 @ 2.40GHz
-* AMD FX-8300 @ 3.30Ghz
-* Orange PC Plus ARM Cortex-A7 @ 1.20Ghz
-* STM32F407 @ 168Mhz
-* STM32F746 @ 210Mhz
-* STM32H750 @ 480Mhz
 * Planned test: *ESP32 Xtensa LX6 @ 240Mhz*
-* Planned test: *Raspberry Pi  Model B+ V1.2 @ 700Mhz*
 
 <br>
 
 #### Benchmark Results rev 0.8.0
 
-* [Benchmark on Intel i5-1135G7 @ 2.40GHz](docs/rev0p8p0/bench_intel_i5-1135G7.md)
-* [Benchmark on AMD FX-8300 @ 3.30Ghz](docs/rev0p8p0/bench_amd_fx8300.md)
-* [Benchmark on Orange PC Plus ARM Cortex-A7](docs/rev0p8p0/bench_opi_pc_plus.md)
-* [Benchmark on CMB32F407HDM (or STM32F4DISCO) STM32F407 @ 168Mhz](docs/rev0p8p0/bench_cmb32f407hdm.md)
-* [Benchmark on WaveShare Core7XXI STM32F746 @ 216Mhz](docs/rev0p8p0/bench_wavesharecore7xxi.md)
-* [Benchmark on CMB32H750HDM STM32H750 @ 480Mhz](docs/rev0p8p0/bench_cmb32h750hdm.md)
+* [Benchmark results on Intel i5-1135G7](docs/rev0p8p0/bench_intel_i5-1135G7.txt) |
+* [Benchmark results on AMD FX-8300](docs/rev0p8p0/bench_amd_fx8300.txt) |
+* [Benchmark results on Orange Pi PC Plus](docs/rev0p8p0/bench_opi_pc_plus.txt) |
+* [Benchmark results on Raspberry Pi Model B+ V1.2](docs/rev0p8p0/bench_rpi_modelbplus_v1p2.txt) |
+* [Benchmark results on CMB32F407HDMIR3 / STM32F4DISCO](docs/rev0p8p0/bench_cmb32f407hdmir3.txt) |
+* [Benchmark results on WaveShare Core7XXI](docs/rev0p8p0/bench_wavesharecore7xxi.txt) |
+* [Benchmark results on CMB32H750HDMIR1](docs/rev0p8p0/bench_cmb32h750hdmir1.txt) |
 
 #### Benchmarks Results rev 0.7.5
+
 * [Benchmark on Intel i5-1135G7 @ 2.40GHz](docs/bench/rev0p7p5/bench_intel_i5-1135G7.md)
 * [Benchmark on AMD FX-8300 @ 3.30Ghz](docs/bench/rev0p7p5/bench_amd_fx8300.md)
-* [Benchmark on Orange PC Plus ARM Cortex-A7](docs/bench/rev0p7p5/bench_opi_pc_plus.md)
+* [Benchmark on Orange PC Plus ARM Cortex-A7 @ 1.2GHz](docs/bench/rev0p7p5/bench_opi_pc_plus.md)
 
 <br>
 
-#### Build & Run
+### Project Sorce code
+https://github.com/vigatron/vhliboptimal_test
+
+### Dependencies
+
+* vhlibplatform 0.4.2  
+https://github.com/vigatron/vhlibplatform
+
+* vhliboptimal 0.8.0 
+https://github.com/vigatron/vhliboptimal
+
+* vhlibrle7b
+https://github.com/vigatron/vhlibrle7b
+
+
+### Build & Run
 
 * [Project compilation for different target platforms](docs/build_and_run.md)
 
 <br>
 
 
-Link to original jpg and resized bmp images:  
+### Link to resized monochrome .bmp images:  
 
 * [Test Images (#1..#7) with different shapes & text symbols](docs/srcimages.md)
 
@@ -114,7 +120,7 @@ Link to original jpg and resized bmp images:
 <br>
 
 
-#### Common camera image resolutions
+### Common camera image resolutions
 
 | Name      | Resolution      | Aspect ratio |
 |-----------|-----------------|--------------|

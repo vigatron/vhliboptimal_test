@@ -22,22 +22,22 @@
         ]
     },
 
-    // PC-Optimized
-    // ****************************************************************************************************
+    // // PC-Optimized
+    // // ****************************************************************************************************
     // "cmake.configureArgs"            : [
     //     "-DBUILD_TARGET=native",
     //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-native.cmake",
     //     "-DCMAKE_BUILD_TYPE=Release" ],
     // "cmake.buildDirectory"           : "${workspaceFolder}/build-release",
     // "C_Cpp.default.compileCommands"  : "${workspaceFolder}/build/compile_commands.json",
-    // ****************************************************************************************************
+    // // ****************************************************************************************************
 
-    // // PC-Debug
-    // // ****************************************************************************************************
-    // "cmake.configureSettings"        : { "CMAKE_TOOLCHAIN_FILE" : "${workspaceFolder}/toolchains/toolchain-dbg.cmake" },
-    // "cmake.buildDirectory"           : "${workspaceFolder}/build-dbg",
-    // "C_Cpp.default.compileCommands"  : "${workspaceFolder}/build-dbg/compile_commands.json",
-    // // ****************************************************************************************************
+    // PC-Debug
+    // ****************************************************************************************************
+    "cmake.configureSettings"        : { "CMAKE_TOOLCHAIN_FILE" : "${workspaceFolder}/toolchains/toolchain-dbg.cmake" },
+    "cmake.buildDirectory"           : "${workspaceFolder}/build-dbg",
+    "C_Cpp.default.compileCommands"  : "${workspaceFolder}/build-dbg/compile_commands.json",
+    // ****************************************************************************************************
 
     // // Orange Pi PC Plus
     // // ****************************************************************************************************
@@ -51,12 +51,12 @@
 
     // Raspberry Pi Model B+ V1.2
     // ****************************************************************************************************
-    "cmake.configureArgs"            : [
-        "-DBUILD_TARGET=native",
-        "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-rpi.cmake",
-        "-DCMAKE_BUILD_TYPE=Release" ],
-    "cmake.buildDirectory"           : "${workspaceFolder}/build-rpi",
-    "C_Cpp.default.compileCommands"  : "${workspaceFolder}/build-rpi/compile_commands.json",
+    // "cmake.configureArgs"            : [
+    //     "-DBUILD_TARGET=native",
+    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-rpi.cmake",
+    //     "-DCMAKE_BUILD_TYPE=Release" ],
+    // "cmake.buildDirectory"           : "${workspaceFolder}/build-rpi",
+    // "C_Cpp.default.compileCommands"  : "${workspaceFolder}/build-rpi/compile_commands.json",
     // ****************************************************************************************************
 
 

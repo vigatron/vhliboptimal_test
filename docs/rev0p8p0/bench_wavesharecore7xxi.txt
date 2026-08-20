@@ -1,0 +1,674 @@
+=======================================================================================
+
+*** Application Info
+Build options         -O3 -g0 -flto -fsingle-precision-constant -fomit-frame-pointer -fno-math-errno -fno-trapping-math -fno-common -fdevirtualize-at-ltrans
+VHLIB_OPTIMAL_TEST   v0.0.5
+VHLIB_OPTIMAL        v0.8.0
+VHLIB_RLE7b          v0.0.4
+
+*** System Info ***
+
+================ MCU INFO =====================
+MCU Family      : STM32F7
+Device ID       : 0x449
+Revision ID     : 0x1001
+Flash Size      : 1024 KB
+Total RAM       : 320 KB
+Main SRAM Total : 240 KB
+Main SRAM Used  : 114 KB
+Unique ID (UID) : 00210039-32365101-36393730
+===============================================
+
+---------------------------------------------------
+Application       : VHLIBOptimal_test
+Platform          : WAVESHARECORE7XXI @ 216 Mhz
+---------------------------------------------------
+Starting test ...  
+
+Checking integrity:
+memblock #1:   8242 bytes  CRC=FCA09E1A / Unpacked  32830 bytes CRC=1AC89539  status=OK
+memblock #2:  10178 bytes  CRC=B15D96D2 / Unpacked  32830 bytes CRC=5B4472FD  status=OK
+memblock #3:   5770 bytes  CRC=B832040B / Unpacked  16262 bytes CRC=7B12F0B6  status=OK
+memblock #4:  10880 bytes  CRC=64331B01 / Unpacked  16262 bytes CRC=A351D96D  status=OK
+memblock #5:   6641 bytes  CRC=CC65D9EC / Unpacked   9662 bytes CRC=C0D68D25  status=OK
+memblock #6:   5480 bytes  CRC=56617B62 / Unpacked  15662 bytes CRC=55ED4BCF  status=OK
+memblock #7:   3823 bytes  CRC=AB2F5E7F / Unpacked   7262 bytes CRC=9E8C84B0  status=OK
+
+Test image set:
+BMP (1-bit) B&W Image #1:  512 x  512 (Original 4096 x 4096)
+BMP (1-bit) B&W Image #2:  512 x  512 (Original 4096 x 4096)
+BMP (1-bit) B&W Image #3:  480 x  270 (Original 1920 x 1080)
+BMP (1-bit) B&W Image #4:  480 x  270 (Original 1920 x 1080)
+BMP (1-bit) B&W Image #5:  320 x  240 (Original  640 x  480)
+BMP (1-bit) B&W Image #6:  400 x  300 (Original  800 x  600)
+BMP (1-bit) B&W Image #7:  320 x  180 (Original 1280 x  720)
+VHLIBOptimal Initialized
+
+=== VHLibOptimal::CalcMemory() === 
+sizeof(VHOptimalFigure) = 16 bytes
+sizeof(spanword) = 4 bytes
+Grid size Max: 512 x 512
+x1 grid  = 32768 bytes
+x2 grids = 65536 bytes
+800 objects x 16 bytes = 12800 bytes
+10000 spans x 4 bytes = 40000 bytes
+
+Address SRC_GRID     : @ 0x20008000 32768 bytes
+Address DST_GRID     : @ 0x20000000 32768 bytes
+Address Objects      : @ 0x20019ea8 12800 bytes
+Address Spans        : @ 0x20010268 40000 bytes
+
+>>> VHLIBOptimal Memory Layout Total: 118336 bytes
+
+
+Welcome!
+
+>run
+
+*** Testing image #1 of 7
+Iteration  1 of 16:  Sampling: 15633 uSec  Scanning: 331201 uSec 
+Iteration  2 of 16:  Sampling: 15640 uSec  Scanning: 331179 uSec 
+Iteration  3 of 16:  Sampling: 15633 uSec  Scanning: 331176 uSec 
+Iteration  4 of 16:  Sampling: 15632 uSec  Scanning: 331169 uSec 
+Iteration  5 of 16:  Sampling: 15632 uSec  Scanning: 331191 uSec 
+Iteration  6 of 16:  Sampling: 15631 uSec  Scanning: 331191 uSec 
+Iteration  7 of 16:  Sampling: 15635 uSec  Scanning: 331168 uSec 
+Iteration  8 of 16:  Sampling: 15632 uSec  Scanning: 331167 uSec 
+Iteration  9 of 16:  Sampling: 15640 uSec  Scanning: 331177 uSec 
+Iteration 10 of 16:  Sampling: 15639 uSec  Scanning: 331200 uSec 
+Iteration 11 of 16:  Sampling: 15634 uSec  Scanning: 331177 uSec 
+Iteration 12 of 16:  Sampling: 15632 uSec  Scanning: 331170 uSec 
+Iteration 13 of 16:  Sampling: 15633 uSec  Scanning: 331170 uSec 
+Iteration 14 of 16:  Sampling: 15634 uSec  Scanning: 331204 uSec 
+Iteration 15 of 16:  Sampling: 15632 uSec  Scanning: 331181 uSec 
+Iteration 16 of 16:  Sampling: 15633 uSec  Scanning: 331176 uSec 
+Found 6 objects, Spans 1295( Rnt check 1295)
+Sampling (uSec) tsmin / tsavg / tsmax   15631 /  15634 /  15640 
+Scanning (uSec) tsmin / tsavg / tsmax  331167 / 331181 / 331204 
+Total    (uSec) tsmin / tsavg / tsmax  346798 / 346815 / 346844 
+
+*** Testing image #2 of 7
+Iteration  1 of 16:  Sampling: 16666 uSec  Scanning: 354116 uSec 
+Iteration  2 of 16:  Sampling: 16670 uSec  Scanning: 354139 uSec 
+Iteration  3 of 16:  Sampling: 16669 uSec  Scanning: 354137 uSec 
+Iteration  4 of 16:  Sampling: 16670 uSec  Scanning: 354122 uSec 
+Iteration  5 of 16:  Sampling: 16668 uSec  Scanning: 354115 uSec 
+Iteration  6 of 16:  Sampling: 16669 uSec  Scanning: 354141 uSec 
+Iteration  7 of 16:  Sampling: 16669 uSec  Scanning: 354138 uSec 
+Iteration  8 of 16:  Sampling: 16668 uSec  Scanning: 354118 uSec 
+Iteration  9 of 16:  Sampling: 16676 uSec  Scanning: 354117 uSec 
+Iteration 10 of 16:  Sampling: 16668 uSec  Scanning: 354139 uSec 
+Iteration 11 of 16:  Sampling: 16670 uSec  Scanning: 354139 uSec 
+Iteration 12 of 16:  Sampling: 16668 uSec  Scanning: 354117 uSec 
+Iteration 13 of 16:  Sampling: 16669 uSec  Scanning: 354123 uSec 
+Iteration 14 of 16:  Sampling: 16669 uSec  Scanning: 354135 uSec 
+Iteration 15 of 16:  Sampling: 16675 uSec  Scanning: 354135 uSec 
+Iteration 16 of 16:  Sampling: 16668 uSec  Scanning: 354114 uSec 
+Found 3 objects, Spans 1774( Rnt check 1774)
+Sampling (uSec) tsmin / tsavg / tsmax   16666 /  16669 /  16676 
+Scanning (uSec) tsmin / tsavg / tsmax  354114 / 354127 / 354141 
+Total    (uSec) tsmin / tsavg / tsmax  370780 / 370796 / 370817 
+
+*** Testing image #3 of 7
+Iteration  1 of 16:  Sampling:  8982 uSec  Scanning: 206850 uSec 
+Iteration  2 of 16:  Sampling:  8982 uSec  Scanning: 206849 uSec 
+Iteration  3 of 16:  Sampling:  8982 uSec  Scanning: 206862 uSec 
+Iteration  4 of 16:  Sampling:  8981 uSec  Scanning: 206871 uSec 
+Iteration  5 of 16:  Sampling:  8982 uSec  Scanning: 206861 uSec 
+Iteration  6 of 16:  Sampling:  8982 uSec  Scanning: 206851 uSec 
+Iteration  7 of 16:  Sampling:  8981 uSec  Scanning: 206843 uSec 
+Iteration  8 of 16:  Sampling:  8981 uSec  Scanning: 206852 uSec 
+Iteration  9 of 16:  Sampling:  8981 uSec  Scanning: 206850 uSec 
+Iteration 10 of 16:  Sampling:  8982 uSec  Scanning: 206868 uSec 
+Iteration 11 of 16:  Sampling:  8980 uSec  Scanning: 206867 uSec 
+Iteration 12 of 16:  Sampling:  8982 uSec  Scanning: 206862 uSec 
+Iteration 13 of 16:  Sampling:  8984 uSec  Scanning: 206850 uSec 
+Iteration 14 of 16:  Sampling:  8982 uSec  Scanning: 206843 uSec 
+Iteration 15 of 16:  Sampling:  8980 uSec  Scanning: 206849 uSec 
+Iteration 16 of 16:  Sampling:  8979 uSec  Scanning: 206848 uSec 
+Found 9 objects, Spans 857( Rnt check 857)
+Sampling (uSec) tsmin / tsavg / tsmax    8979 /   8981 /   8984 
+Scanning (uSec) tsmin / tsavg / tsmax  206843 / 206854 / 206871 
+Total    (uSec) tsmin / tsavg / tsmax  215822 / 215835 / 215855 
+
+*** Testing image #4 of 7
+Iteration  1 of 16:  Sampling: 10735 uSec  Scanning: 3653162 uSec 
+Iteration  2 of 16:  Sampling: 10730 uSec  Scanning: 3653114 uSec 
+Iteration  3 of 16:  Sampling: 10742 uSec  Scanning: 3653155 uSec 
+Iteration  4 of 16:  Sampling: 10748 uSec  Scanning: 3653123 uSec 
+Iteration  5 of 16:  Sampling: 10733 uSec  Scanning: 3653151 uSec 
+Iteration  6 of 16:  Sampling: 10737 uSec  Scanning: 3653148 uSec 
+Iteration  7 of 16:  Sampling: 10736 uSec  Scanning: 3653131 uSec 
+Iteration  8 of 16:  Sampling: 10734 uSec  Scanning: 3653163 uSec 
+Iteration  9 of 16:  Sampling: 10737 uSec  Scanning: 3653128 uSec 
+Iteration 10 of 16:  Sampling: 10731 uSec  Scanning: 3653172 uSec 
+Iteration 11 of 16:  Sampling: 10740 uSec  Scanning: 3653113 uSec 
+Iteration 12 of 16:  Sampling: 10730 uSec  Scanning: 3653155 uSec 
+Iteration 13 of 16:  Sampling: 10745 uSec  Scanning: 3653142 uSec 
+Iteration 14 of 16:  Sampling: 10737 uSec  Scanning: 3653141 uSec 
+Iteration 15 of 16:  Sampling: 10741 uSec  Scanning: 3653147 uSec 
+Iteration 16 of 16:  Sampling: 10738 uSec  Scanning: 3653133 uSec 
+Found 712 objects, Spans 8480( Rnt check 8480)
+Sampling (uSec) tsmin / tsavg / tsmax   10730 /  10737 /  10748 
+Scanning (uSec) tsmin / tsavg / tsmax  3653113 / 3653142 / 3653172 
+Total    (uSec) tsmin / tsavg / tsmax  3663843 / 3663879 / 3663920 
+
+*** Testing image #5 of 7
+Iteration  1 of 16:  Sampling:  6302 uSec  Scanning: 299017 uSec 
+Iteration  2 of 16:  Sampling:  6302 uSec  Scanning: 298998 uSec 
+Iteration  3 of 16:  Sampling:  6303 uSec  Scanning: 298990 uSec 
+Iteration  4 of 16:  Sampling:  6303 uSec  Scanning: 298996 uSec 
+Iteration  5 of 16:  Sampling:  6303 uSec  Scanning: 298994 uSec 
+Iteration  6 of 16:  Sampling:  6304 uSec  Scanning: 299016 uSec 
+Iteration  7 of 16:  Sampling:  6302 uSec  Scanning: 299000 uSec 
+Iteration  8 of 16:  Sampling:  6304 uSec  Scanning: 298988 uSec 
+Iteration  9 of 16:  Sampling:  6313 uSec  Scanning: 298989 uSec 
+Iteration 10 of 16:  Sampling:  6300 uSec  Scanning: 299000 uSec 
+Iteration 11 of 16:  Sampling:  6305 uSec  Scanning: 299018 uSec 
+Iteration 12 of 16:  Sampling:  6304 uSec  Scanning: 298996 uSec 
+Iteration 13 of 16:  Sampling:  6304 uSec  Scanning: 298994 uSec 
+Iteration 14 of 16:  Sampling:  6303 uSec  Scanning: 298990 uSec 
+Iteration 15 of 16:  Sampling:  6303 uSec  Scanning: 299008 uSec 
+Iteration 16 of 16:  Sampling:  6305 uSec  Scanning: 299017 uSec 
+Found 12 objects, Spans 1512( Rnt check 1512)
+Sampling (uSec) tsmin / tsavg / tsmax    6300 /   6303 /   6313 
+Scanning (uSec) tsmin / tsavg / tsmax  298988 / 299000 / 299018 
+Total    (uSec) tsmin / tsavg / tsmax  305288 / 305303 / 305331 
+
+*** Testing image #6 of 7
+Iteration  1 of 16:  Sampling:  7927 uSec  Scanning: 209547 uSec 
+Iteration  2 of 16:  Sampling:  7928 uSec  Scanning: 209550 uSec 
+Iteration  3 of 16:  Sampling:  7926 uSec  Scanning: 209549 uSec 
+Iteration  4 of 16:  Sampling:  7927 uSec  Scanning: 209550 uSec 
+Iteration  5 of 16:  Sampling:  7930 uSec  Scanning: 209554 uSec 
+Iteration  6 of 16:  Sampling:  7928 uSec  Scanning: 209565 uSec 
+Iteration  7 of 16:  Sampling:  7929 uSec  Scanning: 209564 uSec 
+Iteration  8 of 16:  Sampling:  7927 uSec  Scanning: 209548 uSec 
+Iteration  9 of 16:  Sampling:  7931 uSec  Scanning: 209549 uSec 
+Iteration 10 of 16:  Sampling:  7928 uSec  Scanning: 209546 uSec 
+Iteration 11 of 16:  Sampling:  7927 uSec  Scanning: 209550 uSec 
+Iteration 12 of 16:  Sampling:  7929 uSec  Scanning: 209555 uSec 
+Iteration 13 of 16:  Sampling:  7927 uSec  Scanning: 209568 uSec 
+Iteration 14 of 16:  Sampling:  7929 uSec  Scanning: 209566 uSec 
+Iteration 15 of 16:  Sampling:  7927 uSec  Scanning: 209548 uSec 
+Iteration 16 of 16:  Sampling:  7928 uSec  Scanning: 209550 uSec 
+Found 26 objects, Spans 1101( Rnt check 1101)
+Sampling (uSec) tsmin / tsavg / tsmax    7926 /   7928 /   7931 
+Scanning (uSec) tsmin / tsavg / tsmax  209546 / 209553 / 209568 
+Total    (uSec) tsmin / tsavg / tsmax  217472 / 217481 / 217499 
+
+*** Testing image #7 of 7
+Iteration  1 of 16:  Sampling:  4155 uSec  Scanning: 174244 uSec 
+Iteration  2 of 16:  Sampling:  4154 uSec  Scanning: 174242 uSec 
+Iteration  3 of 16:  Sampling:  4157 uSec  Scanning: 174235 uSec 
+Iteration  4 of 16:  Sampling:  4154 uSec  Scanning: 174260 uSec 
+Iteration  5 of 16:  Sampling:  4156 uSec  Scanning: 174260 uSec 
+Iteration  6 of 16:  Sampling:  4155 uSec  Scanning: 174253 uSec 
+Iteration  7 of 16:  Sampling:  4155 uSec  Scanning: 174234 uSec 
+Iteration  8 of 16:  Sampling:  4152 uSec  Scanning: 174243 uSec 
+Iteration  9 of 16:  Sampling:  4156 uSec  Scanning: 174242 uSec 
+Iteration 10 of 16:  Sampling:  4156 uSec  Scanning: 174233 uSec 
+Iteration 11 of 16:  Sampling:  4156 uSec  Scanning: 174241 uSec 
+Iteration 12 of 16:  Sampling:  4155 uSec  Scanning: 174247 uSec 
+Iteration 13 of 16:  Sampling:  4156 uSec  Scanning: 174258 uSec 
+Iteration 14 of 16:  Sampling:  4153 uSec  Scanning: 174260 uSec 
+Iteration 15 of 16:  Sampling:  4157 uSec  Scanning: 174241 uSec 
+Iteration 16 of 16:  Sampling:  4154 uSec  Scanning: 174241 uSec 
+Found 26 objects, Spans 1163( Rnt check 1163)
+Sampling (uSec) tsmin / tsavg / tsmax    4152 /   4155 /   4157 
+Scanning (uSec) tsmin / tsavg / tsmax  174233 / 174245 / 174260 
+Total    (uSec) tsmin / tsavg / tsmax  178385 / 178400 / 178417 
+
+All tests completed
+testContainer() Done
+>
+
+=======================================================================================
+
+*** Application Info
+Build options         -O3 -g0 -flto -fsingle-precision-constant -fomit-frame-pointer -fno-math-errno -fno-trapping-math -fno-common -fdevirtualize-at-ltrans
+VHLIB_OPTIMAL_TEST   v0.0.5
+VHLIB_OPTIMAL        v0.8.0
+VHLIB_RLE7b          v0.0.4
+
+*** System Info ***
+
+================ MCU INFO =====================
+MCU Family      : STM32F7
+Device ID       : 0x449
+Revision ID     : 0x1001
+Flash Size      : 1024 KB
+Total RAM       : 320 KB
+Main SRAM Total : 240 KB
+Main SRAM Used  : 114 KB
+Unique ID (UID) : 00210039-32365101-36393730
+===============================================
+
+---------------------------------------------------
+Application       : VHLIBOptimal_test
+Platform          : WAVESHARECORE7XXI @ 216 Mhz
+---------------------------------------------------
+Starting test ...  
+
+Checking integrity:
+memblock #1:   8242 bytes  CRC=FCA09E1A / Unpacked  32830 bytes CRC=1AC89539  status=OK
+memblock #2:  10178 bytes  CRC=B15D96D2 / Unpacked  32830 bytes CRC=5B4472FD  status=OK
+memblock #3:   5770 bytes  CRC=B832040B / Unpacked  16262 bytes CRC=7B12F0B6  status=OK
+memblock #4:  10880 bytes  CRC=64331B01 / Unpacked  16262 bytes CRC=A351D96D  status=OK
+memblock #5:   6641 bytes  CRC=CC65D9EC / Unpacked   9662 bytes CRC=C0D68D25  status=OK
+memblock #6:   5480 bytes  CRC=56617B62 / Unpacked  15662 bytes CRC=55ED4BCF  status=OK
+memblock #7:   3823 bytes  CRC=AB2F5E7F / Unpacked   7262 bytes CRC=9E8C84B0  status=OK
+
+Test image set:
+BMP (1-bit) B&W Image #1:  512 x  512 (Original 4096 x 4096)
+BMP (1-bit) B&W Image #2:  512 x  512 (Original 4096 x 4096)
+BMP (1-bit) B&W Image #3:  480 x  270 (Original 1920 x 1080)
+BMP (1-bit) B&W Image #4:  480 x  270 (Original 1920 x 1080)
+BMP (1-bit) B&W Image #5:  320 x  240 (Original  640 x  480)
+BMP (1-bit) B&W Image #6:  400 x  300 (Original  800 x  600)
+BMP (1-bit) B&W Image #7:  320 x  180 (Original 1280 x  720)
+VHLIBOptimal Initialized
+
+=== VHLibOptimal::CalcMemory() === 
+sizeof(VHOptimalFigure) = 16 bytes
+sizeof(spanword) = 4 bytes
+Grid size Max: 256 x 256
+x1 grid  = 8192 bytes
+x2 grids = 16384 bytes
+800 objects x 16 bytes = 12800 bytes
+10000 spans x 4 bytes = 40000 bytes
+
+Address SRC_GRID     : @ 0x20002000 8192 bytes
+Address DST_GRID     : @ 0x20000000 8192 bytes
+Address Objects      : @ 0x20019ea8 12800 bytes
+Address Spans        : @ 0x20010268 40000 bytes
+
+>>> VHLIBOptimal Memory Layout Total: 69184 bytes
+
+
+Welcome!
+
+>run
+
+*** Testing image #1 of 7
+Iteration  1 of 16:  Sampling: 16119 uSec  Scanning: 80754 uSec 
+Iteration  2 of 16:  Sampling: 16119 uSec  Scanning: 80761 uSec 
+Iteration  3 of 16:  Sampling: 16120 uSec  Scanning: 80756 uSec 
+Iteration  4 of 16:  Sampling: 16119 uSec  Scanning: 80764 uSec 
+Iteration  5 of 16:  Sampling: 16119 uSec  Scanning: 80753 uSec 
+Iteration  6 of 16:  Sampling: 16118 uSec  Scanning: 80755 uSec 
+Iteration  7 of 16:  Sampling: 16119 uSec  Scanning: 80767 uSec 
+Iteration  8 of 16:  Sampling: 16117 uSec  Scanning: 80768 uSec 
+Iteration  9 of 16:  Sampling: 16117 uSec  Scanning: 80767 uSec 
+Iteration 10 of 16:  Sampling: 16120 uSec  Scanning: 80767 uSec 
+Iteration 11 of 16:  Sampling: 16120 uSec  Scanning: 80767 uSec 
+Iteration 12 of 16:  Sampling: 16120 uSec  Scanning: 80762 uSec 
+Iteration 13 of 16:  Sampling: 16120 uSec  Scanning: 80755 uSec 
+Iteration 14 of 16:  Sampling: 16120 uSec  Scanning: 80754 uSec 
+Iteration 15 of 16:  Sampling: 16129 uSec  Scanning: 80754 uSec 
+Iteration 16 of 16:  Sampling: 16120 uSec  Scanning: 80754 uSec 
+Found 6 objects, Spans 649( Rnt check 649)
+Sampling (uSec) tsmin / tsavg / tsmax   16117 /  16119 /  16129 
+Scanning (uSec) tsmin / tsavg / tsmax   80753 /  80759 /  80768 
+Total    (uSec) tsmin / tsavg / tsmax   96870 /  96878 /  96897 
+
+*** Testing image #2 of 7
+Iteration  1 of 16:  Sampling: 17339 uSec  Scanning: 48843 uSec 
+Iteration  2 of 16:  Sampling: 17340 uSec  Scanning: 48834 uSec 
+Iteration  3 of 16:  Sampling: 17339 uSec  Scanning: 48835 uSec 
+Iteration  4 of 16:  Sampling: 17341 uSec  Scanning: 48834 uSec 
+Iteration  5 of 16:  Sampling: 17344 uSec  Scanning: 48843 uSec 
+Iteration  6 of 16:  Sampling: 17340 uSec  Scanning: 48835 uSec 
+Iteration  7 of 16:  Sampling: 17341 uSec  Scanning: 48834 uSec 
+Iteration  8 of 16:  Sampling: 17342 uSec  Scanning: 48834 uSec 
+Iteration  9 of 16:  Sampling: 17342 uSec  Scanning: 48854 uSec 
+Iteration 10 of 16:  Sampling: 17340 uSec  Scanning: 48843 uSec 
+Iteration 11 of 16:  Sampling: 17347 uSec  Scanning: 48835 uSec 
+Iteration 12 of 16:  Sampling: 17340 uSec  Scanning: 48853 uSec 
+Iteration 13 of 16:  Sampling: 17342 uSec  Scanning: 48847 uSec 
+Iteration 14 of 16:  Sampling: 17341 uSec  Scanning: 48843 uSec 
+Iteration 15 of 16:  Sampling: 17342 uSec  Scanning: 48848 uSec 
+Iteration 16 of 16:  Sampling: 17343 uSec  Scanning: 48847 uSec 
+Found 3 objects, Spans 880( Rnt check 880)
+Sampling (uSec) tsmin / tsavg / tsmax   17339 /  17341 /  17347 
+Scanning (uSec) tsmin / tsavg / tsmax   48834 /  48841 /  48854 
+Total    (uSec) tsmin / tsavg / tsmax   66173 /  66182 /  66201 
+
+*** Testing image #3 of 7
+Iteration  1 of 16:  Sampling:  9349 uSec  Scanning: 35332 uSec 
+Iteration  2 of 16:  Sampling:  9352 uSec  Scanning: 35331 uSec 
+Iteration  3 of 16:  Sampling:  9349 uSec  Scanning: 35332 uSec 
+Iteration  4 of 16:  Sampling:  9348 uSec  Scanning: 35332 uSec 
+Iteration  5 of 16:  Sampling:  9350 uSec  Scanning: 35331 uSec 
+Iteration  6 of 16:  Sampling:  9351 uSec  Scanning: 35339 uSec 
+Iteration  7 of 16:  Sampling:  9349 uSec  Scanning: 35333 uSec 
+Iteration  8 of 16:  Sampling:  9349 uSec  Scanning: 35333 uSec 
+Iteration  9 of 16:  Sampling:  9351 uSec  Scanning: 35331 uSec 
+Iteration 10 of 16:  Sampling:  9350 uSec  Scanning: 35331 uSec 
+Iteration 11 of 16:  Sampling:  9348 uSec  Scanning: 35333 uSec 
+Iteration 12 of 16:  Sampling:  9355 uSec  Scanning: 35331 uSec 
+Iteration 13 of 16:  Sampling:  9351 uSec  Scanning: 35332 uSec 
+Iteration 14 of 16:  Sampling:  9351 uSec  Scanning: 35332 uSec 
+Iteration 15 of 16:  Sampling:  9349 uSec  Scanning: 35332 uSec 
+Iteration 16 of 16:  Sampling:  9350 uSec  Scanning: 35331 uSec 
+Found 9 objects, Spans 431( Rnt check 431)
+Sampling (uSec) tsmin / tsavg / tsmax    9348 /   9350 /   9355 
+Scanning (uSec) tsmin / tsavg / tsmax   35331 /  35332 /  35339 
+Total    (uSec) tsmin / tsavg / tsmax   44679 /  44682 /  44694 
+
+*** Testing image #4 of 7
+Iteration  1 of 16:  Sampling: 11012 uSec  Scanning: 317122 uSec 
+Iteration  2 of 16:  Sampling: 11013 uSec  Scanning: 317146 uSec 
+Iteration  3 of 16:  Sampling: 11011 uSec  Scanning: 317123 uSec 
+Iteration  4 of 16:  Sampling: 11012 uSec  Scanning: 317119 uSec 
+Iteration  5 of 16:  Sampling: 11013 uSec  Scanning: 317111 uSec 
+Iteration  6 of 16:  Sampling: 11011 uSec  Scanning: 317126 uSec 
+Iteration  7 of 16:  Sampling: 11019 uSec  Scanning: 317146 uSec 
+Iteration  8 of 16:  Sampling: 11011 uSec  Scanning: 317105 uSec 
+Iteration  9 of 16:  Sampling: 11011 uSec  Scanning: 317110 uSec 
+Iteration 10 of 16:  Sampling: 11013 uSec  Scanning: 317110 uSec 
+Iteration 11 of 16:  Sampling: 11021 uSec  Scanning: 317142 uSec 
+Iteration 12 of 16:  Sampling: 11013 uSec  Scanning: 317118 uSec 
+Iteration 13 of 16:  Sampling: 11011 uSec  Scanning: 317107 uSec 
+Iteration 14 of 16:  Sampling: 11019 uSec  Scanning: 317104 uSec 
+Iteration 15 of 16:  Sampling: 11011 uSec  Scanning: 317125 uSec 
+Iteration 16 of 16:  Sampling: 11012 uSec  Scanning: 317141 uSec 
+Found 170 objects, Spans 2147( Rnt check 2147)
+Sampling (uSec) tsmin / tsavg / tsmax   11011 /  11013 /  11021 
+Scanning (uSec) tsmin / tsavg / tsmax  317104 / 317122 / 317146 
+Total    (uSec) tsmin / tsavg / tsmax  328115 / 328135 / 328167 
+
+*** Testing image #5 of 7
+Iteration  1 of 16:  Sampling:  6508 uSec  Scanning: 41366 uSec 
+Iteration  2 of 16:  Sampling:  6510 uSec  Scanning: 41357 uSec 
+Iteration  3 of 16:  Sampling:  6511 uSec  Scanning: 41357 uSec 
+Iteration  4 of 16:  Sampling:  6511 uSec  Scanning: 41357 uSec 
+Iteration  5 of 16:  Sampling:  6510 uSec  Scanning: 41356 uSec 
+Iteration  6 of 16:  Sampling:  6512 uSec  Scanning: 41365 uSec 
+Iteration  7 of 16:  Sampling:  6511 uSec  Scanning: 41356 uSec 
+Iteration  8 of 16:  Sampling:  6511 uSec  Scanning: 41357 uSec 
+Iteration  9 of 16:  Sampling:  6509 uSec  Scanning: 41357 uSec 
+Iteration 10 of 16:  Sampling:  6511 uSec  Scanning: 41357 uSec 
+Iteration 11 of 16:  Sampling:  6508 uSec  Scanning: 41366 uSec 
+Iteration 12 of 16:  Sampling:  6509 uSec  Scanning: 41358 uSec 
+Iteration 13 of 16:  Sampling:  6510 uSec  Scanning: 41358 uSec 
+Iteration 14 of 16:  Sampling:  6508 uSec  Scanning: 41358 uSec 
+Iteration 15 of 16:  Sampling:  6510 uSec  Scanning: 41358 uSec 
+Iteration 16 of 16:  Sampling:  6510 uSec  Scanning: 41357 uSec 
+Found 12 objects, Spans 756( Rnt check 756)
+Sampling (uSec) tsmin / tsavg / tsmax    6508 /   6509 /   6512 
+Scanning (uSec) tsmin / tsavg / tsmax   41356 /  41358 /  41366 
+Total    (uSec) tsmin / tsavg / tsmax   47864 /  47867 /  47878 
+
+*** Testing image #6 of 7
+Iteration  1 of 16:  Sampling:  8034 uSec  Scanning: 44256 uSec 
+Iteration  2 of 16:  Sampling:  8035 uSec  Scanning: 44258 uSec 
+Iteration  3 of 16:  Sampling:  8035 uSec  Scanning: 44257 uSec 
+Iteration  4 of 16:  Sampling:  8033 uSec  Scanning: 44257 uSec 
+Iteration  5 of 16:  Sampling:  8037 uSec  Scanning: 44264 uSec 
+Iteration  6 of 16:  Sampling:  8043 uSec  Scanning: 44258 uSec 
+Iteration  7 of 16:  Sampling:  8036 uSec  Scanning: 44270 uSec 
+Iteration  8 of 16:  Sampling:  8034 uSec  Scanning: 44255 uSec 
+Iteration  9 of 16:  Sampling:  8034 uSec  Scanning: 44271 uSec 
+Iteration 10 of 16:  Sampling:  8036 uSec  Scanning: 44257 uSec 
+Iteration 11 of 16:  Sampling:  8036 uSec  Scanning: 44271 uSec 
+Iteration 12 of 16:  Sampling:  8037 uSec  Scanning: 44257 uSec 
+Iteration 13 of 16:  Sampling:  8034 uSec  Scanning: 44271 uSec 
+Iteration 14 of 16:  Sampling:  8036 uSec  Scanning: 44258 uSec 
+Iteration 15 of 16:  Sampling:  8035 uSec  Scanning: 44265 uSec 
+Iteration 16 of 16:  Sampling:  8035 uSec  Scanning: 44257 uSec 
+Found 26 objects, Spans 541( Rnt check 541)
+Sampling (uSec) tsmin / tsavg / tsmax    8033 /   8035 /   8043 
+Scanning (uSec) tsmin / tsavg / tsmax   44255 /  44261 /  44271 
+Total    (uSec) tsmin / tsavg / tsmax   52288 /  52296 /  52314 
+
+*** Testing image #7 of 7
+Iteration  1 of 16:  Sampling:  4089 uSec  Scanning: 39662 uSec 
+Iteration  2 of 16:  Sampling:  4090 uSec  Scanning: 39661 uSec 
+Iteration  3 of 16:  Sampling:  4089 uSec  Scanning: 39662 uSec 
+Iteration  4 of 16:  Sampling:  4090 uSec  Scanning: 39672 uSec 
+Iteration  5 of 16:  Sampling:  4090 uSec  Scanning: 39662 uSec 
+Iteration  6 of 16:  Sampling:  4089 uSec  Scanning: 39663 uSec 
+Iteration  7 of 16:  Sampling:  4089 uSec  Scanning: 39663 uSec 
+Iteration  8 of 16:  Sampling:  4088 uSec  Scanning: 39663 uSec 
+Iteration  9 of 16:  Sampling:  4089 uSec  Scanning: 39664 uSec 
+Iteration 10 of 16:  Sampling:  4089 uSec  Scanning: 39672 uSec 
+Iteration 11 of 16:  Sampling:  4089 uSec  Scanning: 39662 uSec 
+Iteration 12 of 16:  Sampling:  4088 uSec  Scanning: 39661 uSec 
+Iteration 13 of 16:  Sampling:  4091 uSec  Scanning: 39662 uSec 
+Iteration 14 of 16:  Sampling:  4089 uSec  Scanning: 39663 uSec 
+Iteration 15 of 16:  Sampling:  4090 uSec  Scanning: 39671 uSec 
+Iteration 16 of 16:  Sampling:  4089 uSec  Scanning: 39663 uSec 
+Found 26 objects, Spans 559( Rnt check 559)
+Sampling (uSec) tsmin / tsavg / tsmax    4088 /   4089 /   4091 
+Scanning (uSec) tsmin / tsavg / tsmax   39661 /  39664 /  39672 
+Total    (uSec) tsmin / tsavg / tsmax   43749 /  43753 /  43763 
+
+All tests completed
+testContainer() Done
+>
+
+=======================================================================================
+
+*** Application Info
+Build options         -O3 -g0 -flto -fsingle-precision-constant -fomit-frame-pointer -fno-math-errno -fno-trapping-math -fno-common -fdevirtualize-at-ltrans
+VHLIB_OPTIMAL_TEST   v0.0.5
+VHLIB_OPTIMAL        v0.8.0
+VHLIB_RLE7b          v0.0.4
+
+*** System Info ***
+
+================ MCU INFO =====================
+MCU Family      : STM32F7
+Device ID       : 0x449
+Revision ID     : 0x1001
+Flash Size      : 1024 KB
+Total RAM       : 320 KB
+Main SRAM Total : 240 KB
+Main SRAM Used  : 114 KB
+Unique ID (UID) : 00210039-32365101-36393730
+===============================================
+
+---------------------------------------------------
+Application       : VHLIBOptimal_test
+Platform          : WAVESHARECORE7XXI @ 216 Mhz
+---------------------------------------------------
+Starting test ...  
+
+Checking integrity:
+memblock #1:   8242 bytes  CRC=FCA09E1A / Unpacked  32830 bytes CRC=1AC89539  status=OK
+memblock #2:  10178 bytes  CRC=B15D96D2 / Unpacked  32830 bytes CRC=5B4472FD  status=OK
+memblock #3:   5770 bytes  CRC=B832040B / Unpacked  16262 bytes CRC=7B12F0B6  status=OK
+memblock #4:  10880 bytes  CRC=64331B01 / Unpacked  16262 bytes CRC=A351D96D  status=OK
+memblock #5:   6641 bytes  CRC=CC65D9EC / Unpacked   9662 bytes CRC=C0D68D25  status=OK
+memblock #6:   5480 bytes  CRC=56617B62 / Unpacked  15662 bytes CRC=55ED4BCF  status=OK
+memblock #7:   3823 bytes  CRC=AB2F5E7F / Unpacked   7262 bytes CRC=9E8C84B0  status=OK
+
+Test image set:
+BMP (1-bit) B&W Image #1:  512 x  512 (Original 4096 x 4096)
+BMP (1-bit) B&W Image #2:  512 x  512 (Original 4096 x 4096)
+BMP (1-bit) B&W Image #3:  480 x  270 (Original 1920 x 1080)
+BMP (1-bit) B&W Image #4:  480 x  270 (Original 1920 x 1080)
+BMP (1-bit) B&W Image #5:  320 x  240 (Original  640 x  480)
+BMP (1-bit) B&W Image #6:  400 x  300 (Original  800 x  600)
+BMP (1-bit) B&W Image #7:  320 x  180 (Original 1280 x  720)
+VHLIBOptimal Initialized
+
+=== VHLibOptimal::CalcMemory() === 
+sizeof(VHOptimalFigure) = 16 bytes
+sizeof(spanword) = 4 bytes
+Grid size Max: 128 x 128
+x1 grid  = 2048 bytes
+x2 grids = 4096 bytes
+800 objects x 16 bytes = 12800 bytes
+10000 spans x 4 bytes = 40000 bytes
+
+Address SRC_GRID     : @ 0x20000000 2048 bytes
+Address DST_GRID     : @ 0x20000800 2048 bytes
+Address Objects      : @ 0x20019ea8 12800 bytes
+Address Spans        : @ 0x20010268 40000 bytes
+
+>>> VHLIBOptimal Memory Layout Total: 56896 bytes
+
+
+Welcome!
+
+>run
+
+*** Testing image #1 of 7
+Iteration  1 of 16:  Sampling: 16050 uSec  Scanning: 16187 uSec 
+Iteration  2 of 16:  Sampling: 16047 uSec  Scanning: 16098 uSec 
+Iteration  3 of 16:  Sampling: 16051 uSec  Scanning: 16099 uSec 
+Iteration  4 of 16:  Sampling: 16044 uSec  Scanning: 16098 uSec 
+Iteration  5 of 16:  Sampling: 16052 uSec  Scanning: 16099 uSec 
+Iteration  6 of 16:  Sampling: 16051 uSec  Scanning: 16098 uSec 
+Iteration  7 of 16:  Sampling: 16052 uSec  Scanning: 16107 uSec 
+Iteration  8 of 16:  Sampling: 16055 uSec  Scanning: 16100 uSec 
+Iteration  9 of 16:  Sampling: 16052 uSec  Scanning: 16099 uSec 
+Iteration 10 of 16:  Sampling: 16051 uSec  Scanning: 16099 uSec 
+Iteration 11 of 16:  Sampling: 16046 uSec  Scanning: 16098 uSec 
+Iteration 12 of 16:  Sampling: 16044 uSec  Scanning: 16099 uSec 
+Iteration 13 of 16:  Sampling: 16052 uSec  Scanning: 16099 uSec 
+Iteration 14 of 16:  Sampling: 16049 uSec  Scanning: 16100 uSec 
+Iteration 15 of 16:  Sampling: 16057 uSec  Scanning: 16107 uSec 
+Iteration 16 of 16:  Sampling: 16053 uSec  Scanning: 16099 uSec 
+Found 6 objects, Spans 326( Rnt check 326)
+Sampling (uSec) tsmin / tsavg / tsmax   16044 /  16050 /  16057 
+Scanning (uSec) tsmin / tsavg / tsmax   16098 /  16105 /  16187 
+Total    (uSec) tsmin / tsavg / tsmax   32142 /  32155 /  32244 
+
+*** Testing image #2 of 7
+Iteration  1 of 16:  Sampling: 17255 uSec  Scanning:  8936 uSec 
+Iteration  2 of 16:  Sampling: 17259 uSec  Scanning:  8924 uSec 
+Iteration  3 of 16:  Sampling: 17256 uSec  Scanning:  8925 uSec 
+Iteration  4 of 16:  Sampling: 17254 uSec  Scanning:  8926 uSec 
+Iteration  5 of 16:  Sampling: 17253 uSec  Scanning:  8925 uSec 
+Iteration  6 of 16:  Sampling: 17261 uSec  Scanning:  8924 uSec 
+Iteration  7 of 16:  Sampling: 17259 uSec  Scanning:  8926 uSec 
+Iteration  8 of 16:  Sampling: 17255 uSec  Scanning:  8924 uSec 
+Iteration  9 of 16:  Sampling: 17254 uSec  Scanning:  8925 uSec 
+Iteration 10 of 16:  Sampling: 17263 uSec  Scanning:  8933 uSec 
+Iteration 11 of 16:  Sampling: 17253 uSec  Scanning:  8925 uSec 
+Iteration 12 of 16:  Sampling: 17254 uSec  Scanning:  8924 uSec 
+Iteration 13 of 16:  Sampling: 17251 uSec  Scanning:  8924 uSec 
+Iteration 14 of 16:  Sampling: 17258 uSec  Scanning:  8933 uSec 
+Iteration 15 of 16:  Sampling: 17251 uSec  Scanning:  8925 uSec 
+Iteration 16 of 16:  Sampling: 17253 uSec  Scanning:  8925 uSec 
+Found 3 objects, Spans 436( Rnt check 436)
+Sampling (uSec) tsmin / tsavg / tsmax   17251 /  17255 /  17263 
+Scanning (uSec) tsmin / tsavg / tsmax    8924 /   8926 /   8936 
+Total    (uSec) tsmin / tsavg / tsmax   26175 /  26181 /  26199 
+
+*** Testing image #3 of 7
+Iteration  1 of 16:  Sampling:  9279 uSec  Scanning:  6960 uSec 
+Iteration  2 of 16:  Sampling:  9281 uSec  Scanning:  6947 uSec 
+Iteration  3 of 16:  Sampling:  9278 uSec  Scanning:  6927 uSec 
+Iteration  4 of 16:  Sampling:  9282 uSec  Scanning:  6928 uSec 
+Iteration  5 of 16:  Sampling:  9279 uSec  Scanning:  6927 uSec 
+Iteration  6 of 16:  Sampling:  9280 uSec  Scanning:  6928 uSec 
+Iteration  7 of 16:  Sampling:  9278 uSec  Scanning:  6926 uSec 
+Iteration  8 of 16:  Sampling:  9279 uSec  Scanning:  6928 uSec 
+Iteration  9 of 16:  Sampling:  9277 uSec  Scanning:  6927 uSec 
+Iteration 10 of 16:  Sampling:  9282 uSec  Scanning:  6928 uSec 
+Iteration 11 of 16:  Sampling:  9280 uSec  Scanning:  6926 uSec 
+Iteration 12 of 16:  Sampling:  9281 uSec  Scanning:  6927 uSec 
+Iteration 13 of 16:  Sampling:  9282 uSec  Scanning:  6928 uSec 
+Iteration 14 of 16:  Sampling:  9279 uSec  Scanning:  6929 uSec 
+Iteration 15 of 16:  Sampling:  9280 uSec  Scanning:  6926 uSec 
+Iteration 16 of 16:  Sampling:  9280 uSec  Scanning:  6927 uSec 
+Found 9 objects, Spans 222( Rnt check 222)
+Sampling (uSec) tsmin / tsavg / tsmax    9277 /   9279 /   9282 
+Scanning (uSec) tsmin / tsavg / tsmax    6926 /   6930 /   6960 
+Total    (uSec) tsmin / tsavg / tsmax   16203 /  16209 /  16242 
+
+*** Testing image #4 of 7
+Iteration  1 of 16:  Sampling: 10941 uSec  Scanning: 70198 uSec 
+Iteration  2 of 16:  Sampling: 10944 uSec  Scanning: 69399 uSec 
+Iteration  3 of 16:  Sampling: 10944 uSec  Scanning: 69405 uSec 
+Iteration  4 of 16:  Sampling: 10951 uSec  Scanning: 69402 uSec 
+Iteration  5 of 16:  Sampling: 10943 uSec  Scanning: 69399 uSec 
+Iteration  6 of 16:  Sampling: 10943 uSec  Scanning: 69401 uSec 
+Iteration  7 of 16:  Sampling: 10945 uSec  Scanning: 69408 uSec 
+Iteration  8 of 16:  Sampling: 10944 uSec  Scanning: 69405 uSec 
+Iteration  9 of 16:  Sampling: 10944 uSec  Scanning: 69400 uSec 
+Iteration 10 of 16:  Sampling: 10945 uSec  Scanning: 69417 uSec 
+Iteration 11 of 16:  Sampling: 10945 uSec  Scanning: 69415 uSec 
+Iteration 12 of 16:  Sampling: 10946 uSec  Scanning: 69407 uSec 
+Iteration 13 of 16:  Sampling: 10953 uSec  Scanning: 69400 uSec 
+Iteration 14 of 16:  Sampling: 10949 uSec  Scanning: 69409 uSec 
+Iteration 15 of 16:  Sampling: 10942 uSec  Scanning: 69418 uSec 
+Iteration 16 of 16:  Sampling: 10945 uSec  Scanning: 69408 uSec 
+Found 12 objects, Spans 540( Rnt check 540)
+Sampling (uSec) tsmin / tsavg / tsmax   10941 /  10945 /  10953 
+Scanning (uSec) tsmin / tsavg / tsmax   69399 /  69455 /  70198 
+Total    (uSec) tsmin / tsavg / tsmax   80340 /  80400 /  81151 
+
+*** Testing image #5 of 7
+Iteration  1 of 16:  Sampling:  6441 uSec  Scanning: 10739 uSec 
+Iteration  2 of 16:  Sampling:  6441 uSec  Scanning: 10715 uSec 
+Iteration  3 of 16:  Sampling:  6444 uSec  Scanning: 10714 uSec 
+Iteration  4 of 16:  Sampling:  6445 uSec  Scanning: 10714 uSec 
+Iteration  5 of 16:  Sampling:  6444 uSec  Scanning: 10714 uSec 
+Iteration  6 of 16:  Sampling:  6444 uSec  Scanning: 10715 uSec 
+Iteration  7 of 16:  Sampling:  6441 uSec  Scanning: 10715 uSec 
+Iteration  8 of 16:  Sampling:  6444 uSec  Scanning: 10715 uSec 
+Iteration  9 of 16:  Sampling:  6444 uSec  Scanning: 10714 uSec 
+Iteration 10 of 16:  Sampling:  6445 uSec  Scanning: 10716 uSec 
+Iteration 11 of 16:  Sampling:  6443 uSec  Scanning: 10715 uSec 
+Iteration 12 of 16:  Sampling:  6443 uSec  Scanning: 10715 uSec 
+Iteration 13 of 16:  Sampling:  6450 uSec  Scanning: 10714 uSec 
+Iteration 14 of 16:  Sampling:  6446 uSec  Scanning: 10715 uSec 
+Iteration 15 of 16:  Sampling:  6446 uSec  Scanning: 10716 uSec 
+Iteration 16 of 16:  Sampling:  6443 uSec  Scanning: 10716 uSec 
+Found 12 objects, Spans 378( Rnt check 378)
+Sampling (uSec) tsmin / tsavg / tsmax    6441 /   6444 /   6450 
+Scanning (uSec) tsmin / tsavg / tsmax   10714 /  10716 /  10739 
+Total    (uSec) tsmin / tsavg / tsmax   17155 /  17160 /  17189 
+
+*** Testing image #6 of 7
+Iteration  1 of 16:  Sampling:  7971 uSec  Scanning:  9494 uSec 
+Iteration  2 of 16:  Sampling:  7970 uSec  Scanning:  9470 uSec 
+Iteration  3 of 16:  Sampling:  7971 uSec  Scanning:  9485 uSec 
+Iteration  4 of 16:  Sampling:  7968 uSec  Scanning:  9469 uSec 
+Iteration  5 of 16:  Sampling:  7969 uSec  Scanning:  9486 uSec 
+Iteration  6 of 16:  Sampling:  7971 uSec  Scanning:  9469 uSec 
+Iteration  7 of 16:  Sampling:  7969 uSec  Scanning:  9486 uSec 
+Iteration  8 of 16:  Sampling:  7969 uSec  Scanning:  9470 uSec 
+Iteration  9 of 16:  Sampling:  7969 uSec  Scanning:  9480 uSec 
+Iteration 10 of 16:  Sampling:  7971 uSec  Scanning:  9469 uSec 
+Iteration 11 of 16:  Sampling:  7976 uSec  Scanning:  9486 uSec 
+Iteration 12 of 16:  Sampling:  7971 uSec  Scanning:  9470 uSec 
+Iteration 13 of 16:  Sampling:  7969 uSec  Scanning:  9474 uSec 
+Iteration 14 of 16:  Sampling:  7970 uSec  Scanning:  9470 uSec 
+Iteration 15 of 16:  Sampling:  7971 uSec  Scanning:  9481 uSec 
+Iteration 16 of 16:  Sampling:  7969 uSec  Scanning:  9470 uSec 
+Found 25 objects, Spans 250( Rnt check 250)
+Sampling (uSec) tsmin / tsavg / tsmax    7968 /   7970 /   7976 
+Scanning (uSec) tsmin / tsavg / tsmax    9469 /   9476 /   9494 
+Total    (uSec) tsmin / tsavg / tsmax   17437 /  17446 /  17470 
+
+*** Testing image #7 of 7
+Iteration  1 of 16:  Sampling:  4032 uSec  Scanning: 10257 uSec 
+Iteration  2 of 16:  Sampling:  4023 uSec  Scanning: 10259 uSec 
+Iteration  3 of 16:  Sampling:  4032 uSec  Scanning: 10249 uSec 
+Iteration  4 of 16:  Sampling:  4032 uSec  Scanning: 10251 uSec 
+Iteration  5 of 16:  Sampling:  4033 uSec  Scanning: 10252 uSec 
+Iteration  6 of 16:  Sampling:  4027 uSec  Scanning: 10249 uSec 
+Iteration  7 of 16:  Sampling:  4033 uSec  Scanning: 10252 uSec 
+Iteration  8 of 16:  Sampling:  4034 uSec  Scanning: 10252 uSec 
+Iteration  9 of 16:  Sampling:  4032 uSec  Scanning: 10249 uSec 
+Iteration 10 of 16:  Sampling:  4031 uSec  Scanning: 10259 uSec 
+Iteration 11 of 16:  Sampling:  4033 uSec  Scanning: 10252 uSec 
+Iteration 12 of 16:  Sampling:  4032 uSec  Scanning: 10249 uSec 
+Iteration 13 of 16:  Sampling:  4033 uSec  Scanning: 10251 uSec 
+Iteration 14 of 16:  Sampling:  4033 uSec  Scanning: 10251 uSec 
+Iteration 15 of 16:  Sampling:  4029 uSec  Scanning: 10248 uSec 
+Iteration 16 of 16:  Sampling:  4033 uSec  Scanning: 10251 uSec 
+Found 26 objects, Spans 292( Rnt check 292)
+Sampling (uSec) tsmin / tsavg / tsmax    4023 /   4031 /   4034 
+Scanning (uSec) tsmin / tsavg / tsmax   10248 /  10251 /  10259 
+Total    (uSec) tsmin / tsavg / tsmax   14271 /  14282 /  14293 
+
+All tests completed
+testContainer() Done
+>
