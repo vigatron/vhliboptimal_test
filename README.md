@@ -150,10 +150,10 @@ https://github.com/vigatron/vhliboptimal_test
 * vhlibplatform 0.4.2  
 https://github.com/vigatron/vhlibplatform
 
-* vhliboptimal 0.8.0 
+* vhliboptimal 0.8.0  
 https://github.com/vigatron/vhliboptimal
 
-* vhlibrle7b
+* vhlibrle7b  
 https://github.com/vigatron/vhlibrle7b
 
 
