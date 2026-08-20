@@ -117,7 +117,7 @@
 | Orange Pi PC Plus            | ARM Cortex-A7    | ARMv7-A   | 1.20 GHz  |
 | Raspberry Pi Model B+ V1.2   | ARM1176JZF-S     | ARMv6     | 700 MHz   |
 | CMB32F407HDMIR3              | STM32F407        | Cortex-M4 | 168 MHz   |
-| WAVESHARE CORE7XXI           | STM32F746        | Cortex-M7 | 210 MHz   |
+| WAVESHARE CORE7XXI           | STM32F746        | Cortex-M7 | 216 MHz   |
 | CMB32H750HDMIR1              | STM32H750        | Cortex-M7 | 480 MHz   |
 
 * Planned test: *ESP32 Xtensa LX6 @ 240Mhz*
@@ -142,7 +142,7 @@
 
 <br>
 
-### Project Sorce code
+### Project Source code
 https://github.com/vigatron/vhliboptimal_test
 
 ### Dependencies

@@ -14,6 +14,7 @@ set(CMAKE_CXX_STANDARD 17)
 # Важно: отключаем проверку запуска тестового бинаря
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
+#
 set(VHBASE_ARM_OPTIONS
     -mcpu=cortex-m4
     -mfpu=fpv4-sp-d16
@@ -55,6 +56,7 @@ set(CMAKE_C_FLAGS_RELEASE "-O3 -g0 ${COMMON_PERF_FLAGS}" )
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0 -flto ${COMMON_PERF_FLAGS} -fdevirtualize-at-ltrans")
 
+#
 string(REPLACE ";" " " VHBASE_ARM_OPTIONS_CLEAN "${VHBASE_ARM_OPTIONS}")
 set(VH_CXX_FLAGS "${VHBASE_ARM_OPTIONS_CLEAN} ${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_RELEASE}")
 
