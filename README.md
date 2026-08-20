@@ -4,7 +4,7 @@
 ![CMake](https://img.shields.io/badge/Build-CMake-1f4f9c.svg)
 ![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Cross--platform-lightgrey.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Version](https://img.shields.io/badge/Version-0.0.5--beta-orange.svg)
+![Version](https://img.shields.io/badge/Version-0.0.5-orange.svg)
 ![Author](https://img.shields.io/badge/Author-V01G04A81-brown.svg)
 
 
@@ -14,44 +14,96 @@
 
 ### Test Images Examples
 
-* **Example #1:**  Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
-* **Example #2:**  Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
-* **Example #3:**  Image size: 1920*1080 (1080p) Shapes
-* **Example #4:**  Image size: 1920*1080 (1080p) Synthetic Dense Text Block (Extreme Stress Test)
-* **Example #5:**  Image size: 640*480 (VGA) Shapes
-* **Example #6:**  Image size: 800*600 (SVGA) Text
-* **Example #7:**  Image size: 1280*720 (HD 720p) Shapes & Text
-
-
-<br>
+##### Example 1: Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
 
 <table>
-  <tr align="center" valign="middle">
-    <td>
-      <img src="results/testimage1r4096_out.jpg" alt="out" height="200px" width="300px"/>
+  <tr>
+    <td align="center">
+      <img src="data/original/testimage1r4096.jpg" alt="src" style="width:100%; height:auto;"/>
     </td>
-    <td>
-      <img src="results/testimage2r4096_out.jpg" alt="out" height="200px" width="300px"/>
-    </td>
-    <td>
-      <img src="results/testimage3r1080p_out.jpg" alt="out" height="200px" width="auto"/>
-    </td>
-    <td>
-      <img src="results/testimage4r1080p_out.jpg" alt="out" height="160px" width="auto"/>
-    </td>
-    <td>
-      <img src="results/testimage5rvga_out.jpg" alt="out" height="160px" width="auto"/>
-    </td>
-    <td>
-      <img src="results/testimage6rsvga_out.jpg" alt="out" height="160px" width="auto"/>
-    </td>
-    <td>
-      <img src="results/testimage7r720p_out.jpg" alt="out" height="160px" width="auto"/>
+    <td align="center">
+      <img src="results/testimage1r4096_out.jpg" alt="out" style="width:100%; height:auto;"/>
     </td>
   </tr>
 </table>
 
-<br>
+##### Example 2: Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="data/original/testimage2r4096.jpg" alt="src" style="width:100%; height:auto;"/>
+    </td>
+    <td align="center">
+      <img src="results/testimage2r4096_out.jpg" alt="out" style="width:100%; height:auto;"/>
+    </td>
+  </tr>
+</table>
+
+##### Example 3: Image size: 1920*1080 (1080p) Shapes
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="data/original/testimage3r1080p.jpg" alt="src" style="width:100%; height:auto;"/>
+    </td>
+    <td align="center">
+      <img src="results/testimage3r1080p_out.jpg" alt="out" style="width:100%; height:auto;"/>
+    </td>
+  </tr>
+</table>
+
+##### Example 4: Image size: 1920*1080 (1080p) Synthetic Dense Text Block (Extreme Stress Test)
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="data/original/testimage4r1080p.jpg" alt="src" style="width:100%; height:auto;"/>
+    </td>
+    <td align="center">
+      <img src="results/testimage4r1080p_out.jpg" alt="out" style="width:100%; height:auto;"/>
+    </td>
+  </tr>
+</table>
+
+##### Example 5: Image size: 640*480 (VGA) Shapes
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="data/original/testimage5rvga.jpg" alt="src" style="width:100%; height:auto;"/>
+    </td>
+    <td align="center">
+      <img src="results/testimage5rvga_out.jpg" alt="out" style="width:100%; height:auto;"/>
+    </td>
+  </tr>
+</table>
+
+##### Example 6: Image size: 800*600 (SVGA) Text
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="data/original/testimage6rsvga.jpg" alt="src" style="width:100%; height:auto;"/>
+    </td>
+    <td align="center">
+      <img src="results/testimage6rsvga_out.jpg" alt="out" style="width:100%; height:auto;"/>
+    </td>
+  </tr>
+</table>
+
+##### Example 7: Image size: 1280 × 720 (HD 720p) Shapes & Text
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="data/original/testimage7r720p.jpg" alt="src" style="width:100%; height:auto;"/>
+    </td>
+    <td align="center">
+      <img src="results/testimage7r720p_out.jpg" alt="out" style="width:100%; height:auto;"/>
+    </td>
+  </tr>
+</table>
 
 
 <br>
@@ -74,13 +126,13 @@
 
 #### Benchmark Results rev 0.8.0
 
-* [Benchmark results on Intel i5-1135G7](docs/rev0p8p0/bench_intel_i5-1135G7.txt) |
-* [Benchmark results on AMD FX-8300](docs/rev0p8p0/bench_amd_fx8300.txt) |
-* [Benchmark results on Orange Pi PC Plus](docs/rev0p8p0/bench_opi_pc_plus.txt) |
-* [Benchmark results on Raspberry Pi Model B+ V1.2](docs/rev0p8p0/bench_rpi_modelbplus_v1p2.txt) |
-* [Benchmark results on CMB32F407HDMIR3 / STM32F4DISCO](docs/rev0p8p0/bench_cmb32f407hdmir3.txt) |
-* [Benchmark results on WaveShare Core7XXI](docs/rev0p8p0/bench_wavesharecore7xxi.txt) |
-* [Benchmark results on CMB32H750HDMIR1](docs/rev0p8p0/bench_cmb32h750hdmir1.txt) |
+* [Benchmark results on Intel i5-1135G7](docs/rev0p8p0/bench_intel_i5-1135G7.txt)
+* [Benchmark results on AMD FX-8300](docs/rev0p8p0/bench_amd_fx8300.txt)
+* [Benchmark results on Orange Pi PC Plus](docs/rev0p8p0/bench_opi_pc_plus.txt)
+* [Benchmark results on Raspberry Pi Model B+ V1.2](docs/rev0p8p0/bench_rpi_modelbplus_v1p2.txt)
+* [Benchmark results on CMB32F407HDMIR3](docs/rev0p8p0/bench_cmb32f407hdmir3.txt)
+* [Benchmark results on WaveShare Core7XXI](docs/rev0p8p0/bench_wavesharecore7xxi.txt)
+* [Benchmark results on CMB32H750HDMIR1](docs/rev0p8p0/bench_cmb32h750hdmir1.txt)
 
 #### Benchmarks Results rev 0.7.5
 
