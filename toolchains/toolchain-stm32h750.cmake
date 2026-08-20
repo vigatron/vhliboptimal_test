@@ -15,7 +15,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
 #
-add_compile_options(
+set(VHBASE_ARM_OPTIONS
     -mcpu=cortex-m7
     -mfpu=fpv5-d16
     -mfloat-abi=hard
@@ -24,6 +24,9 @@ add_compile_options(
     -ffunction-sections
     -fstack-usage
 )
+
+#
+add_compile_options(${VHBASE_ARM_OPTIONS})
 
 #
 add_compile_definitions(
@@ -53,10 +56,15 @@ set(CMAKE_C_FLAGS_RELEASE "-O3 -g0 ${COMMON_PERF_FLAGS}")
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0 -flto ${COMMON_PERF_FLAGS} -fdevirtualize-at-ltrans")
 
+#
+string(REPLACE ";" " " VHBASE_ARM_OPTIONS_CLEAN "${VHBASE_ARM_OPTIONS}")
+set(VH_CXX_FLAGS "${VHBASE_ARM_OPTIONS_CLEAN} ${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_RELEASE}")
+
+#
 message(STATUS "Base CXX Flags: ${CMAKE_CXX_FLAGS}")
 message(STATUS "Release CXX Flags: ${CMAKE_CXX_FLAGS_RELEASE}")
+message(STATUS "VH_CXX_FLAGS: ${VH_CXX_FLAGS}")
 
-set(VH_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_RELEASE}")
 
 #
 set(CMAKE_EXE_LINKER_FLAGS_INIT "--specs=nano.specs")
