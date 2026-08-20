@@ -5,4 +5,8 @@
 [submodule "src/extmods/vhliboptimal"]
 	path = src/extmods/vhliboptimal
 	url = https://github.com/vigatron/vhliboptimal
+	branch = rev0p8p0beta
+[submodule "src/extmods/vhlibrle7b"]
+	path = src/extmods/vhlibrle7b
+	url = https://github.com/vigatron/vhlibrle7b
 	branch = main

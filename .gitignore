@@ -1,5 +1,5 @@
 build*
 tmp
-tests/*.jpg
-tests/*.md
+# tests/*.jpg
+# tests/*.md
 
