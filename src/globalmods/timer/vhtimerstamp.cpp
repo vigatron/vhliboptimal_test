@@ -26,6 +26,25 @@ long long VHTimerStamp::result_ms() {
 
 #endif
 
+#ifdef VHPLATFORM_ESP32
+
+void VHTimerStamp::start() {
+    _start = esp_timer_get_time();
+}
+
+void VHTimerStamp::stop() {
+    _stop = esp_timer_get_time();
+}
+
+uint32_t VHTimerStamp::result_us() {
+    return _stop - _start;
+}
+
+uint32_t VHTimerStamp::result_ms() {
+    return (_stop - _start) / 1000;
+}
+
+#endif
 
 
 #ifdef VHPLATFORM_STM32

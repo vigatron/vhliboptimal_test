@@ -1,24 +1,25 @@
 {
-    // "configurations": [],
-
+    "configurations": [],
     // "configurations": [
     //     {
-    //     "name": "Linux",
-    //     "compileCommands": "${workspaceFolder}/build/compile_commands.json"
+    //         "name": "ESP32",
+    //         "includePath": [
+    //             "/home/stepper2/VHSourcesCPP/remote/vhliboptimal_test/**",
+    //             "/home/stepper2/VHSourcesCPP/remote/vhliboptimal_test/src/appesp32/build/extmods/vhliboptimal/generated"
+    //         ],
+    //         "defines": [],
+    //         "cStandard": "c11",
+    //         "cppStandard": "c++17",
+    //         "intelliSenseMode": "gcc-x64",
+    //         "compileCommands": [
+    //             "/home/stepper2/VHSourcesCPP/remote/vhliboptimal_test/src/appesp32/build/compile_commands.json"
+    //         ],
+    //         "mergeConfigurations": false,
+    //         "recursiveIncludes": {},
+    //         "browse": {
+    //             "limitSymbolsToIncludedHeaders": true
+    //         }
     //     }
     // ],
-
-    "configurations": [
-        {
-            "name": "Linux",
-            "includePath": [
-                "${workspaceFolder}/**"
-            ],
-            "defines": [],
-            "cStandard": "c17",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "linux-clang-x64"
-        }
-    ],
     "version": 4
 }

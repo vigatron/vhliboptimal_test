@@ -22,22 +22,22 @@
         ]
     },
 
-    // // PC-Optimized
-    // // ****************************************************************************************************
-    // "cmake.configureArgs"            : [
-    //     "-DBUILD_TARGET=native",
-    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-native.cmake",
-    //     "-DCMAKE_BUILD_TYPE=Release" ],
-    // "cmake.buildDirectory"           : "${workspaceFolder}/build-release",
-    // "C_Cpp.default.compileCommands"  : "${workspaceFolder}/build/compile_commands.json",
-    // // ****************************************************************************************************
+    // PC-Optimized
+    // ****************************************************************************************************
+    "cmake.configureArgs"            : [
+        "-DBUILD_TARGET=native",
+        "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-native.cmake",
+        "-DCMAKE_BUILD_TYPE=Release" ],
+    "cmake.buildDirectory"           : "${workspaceFolder}/build-release",
+    "C_Cpp.default.compileCommands"  : "${workspaceFolder}/build/compile_commands.json",
+    // ****************************************************************************************************
 
-    // PC-Debug
-    // ****************************************************************************************************
-    "cmake.configureSettings"        : { "CMAKE_TOOLCHAIN_FILE" : "${workspaceFolder}/toolchains/toolchain-dbg.cmake" },
-    "cmake.buildDirectory"           : "${workspaceFolder}/build-dbg",
-    "C_Cpp.default.compileCommands"  : "${workspaceFolder}/build-dbg/compile_commands.json",
-    // ****************************************************************************************************
+    // // PC-Debug
+    // // ****************************************************************************************************
+    // "cmake.configureSettings"        : { "CMAKE_TOOLCHAIN_FILE" : "${workspaceFolder}/toolchains/toolchain-dbg.cmake" },
+    // "cmake.buildDirectory"           : "${workspaceFolder}/build-dbg",
+    // "C_Cpp.default.compileCommands"  : "${workspaceFolder}/build-dbg/compile_commands.json",
+    // // ****************************************************************************************************
 
     // // Orange Pi PC Plus
     // // ****************************************************************************************************
@@ -99,6 +99,16 @@
     // "cmake.buildDirectory"          : "${workspaceFolder}/build-CMB32H750HDM",
     // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-CMB32H750HDM/compile_commands.json",
     // // ****************************************************************************************************
+
+    // // ESP-32
+    // // ****************************************************************************************************
+    // "C_Cpp.default.compileCommands"         : "${workspaceFolder}/src/appesp32/build/compile_commands.json",
+    // "C_Cpp.default.defines"                 : [
+    //     "VHPLATFORM_ESP32"
+    // ],
+    // "C_Cpp.default.configurationProvider"   : "ms-vscode.cmake-tools",
+    // "C_Cpp.default.compileCommands"         : "${workspaceFolder}/build-CMB32H750HDM/compile_commands.json",
+
 
     // ****************************************************************************************************
     // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-intel.cmake" },
