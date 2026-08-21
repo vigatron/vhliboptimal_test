@@ -172,7 +172,7 @@ https://github.com/vigatron/vhlibrle7b
 
 ### Build & Run
 
-* [Project compilation for different target platforms](docs/build_and_run.md)
+* [Project compilation for different target platforms](docs/appbuild_and_run.md)
 
 
 #### Link to resized monochrome .bmp images:  
