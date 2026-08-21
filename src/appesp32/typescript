@@ -1,0 +1,456 @@
+Script started on 2026-08-21 13:25:38+03:00 [COMMAND="idf.py -p /dev/ttyUSB0 monitor" TERM="xterm-256color" TTY="/dev/pts/2" COLUMNS="211" LINES="54"]
+Executing action: monitor
+Running idf_monitor in directory /home/stepper2/VHSourcesCPP/remote/vhliboptimal_test/src/appesp32
+Executing "/home/stepper2/.espressif/python_env/idf5.2_py3.12_env/bin/python /home/stepper2/esp/esp-idf/tools/idf_monitor.py -p /dev/ttyUSB0 -b 115200 --toolchain-prefix xtensa-esp32-elf- --target esp32 --revision 0 /home/stepper2/VHSourcesCPP/remote/vhliboptimal_test/src/appesp32/build/appesp32.elf -m '/home/stepper2/.espressif/python_env/idf5.2_py3.12_env/bin/python' '/home/stepper2/esp/esp-idf/tools/idf.py' '-p' '/dev/ttyUSB0'"...
+[0;33m--- esp-idf-monitor 1.9.0 on /dev/ttyUSB0 115200[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H[0m
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7172
+load:0x40078000,len:15540
+load:0x40080400,len:4
+[0m--- 0x40080400: [0;33m_init[0m[0m at [0;32m??[0m[0m:[1;31m?[0m
+ho 8 tail 4 room 4
+load:0x40080404,len:3904
+entry 0x40080640
+[0;32mI (30) boot: ESP-IDF v5.2.2 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Aug 21 2026 12:41:16[0m
+[0;32mI (31) boot: Multicore bootloader[0m
+[0;32mI (35) boot: chip revision: v1.0[0m
+[0;32mI (38) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (43) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (48) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (52) boot: Enabling RNG early entropy source...[0m
+[0;32mI (58) boot: Partition Table:[0m
+[0;32mI (61) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (68) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (76) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (83) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (91) boot: End of partition table[0m
+[0;32mI (95) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=16498h ( 91288) map[0m
+[0;32mI (122) esp_image: segment 1: paddr=000264c0 vaddr=3ffb0000 size=020e4h (  8420) load[0m
+[0;32mI (125) esp_image: segment 2: paddr=000285ac vaddr=40080000 size=07a6ch ( 31340) load[0m
+[0;32mI (136) esp_image: segment 3: paddr=00030020 vaddr=400d0020 size=14d74h ( 85364) map[0m
+[0;32mI (154) esp_image: segment 4: paddr=00044d9c vaddr=40087a6c size=04238h ( 16952) load[0m
+[0;32mI (165) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (165) boot: Disabling RNG early entropy source...[0m
+[0;32mI (177) cpu_start: Multicore app[0m
+[0;32mI (185) cpu_start: Pro cpu start user code[0m
+[0;32mI (185) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (186) cpu_start: Application information:[0m
+[0;32mI (188) cpu_start: Project name:     appesp32[0m
+[0;32mI (194) cpu_start: App version:      662ac7c-dirty[0m
+[0;32mI (199) cpu_start: Compile time:     Aug 21 2026 12:41:16[0m
+[0;32mI (205) cpu_start: ELF file SHA256:  67f4f9f77...[0m
+[0;32mI (210) cpu_start: ESP-IDF:          v5.2.2[0m
+[0;32mI (215) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (220) cpu_start: Max chip rev:     v3.99 [0m
+[0;32mI (225) cpu_start: Chip rev:         v1.0[0m
+[0;32mI (230) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (237) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (243) heap_init: At 3FFC8CC0 len 00017340 (92 KiB): DRAM[0m
+[0;32mI (249) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (255) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (262) heap_init: At 4008BCA4 len 0001435C (80 KiB): IRAM[0m
+[0;32mI (269) spi_flash: detected chip: generic[0m
+[0;32mI (273) spi_flash: flash io: dio[0m
+[0;32mI (277) main_task: Started on CPU0[0m
+[0;32mI (287) main_task: Calling app_main()[0m
+This is esp32 chip with 2 CPU core(s), WiFi/BTBLE, silicon revision v1.0, 4MB external flash
+Minimum free heap size: 210336 bytes
+
+*** Application Info
+Build options        -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy -O3
+VHLIB_OPTIMAL_TEST   v0.0.5
+VHLIB_OPTIMAL        v0.8.0
+VHLIB_RLE7b          v0.0.4
+
+*** System Info ***
+Starting test ...  
+
+Checking integrity:
+memblock #1:   8242 bytes  CRC=FCA09E1A / Unpacked  32830 bytes CRC=1AC89539  status=OK
+memblock #2:  10178 bytes  CRC=B15D96D2 / Unpacked  32830 bytes CRC=5B4472FD  status=OK
+memblock #3:   5770 bytes  CRC=B832040B / Unpacked  16262 bytes CRC=7B12F0B6  status=OK
+memblock #4:  10880 bytes  CRC=64331B01 / Unpacked  16262 bytes CRC=A351D96D  status=OK
+memblock #5:   6641 bytes  CRC=CC65D9EC / Unpacked   9662 bytes CRC=C0D68D25  status=OK
+memblock #6:   5480 bytes  CRC=56617B62 / Unpacked  15662 bytes CRC=55ED4BCF  status=OK
+memblock #7:   3823 bytes  CRC=AB2F5E7F / Unpacked   7262 bytes CRC=9E8C84B0  status=OK
+
+Test image set:
+BMP (1-bit) B&W Image #1:  512 x  512 (Original 4096 x 4096)
+BMP (1-bit) B&W Image #2:  512 x  512 (Original 4096 x 4096)
+BMP (1-bit) B&W Image #3:  480 x  270 (Original 1920 x 1080)
+BMP (1-bit) B&W Image #4:  480 x  270 (Original 1920 x 1080)
+BMP (1-bit) B&W Image #5:  320 x  240 (Original  640 x  480)
+BMP (1-bit) B&W Image #6:  400 x  300 (Original  800 x  600)
+BMP (1-bit) B&W Image #7:  320 x  180 (Original 1280 x  720)
+gridw=128 gridh=128 LX=7 LY=7
+VHLIBOptimal Initialized
+
+=== VHLibOptimal::CalcMemory() === 
+sizeof(VHOptimalFigure) = 16 bytes
+sizeof(spanword) = 4 bytes
+Grid size Max: 128 x 128
+x1 grid  = 2048 bytes
+x2 grids = 4096 bytes
+800 objects x 16 bytes = 12800 bytes
+10000 spans x 4 bytes = 40000 bytes
+
+Address SRC_GRID     : @ 0x3ffbfe7c 2048 bytes
+Address DST_GRID     : @ 0x3ffbf67c 2048 bytes
+Address Objects      : @ 0x3ffbc47c 12800 bytes
+Address Spans        : @ 0x3ffb283c 40000 bytes
+
+>>> VHLIBOptimal Memory Layout Total: 56896 bytes
+
+
+*** Testing image #1 of 7
+Iteration  1 of 16:  Sampling: 37374 uSec  Scanning: 35087 uSec 
+Iteration  2 of 16:  Sampling: 36189 uSec  Scanning: 34920 uSec 
+Iteration  3 of 16:  Sampling: 36193 uSec  Scanning: 34925 uSec 
+Iteration  4 of 16:  Sampling: 36185 uSec  Scanning: 34925 uSec 
+Iteration  5 of 16:  Sampling: 36188 uSec  Scanning: 34925 uSec 
+Iteration  6 of 16:  Sampling: 36185 uSec  Scanning: 34924 uSec 
+Iteration  7 of 16:  Sampling: 36194 uSec  Scanning: 34919 uSec 
+Iteration  8 of 16:  Sampling: 36189 uSec  Scanning: 34919 uSec 
+Iteration  9 of 16:  Sampling: 36194 uSec  Scanning: 34919 uSec 
+Iteration 10 of 16:  Sampling: 36189 uSec  Scanning: 34919 uSec 
+Iteration 11 of 16:  Sampling: 36189 uSec  Scanning: 34925 uSec 
+Iteration 12 of 16:  Sampling: 36184 uSec  Scanning: 34925 uSec 
+Iteration 13 of 16:  Sampling: 36184 uSec  Scanning: 34925 uSec 
+Iteration 14 of 16:  Sampling: 36184 uSec  Scanning: 34925 uSec 
+Iteration 15 of 16:  Sampling: 36189 uSec  Scanning: 34919 uSec 
+Iteration 16 of 16:  Sampling: 36189 uSec  Scanning: 34920 uSec 
+Found 6 objects, Spans 326( Rnt check 326)
+Sampling (uSec) tsmin / tsavg / tsmax   36184 /  36262 /  37374 
+Scanning (uSec) tsmin / tsavg / tsmax   34919 /  34932 /  35087 
+Total    (uSec) tsmin / tsavg / tsmax   71103 /  71194 /  72461 
+
+*** Testing image #2 of 7
+Iteration  1 of 16:  Sampling: 41634 uSec  Scanning: 17624 uSec 
+Iteration  2 of 16:  Sampling: 40483 uSec  Scanning: 17632 uSec 
+Iteration  3 of 16:  Sampling: 40482 uSec  Scanning: 17624 uSec 
+Iteration  4 of 16:  Sampling: 40467 uSec  Scanning: 17626 uSec 
+Iteration  5 of 16:  Sampling: 40487 uSec  Scanning: 17619 uSec 
+Iteration  6 of 16:  Sampling: 40466 uSec  Scanning: 17632 uSec 
+Iteration  7 of 16:  Sampling: 40482 uSec  Scanning: 17624 uSec 
+Iteration  8 of 16:  Sampling: 40467 uSec  Scanning: 17631 uSec 
+Iteration  9 of 16:  Sampling: 40482 uSec  Scanning: 17623 uSec 
+[0;33m
+--- Logging is enabled into file log.appesp32.20260821132541.txt[0m
+Iteration 10 of 16:  Sampling: 40459 uSec  Scanning: 17627 uSec 
+Iteration 11 of 16:  Sampling: 40475 uSec  Scanning: 17619 uSec 
+Iteration 12 of 16:  Sampling: 40459 uSec  Scanning: 17632 uSec 
+Iteration 13 of 16:  Sampling: 40471 uSec  Scanning: 17624 uSec 
+Iteration 14 of 16:  Sampling: 40459 uSec  Scanning: 17632 uSec 
+Iteration 15 of 16:  Sampling: 40470 uSec  Scanning: 17623 uSec 
+Iteration 16 of 16:  Sampling: 40460 uSec  Scanning: 17626 uSec 
+Found 3 objects, Spans 436( Rnt check 436)
+Sampling (uSec) tsmin / tsavg / tsmax   40459 /  40543 /  41634 
+Scanning (uSec) tsmin / tsavg / tsmax   17619 /  17626 /  17632 
+Total    (uSec) tsmin / tsavg / tsmax   58078 /  58169 /  59266 
+
+*** Testing image #3 of 7
+Iteration  1 of 16:  Sampling: 22941 uSec  Scanning: 16687 uSec 
+Iteration  2 of 16:  Sampling: 22199 uSec  Scanning: 16688 uSec 
+Iteration  3 of 16:  Sampling: 22199 uSec  Scanning: 16688 uSec 
+Iteration  4 of 16:  Sampling: 22199 uSec  Scanning: 16688 uSec 
+Iteration  5 of 16:  Sampling: 22199 uSec  Scanning: 16688 uSec 
+Iteration  6 of 16:  Sampling: 22199 uSec  Scanning: 16688 uSec 
+Iteration  7 of 16:  Sampling: 22199 uSec  Scanning: 16688 uSec 
+Iteration  8 of 16:  Sampling: 22199 uSec  Scanning: 16688 uSec 
+Iteration  9 of 16:  Sampling: 22198 uSec  Scanning: 16683 uSec 
+Iteration 10 of 16:  Sampling: 22204 uSec  Scanning: 16683 uSec 
+Iteration 11 of 16:  Sampling: 22204 uSec  Scanning: 16683 uSec 
+Iteration 12 of 16:  Sampling: 22203 uSec  Scanning: 16683 uSec 
+Iteration 13 of 16:  Sampling: 22199 uSec  Scanning: 16688 uSec 
+Iteration 14 of 16:  Sampling: 22199 uSec  Scanning: 16688 uSec 
+Iteration 15 of 16:  Sampling: 22198 uSec  Scanning: 16688 uSec 
+Iteration 16 of 16:  Sampling: 22198 uSec  Scanning: 16688 uSec 
+Found 9 objects, Spans 222( Rnt check 222)
+Sampling (uSec) tsmin / tsavg / tsmax   22198 /  22246 /  22941 
+Scanning (uSec) tsmin / tsavg / tsmax   16683 /  16686 /  16688 
+Total    (uSec) tsmin / tsavg / tsmax   38881 /  38932 /  39629 
+
+*** Testing image #4 of 7
+Iteration  1 of 16:  Sampling: 26742 uSec  Scanning: 120227 uSec 
+Iteration  2 of 16:  Sampling: 25429 uSec  Scanning: 120195 uSec 
+Iteration  3 of 16:  Sampling: 25439 uSec  Scanning: 120187 uSec 
+Iteration  4 of 16:  Sampling: 25424 uSec  Scanning: 120195 uSec 
+Iteration  5 of 16:  Sampling: 25444 uSec  Scanning: 120188 uSec 
+Iteration  6 of 16:  Sampling: 25424 uSec  Scanning: 120196 uSec 
+Iteration  7 of 16:  Sampling: 25445 uSec  Scanning: 120188 uSec 
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7172
+load:0x40078000,len:15540
+load:0x40080400,len:4
+[0m--- 0x40080400: [0;33m_init[0m[0m at [0;32m??[0m[0m:[1;31m?[0m
+ho 8 tail 4 room 4
+load:0x40080404,len:3904
+entry 0x40080640
+[0;32mI (30) boot: ESP-IDF v5.2.2 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Aug 21 2026 12:41:16[0m
+[0;32mI (31) boot: Multicore bootloader[0m
+[0;32mI (35) boot: chip revision: v1.0[0m
+[0;32mI (38) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (43) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (48) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (52) boot: Enabling RNG early entropy source...[0m
+[0;32mI (58) boot: Partition Table:[0m
+[0;32mI (61) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (68) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (76) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (83) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (91) boot: End of partition table[0m
+[0;32mI (95) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=16498h ( 91288) map[0m
+[0;32mI (122) esp_image: segment 1: paddr=000264c0 vaddr=3ffb0000 size=020e4h (  8420) load[0m
+[0;32mI (125) esp_image: segment 2: paddr=000285ac vaddr=40080000 size=07a6ch ( 31340) load[0m
+[0;32mI (136) esp_image: segment 3: paddr=00030020 vaddr=400d0020 size=14d74h ( 85364) map[0m
+[0;32mI (154) esp_image: segment 4: paddr=00044d9c vaddr=40087a6c size=04238h ( 16952) load[0m
+[0;32mI (165) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (165) boot: Disabling RNG early entropy source...[0m
+[0;32mI (177) cpu_start: Multicore app[0m
+[0;32mI (185) cpu_start: Pro cpu start user code[0m
+[0;32mI (185) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (186) cpu_start: Application information:[0m
+[0;32mI (189) cpu_start: Project name:     appesp32[0m
+[0;32mI (194) cpu_start: App version:      662ac7c-dirty[0m
+[0;32mI (199) cpu_start: Compile time:     Aug 21 2026 12:41:16[0m
+[0;32mI (205) cpu_start: ELF file SHA256:  67f4f9f77...[0m
+[0;32mI (210) cpu_start: ESP-IDF:          v5.2.2[0m
+[0;32mI (215) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (220) cpu_start: Max chip rev:     v3.99 [0m
+[0;32mI (225) cpu_start: Chip rev:         v1.0[0m
+[0;32mI (230) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (237) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (243) heap_init: At 3FFC8CC0 len 00017340 (92 KiB): DRAM[0m
+[0;32mI (249) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (255) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (262) heap_init: At 4008BCA4 len 0001435C (80 KiB): IRAM[0m
+[0;32mI (269) spi_flash: detected chip: generic[0m
+[0;32mI (273) spi_flash: flash io: dio[0m
+[0;32mI (277) main_task: Started on CPU0[0m
+[0;32mI (287) main_task: Calling app_main()[0m
+This is esp32 chip with 2 CPU core(s), WiFi/BTBLE, silicon revision v1.0, 4MB external flash
+Minimum free heap size: 210336 bytes
+
+*** Application Info
+Build options        -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy -O3
+VHLIB_OPTIMAL_TEST   v0.0.5
+VHLIB_OPTIMAL        v0.8.0
+VHLIB_RLE7b          v0.0.4
+
+*** System Info ***
+Starting test ...  
+
+Checking integrity:
+memblock #1:   8242 bytes  CRC=FCA09E1A / Unpacked  32830 bytes CRC=1AC89539  status=OK
+memblock #2:  10178 bytes  CRC=B15D96D2 / Unpacked  32830 bytes CRC=5B4472FD  status=OK
+memblock #3:   5770 bytes  CRC=B832040B / Unpacked  16262 bytes CRC=7B12F0B6  status=OK
+memblock #4:  10880 bytes  CRC=64331B01 / Unpacked  16262 bytes CRC=A351D96D  status=OK
+memblock #5:   6641 bytes  CRC=CC65D9EC / Unpacked   9662 bytes CRC=C0D68D25  status=OK
+memblock #6:   5480 bytes  CRC=56617B62 / Unpacked  15662 bytes CRC=55ED4BCF  status=OK
+memblock #7:   3823 bytes  CRC=AB2F5E7F / Unpacked   7262 bytes CRC=9E8C84B0  status=OK
+
+Test image set:
+BMP (1-bit) B&W Image #1:  512 x  512 (Original 4096 x 4096)
+BMP (1-bit) B&W Image #2:  512 x  512 (Original 4096 x 4096)
+BMP (1-bit) B&W Image #3:  480 x  270 (Original 1920 x 1080)
+BMP (1-bit) B&W Image #4:  480 x  270 (Original 1920 x 1080)
+BMP (1-bit) B&W Image #5:  320 x  240 (Original  640 x  480)
+BMP (1-bit) B&W Image #6:  400 x  300 (Original  800 x  600)
+BMP (1-bit) B&W Image #7:  320 x  180 (Original 1280 x  720)
+gridw=128 gridh=128 LX=7 LY=7
+VHLIBOptimal Initialized
+
+=== VHLibOptimal::CalcMemory() === 
+sizeof(VHOptimalFigure) = 16 bytes
+sizeof(spanword) = 4 bytes
+Grid size Max: 128 x 128
+x1 grid  = 2048 bytes
+x2 grids = 4096 bytes
+800 objects x 16 bytes = 12800 bytes
+10000 spans x 4 bytes = 40000 bytes
+
+Address SRC_GRID     : @ 0x3ffbfe7c 2048 bytes
+Address DST_GRID     : @ 0x3ffbf67c 2048 bytes
+Address Objects      : @ 0x3ffbc47c 12800 bytes
+Address Spans        : @ 0x3ffb283c 40000 bytes
+
+>>> VHLIBOptimal Memory Layout Total: 56896 bytes
+
+
+*** Testing image #1 of 7
+Iteration  1 of 16:  Sampling: 37374 uSec  Scanning: 35087 uSec 
+Iteration  2 of 16:  Sampling: 36189 uSec  Scanning: 34920 uSec 
+Iteration  3 of 16:  Sampling: 36193 uSec  Scanning: 34925 uSec 
+Iteration  4 of 16:  Sampling: 36184 uSec  Scanning: 34925 uSec 
+Iteration  5 of 16:  Sampling: 36188 uSec  Scanning: 34925 uSec 
+Iteration  6 of 16:  Sampling: 36184 uSec  Scanning: 34925 uSec 
+Iteration  7 of 16:  Sampling: 36193 uSec  Scanning: 34920 uSec 
+Iteration  8 of 16:  Sampling: 36189 uSec  Scanning: 34919 uSec 
+Iteration  9 of 16:  Sampling: 36194 uSec  Scanning: 34919 uSec 
+Iteration 10 of 16:  Sampling: 36189 uSec  Scanning: 34920 uSec 
+Iteration 11 of 16:  Sampling: 36189 uSec  Scanning: 34925 uSec 
+Iteration 12 of 16:  Sampling: 36185 uSec  Scanning: 34925 uSec 
+Iteration 13 of 16:  Sampling: 36184 uSec  Scanning: 34925 uSec 
+Iteration 14 of 16:  Sampling: 36185 uSec  Scanning: 34925 uSec 
+Iteration 15 of 16:  Sampling: 36189 uSec  Scanning: 34920 uSec 
+Iteration 16 of 16:  Sampling: 36190 uSec  Scanning: 34920 uSec 
+Found 6 objects, Spans 326( Rnt check 326)
+Sampling (uSec) tsmin / tsavg / tsmax   36184 /  36262 /  37374 
+Scanning (uSec) tsmin / tsavg / tsmax   34919 /  34932 /  35087 
+Total    (uSec) tsmin / tsavg / tsmax   71103 /  71194 /  72461 
+
+*** Testing image #2 of 7
+Iteration  1 of 16:  Sampling: 41634 uSec  Scanning: 17624 uSec 
+Iteration  2 of 16:  Sampling: 40483 uSec  Scanning: 17632 uSec 
+Iteration  3 of 16:  Sampling: 40482 uSec  Scanning: 17624 uSec 
+Iteration  4 of 16:  Sampling: 40467 uSec  Scanning: 17626 uSec 
+Iteration  5 of 16:  Sampling: 40487 uSec  Scanning: 17619 uSec 
+Iteration  6 of 16:  Sampling: 40467 uSec  Scanning: 17632 uSec 
+Iteration  7 of 16:  Sampling: 40482 uSec  Scanning: 17624 uSec 
+Iteration  8 of 16:  Sampling: 40467 uSec  Scanning: 17632 uSec 
+Iteration  9 of 16:  Sampling: 40483 uSec  Scanning: 17623 uSec 
+Iteration 10 of 16:  Sampling: 40459 uSec  Scanning: 17627 uSec 
+Iteration 11 of 16:  Sampling: 40475 uSec  Scanning: 17618 uSec 
+Iteration 12 of 16:  Sampling: 40459 uSec  Scanning: 17632 uSec 
+Iteration 13 of 16:  Sampling: 40470 uSec  Scanning: 17624 uSec 
+Iteration 14 of 16:  Sampling: 40459 uSec  Scanning: 17631 uSec 
+Iteration 15 of 16:  Sampling: 40470 uSec  Scanning: 17624 uSec 
+Iteration 16 of 16:  Sampling: 40459 uSec  Scanning: 17627 uSec 
+Found 3 objects, Spans 436( Rnt check 436)
+Sampling (uSec) tsmin / tsavg / tsmax   40459 /  40543 /  41634 
+Scanning (uSec) tsmin / tsavg / tsmax   17618 /  17626 /  17632 
+Total    (uSec) tsmin / tsavg / tsmax   58077 /  58169 /  59266 
+
+*** Testing image #3 of 7
+Iteration  1 of 16:  Sampling: 22941 uSec  Scanning: 16686 uSec 
+Iteration  2 of 16:  Sampling: 22199 uSec  Scanning: 16688 uSec 
+Iteration  3 of 16:  Sampling: 22199 uSec  Scanning: 16688 uSec 
+Iteration  4 of 16:  Sampling: 22198 uSec  Scanning: 16688 uSec 
+Iteration  5 of 16:  Sampling: 22198 uSec  Scanning: 16688 uSec 
+Iteration  6 of 16:  Sampling: 22198 uSec  Scanning: 16688 uSec 
+Iteration  7 of 16:  Sampling: 22198 uSec  Scanning: 16688 uSec 
+Iteration  8 of 16:  Sampling: 22198 uSec  Scanning: 16688 uSec 
+Iteration  9 of 16:  Sampling: 22199 uSec  Scanning: 16683 uSec 
+Iteration 10 of 16:  Sampling: 22204 uSec  Scanning: 16683 uSec 
+Iteration 11 of 16:  Sampling: 22203 uSec  Scanning: 16683 uSec 
+Iteration 12 of 16:  Sampling: 22204 uSec  Scanning: 16683 uSec 
+Iteration 13 of 16:  Sampling: 22199 uSec  Scanning: 16688 uSec 
+Iteration 14 of 16:  Sampling: 22198 uSec  Scanning: 16688 uSec 
+Iteration 15 of 16:  Sampling: 22199 uSec  Scanning: 16688 uSec 
+Iteration 16 of 16:  Sampling: 22199 uSec  Scanning: 16688 uSec 
+Found 9 objects, Spans 222( Rnt check 222)
+Sampling (uSec) tsmin / tsavg / tsmax   22198 /  22245 /  22941 
+Scanning (uSec) tsmin / tsavg / tsmax   16683 /  16686 /  16688 
+Total    (uSec) tsmin / tsavg / tsmax   38881 /  38931 /  39629 
+
+*** Testing image #4 of 7
+Iteration  1 of 16:  Sampling: 26741 uSec  Scanning: 120228 uSec 
+Iteration  2 of 16:  Sampling: 25429 uSec  Scanning: 120196 uSec 
+Iteration  3 of 16:  Sampling: 25439 uSec  Scanning: 120188 uSec 
+Iteration  4 of 16:  Sampling: 25424 uSec  Scanning: 120196 uSec 
+Iteration  5 of 16:  Sampling: 25445 uSec  Scanning: 120187 uSec 
+Iteration  6 of 16:  Sampling: 25424 uSec  Scanning: 120196 uSec 
+Iteration  7 of 16:  Sampling: 25444 uSec  Scanning: 120188 uSec 
+Iteration  8 of 16:  Sampling: 25424 uSec  Scanning: 120196 uSec 
+Iteration  9 of 16:  Sampling: 25444 uSec  Scanning: 120189 uSec 
+Iteration 10 of 16:  Sampling: 25421 uSec  Scanning: 120196 uSec 
+Iteration 11 of 16:  Sampling: 25428 uSec  Scanning: 120188 uSec 
+Iteration 12 of 16:  Sampling: 25420 uSec  Scanning: 120196 uSec 
+Iteration 13 of 16:  Sampling: 25428 uSec  Scanning: 120187 uSec 
+Iteration 14 of 16:  Sampling: 25421 uSec  Scanning: 120195 uSec 
+Iteration 15 of 16:  Sampling: 25432 uSec  Scanning: 120187 uSec 
+Iteration 16 of 16:  Sampling: 25416 uSec  Scanning: 120196 uSec 
+Found 12 objects, Spans 540( Rnt check 540)
+Sampling (uSec) tsmin / tsavg / tsmax   25416 /  25511 /  26741 
+Scanning (uSec) tsmin / tsavg / tsmax  120187 / 120194 / 120228 
+Total    (uSec) tsmin / tsavg / tsmax  145603 / 145705 / 146969 
+
+*** Testing image #5 of 7
+Iteration  1 of 16:  Sampling: 15919 uSec  Scanning: 27145 uSec 
+Iteration  2 of 16:  Sampling: 15091 uSec  Scanning: 27016 uSec 
+Iteration  3 of 16:  Sampling: 15086 uSec  Scanning: 27016 uSec 
+Iteration  4 of 16:  Sampling: 15086 uSec  Scanning: 27015 uSec 
+Iteration  5 of 16:  Sampling: 15085 uSec  Scanning: 27016 uSec 
+Iteration  6 of 16:  Sampling: 15090 uSec  Scanning: 27011 uSec 
+Iteration  7 of 16:  Sampling: 15091 uSec  Scanning: 27016 uSec 
+Iteration  8 of 16:  Sampling: 15086 uSec  Scanning: 27016 uSec 
+Iteration  9 of 16:  Sampling: 15086 uSec  Scanning: 27015 uSec 
+Iteration 10 of 16:  Sampling: 15091 uSec  Scanning: 27011 uSec 
+Iteration 11 of 16:  Sampling: 15091 uSec  Scanning: 27016 uSec 
+Iteration 12 of 16:  Sampling: 15085 uSec  Scanning: 27016 uSec 
+Iteration 13 of 16:  Sampling: 15086 uSec  Scanning: 27016 uSec 
+Iteration 14 of 16:  Sampling: 15086 uSec  Scanning: 27015 uSec 
+Iteration 15 of 16:  Sampling: 15091 uSec  Scanning: 27011 uSec 
+Iteration 16 of 16:  Sampling: 15091 uSec  Scanning: 27016 uSec 
+Found 12 objects, Spans 378( Rnt check 378)
+Sampling (uSec) tsmin / tsavg / tsmax   15085 /  15140 /  15919 
+Scanning (uSec) tsmin / tsavg / tsmax   27011 /  27022 /  27145 
+Total    (uSec) tsmin / tsavg / tsmax   42096 /  42162 /  43064 
+
+*** Testing image #6 of 7
+Iteration  1 of 16:  Sampling: 18429 uSec  Scanning: 26755 uSec 
+Iteration  2 of 16:  Sampling: 17826 uSec  Scanning: 26758 uSec 
+Iteration  3 of 16:  Sampling: 17821 uSec  Scanning: 26755 uSec 
+Iteration  4 of 16:  Sampling: 17809 uSec  Scanning: 26757 uSec 
+Iteration  5 of 16:  Sampling: 17821 uSec  Scanning: 26755 uSec 
+Iteration  6 of 16:  Sampling: 17810 uSec  Scanning: 26758 uSec 
+Iteration  7 of 16:  Sampling: 17821 uSec  Scanning: 26755 uSec 
+Iteration  8 of 16:  Sampling: 17810 uSec  Scanning: 26758 uSec 
+Iteration  9 of 16:  Sampling: 17821 uSec  Scanning: 26755 uSec 
+Iteration 10 of 16:  Sampling: 17801 uSec  Scanning: 26758 uSec 
+Iteration 11 of 16:  Sampling: 17813 uSec  Scanning: 26755 uSec 
+Iteration 12 of 16:  Sampling: 17802 uSec  Scanning: 26758 uSec 
+Iteration 13 of 16:  Sampling: 17813 uSec  Scanning: 26756 uSec 
+Iteration 14 of 16:  Sampling: 17802 uSec  Scanning: 26757 uSec 
+Iteration 15 of 16:  Sampling: 17814 uSec  Scanning: 26755 uSec 
+Iteration 16 of 16:  Sampling: 17797 uSec  Scanning: 26764 uSec 
+Found 25 objects, Spans 250( Rnt check 250)
+Sampling (uSec) tsmin / tsavg / tsmax   17797 /  17850 /  18429 
+Scanning (uSec) tsmin / tsavg / tsmax   26755 /  26756 /  26764 
+Total    (uSec) tsmin / tsavg / tsmax   44552 /  44606 /  45193 
+
+*** Testing image #7 of 7
+Iteration  1 of 16:  Sampling:  9366 uSec  Scanning: 29939 uSec 
+Iteration  2 of 16:  Sampling:  8909 uSec  Scanning: 29938 uSec 
+Iteration  3 of 16:  Sampling:  8909 uSec  Scanning: 29939 uSec 
+Iteration  4 of 16:  Sampling:  8909 uSec  Scanning: 29939 uSec 
+Iteration  5 of 16:  Sampling:  8908 uSec  Scanning: 29938 uSec 
+Iteration  6 of 16:  Sampling:  8904 uSec  Scanning: 29938 uSec 
+Iteration  7 of 16:  Sampling:  8908 uSec  Scanning: 29938 uSec 
+Iteration  8 of 16:  Sampling:  8908 uSec  Scanning: 29938 uSec 
+Iteration  9 of 16:  Sampling:  8908 uSec  Scanning: 29939 uSec 
+Iteration 10 of 16:  Sampling:  8908 uSec  Scanning: 29938 uSec 
+Iteration 11 of 16:  Sampling:  8908 uSec  Scanning: 29939 uSec 
+Iteration 12 of 16:  Sampling:  8908 uSec  Scanning: 29939 uSec 
+Iteration 13 of 16:  Sampling:  8909 uSec  Scanning: 29939 uSec 
+Iteration 14 of 16:  Sampling:  8909 uSec  Scanning: 29939 uSec 
+Iteration 15 of 16:  Sampling:  8909 uSec  Scanning: 29939 uSec 
+Iteration 16 of 16:  Sampling:  8904 uSec  Scanning: 29938 uSec 
+Found 26 objects, Spans 292( Rnt check 292)
+Sampling (uSec) tsmin / tsavg / tsmax    8904 /   8936 /   9366 
+Scanning (uSec) tsmin / tsavg / tsmax   29938 /  29938 /  29939 
+Total    (uSec) tsmin / tsavg / tsmax   38842 /  38874 /  39305 
+
+All tests completed
+Done
+Restarting in 10 seconds...
+Restarting in 9 seconds...
+Restarting in 8 seconds...
+[0;33m
+--- Logging is disabled and file log.appesp32.20260821132541.txt has been closed[0m
+[0m
+
+Script done on 2026-08-21 13:25:55+03:00 [COMMAND_EXIT_CODE="0"]

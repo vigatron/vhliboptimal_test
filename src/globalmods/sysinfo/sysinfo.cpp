@@ -257,6 +257,9 @@ void VHSYSInfo::SysInfo()
     Print_STM32_Info();
     Print_App_Info();
     #endif
-    
+
+    #ifdef VHPLATFORM_ESP32
+    #endif
+
 }
 

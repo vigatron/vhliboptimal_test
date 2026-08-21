@@ -1,0 +1,70 @@
+.
+├── appesp32
+│   └── main
+├── appnative
+│   └── mods
+│       ├── args
+│       ├── benchmark
+│       ├── iface
+│       ├── imgdst
+│       ├── imgsrc
+│       └── report
+├── appstm32
+│   ├── classes
+│   ├── platformstm32f407
+│   │   ├── Core
+│   │   │   ├── Inc
+│   │   │   └── Src
+│   │   └── USB_DEVICE
+│   │       ├── App
+│   │       └── Target
+│   ├── platformstm32f746
+│   │   ├── Core
+│   │   │   ├── Inc
+│   │   │   └── Src
+│   │   └── USB_DEVICE
+│   │       ├── App
+│   │       └── Target
+│   └── platformstm32h750
+│       ├── Core
+│       │   ├── Inc
+│       │   └── Src
+│       └── USB_DEVICE
+│           ├── App
+│           └── Target
+├── extmods
+│   ├── vhliboptimal
+│   │   ├── docs
+│   │   │   ├── ocr3
+│   │   │   ├── ocr4
+│   │   │   ├── roadsign1
+│   │   │   └── roadsign2
+│   │   ├── src
+│   │   │   ├── bitfield
+│   │   │   ├── bits
+│   │   │   ├── cfg
+│   │   │   ├── cmatrix
+│   │   │   ├── figure
+│   │   │   ├── log
+│   │   │   ├── mem
+│   │   │   ├── platform
+│   │   │   ├── spans
+│   │   │   ├── structs
+│   │   │   ├── sys
+│   │   │   └── usr
+│   │   └── vhpytools -> /home/stepper2/VHSourcesPy/tools/vhpytools/
+│   ├── vhlibplatform
+│   │   ├── docs
+│   │   ├── src
+│   │   └── vhpytools -> /home/stepper2/VHSourcesPy/tools/vhpytools/
+│   └── vhlibrle7b
+│       ├── docs
+│       ├── src
+│       └── vhpytools -> /home/stepper2/VHSourcesPy/tools/vhpytools/
+└── globalmods
+    ├── pics
+    ├── sysinfo
+    ├── testcontainer
+    └── timer
+
+68 directories

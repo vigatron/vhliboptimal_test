@@ -110,17 +110,26 @@
 
 ### Tested Platforms
 
-| Platform / Board             | CPU / MCU        | Arch      | Freq      |
-|------------------------------|------------------|-----------|-----------|
-| ASUS Vivobook                | Intel i5-1135G7  | x86_64    | 2.40 GHz  |
-| AMD Based Desktop            | AMD FX-8300      | x86_64    | 3.30 GHz  |
-| Orange Pi PC Plus            | ARM Cortex-A7    | ARMv7-A   | 1.20 GHz  |
-| Raspberry Pi Model B+ V1.2   | ARM1176JZF-S     | ARMv6     | 700 MHz   |
-| CMB32F407HDMIR3              | STM32F407        | Cortex-M4 | 168 MHz   |
-| WAVESHARE CORE7XXI           | STM32F746        | Cortex-M7 | 216 MHz   |
-| CMB32H750HDMIR1              | STM32H750        | Cortex-M7 | 480 MHz   |
+| Platform / Board             | CPU / MCU        | Arch       | Freq      |
+|------------------------------|------------------|------------|-----------|
+| ASUS Vivobook                | Intel i5-1135G7  | x86_64     | 2.40 GHz  |
+| AMD Based Desktop            | AMD FX-8300      | x86_64     | 3.30 GHz  |
+| Orange Pi PC Plus            | ARM Cortex-A7    | ARMv7-A    | 1.20 GHz  |
+| Raspberry Pi Model B+ V1.2   | ARM1176JZF-S     | ARMv6      | 700 MHz   |
+| CMB32F407HDMIR3              | STM32F407        | Cortex-M4  | 168 MHz   |
+| WAVESHARE CORE7XXI           | STM32F746        | Cortex-M7  | 216 MHz   |
+| CMB32H750HDMIR1              | STM32H750        | Cortex-M7  | 480 MHz   |
+| ESP32-WROOM-32D              | ESP32-D0WD       | Xtensa LX6 | 240 Mhz   |
 
-* Planned test: *ESP32 Xtensa LX6 @ 240Mhz*
+<br>
+
+* STM32F407: Optimized for CCMRAM only (BitFields); IRAM not used / not optimized.
+
+* STM32F746: Optimized for DTCMRAM only (BitFields); ITCMRAM optimization pending in this revision.
+
+* STM32H750: Optimized for DTCMRAM only (BitFields); ITCMRAM optimization pending in this revision.
+
+* ESP32-D0WD: Optimized for DRAM only (BitFields); IRAM optimization pending in this revision.
 
 <br>
 
@@ -133,6 +142,8 @@
 * [Benchmark results on CMB32F407HDMIR3](docs/rev0p8p0/bench_cmb32f407hdmir3.txt)
 * [Benchmark results on WaveShare Core7XXI](docs/rev0p8p0/bench_wavesharecore7xxi.txt)
 * [Benchmark results on CMB32H750HDMIR1](docs/rev0p8p0/bench_cmb32h750hdmir1.txt)
+* [Benchmark results on ESP32-WROOM-32D](docs/rev0p8p0/bench_esp32_d0wd.txt)
+
 
 #### Benchmarks Results rev 0.7.5
 

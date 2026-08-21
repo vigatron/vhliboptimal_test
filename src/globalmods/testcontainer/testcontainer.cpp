@@ -1,6 +1,5 @@
 #include "vhplatform.hpp"
 #include "testcontainer.hpp"
-// #include "cmsis_os.h"
 #include "vhliboptimal.hpp"
 #include "vhliboptimal/src/mem/memorylayout.hpp"
 #include "sysinfo/sysinfo.hpp"
