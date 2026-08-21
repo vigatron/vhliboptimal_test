@@ -7,14 +7,42 @@
 ![Version](https://img.shields.io/badge/Version-0.0.5-orange.svg)
 ![Author](https://img.shields.io/badge/Author-V01G04A81-brown.svg)
 
-
-
 ## Test suite for shape contour detection and image outline recognition
+
+
+### Project Source code
+https://github.com/vigatron/vhliboptimal_test
+
+
+### Tested Platforms
+
+| Platform / Board             | CPU / MCU        | Arch       | Freq      |
+|------------------------------|------------------|------------|-----------|
+| ASUS Vivobook                | Intel i5-1135G7  | x86_64     | 2.40 GHz  |
+| AMD Based Desktop            | AMD FX-8300      | x86_64     | 3.30 GHz  |
+| Orange Pi PC Plus            | ARM Cortex-A7    | ARMv7-A    | 1.20 GHz  |
+| Raspberry Pi Model B+ V1.2   | ARM1176JZF-S     | ARMv6      | 700 MHz   |
+| CMB32F407HDMIR3              | STM32F407        | Cortex-M4  | 168 MHz   |
+| WAVESHARE CORE7XXI           | STM32F746        | Cortex-M7  | 216 MHz   |
+| CMB32H750HDMIR1              | STM32H750        | Cortex-M7  | 480 MHz   |
+| ESP32-WROOM-32D              | ESP32-D0WD       | Xtensa LX6 | 240 MHz   |
+
+*Notes:*
+
+* STM32F407: Optimized for CCMRAM only (BitFields); IRAM not used / not optimized.  
+
+* STM32F746: Optimized for DTCMRAM only (BitFields); ITCMRAM optimization pending in this revision.  
+
+* STM32H750: Optimized for DTCMRAM only (BitFields); ITCMRAM optimization pending in this revision.  
+
+* ESP32-D0WD: Optimized for DRAM only (BitFields); IRAM optimization pending in this revision.  
+
+<br>
 
 
 ### Test Images Examples
 
-##### Example 1: Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
+#### Example 1: Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
 
 <table>
   <tr>
@@ -27,7 +55,7 @@
   </tr>
 </table>
 
-##### Example 2: Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
+#### Example 2: Image size: 4096*4096 Letters and Geometric shape (Extreme Size Test)
 
 <table>
   <tr>
@@ -40,7 +68,7 @@
   </tr>
 </table>
 
-##### Example 3: Image size: 1920*1080 (1080p) Shapes
+#### Example 3: Image size: 1920*1080 (1080p) Shapes
 
 <table>
   <tr>
@@ -53,7 +81,7 @@
   </tr>
 </table>
 
-##### Example 4: Image size: 1920*1080 (1080p) Synthetic Dense Text Block (Extreme Stress Test)
+#### Example 4: Image size: 1920*1080 (1080p) Synthetic Dense Text Block (Extreme Stress Test)
 
 <table>
   <tr>
@@ -66,7 +94,7 @@
   </tr>
 </table>
 
-##### Example 5: Image size: 640*480 (VGA) Shapes
+#### Example 5: Image size: 640*480 (VGA) Shapes
 
 <table>
   <tr>
@@ -79,7 +107,7 @@
   </tr>
 </table>
 
-##### Example 6: Image size: 800*600 (SVGA) Text
+#### Example 6: Image size: 800*600 (SVGA) Text
 
 <table>
   <tr>
@@ -92,7 +120,7 @@
   </tr>
 </table>
 
-##### Example 7: Image size: 1280 × 720 (HD 720p) Shapes & Text
+#### Example 7: Image size: 1280 × 720 (HD 720p) Shapes & Text
 
 <table>
   <tr>
@@ -108,32 +136,10 @@
 
 <br>
 
-### Tested Platforms
 
-| Platform / Board             | CPU / MCU        | Arch       | Freq      |
-|------------------------------|------------------|------------|-----------|
-| ASUS Vivobook                | Intel i5-1135G7  | x86_64     | 2.40 GHz  |
-| AMD Based Desktop            | AMD FX-8300      | x86_64     | 3.30 GHz  |
-| Orange Pi PC Plus            | ARM Cortex-A7    | ARMv7-A    | 1.20 GHz  |
-| Raspberry Pi Model B+ V1.2   | ARM1176JZF-S     | ARMv6      | 700 MHz   |
-| CMB32F407HDMIR3              | STM32F407        | Cortex-M4  | 168 MHz   |
-| WAVESHARE CORE7XXI           | STM32F746        | Cortex-M7  | 216 MHz   |
-| CMB32H750HDMIR1              | STM32H750        | Cortex-M7  | 480 MHz   |
-| ESP32-WROOM-32D              | ESP32-D0WD       | Xtensa LX6 | 240 Mhz   |
+## Benchmark Results
 
-<br>
-
-* STM32F407: Optimized for CCMRAM only (BitFields); IRAM not used / not optimized.
-
-* STM32F746: Optimized for DTCMRAM only (BitFields); ITCMRAM optimization pending in this revision.
-
-* STM32H750: Optimized for DTCMRAM only (BitFields); ITCMRAM optimization pending in this revision.
-
-* ESP32-D0WD: Optimized for DRAM only (BitFields); IRAM optimization pending in this revision.
-
-<br>
-
-#### Benchmark Results rev 0.8.0
+rev 0.8.0
 
 * [Benchmark results on Intel i5-1135G7](docs/rev0p8p0/bench_intel_i5-1135G7.txt)
 * [Benchmark results on AMD FX-8300](docs/rev0p8p0/bench_amd_fx8300.txt)
@@ -144,8 +150,7 @@
 * [Benchmark results on CMB32H750HDMIR1](docs/rev0p8p0/bench_cmb32h750hdmir1.txt)
 * [Benchmark results on ESP32-WROOM-32D](docs/rev0p8p0/bench_esp32_d0wd.txt)
 
-
-#### Benchmarks Results rev 0.7.5
+rev 0.7.5
 
 * [Benchmark on Intel i5-1135G7 @ 2.40GHz](docs/bench/rev0p7p5/bench_intel_i5-1135G7.md)
 * [Benchmark on AMD FX-8300 @ 3.30Ghz](docs/bench/rev0p7p5/bench_amd_fx8300.md)
@@ -153,34 +158,26 @@
 
 <br>
 
-### Project Source code
-https://github.com/vigatron/vhliboptimal_test
-
 ### Dependencies
 
 * vhlibplatform 0.4.2  
-https://github.com/vigatron/vhlibplatform
+https://github.com/vigatron/vhlibplatform  
 
 * vhliboptimal 0.8.0  
-https://github.com/vigatron/vhliboptimal
+https://github.com/vigatron/vhliboptimal  
 
-* vhlibrle7b  
-https://github.com/vigatron/vhlibrle7b
+* vhlibrle7b  0.0.4
+https://github.com/vigatron/vhlibrle7b  
 
 
 ### Build & Run
 
 * [Project compilation for different target platforms](docs/build_and_run.md)
 
-<br>
 
-
-### Link to resized monochrome .bmp images:  
+#### Link to resized monochrome .bmp images:  
 
 * [Test Images (#1..#7) with different shapes & text symbols](docs/srcimages.md)
-
-
-<br>
 
 
 ### Common camera image resolutions
