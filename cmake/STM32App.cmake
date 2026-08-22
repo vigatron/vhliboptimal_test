@@ -64,7 +64,7 @@ target_compile_definitions(${TARGET_ELF} PUBLIC
 
 )
 
-# Проверяем, задан ли ключ MY_KEY
+# FLASH MCU with st-link or DFU
 if(DEFINED RUNFLASH)
 
 # --- Выбор команды прошивки по молчанию для каждого таргета ---
