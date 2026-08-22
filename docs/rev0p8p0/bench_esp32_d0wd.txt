@@ -1,3 +1,4 @@
+=== [ GRID_SIZE 512x512 ] ===
 
 rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
 configsip: 0, SPIWP:0xee
@@ -258,6 +259,7 @@ Total    (uSec) tsmin / tsavg / tsmax  520727 / 520761 / 521211
 All tests completed
 Done
 
+=== [ GRID_SIZE 256x256 ] ===
 
 rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
 configsip: 0, SPIWP:0xee
@@ -518,6 +520,7 @@ Total    (uSec) tsmin / tsavg / tsmax  126625 / 126662 / 127106
 All tests completed
 Done
 
+=== [ GRID_SIZE 128x128 ] ===
 
 rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
 configsip: 0, SPIWP:0xee

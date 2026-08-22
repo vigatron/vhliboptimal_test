@@ -3,6 +3,8 @@
 # Остановка скрипта при любой ошибке
 set -e
 
-. ~/esp/esp-idf/export.sh
+export IDF_PATH="$HOME/esp/esp-idf"
+
+. $IDF_PATH/export.sh
 
 idf.py reconfigure

@@ -22,16 +22,6 @@
         ]
     },
 
-    // PC-Optimized
-    // ****************************************************************************************************
-    "cmake.configureArgs"            : [
-        "-DBUILD_TARGET=native",
-        "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-native.cmake",
-        "-DCMAKE_BUILD_TYPE=Release" ],
-    "cmake.buildDirectory"           : "${workspaceFolder}/build-release",
-    "C_Cpp.default.compileCommands"  : "${workspaceFolder}/build/compile_commands.json",
-    // ****************************************************************************************************
-
     // // PC-Debug
     // // ****************************************************************************************************
     // "cmake.configureSettings"        : { "CMAKE_TOOLCHAIN_FILE" : "${workspaceFolder}/toolchains/toolchain-dbg.cmake" },
@@ -39,11 +29,23 @@
     // "C_Cpp.default.compileCommands"  : "${workspaceFolder}/build-dbg/compile_commands.json",
     // // ****************************************************************************************************
 
+
+
+    // // PC-Optimized
+    // // ****************************************************************************************************
+    // "cmake.configureArgs"            : [
+    //     "-DBUILD_TARGET=native",
+    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/cmake/toolchains/toolchain-native.cmake",
+    //     "-DCMAKE_BUILD_TYPE=Release" ],
+    // "cmake.buildDirectory"           : "${workspaceFolder}/build-release",
+    // "C_Cpp.default.compileCommands"  : "${workspaceFolder}/build/compile_commands.json",
+    // // ****************************************************************************************************
+
     // // Orange Pi PC Plus
     // // ****************************************************************************************************
     // "cmake.configureArgs"            : [
     //     "-DBUILD_TARGET=native",
-    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-opi.cmake",
+    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/cmake/toolchains/toolchain-opi.cmake",
     //     "-DCMAKE_BUILD_TYPE=Release" ],
     // "cmake.buildDirectory"           : "${workspaceFolder}/build-opi",
     // "C_Cpp.default.compileCommands"  : "${workspaceFolder}/build-opi/compile_commands.json",
@@ -53,7 +55,7 @@
     // ****************************************************************************************************
     // "cmake.configureArgs"            : [
     //     "-DBUILD_TARGET=native",
-    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-rpi.cmake",
+    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/cmake/toolchains/toolchain-rpi.cmake",
     //     "-DCMAKE_BUILD_TYPE=Release" ],
     // "cmake.buildDirectory"           : "${workspaceFolder}/build-rpi",
     // "C_Cpp.default.compileCommands"  : "${workspaceFolder}/build-rpi/compile_commands.json",
@@ -64,7 +66,7 @@
     // "cmake.configureArgs"           : [
     //     "-DBUILD_TARGET=CMB32F407HDM",
     //     "-DCMAKE_BUILD_TYPE=Release",
-    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32f407.cmake",
+    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/cmake/toolchains/toolchain-stm32f407.cmake",
     //     "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_F4_V1.28.3" ],
     // "cmake.buildDirectory"          : "${workspaceFolder}/build-CMB32F407HDM",
     // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-CMB32F407HDM/compile_commands.json",
@@ -74,7 +76,7 @@
     // "cmake.configureArgs"           : [
     //     "-DBUILD_TARGET=STM32F4DISCOVERY",
     //     "-DCMAKE_BUILD_TYPE=Release",
-    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32f407.cmake",
+    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/cmake/toolchains/toolchain-stm32f407.cmake",
     //     "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_F4_V1.28.3" ],
     // "cmake.buildDirectory"          : "${workspaceFolder}/build-STM32F4DISCOVERY",
     // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-STM32F4DISCOVERY/compile_commands.json",
@@ -84,7 +86,7 @@
     // "cmake.configureArgs"           : [
     //     "-DBUILD_TARGET=WAVESHARECORE7XXI",
     //     "-DCMAKE_BUILD_TYPE=Release",
-    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32f746.cmake",
+    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/cmake/toolchains/toolchain-stm32f746.cmake",
     //     "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_F7_V1.17.4" ],
     // "cmake.buildDirectory"          : "${workspaceFolder}/build-WAVESHARECORE7XXI",
     // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-WAVESHARECORE7XXI/compile_commands.json",
@@ -94,7 +96,7 @@
     // "cmake.configureArgs"           : [
     //     "-DBUILD_TARGET=CMB32H750HDM",
     //     "-DCMAKE_BUILD_TYPE=Release",
-    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/toolchains/toolchain-stm32h750.cmake",
+    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/cmake/toolchains/toolchain-stm32h750.cmake",
     //     "-DCUBEMX_PATH=~/STM32Cube/Repository/STM32Cube_FW_H7_V1.13.0" ],
     // "cmake.buildDirectory"          : "${workspaceFolder}/build-CMB32H750HDM",
     // "C_Cpp.default.compileCommands" : "${workspaceFolder}/build-CMB32H750HDM/compile_commands.json",
@@ -102,23 +104,11 @@
 
     // // ESP-32
     // // ****************************************************************************************************
-    // "C_Cpp.default.compileCommands"         : "${workspaceFolder}/src/appesp32/build/compile_commands.json",
-    // "C_Cpp.default.defines"                 : [
+    // "C_Cpp.default.compileCommands" : "${workspaceFolder}/src/appesp32/build/compile_commands.json",
+    // "C_Cpp.default.defines"         : [
     //     "VHPLATFORM_ESP32"
     // ],
-    // "C_Cpp.default.configurationProvider"   : "ms-vscode.cmake-tools",
-    // "C_Cpp.default.compileCommands"         : "${workspaceFolder}/build-CMB32H750HDM/compile_commands.json",
-
-
-    // ****************************************************************************************************
-    // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-intel.cmake" },
-    // "cmake.buildDirectory": "${workspaceFolder}/build-intel",
-    // "C_Cpp.default.compileCommands": "${workspaceFolder}/build-intel/compile_commands.json",
-    // // ****************************************************************************************************
-
-    // "cmake.configureSettings": { "CMAKE_TOOLCHAIN_FILE": "${workspaceFolder}/toolchain-amd.cmake" },
-    // "cmake.buildDirectory": "${workspaceFolder}/build-amd",
-    // // ****************************************************************************************************
+    // // "C_Cpp.default.configurationProvider"   : "ms-vscode.cmake-tools",
 
     "files.associations": { "cstdint": "cpp" }
 

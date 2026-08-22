@@ -1,6 +1,5 @@
 idf_component_register(
-    # INCLUDE_DIRS
-    #     ${CMAKE_BINARY_DIR}/extmods/vhlibrle7b/generated
+    INCLUDE_DIRS "."
 )
 
 add_subdirectory(

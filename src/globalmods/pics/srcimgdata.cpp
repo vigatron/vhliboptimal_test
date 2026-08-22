@@ -42,7 +42,7 @@ const uint8_t *   VHTestImagesArray::memblock_data(uint16_t imgid) {
 /**
  * 
  */
-const uint32_t VHTestImagesArray::memblock_size(uint16_t imgid) {
+uint32_t VHTestImagesArray::memblock_size(uint16_t imgid) {
 
     switch(imgid) {
         case 1: return example1_vhrle_len; break;
@@ -61,7 +61,7 @@ const uint32_t VHTestImagesArray::memblock_size(uint16_t imgid) {
 /**
  * 
  */
-const uint32_t VHTestImagesArray::memblock_unpacked_size(uint16_t imgid) {
+uint32_t VHTestImagesArray::memblock_unpacked_size(uint16_t imgid) {
 
     return blocksize;
 }

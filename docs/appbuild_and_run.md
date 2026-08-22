@@ -1,34 +1,41 @@
 ## Project compilation for different target platforms
 
----
- 
-Rev 0.8.0
-> Will be published ASAP
 
----
 
-Rev 0.7.5
 
-### Intel i5-1135G7
 
-```bash
-mkdir build-intel && cd build-intel
-cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain-intel.cmake ..
-make -j$(nproc)
+### Desktop PC
+
+```
+cd scripts && build_native.sh
 ```
 
-### AMD FX-8300
+### CMB32F407HDM board based on STM32F407
 
-```bash
-mkdir build-amd && cd build-amd
-cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain-amd.cmake ..
-make -j$(nproc)
+```
+cd scripts && build_cmb32f407hdm.sh
 ```
 
-### Orange Pi PC Plus (ARM Cortex-A7)
+### STM32F407 based DISCO board
 
-```bash
-mkdir build-arm && cd build-arm
-cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain-opi-pc-plus.cmake ..
-make -j2
+```
+cd scripts && build_stm32f407disco.sh
+```
+
+### STM32F746 based WaveShare Core7XXI board
+
+```
+cd scripts && build_wavesharecore7xxi.sh
+```
+
+### STM32H750 based CMB32H750HDM board
+
+```
+cd scripts && build_cmb32h750hdm.sh
+```
+
+### ESP32-WROOM-32D board
+
+```
+cd scripts && build_esp32d0wd.sh
 ```
