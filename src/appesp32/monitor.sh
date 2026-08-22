@@ -3,6 +3,8 @@
 # Остановка скрипта при любой ошибке
 set -e
 
-. ~/esp/esp-idf/export.sh
+export IDF_PATH="$HOME/esp/esp-idf"
 
-script -q -c "idf.py -p /dev/ttyUSB0 monitor" /dev/stdout | col -bx > build/monitor.log
+. $IDF_PATH/export.sh
+
+idf.py -p /dev/ttyUSB0 monitor

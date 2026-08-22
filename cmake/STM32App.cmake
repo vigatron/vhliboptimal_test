@@ -64,6 +64,9 @@ target_compile_definitions(${TARGET_ELF} PUBLIC
 
 )
 
+# FLASH MCU with st-link or DFU
+if(DEFINED RUNFLASH)
+
 # --- Выбор команды прошивки по молчанию для каждого таргета ---
 if(BUILD_TARGET STREQUAL "CMB32F407HDM")
     set(FLASH_COMMAND dfu-util -a 0 -s 0x08000000:leave -D ${CMAKE_BINARY_DIR}/${PROJECT_NAME}_${BUILD_TARGET}.bin)
@@ -80,6 +83,8 @@ elseif(BUILD_TARGET STREQUAL "CMB32H750HDM")
 else()
     set(FLASH_COMMAND st-flash --reset write ${CMAKE_BINARY_DIR}/${PROJECT_NAME}_${BUILD_TARGET}.bin 0x08000000)
     set(FLASH_COMMENT "Auto-flashing ${BUILD_TARGET} via ST-Link")
+endif()
+
 endif()
 
 

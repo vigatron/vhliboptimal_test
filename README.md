@@ -4,14 +4,14 @@
 ![CMake](https://img.shields.io/badge/Build-CMake-1f4f9c.svg)
 ![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Cross--platform-lightgrey.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Version](https://img.shields.io/badge/Version-0.0.5-orange.svg)
+![Version](https://img.shields.io/badge/Version-0.0.6-orange.svg)
 ![Author](https://img.shields.io/badge/Author-V01G04A81-brown.svg)
 
 ## Test suite for shape contour detection and image outline recognition
 
 
 ### Project Source code
-https://github.com/vigatron/vhliboptimal_test
+Full Source Code on GitHub: [https://github.com/vigatron/vhliboptimal_test](https://github.com/vigatron/vhliboptimal_test)
 
 
 ### Tested Platforms
@@ -35,7 +35,7 @@ https://github.com/vigatron/vhliboptimal_test
 
 * STM32H750: Optimized for DTCMRAM only (BitFields); ITCMRAM optimization pending in this revision.  
 
-* ESP32-D0WD: Optimized for DRAM only (BitFields); IRAM optimization pending in this revision.  
+* ESP32-D0WD: Optimized for DRAM (BitFields) and IRAM (BitFields routines)  
 
 <br>
 
@@ -148,7 +148,9 @@ rev 0.8.0
 * [Benchmark results on CMB32F407HDMIR3](docs/rev0p8p0/bench_cmb32f407hdmir3.txt)
 * [Benchmark results on WaveShare Core7XXI](docs/rev0p8p0/bench_wavesharecore7xxi.txt)
 * [Benchmark results on CMB32H750HDMIR1](docs/rev0p8p0/bench_cmb32h750hdmir1.txt)
-* [Benchmark results on ESP32-WROOM-32D](docs/rev0p8p0/bench_esp32_d0wd.txt)
+* [Benchmark results on ESP32-WROOM-32D initial revision](docs/rev0p8p0/bench_esp32_d0wd.txt)
+* [Benchmark results on ESP32-WROOM-32D optimized revision](docs/rev0p8p0/bench_esp32_d0wd_optimized.txt)
+
 
 rev 0.7.5
 
@@ -161,13 +163,13 @@ rev 0.7.5
 ### Dependencies
 
 * vhlibplatform 0.4.2  
-https://github.com/vigatron/vhlibplatform  
+[https://github.com/vigatron/vhlibplatform](https://github.com/vigatron/vhlibplatform)  
 
-* vhliboptimal 0.8.0  
-https://github.com/vigatron/vhliboptimal  
+* vhliboptimal 0.8.1  
+[https://github.com/vigatron/vhliboptimal](https://github.com/vigatron/vhliboptimal)  
 
 * vhlibrle7b  0.0.4
-https://github.com/vigatron/vhlibrle7b  
+[https://github.com/vigatron/vhlibrle7b](https://github.com/vigatron/vhlibrle7b)  
 
 
 ### Build & Run

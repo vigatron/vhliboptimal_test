@@ -13,12 +13,15 @@ namespace vhliboptimal {
 
 using namespace vhliboptimal;
 
-// dedicated BitFields GRID Buffer @ CCM RAM on STM32
-VHLIB_OPTIMAL_FASTSRAM    static uint8_t mem_buffer_grid_src[CFG_MEMSIZE_BYTES_PerGrid];
-VHLIB_OPTIMAL_FASTSRAM    static uint8_t mem_buffer_grid_dst[CFG_MEMSIZE_BYTES_PerGrid];
+// dedicated BitFields GRID Src Buffer @ CCM/DTCM on STM32
+VHLIB_OPTIMAL_ALIGNED16 VHLIB_OPTIMAL_FASTSRAM uint8_t mem_buffer_grid_src[CFG_MEMSIZE_BYTES_PerGrid];
 
-static uint8_t mem_buffer_objects[CFG_MEMSIZE_BYTES_Objects];
-static uint8_t mem_buffer_spans[CFG_MEMSIZE_BYTES_Spans];
+// dedicated BitFields GRID Dst Buffer @ CCM/DTCM on STM32
+VHLIB_OPTIMAL_ALIGNED16 VHLIB_OPTIMAL_FASTSRAM uint8_t mem_buffer_grid_dst[CFG_MEMSIZE_BYTES_PerGrid];
+
+VHLIB_OPTIMAL_ALIGNED16 static uint8_t mem_buffer_objects[CFG_MEMSIZE_BYTES_Objects];
+
+VHLIB_OPTIMAL_ALIGNED16 static uint8_t mem_buffer_spans[CFG_MEMSIZE_BYTES_Spans];
 
 
 /**

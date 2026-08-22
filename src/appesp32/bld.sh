@@ -3,8 +3,14 @@
 # Остановка скрипта при любой ошибке
 set -e
 
-. ~/esp/esp-idf/export.sh
+#
+export IDF_PATH="$HOME/esp/esp-idf"
 
-# idf.py reconfigure
+#
+. $IDF_PATH/export.sh
 
-idf.py build
+#
+idf.py -B ../../build-esp32d0wd build
+
+#
+idf.py size
