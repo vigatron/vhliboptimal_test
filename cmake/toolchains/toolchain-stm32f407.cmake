@@ -54,7 +54,11 @@ set(CMAKE_C_FLAGS_DEBUG "-O0 -g3")
 set(CMAKE_C_FLAGS_RELEASE "-O3 -g0 ${COMMON_PERF_FLAGS}" )
 
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0 -flto ${COMMON_PERF_FLAGS} -fdevirtualize-at-ltrans")
+set(CMAKE_CXX_FLAGS_RELEASE 
+    "-O2 -g0 -flto ${COMMON_PERF_FLAGS} \
+    -funroll-loops \
+    -ffast-math \
+    -fdevirtualize-at-ltrans")
 
 #
 string(REPLACE ";" " " VHBASE_ARM_OPTIONS_CLEAN "${VHBASE_ARM_OPTIONS}")

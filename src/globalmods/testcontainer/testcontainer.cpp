@@ -7,8 +7,9 @@
 // Source Image (embedded)
 #include "pics/srcimgdata.hpp"
 
-namespace vhliboptimal {
-    extern void asrts(bool cond, int module, const char * msg);
+namespace vhliboptimal
+{
+    extern void asrts(bool cond, int module, const char *msg);
 };
 
 using namespace vhliboptimal;
@@ -23,20 +24,29 @@ VHLIB_OPTIMAL_ALIGNED16 static uint8_t mem_buffer_objects[CFG_MEMSIZE_BYTES_Obje
 
 VHLIB_OPTIMAL_ALIGNED16 static uint8_t mem_buffer_spans[CFG_MEMSIZE_BYTES_Spans];
 
-
 /**
  *
  */
 verr TestLibraryContainer::CopyAndScale(uint16_t imageid, uint8_t levelcs)
 {
+    // Using spans area as temporary unpacked bitmap buffer
+    uint8_t *pbmp = mem_buffer_spans;
+    uint16_t pbmp_size = CFG_MEMSIZE_BYTES_Spans;
 
-    verr resunpack = VHTestImagesArray::unpack(imageid);
+    // Check output buffer size
+    // TODO: compare with uncompressed size / not maximal
+    if (pbmp_size < VHTestImagesArray::minRequiredBufferSize())
+    {
+        return verrmsg(106, "Output bitmap buffer size not enough for CopyAndScale()");
+    }
+
+    // Unpack bitmap
+    verr resunpack = VHTestImagesArray::unpack(imageid, pbmp, pbmp_size);
     if (vok != resunpack)
     {
         return verrmsg(101, "Unpack error");
     }
 
-    const uint8_t *pbmp = VHTestImagesArray::TempPtr();
     const BMPFileHeader *pbmphdr = (BMPFileHeader *)pbmp;
 
     // Transfer source image bitfield
@@ -91,6 +101,40 @@ verr TestLibraryContainer::TestImageIteration(uint16_t imageid, uint8_t levelcs)
 
     return vok;
 }
+
+/**
+ * 
+ */
+verr TestLibraryContainer::CheckResolutions() {
+
+    printf("\nTest image set:\n");
+
+    // Using spans area as temporary unpacked bitmap buffer
+    uint8_t *pbmp = mem_buffer_spans;
+    uint16_t pbmp_size = CFG_MEMSIZE_BYTES_Spans;
+
+    for(uint16_t blkid = VHTestImagesArray::GetFirstID(); blkid <= VHTestImagesArray::GetLastID(); blkid++) {
+        
+        int width = 0;
+        int height = 0;
+        verr result = VHTestImagesArray::unpack(blkid, pbmp, pbmp_size);
+
+        if(result == vok) {
+            const uint8_t * pbmphdr = pbmp + sizeof(vhliboptimal::BMPFileHeader);
+            const vhliboptimal::BMPInfoHeader * phdr = (vhliboptimal::BMPInfoHeader *)pbmphdr;
+            width = phdr->width;
+            height = phdr->height;
+        }
+
+        uint8_t sc = VHTestImagesArray::GetScaller(blkid);
+
+        printf("BMP (1-bit) B&W Image #%d: %4d x %4d (Original %4d x %4d)\n",
+            blkid, width, height, width * sc, height * sc);
+    }
+
+    return vok;
+}
+
 
 /**
  *
@@ -159,12 +203,12 @@ verr TestLibraryContainer::TestImageAverage(uint16_t imageid, uint8_t levelcs)
  */
 verr TestLibraryContainer::StartTests()
 {
-    if(!detector.isInitialized())
+    if (!detector.isInitialized())
         return verrmsg(102, "VHLIB_OPTIMAL is not initialized");
 
     // Testing all images from embedded set
     uint16_t firstid = VHTestImagesArray::GetFirstID();
-    uint16_t lastid  = VHTestImagesArray::GetLastID();
+    uint16_t lastid = VHTestImagesArray::GetLastID();
 
     // SCALE Factor
     uint8_t levelcs = 9 - VHLIB_OPTIMAL_GRID_LX;
@@ -198,7 +242,7 @@ verr TestLibraryContainer::Init()
         return verror(1);
 
     // Source Images array info
-    VHTestImagesArray::CheckResolutions();
+    CheckResolutions();
 
     //
     vhliboptimal::stConfig cfg = {
@@ -371,28 +415,3 @@ void TestLibraryContainer::CALLBACK_VHLIBOPTIMAL_Benchmark(
     auto *self = static_cast<TestLibraryContainer *>(caller);
     self->CallbackBenchmark(cmd, param);
 }
-
-// 2 в степени: вычисление размера ячейки в пикселях
-// uint8_t levelcs = 1;
-
-// .levelcs = __builtin_ctz(VHLIB_OPTIMAL_GRID_SZ),
-// inline uint8_t FilterLevel() const noexcept { return cfg.minColorVal; }
-
-// Подсветка цветности ячейки
-// меньшие значения принимаем за черный
-// uint8_t     minColorVal;
-// .minColorVal    = VHAPP_OPTIMAL_TEST_FLTVAL,
-
-// const stContainerConfig & cfg
-// Memory allocation & Grid settings
-// TODO: Check alignment if need
-
-// 2. Memory allocation
-// size_t membytes = detector.CalcMemory();
-// asrts(membytes >    1 * F1K, 1, "VHLibOptimal::CalcMemory()");
-// asrts(membytes <  512 * F1K, 1, "VHLibOptimal::CalcMemory()");
-
-// Allocate memory with std::vector<uint8_t>
-// memBlockAligned.assign(membytes, 0);
-// verr r = detector.SetupMemory(memBlockAligned.data(), memBlockAligned.size());
-// if(r) return verrmsg(1, "VHLIBOptimalSetup() memory allocation issue");

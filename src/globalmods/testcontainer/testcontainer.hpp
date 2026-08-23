@@ -91,6 +91,11 @@ class TestLibraryContainer {
         /**
          * 
          */
+        verr    CheckResolutions();
+
+        /**
+         * 
+         */
         void CallbackBorder(
             uint8_t cmd,
             uint8_t dirh, 
