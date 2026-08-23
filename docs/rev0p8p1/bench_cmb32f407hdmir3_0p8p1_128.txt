@@ -1,0 +1,237 @@
+=== [ GRID_SIZE 128x128 ] ===
+
+*** Application Info
+Build options        -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -Wall -fdata-sections -ffunction-sections -fstack-usage  -O2 -g0 -flto -fsingle-precision-constant -fomit-frame-pointer -fno-math-errno -fno-trapping-math -fno-common -funroll-loops -ffast-math -fdevirtualize-at-ltrans
+VHLIB_OPTIMAL_TEST   v0.0.7
+VHLIB_OPTIMAL        v0.8.1
+VHLIB_RLE7b          v0.0.4
+
+*** System Info ***
+
+================ MCU INFO =====================
+MCU Family      : STM32F4
+Device ID       : 0x413
+Revision ID     : 0x100F
+Flash Size      : 1024 KB
+Total RAM       : 192 KB
+Main SRAM Total : 128 KB
+Main SRAM Used  : 81 KB
+Unique ID (UID) : 001F001F-30374708-38393536
+===============================================
+
+---------------------------------------------------
+Application       : VHLIBOptimal_test
+Platform          : CMB32F407HDM @ 168 Mhz
+---------------------------------------------------
+Starting test ...  
+
+Checking integrity:
+memblock #1:   8242 bytes  CRC=FCA09E1A / Unpacked  32830 bytes CRC=1AC89539  status=OK
+memblock #2:  10178 bytes  CRC=B15D96D2 / Unpacked  32830 bytes CRC=5B4472FD  status=OK
+memblock #3:   5770 bytes  CRC=B832040B / Unpacked  16262 bytes CRC=7B12F0B6  status=OK
+memblock #4:  10880 bytes  CRC=64331B01 / Unpacked  16262 bytes CRC=A351D96D  status=OK
+memblock #5:   6641 bytes  CRC=CC65D9EC / Unpacked   9662 bytes CRC=C0D68D25  status=OK
+memblock #6:   5480 bytes  CRC=56617B62 / Unpacked  15662 bytes CRC=55ED4BCF  status=OK
+memblock #7:   3823 bytes  CRC=AB2F5E7F / Unpacked   7262 bytes CRC=9E8C84B0  status=OK
+
+Test image set:
+BMP (1-bit) B&W Image #1:  512 x  512 (Original 4096 x 4096)
+BMP (1-bit) B&W Image #2:  512 x  512 (Original 4096 x 4096)
+BMP (1-bit) B&W Image #3:  480 x  270 (Original 1920 x 1080)
+BMP (1-bit) B&W Image #4:  480 x  270 (Original 1920 x 1080)
+BMP (1-bit) B&W Image #5:  320 x  240 (Original  640 x  480)
+BMP (1-bit) B&W Image #6:  400 x  300 (Original  800 x  600)
+BMP (1-bit) B&W Image #7:  320 x  180 (Original 1280 x  720)
+VHLIBOptimal Initialized
+
+=== VHLibOptimal::CalcMemory() === 
+sizeof(VHOptimalFigure) = 16 bytes
+sizeof(spanword) = 4 bytes
+Grid size Max: 128 x 128
+x1 grid  = 2048 bytes
+x2 grids = 4096 bytes
+800 objects x 16 bytes = 12800 bytes
+10000 spans x 4 bytes = 40000 bytes
+
+Address SRC_GRID     : @ 0x10000000 2048 bytes
+Address DST_GRID     : @ 0x10000800 2048 bytes
+Address Objects      : @ 0x200003d0 12800 bytes
+Address Spans        : @ 0x200035d0 40000 bytes
+
+>>> VHLIBOptimal Memory Layout Total: 56896 bytes
+
+
+Welcome!
+
+>run
+
+*** Testing image #1 of 7  (uSec)
+   Iteration | Sampling | Scanning |    Total 
+#  1 of 16   |    29265 |    35284 |    64549
+#  2 of 16   |    29284 |    35285 |    64569
+#  3 of 16   |    29257 |    35285 |    64542
+#  4 of 16   |    29261 |    35284 |    64545
+#  5 of 16   |    29255 |    35285 |    64540
+#  6 of 16   |    29250 |    35284 |    64534
+#  7 of 16   |    29265 |    35284 |    64549
+#  8 of 16   |    29273 |    35285 |    64558
+#  9 of 16   |    29275 |    35284 |    64559
+# 10 of 16   |    29269 |    35285 |    64554
+# 11 of 16   |    29259 |    35285 |    64544
+# 12 of 16   |    29267 |    35284 |    64551
+# 13 of 16   |    29253 |    35285 |    64538
+# 14 of 16   |    29251 |    35284 |    64535
+# 15 of 16   |    29280 |    35284 |    64564
+# 16 of 16   |    29273 |    35293 |    64566
+Sampling (uSec) tsmin / tsavg / tsmax   29250 /  29264 /  29284 
+Scanning (uSec) tsmin / tsavg / tsmax   35284 /  35285 /  35293 
+Total    (uSec) tsmin / tsavg / tsmax   64534 /  64549 /  64577 
+Found 6 objects, Spans 326 ( Runtime-check 326 ) 
+Average  15 FPS
+
+*** Testing image #2 of 7  (uSec)
+   Iteration | Sampling | Scanning |    Total 
+#  1 of 16   |    32810 |    19119 |    51929
+#  2 of 16   |    32793 |    19130 |    51923
+#  3 of 16   |    32816 |    19120 |    51936
+#  4 of 16   |    32809 |    19126 |    51935
+#  5 of 16   |    32808 |    19120 |    51928
+#  6 of 16   |    32798 |    19127 |    51925
+#  7 of 16   |    32776 |    19120 |    51896
+#  8 of 16   |    32797 |    19130 |    51927
+#  9 of 16   |    32799 |    19120 |    51919
+# 10 of 16   |    32792 |    19119 |    51911
+# 11 of 16   |    32771 |    19119 |    51890
+# 12 of 16   |    32818 |    19119 |    51937
+# 13 of 16   |    32792 |    19119 |    51911
+# 14 of 16   |    32754 |    19118 |    51872
+# 15 of 16   |    32822 |    19119 |    51941
+# 16 of 16   |    32798 |    19119 |    51917
+Sampling (uSec) tsmin / tsavg / tsmax   32754 /  32797 /  32822 
+Scanning (uSec) tsmin / tsavg / tsmax   19118 /  19121 /  19130 
+Total    (uSec) tsmin / tsavg / tsmax   51872 /  51918 /  51952 
+Found 3 objects, Spans 436 ( Runtime-check 436 ) 
+Average  19 FPS
+
+*** Testing image #3 of 7  (uSec)
+   Iteration | Sampling | Scanning |    Total 
+#  1 of 16   |    18138 |    16064 |    34202
+#  2 of 16   |    18133 |    16064 |    34197
+#  3 of 16   |    18137 |    16066 |    34203
+#  4 of 16   |    18131 |    16064 |    34195
+#  5 of 16   |    18160 |    16064 |    34224
+#  6 of 16   |    18127 |    16064 |    34191
+#  7 of 16   |    18136 |    16064 |    34200
+#  8 of 16   |    18141 |    16064 |    34205
+#  9 of 16   |    18131 |    16064 |    34195
+# 10 of 16   |    18128 |    16065 |    34193
+# 11 of 16   |    18134 |    16066 |    34200
+# 12 of 16   |    18139 |    16071 |    34210
+# 13 of 16   |    18132 |    16064 |    34196
+# 14 of 16   |    18134 |    16065 |    34199
+# 15 of 16   |    18138 |    16064 |    34202
+# 16 of 16   |    18144 |    16064 |    34208
+Sampling (uSec) tsmin / tsavg / tsmax   18127 /  18136 /  18160 
+Scanning (uSec) tsmin / tsavg / tsmax   16064 /  16064 /  16071 
+Total    (uSec) tsmin / tsavg / tsmax   34191 /  34200 /  34231 
+Found 9 objects, Spans 222 ( Runtime-check 222 ) 
+Average  29 FPS
+
+*** Testing image #4 of 7  (uSec)
+   Iteration | Sampling | Scanning |    Total 
+#  1 of 16   |    20615 |   144507 |   165122
+#  2 of 16   |    20605 |   144507 |   165112
+#  3 of 16   |    20610 |   144500 |   165110
+#  4 of 16   |    20614 |   144490 |   165104
+#  5 of 16   |    20610 |   144482 |   165092
+#  6 of 16   |    20610 |   144482 |   165092
+#  7 of 16   |    20606 |   144488 |   165094
+#  8 of 16   |    20602 |   144481 |   165083
+#  9 of 16   |    20617 |   144486 |   165103
+# 10 of 16   |    20617 |   144500 |   165117
+# 11 of 16   |    20607 |   144506 |   165113
+# 12 of 16   |    20615 |   144506 |   165121
+# 13 of 16   |    20624 |   144495 |   165119
+# 14 of 16   |    20629 |   144480 |   165109
+# 15 of 16   |    20607 |   144483 |   165090
+# 16 of 16   |    20622 |   144489 |   165111
+Sampling (uSec) tsmin / tsavg / tsmax   20602 /  20613 /  20629 
+Scanning (uSec) tsmin / tsavg / tsmax  144480 / 144492 / 144507 
+Total    (uSec) tsmin / tsavg / tsmax  165082 / 165105 / 165136 
+Found 12 objects, Spans 540 ( Runtime-check 540 ) 
+Average  6 FPS
+
+*** Testing image #5 of 7  (uSec)
+   Iteration | Sampling | Scanning |    Total 
+#  1 of 16   |    12340 |    24924 |    37264
+#  2 of 16   |    12326 |    24925 |    37251
+#  3 of 16   |    12325 |    24924 |    37249
+#  4 of 16   |    12334 |    24924 |    37258
+#  5 of 16   |    12340 |    24925 |    37265
+#  6 of 16   |    12350 |    24925 |    37275
+#  7 of 16   |    12340 |    24924 |    37264
+#  8 of 16   |    12334 |    24925 |    37259
+#  9 of 16   |    12326 |    24924 |    37250
+# 10 of 16   |    12342 |    24924 |    37266
+# 11 of 16   |    12336 |    24924 |    37260
+# 12 of 16   |    12341 |    24931 |    37272
+# 13 of 16   |    12336 |    24931 |    37267
+# 14 of 16   |    12341 |    24924 |    37265
+# 15 of 16   |    12342 |    24933 |    37275
+# 16 of 16   |    12350 |    24924 |    37274
+Sampling (uSec) tsmin / tsavg / tsmax   12325 /  12337 /  12350 
+Scanning (uSec) tsmin / tsavg / tsmax   24924 /  24925 /  24933 
+Total    (uSec) tsmin / tsavg / tsmax   37249 /  37262 /  37283 
+Found 12 objects, Spans 378 ( Runtime-check 378 ) 
+Average  27 FPS
+
+*** Testing image #6 of 7  (uSec)
+   Iteration | Sampling | Scanning |    Total 
+#  1 of 16   |    14367 |    23738 |    38105
+#  2 of 16   |    14353 |    23744 |    38097
+#  3 of 16   |    14344 |    23738 |    38082
+#  4 of 16   |    14346 |    23743 |    38089
+#  5 of 16   |    14395 |    23737 |    38132
+#  6 of 16   |    14345 |    23738 |    38083
+#  7 of 16   |    14366 |    23745 |    38111
+#  8 of 16   |    14350 |    23738 |    38088
+#  9 of 16   |    14352 |    23743 |    38095
+# 10 of 16   |    14346 |    23737 |    38083
+# 11 of 16   |    14347 |    23737 |    38084
+# 12 of 16   |    14346 |    23738 |    38084
+# 13 of 16   |    14367 |    23738 |    38105
+# 14 of 16   |    14352 |    23738 |    38090
+# 15 of 16   |    14346 |    23737 |    38083
+# 16 of 16   |    14392 |    23743 |    38135
+Sampling (uSec) tsmin / tsavg / tsmax   14344 /  14357 /  14395 
+Scanning (uSec) tsmin / tsavg / tsmax   23737 /  23739 /  23745 
+Total    (uSec) tsmin / tsavg / tsmax   38081 /  38096 /  38140 
+Found 25 objects, Spans 250 ( Runtime-check 250 ) 
+Average  26 FPS
+
+*** Testing image #7 of 7  (uSec)
+   Iteration | Sampling | Scanning |    Total 
+#  1 of 16   |     7243 |    25943 |    33186
+#  2 of 16   |     7242 |    25944 |    33186
+#  3 of 16   |     7243 |    25944 |    33187
+#  4 of 16   |     7245 |    25943 |    33188
+#  5 of 16   |     7241 |    25944 |    33185
+#  6 of 16   |     7242 |    25944 |    33186
+#  7 of 16   |     7243 |    25950 |    33193
+#  8 of 16   |     7244 |    25944 |    33188
+#  9 of 16   |     7243 |    25944 |    33187
+# 10 of 16   |     7242 |    25944 |    33186
+# 11 of 16   |     7238 |    25943 |    33181
+# 12 of 16   |     7251 |    25943 |    33194
+# 13 of 16   |     7244 |    25944 |    33188
+# 14 of 16   |     7242 |    25944 |    33186
+# 15 of 16   |     7245 |    25942 |    33187
+# 16 of 16   |     7243 |    25943 |    33186
+Sampling (uSec) tsmin / tsavg / tsmax    7238 /   7243 /   7251 
+Scanning (uSec) tsmin / tsavg / tsmax   25942 /  25943 /  25950 
+Total    (uSec) tsmin / tsavg / tsmax   33180 /  33186 /  33201 
+Found 26 objects, Spans 292 ( Runtime-check 292 ) 
+Average  30 FPS
+
+All tests completed
+testContainer() Done

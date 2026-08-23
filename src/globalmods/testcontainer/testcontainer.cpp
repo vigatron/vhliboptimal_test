@@ -92,7 +92,7 @@ verr TestLibraryContainer::TestImageIteration(uint16_t imageid, uint8_t levelcs)
     int t_scan_us = tsScanning.result_us();
     arrtsScanning.add(t_scan_us);
 
-    printf(" Sampling: %5d uSec  Scanning: %5d uSec \n", t_samp_us, t_scan_us);
+    printf(" %8d | %8d | %8d\n", t_samp_us, t_scan_us, t_samp_us + t_scan_us);
 
 #ifdef __CMT
     printf("%-20s : %u\n", "Clocks  elapsed", timer_clk);
@@ -103,9 +103,10 @@ verr TestLibraryContainer::TestImageIteration(uint16_t imageid, uint8_t levelcs)
 }
 
 /**
- * 
+ *
  */
-verr TestLibraryContainer::CheckResolutions() {
+verr TestLibraryContainer::CheckResolutions()
+{
 
     printf("\nTest image set:\n");
 
@@ -113,15 +114,17 @@ verr TestLibraryContainer::CheckResolutions() {
     uint8_t *pbmp = mem_buffer_spans;
     uint16_t pbmp_size = CFG_MEMSIZE_BYTES_Spans;
 
-    for(uint16_t blkid = VHTestImagesArray::GetFirstID(); blkid <= VHTestImagesArray::GetLastID(); blkid++) {
-        
+    for (uint16_t blkid = VHTestImagesArray::GetFirstID(); blkid <= VHTestImagesArray::GetLastID(); blkid++)
+    {
+
         int width = 0;
         int height = 0;
         verr result = VHTestImagesArray::unpack(blkid, pbmp, pbmp_size);
 
-        if(result == vok) {
-            const uint8_t * pbmphdr = pbmp + sizeof(vhliboptimal::BMPFileHeader);
-            const vhliboptimal::BMPInfoHeader * phdr = (vhliboptimal::BMPInfoHeader *)pbmphdr;
+        if (result == vok)
+        {
+            const uint8_t *pbmphdr = pbmp + sizeof(vhliboptimal::BMPFileHeader);
+            const vhliboptimal::BMPInfoHeader *phdr = (vhliboptimal::BMPInfoHeader *)pbmphdr;
             width = phdr->width;
             height = phdr->height;
         }
@@ -129,12 +132,11 @@ verr TestLibraryContainer::CheckResolutions() {
         uint8_t sc = VHTestImagesArray::GetScaller(blkid);
 
         printf("BMP (1-bit) B&W Image #%d: %4d x %4d (Original %4d x %4d)\n",
-            blkid, width, height, width * sc, height * sc);
+               blkid, width, height, width * sc, height * sc);
     }
 
     return vok;
 }
-
 
 /**
  *
@@ -155,24 +157,9 @@ verr TestLibraryContainer::TestImageAverage(uint16_t imageid, uint8_t levelcs)
     // Multiple cycles for average measurements values
     for (int i = 0; i < VHLIBOPTIMAL_TEST_PASS_COUNT; i++)
     {
-        printf("Iteration %2d of %d: ", i + 1, VHLIBOPTIMAL_TEST_PASS_COUNT);
+        printf("# %2d of %d   |", i + 1, VHLIBOPTIMAL_TEST_PASS_COUNT);
         TestImageIteration(imageid, levelcs);
     }
-
-    uint16_t objcount = detector.ObjectsCount();
-    uint32_t spncount1 = detector.GlobalSpansCount();
-    uint32_t spncount2 = detector.CalcSpansTotal();
-
-    log::partout("Found ");
-    log::partint(objcount);
-    log::partout(" objects");
-    log::partout(", Spans ");
-    log::partint(spncount1);
-    log::partout("( Rnt check ");
-    log::partint(spncount2);
-    log::lineout(")");
-
-    asrts(spncount1 == spncount2, 100, "Spans Rnt check failed");
 
     // Sampling
     int ts_smp_min = arrtsSampling.resultmin();
@@ -193,6 +180,34 @@ verr TestLibraryContainer::TestImageAverage(uint16_t imageid, uint8_t levelcs)
     printf("Sampling (uSec) tsmin / tsavg / tsmax  %6d / %6d / %6d \n", ts_smp_min, ts_smp_avg, ts_smp_max);
     printf("Scanning (uSec) tsmin / tsavg / tsmax  %6d / %6d / %6d \n", ts_scn_min, ts_scn_avg, ts_scn_max);
     printf("Total    (uSec) tsmin / tsavg / tsmax  %6d / %6d / %6d \n", ts_fin_min, ts_fin_avg, ts_fin_max);
+
+    uint16_t objcount = detector.ObjectsCount();
+    uint32_t spncount1 = detector.GlobalSpansCount();
+    uint32_t spncount2 = detector.CalcSpansTotal();
+
+    log::partout("Found ");
+    log::partint(objcount);
+    log::partout(" objects, ");
+    log::partout("Spans ");
+    log::partint(spncount1);
+    log::partout(" ( Runtime-check ");
+    log::partint(spncount2);
+    log::partout(" ) ");
+    asrts(spncount1 == spncount2, 100, "Spans Rnt check failed");
+
+    float avgfpsf = 1000000.0f / ts_fin_avg;
+
+    printf("\nAverage ");
+    if (avgfpsf < 3)
+    {
+        printf(" %.2f FPS", avgfpsf);
+    }
+    else
+    {
+        printf(" %.0f FPS", avgfpsf);
+    }
+
+    log::lineout("");
 
     return vok;
 }
@@ -215,7 +230,7 @@ verr TestLibraryContainer::StartTests()
 
     for (uint16_t imgid = firstid; imgid <= lastid; imgid++)
     {
-        printf("\n*** Testing image #%d of %d\n", imgid, lastid);
+        printf("\n*** Testing image #%d of %d  (uSec)\n   Iteration | Sampling | Scanning |    Total \n", imgid, lastid);
         verr vtest = TestImageAverage(imgid, levelcs);
         if (vok != vtest)
             return verrmsg(102, "Test failed");
