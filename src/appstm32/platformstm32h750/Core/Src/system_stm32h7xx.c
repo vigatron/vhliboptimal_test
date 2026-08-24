@@ -304,6 +304,15 @@ void SystemInit (void)
     CLEAR_BIT(RCC->AHB3ENR, RCC_AHB3ENR_FMCEN);
   }
 
+
+    SCB->ITCMCR = (1 << 0) | (1 << 1); // EN + RMW
+    SCB->DTCMCR = (1 << 0) | (1 << 1);
+    __DSB(); __ISB();
+
+    // SCB_InvalidateICache_by_Addr((uint32_t*)ITCM_FUNC_ADDR, size);
+    // __DSB();
+    // __ISB();    
+
   /* Configure the Vector Table location -------------------------------------*/
 #if defined(USER_VECT_TAB_ADDRESS)
   SCB->VTOR = VECT_TAB_BASE_ADDRESS | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal D1 AXI-RAM or in Internal FLASH */

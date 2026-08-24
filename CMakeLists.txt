@@ -5,7 +5,7 @@ set(ALLOWED_TARGETS "native" "CMB32F407HDM" "STM32F4DISCOVERY" "WAVESHARECORE7XX
 set(BUILD_TARGET "native" CACHE STRING "Select target: ${ALLOWED_TARGETS}")
 set_property(CACHE BUILD_TARGET PROPERTY STRINGS ${ALLOWED_TARGETS})
 
-project(test_lib_optimal VERSION 0.0.6 LANGUAGES C CXX ASM)
+project(test_lib_optimal VERSION 0.0.7 LANGUAGES C CXX ASM)
 
 # set(APP_VERSION_SUFFIX_STR "-beta")
 
@@ -27,6 +27,31 @@ add_subdirectory(src/extmods/vhliboptimal)
 add_subdirectory(src/extmods/vhlibrle7b)
 
 
+
+# ------------------------------------------------------------
+# FIXED GRID Option
+# 7:128 / 8:256 / 9: 512 / 10: 1024 / 11: 2048 / 12: 4096 pxls
+# ------------------------------------------------------------
+
+
+if(VHLIB_OPTIMAL_GRID_GIZE STREQUAL "512")
+
+    # 9: 512x512 : 32K Grid : LEVELCS=0
+    set(VHLIB_OPTIMAL_GRID_PARAMS VHLIB_OPTIMAL_GRID_FIXED VHLIB_OPTIMAL_GRID_LX=9 VHLIB_OPTIMAL_GRID_LY=9)
+
+elseif(VHLIB_OPTIMAL_GRID_GIZE STREQUAL "256")
+
+    # 8: 256x256 :  8K Grid : LEVELCS=1
+    set(VHLIB_OPTIMAL_GRID_PARAMS VHLIB_OPTIMAL_GRID_FIXED VHLIB_OPTIMAL_GRID_LX=8 VHLIB_OPTIMAL_GRID_LY=8)
+
+elseif(VHLIB_OPTIMAL_GRID_GIZE STREQUAL "128")
+
+    # 7: 128x128 :  2K Grid : LEVELCS=2
+    set(VHLIB_OPTIMAL_GRID_PARAMS VHLIB_OPTIMAL_GRID_FIXED VHLIB_OPTIMAL_GRID_LX=7 VHLIB_OPTIMAL_GRID_LY=7)
+
+endif()
+
+
 # ------------------------------------------------------------
 # VHLIBOptimal Related
 # (объявляем общие дефайны, которые не зависят от таргета)
@@ -40,26 +65,10 @@ set(VHLIB_OPTIMAL_DEFS
     VHLIB_OPTIMAL_OBJS_MAX=800
     VHLIB_OPTIMAL_SPNS_MAX=10000
 
+    ${VHLIB_OPTIMAL_GRID_PARAMS}
+
     # Embedded version
     VHLIB_OPTIMAL_STL=0
-
-    # ------------------------------------------------------------
-    # FIXED GRID Option
-    # 7:128 / 8:256 / 9: 512 / 10: 1024 / 11: 2048 / 12: 4096 pxls
-    # ------------------------------------------------------------
-    VHLIB_OPTIMAL_GRID_FIXED
-
-    # 9: 512x512 : 32K Grid : LEVELCS=0
-    VHLIB_OPTIMAL_GRID_LX=9       # 512
-    VHLIB_OPTIMAL_GRID_LY=9       # 512
-
-    # 8: 256x256 :  8K Grid : LEVELCS=1
-    # VHLIB_OPTIMAL_GRID_LX=8     # 256
-    # VHLIB_OPTIMAL_GRID_LY=8     # 256
-
-    # 7: 128x128 :  2K Grid : LEVELCS=2
-    # VHLIB_OPTIMAL_GRID_LX=7     # 128
-    # VHLIB_OPTIMAL_GRID_LY=7     # 128
 
     VHLIB_OPTIMAL_LOG_LEVEL=1
     # VHLIB_OPTIMAL_DEBUG
@@ -75,21 +84,21 @@ if(BUILD_TARGET STREQUAL "native")
 # *** STM32F407
 elseif(BUILD_TARGET STREQUAL "CMB32F407HDM" OR BUILD_TARGET STREQUAL "STM32F4DISCOVERY")
     list(APPEND VHLIB_OPTIMAL_DEFS 
-        # VHLIB_OPTIMAL_USE_ICACHE="ramfunc"
+        # VHLIB_OPTIMAL_USE_ICACHE=".RamFunc"
         VHLIB_OPTIMAL_USE_DCACHE=".ccmram"
     )
 
 # *** STM32F746
 elseif(BUILD_TARGET STREQUAL "WAVESHARECORE7XXI")
     list(APPEND VHLIB_OPTIMAL_DEFS
-        # VHLIB_OPTIMAL_USE_ICACHE=".itcm_text"
+        VHLIB_OPTIMAL_USE_ICACHE=".itcm_text"
         VHLIB_OPTIMAL_USE_DCACHE=".dtcm_bss"
     )
 
 # *** STM32H750
 elseif(BUILD_TARGET STREQUAL "CMB32H750HDM")
     list(APPEND VHLIB_OPTIMAL_DEFS
-        # VHLIB_OPTIMAL_USE_ICACHE=".itcm_text"
+        VHLIB_OPTIMAL_USE_ICACHE=".itcm_text"
         VHLIB_OPTIMAL_USE_DCACHE=".dtcm_bss"
     )
 else()

@@ -79,7 +79,22 @@ LoopCopyDataInit:
   adds r4, r0, r3
   cmp r4, r1
   bcc CopyDataInit
-  
+
+/* V01G04A81: Copy ITCM functions */
+  ldr   r0, =_sitcm_load   /* source in FLASH */
+  ldr   r1, =_sitcm        /* destination in ITCMRAM */
+  ldr   r2, =_eitcm        /* end of ITCMRAM section */
+CopyITCM:
+  cmp   r1, r2
+  bcc   CopyITCMDo
+  b     CopyITCMEnd
+CopyITCMDo:
+  ldr   r3, [r0], #4
+  str   r3, [r1], #4
+  b     CopyITCM
+CopyITCMEnd:
+
+
 /* Zero fill the bss segment. */
   ldr r2, =_sbss
   ldr r4, =_ebss
