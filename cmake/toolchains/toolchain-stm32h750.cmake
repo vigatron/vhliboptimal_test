@@ -54,7 +54,7 @@ set(CMAKE_C_FLAGS_DEBUG "-O0 -g3")
 set(CMAKE_C_FLAGS_RELEASE "-O3 -g0 ${COMMON_PERF_FLAGS}")
 
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0 -flto ${COMMON_PERF_FLAGS} -fdevirtualize-at-ltrans")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0 -flto ${COMMON_PERF_FLAGS} -fdevirtualize-at-ltrans") # 
 
 #
 string(REPLACE ";" " " VHBASE_ARM_OPTIONS_CLEAN "${VHBASE_ARM_OPTIONS}")
@@ -76,6 +76,7 @@ add_link_options(
     -mcpu=cortex-m7
     -mfpu=fpv5-d16
     -mfloat-abi=hard
+    -u _printf_float
     -T${CMAKE_SOURCE_DIR}/src/appstm32/platformstm32h750/STM32H750xx_FLASH.ld
     -Wl,--gc-sections
     -Wl,-Map=${CMAKE_PROJECT_NAME}.map

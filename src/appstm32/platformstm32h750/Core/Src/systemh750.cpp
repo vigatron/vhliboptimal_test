@@ -7,31 +7,44 @@
 
 static void MPU_Config(void)
 {
-  MPU_Region_InitTypeDef MPU_InitStruct = {0};
+    MPU_Region_InitTypeDef MPU_InitStruct = {0};
 
-  /* Disables the MPU */
-  HAL_MPU_Disable();
+    /* Отключаем MPU на время переконфигурации */
+    HAL_MPU_Disable();
 
-  /** Initializes and configures the Region and the memory to be protected
-  */
-  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
-  MPU_InitStruct.Number = MPU_REGION_NUMBER0;
-  MPU_InitStruct.BaseAddress = 0x0;
-  MPU_InitStruct.Size = MPU_REGION_SIZE_4GB;
-  MPU_InitStruct.SubRegionDisable = 0x87;
-  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
-  MPU_InitStruct.AccessPermission = MPU_REGION_NO_ACCESS;
-  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
-  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
-  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
-  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+    /* Регион 0: ITCM (0x0000_0000, 64K) - полный доступ, исполнение разрешено */
+    MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+    MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+    MPU_InitStruct.BaseAddress = 0x00000000;
+    MPU_InitStruct.Size = MPU_REGION_SIZE_64KB;
+    MPU_InitStruct.SubRegionDisable = 0x00;
+    MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+    MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+    MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;  // исполнение РАЗРЕШЕНО
+    MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+    MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;       // ITCM обычно не кэшируют
+    MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
 
-  HAL_MPU_ConfigRegion(&MPU_InitStruct);
-  /* Enables the MPU */
-  HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
+    HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
+    /* Регион 1: DTCM (0x2000_0000, 128K) - данные, исполнение можно запретить */
+    MPU_InitStruct.Number = MPU_REGION_NUMBER1;
+    MPU_InitStruct.BaseAddress = 0x20000000;
+    MPU_InitStruct.Size = MPU_REGION_SIZE_128KB;
+    MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+    MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE; // исполнение запрещено (опционально)
+    MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+    MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+    MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
+
+    HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+    /* Регион 2: AXI SRAM + остальные RAM (опционально, по необходимости) */
+    /* Например, 0x2400_0000, 512K+ */
+
+    /* Включаем MPU */
+    HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 }
-
 
 /**
   * @brief System Clock Configuration
@@ -162,9 +175,33 @@ extern "C" void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE END Callback 1 */
 }
 
+extern uint32_t _sitcm_load;
+extern uint32_t _sitcm;
+extern uint32_t _eitcm;
+
+void Copy_ITCM_Code(void) {
+
+    uint32_t *pSrc  = &_sitcm_load;
+    uint32_t *pDest = &_sitcm;
+
+    // Побитовое копирование данных из Flash в ITCM RAM
+    while (pDest < & _eitcm) {
+        *pDest++ = *pSrc++;
+    }
+
+    // Обязательная очистка конвейера команд процессора
+    __DSB();
+    __ISB();
+}
+
+
 //
 void VHBoardInit() {
 
+    //
+    Copy_ITCM_Code();
+
+    //
     MPU_Config();
 
     /* ВключениеInstruction Cache (I-Cache) */

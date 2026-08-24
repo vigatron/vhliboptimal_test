@@ -14,6 +14,7 @@ set(CMAKE_CXX_STANDARD 17)
 # Важно: отключаем проверку запуска тестового бинаря
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
+#
 set(VHBASE_ARM_OPTIONS
     -mcpu=cortex-m7
     -mfpu=fpv5-sp-d16
@@ -53,7 +54,7 @@ set(CMAKE_C_FLAGS_DEBUG "-O0 -g3")
 set(CMAKE_C_FLAGS_RELEASE "-O3 -g0 ${COMMON_PERF_FLAGS}") 
 
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g0 -flto ${COMMON_PERF_FLAGS} -fdevirtualize-at-ltrans")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -flto -g0 ${COMMON_PERF_FLAGS} -ffast-math -fdevirtualize-at-ltrans")
 
 #
 string(REPLACE ";" " " VHBASE_ARM_OPTIONS_CLEAN "${VHBASE_ARM_OPTIONS}")
@@ -74,6 +75,7 @@ add_link_options(
     -mcpu=cortex-m7
     -mfpu=fpv5-sp-d16
     -mfloat-abi=hard
+    -u _printf_float
     -T${CMAKE_SOURCE_DIR}/src/appstm32/platformstm32f746/STM32F746xx_FLASH.ld
     -Wl,--gc-sections
     -Wl,-Map=${CMAKE_PROJECT_NAME}.map

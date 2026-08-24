@@ -14,8 +14,6 @@
 #include "example6.h"
 #include "example7.h"
 
-static constexpr uint32_t blocksize = 33 * 1024;
-static uint8_t unpacked_bmp_area[blocksize] __attribute__((aligned(4)));
 
 static VHRLE7b rle;
 
@@ -61,48 +59,19 @@ uint32_t VHTestImagesArray::memblock_size(uint16_t imgid) {
 /**
  * 
  */
-uint32_t VHTestImagesArray::memblock_unpacked_size(uint16_t imgid) {
-
-    return blocksize;
-}
-
-
-/**
- * 
- */
-uint8_t * VHTestImagesArray::TempPtr() {
-    return unpacked_bmp_area;
-}
-
-/**
- * 
- */
-uint32_t VHTestImagesArray::TempMaxBufferSize() {
-    return blocksize;
-}
-
-/**
- * 
- */
-verr VHTestImagesArray::unpack(uint16_t imageid) {
+verr VHTestImagesArray::unpack(uint16_t imageid, uint8_t * ptrdst, uint16_t dstszmax) {
 
     if(!(imageid >= GetFirstID() && imageid <= GetLastID()))
         return verror(1);
 
     const uint8_t             * prle        = memblock_data(imageid);
     const uint32_t              blocksz     = memblock_size(imageid);
-    // const VHRLE7b::sthdr      * phdr        = (const VHRLE7b::sthdr *)prle;
 
-    uint8_t *                   ptrdst      = TempPtr();
-    uint32_t                    sizedst     = TempMaxBufferSize();
-
-    verr retunpack = rle.unpack(prle, blocksz, ptrdst, sizedst);
+    verr retunpack = rle.unpack(prle, blocksz, ptrdst, dstszmax);
 
     if(retunpack) {
         return verrmsg(201, "Can't unpack RLE memblock");
     }
-
-    // printf("Image #%d unpack result status: %s \n", imgid, retunpack ? "FAILED" : "OK");
 
     return retunpack;
 }
@@ -146,31 +115,36 @@ verr VHTestImagesArray::CheckIntegrity() {
     return r;
 }
 
-/**
- * 
- */
-verr VHTestImagesArray::CheckResolutions() {
+// static constexpr uint32_t blocksize = 33 * 1024;
+// static uint8_t unpacked_bmp_area[blocksize] __attribute__((aligned(4)));
 
-    printf("\nTest image set:\n");
+// const VHRLE7b::sthdr      * phdr        = (const VHRLE7b::sthdr *)prle;
+// uint8_t *                   ptrdst      = TempPtr();
+// uint32_t                    sizedst     = TempMaxBufferSize();
 
-    for(uint16_t blkid = GetFirstID(); blkid <= GetLastID(); blkid++) {
-        
-        verr result = unpack(blkid);
-        int width = 0;
-        int height = 0;
+// printf("Image #%d unpack result status: %s \n", imgid, retunpack ? "FAILED" : "OK");
 
-        if(result == vok) {
-            const uint8_t * pbmphdr = VHTestImagesArray::TempPtr() + sizeof(vhliboptimal::BMPFileHeader);
-            const vhliboptimal::BMPInfoHeader * phdr = (vhliboptimal::BMPInfoHeader *)pbmphdr;
-            width = phdr->width;
-            height = phdr->height;
-        }
+// static uint8_t *TempPtr();
+// static uint32_t TempMaxBufferSize();
+// static uint32_t memblock_unpacked_size(uint16_t imgid);
 
-        uint8_t sc = GetScaller(blkid);
+// /**
+//  * 
+//  */
+// uint32_t VHTestImagesArray::memblock_unpacked_size(uint16_t imgid) {
+//     return blocksize;
+// }
 
-        printf("BMP (1-bit) B&W Image #%d: %4d x %4d (Original %4d x %4d)\n",
-            blkid, width, height, width * sc, height * sc);
-    }
+// /**
+//  * 
+//  */
+// uint8_t * VHTestImagesArray::TempPtr() {
+//     return unpacked_bmp_area;
+// }
 
-    return vok;
-}
+// /**
+//  * 
+//  */
+// uint32_t VHTestImagesArray::TempMaxBufferSize() {
+//     return blocksize;
+// }

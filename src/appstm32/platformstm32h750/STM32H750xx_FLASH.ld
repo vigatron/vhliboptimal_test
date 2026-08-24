@@ -111,10 +111,14 @@ SECTIONS
     .itcm_text :
     {
         . = ALIGN(4);
+        _sitcm = .;              /* VMA start */
         *(.itcm_text)
         *(.itcm_text*)
         . = ALIGN(4);
+        _eitcm = .;              /* VMA end */
     } >ITCMRAM AT>FLASH
+
+    _sitcm_load = LOADADDR(.itcm_text);
 
   /* Constant data goes into FLASH */
   .rodata :

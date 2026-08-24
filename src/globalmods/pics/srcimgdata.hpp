@@ -12,18 +12,12 @@ public:
 
     static const uint8_t *memblock_data(uint16_t imgid);
     static uint32_t memblock_size(uint16_t imgid);
-    static uint32_t memblock_unpacked_size(uint16_t imgid);
-
-    static uint8_t *TempPtr();
-    static uint32_t TempMaxBufferSize();
 
     static verr CheckIntegrity();
-    static verr CheckResolutions();
 
-    static verr unpack(uint16_t blkid);
+    static verr unpack(uint16_t blkid, uint8_t * dstptr, uint16_t dstszmax);
 
-private:
-    static verr check_memblock(uint16_t id);
+    static uint16_t minRequiredBufferSize() { return 33 * 1024; }
 
     static uint8_t GetScaller(uint16_t imgid)
     {
@@ -47,4 +41,11 @@ private:
         }
         return 0;
     }
+
+    static verr check_memblock(uint16_t id);
+    
+private:
+
+
+
 };

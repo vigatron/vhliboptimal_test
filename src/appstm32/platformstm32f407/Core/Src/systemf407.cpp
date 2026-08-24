@@ -86,6 +86,10 @@ void VHBoardInit() {
     /* Configure the system clock */
     SystemClock_Config();
 
+    __HAL_FLASH_INSTRUCTION_CACHE_ENABLE();
+    __HAL_FLASH_DATA_CACHE_ENABLE();
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+
     /* Initialize all configured peripherals */
     VHSYS_MX_GPIO_Init();
 
