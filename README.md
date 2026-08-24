@@ -16,35 +16,40 @@ Full Source Code on GitHub: [https://github.com/vigatron/vhliboptimal_test](http
 
 ### Tested Platforms
 
-| Platform / Board             | CPU / MCU        | Arch       | Freq      |
-|------------------------------|------------------|------------|-----------|
-| ASUS Vivobook                | Intel i5-1135G7  | x86_64     | 2.40 GHz  |
-| AMD Based Desktop            | AMD FX-8300      | x86_64     | 3.30 GHz  |
-| Orange Pi PC Plus            | ARM Cortex-A7    | ARMv7-A    | 1.20 GHz  |
-| Raspberry Pi Model B+ V1.2   | ARM1176JZF-S     | ARMv6      | 700 MHz   |
-| CMB32F407HDMIR3              | STM32F407        | Cortex-M4  | 168 MHz   |
-| WAVESHARE CORE7XXI           | STM32F746        | Cortex-M7  | 216 MHz   |
-| CMB32H750HDMIR1              | STM32H750        | Cortex-M7  | 480 MHz   |
-| ESP32-WROOM-32D              | ESP32-D0WD       | Xtensa LX6 | 240 MHz   |
+| Platform / Board             | Processor / MCU  | Architecture | Freq      |
+|------------------------------|------------------|--------------|-----------|
+| ASUS Vivobook                | Intel i5-1135G7  | x86_64       | 2.40 GHz  |
+| AMD Based Desktop            | AMD FX-8300      | x86_64       | 3.30 GHz  |
+| Orange Pi PC Plus            | ARM Cortex-A7    | ARMv7-A      | 1.20 GHz  |
+| Raspberry Pi Model B+ V1.2   | ARM1176JZF-S     | ARMv6        | 700 MHz   |
+| CMB32F407HDMIR3              | STM32F407        | Cortex-M4    | 168 MHz   |
+| Waveshare Core7XXI           | STM32F746        | Cortex-M7    | 216 MHz   |
+| CMB32H750HDMIR1              | STM32H750        | Cortex-M7    | 480 MHz   |
+| ESP32-WROOM-32D              | ESP32-D0WD       | Xtensa LX6   | 240 MHz   |
 
 *Rev 0.0.7 Notes:*
 
+
+Time-critical routines placed in `ITCMRAM` / `IRAM`
+
+
 * STM32F407:  
-    * Optimized for CCMRAM only (BitFields data arrays)  
-    * time-critical running in FLASH section faster than in FastRam  
-    * Instruction related region (IRAM) not availbale  
+    * BitFields data arrays optimized for CCMRAM  
+    * Time-critical routines running in FLASH section faster than in SRAM  
+    * ITCMRAM is not available on STM32F407  
 
 * STM32F746:  
-    * Optimized for DTCMRAM only (BitFields data arrays)  
-    * ITCMRAM optimization pending in this revision.  
+    * Optimized for DTCMRAM (BitFields data arrays)
+    * Selected time-critical routines placed in ITCMRAM
 
 * STM32H750:  
-    * Optimized for DTCMRAM only (BitFields data arrays)  
-    * ITCMRAM optimization pending in this revision.  
+    * Optimized for DTCMRAM (BitFields data arrays)  
+    * Selected time-critical routines placed in ITCMRAM
 
 * ESP32-D0WD:  
     * Optimized for ESP32 DRAM (BitFields data arrays)  
-    * Optimized for ESP32 IRAM (time-critical BitFields routines)  
+    * Selected time-critical routines placed in IRAM
+
 
 <br>
 
@@ -150,7 +155,8 @@ Full Source Code on GitHub: [https://github.com/vigatron/vhliboptimal_test](http
 
 
 
-**rev 0.8.1** Optimized for `STM32` `F4` / `F7` / `H7`
+**Library rev 0.8.1**  
+Optimized for `STM32` `F4` / `F7` / `H7`  
 
 * CMB32F407HDMIR3 (STM32F407) [GRID 512x512](docs/rev0p8p1/bench_cmb32f407hdmir3_0p8p1_512.txt) | [GRID 256x256](docs/rev0p8p1/bench_cmb32f407hdmir3_0p8p1_256.txt) | [GRID 128x128](docs/rev0p8p1/bench_cmb32f407hdmir3_0p8p1_128.txt)
 
@@ -159,7 +165,8 @@ Full Source Code on GitHub: [https://github.com/vigatron/vhliboptimal_test](http
 * CMB32H750HDMIR1 (STM32H750) [GRID 512x512](docs/rev0p8p1/bench_cmb32h750hdmir1_0p8p1_512.txt) | [GRID 256x256](docs/rev0p8p1/bench_cmb32h750hdmir1_0p8p1_256.txt) | [GRID 128x128](docs/rev0p8p1/bench_cmb32h750hdmir1_0p8p1_128.txt)
 
 
-**rev 0.8.0** Added `zero-allocation` support with `FIXED_GRID` option for `STM32` & `ESP32`
+**Library rev 0.8.0**  
+Added `zero-allocation` support with `FIXED_GRID` option for `STM32` & `ESP32`  
 
 * [Benchmark results on Intel i5-1135G7](docs/rev0p8p0/bench_intel_i5-1135G7.txt)
 * [Benchmark results on AMD FX-8300](docs/rev0p8p0/bench_amd_fx8300.txt)
@@ -171,11 +178,12 @@ Full Source Code on GitHub: [https://github.com/vigatron/vhliboptimal_test](http
 * [Benchmark results on ESP32-WROOM-32D initial revision](docs/rev0p8p0/bench_esp32_d0wd.txt)
 * [Benchmark results on ESP32-WROOM-32D optimized revision](docs/rev0p8p0/bench_esp32_d0wd_optimized.txt)
 
-**rev 0.7.5** Initial revision for `PC` and `SBC`
+**Library rev 0.7.5**  
+Initial revision for `PC` and `SBC`  
 
-* [Benchmark on Intel i5-1135G7 @ 2.40GHz](docs/bench/rev0p7p5/bench_intel_i5-1135G7.md)
-* [Benchmark on AMD FX-8300 @ 3.30Ghz](docs/bench/rev0p7p5/bench_amd_fx8300.md)
-* [Benchmark on Orange PC Plus ARM Cortex-A7 @ 1.2GHz](docs/bench/rev0p7p5/bench_opi_pc_plus.md)
+* [Benchmark on Intel i5-1135G7 @ 2.40 GHz](docs/bench/rev0p7p5/bench_intel_i5-1135G7.md)
+* [Benchmark on AMD FX-8300 @ 3.30 GHz](docs/bench/rev0p7p5/bench_amd_fx8300.md)
+* [Benchmark on Orange Pi PC Plus ARM Cortex-A7 @ 1.2 GHz](docs/bench/rev0p7p5/bench_opi_pc_plus.md)
 
 <br>
 
