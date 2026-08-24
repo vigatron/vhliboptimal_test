@@ -148,13 +148,18 @@ Full Source Code on GitHub: [https://github.com/vigatron/vhliboptimal_test](http
 
 ## Benchmark Results
 
-rev 0.8.1 - Optimized for `STM32` F4 / F7 / H7  
 
-* CMB32F407HDMIR3 / STM32F407 [GRID 512x512](docs/rev0p8p1/bench_cmb32f407hdmir3_0p8p1_512.txt) | [GRID 256x256](docs/rev0p8p1/bench_cmb32f407hdmir3_0p8p1_256.txt) | [GRID 128x128](docs/rev0p8p1/bench_cmb32f407hdmir3_0p8p1_128.txt)
-* WaveShare Core7XXI / STM32F746 [GRID 512x512](log512.txt) | [GRID 256x256](log256.txt) | [GRID 128x128](log128.txt)
-* CMB32H750HDMIR1 / STM32H750 [GRID 512x512](log512.txt) | [GRID 256x256](log256.txt) | [GRID 128x128](log128.txt)
 
-rev 0.8.0 - Added `zero-allocation` support with `FIXED_GRID` option for `STM32` & `ESP32`
+**rev 0.8.1** Optimized for `STM32` `F4` / `F7` / `H7`
+
+* CMB32F407HDMIR3 (STM32F407) [GRID 512x512](docs/rev0p8p1/bench_cmb32f407hdmir3_0p8p1_512.txt) | [GRID 256x256](docs/rev0p8p1/bench_cmb32f407hdmir3_0p8p1_256.txt) | [GRID 128x128](docs/rev0p8p1/bench_cmb32f407hdmir3_0p8p1_128.txt)
+
+* WaveShare Core7XXI (STM32F746) [GRID 512x512](log512.txt) | [GRID 256x256](log256.txt) | [GRID 128x128](log128.txt)
+
+* CMB32H750HDMIR1 (STM32H750) [GRID 512x512](log512.txt) | [GRID 256x256](log256.txt) | [GRID 128x128](log128.txt)
+
+
+**rev 0.8.0** Added `zero-allocation` support with `FIXED_GRID` option for `STM32` & `ESP32`
 
 * [Benchmark results on Intel i5-1135G7](docs/rev0p8p0/bench_intel_i5-1135G7.txt)
 * [Benchmark results on AMD FX-8300](docs/rev0p8p0/bench_amd_fx8300.txt)
@@ -166,8 +171,7 @@ rev 0.8.0 - Added `zero-allocation` support with `FIXED_GRID` option for `STM32`
 * [Benchmark results on ESP32-WROOM-32D initial revision](docs/rev0p8p0/bench_esp32_d0wd.txt)
 * [Benchmark results on ESP32-WROOM-32D optimized revision](docs/rev0p8p0/bench_esp32_d0wd_optimized.txt)
 
-
-rev 0.7.5 - Initial revision for `PC` and `SBC`
+**rev 0.7.5** Initial revision for `PC` and `SBC`
 
 * [Benchmark on Intel i5-1135G7 @ 2.40GHz](docs/bench/rev0p7p5/bench_intel_i5-1135G7.md)
 * [Benchmark on AMD FX-8300 @ 3.30Ghz](docs/bench/rev0p7p5/bench_amd_fx8300.md)
@@ -186,15 +190,25 @@ rev 0.7.5 - Initial revision for `PC` and `SBC`
 * vhlibrle7b  0.0.4
 [https://github.com/vigatron/vhlibrle7b](https://github.com/vigatron/vhlibrle7b)  
 
+<br>
+
 
 ### Build & Run
 
 * [Project compilation for different target platforms](docs/appbuild_and_run.md)
 
+<br>
 
-#### Link to resized monochrome .bmp images:  
 
-* [Test Images (#1..#7) with different shapes & text symbols](docs/srcimages.md)
+### GRID Memory Layout Configuration
+
+| Grid Size   | Scale Level | Dimensions | Total Memory | Breakdown (Objects + Spans) |
+|-------------|-------------|------------|--------------|-----------------------------|
+| GRID_512x512 | SCALE_LV = 9 | 512 × 512  | 118,336 bytes | 12,800 bytes (800 objects) + 40,000 bytes (10,000 spans) |
+| GRID_256x256 | SCALE_LV = 8 | 256 × 256  | 69,184 bytes  | 12,800 bytes (800 objects) + 40,000 bytes (10,000 spans) |
+| GRID_128x128 | SCALE_LV = 7 | 128 × 128  | 56,896 bytes  | 12,800 bytes (800 objects) + 40,000 bytes (10,000 spans) |
+
+<br>
 
 
 ### Common camera image resolutions
@@ -211,14 +225,12 @@ rev 0.7.5 - Initial revision for `PC` and `SBC`
 | QSXGA     | 2592 × 1944     | 4:3          |
 | 4K UHD    | 3840 × 2160     | 16:9         |
 
----
+<br>
 
-#### GRID Configuration / Image Tests
+#### Link to resized monochrome .bmp images:  
 
-* GRID_512x512        SCALE_LV = 9 (512)
-* GRID_256x256        SCALE_LV = 8 (256)
-* GRID_128x128        SCALE_LV = 7 (128)
+* [Test Images (#1..#7) with different shapes & text symbols](docs/srcimages.md)
 
----
+<br>
 
 © 2026 V01G04A81 / Viktor Glebov

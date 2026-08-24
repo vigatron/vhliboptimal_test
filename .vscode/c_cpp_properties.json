@@ -2,22 +2,18 @@
     "configurations": [
         {
             "name": "ESP32",
-            "includePath": [
-            ],
+            "includePath": [],
             "defines": [],
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "gcc-x64",
-            "compileCommands": [
-            ],
             "mergeConfigurations": false,
             "recursiveIncludes": {},
             "browse": {
                 "limitSymbolsToIncludedHeaders": true
             },
-            // "compileCommandsInCppPropertiesJson": [
-            // ],
-            "configurationProvider": "ms-vscode.cmake-tools"
+            "compileCommands": [
+            ]
         }
     ],
     "version": 4

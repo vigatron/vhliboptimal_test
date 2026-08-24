@@ -87,6 +87,20 @@ LoopCopyDataInit:
   movs r3, #0
   b LoopFillZerobss
 
+/* V01G04A81: Copy ITCM functions */
+  ldr   r0, =_sitcm_load   /* source in FLASH */
+  ldr   r1, =_sitcm        /* destination in ITCMRAM */
+  ldr   r2, =_eitcm        /* end of ITCMRAM section */
+CopyITCM:
+  cmp   r1, r2
+  bcc   CopyITCMDo
+  b     CopyITCMEnd
+CopyITCMDo:
+  ldr   r3, [r0], #4
+  str   r3, [r1], #4
+  b     CopyITCM
+CopyITCMEnd:
+
 FillZerobss:
   str  r3, [r2]
   adds r2, r2, #4

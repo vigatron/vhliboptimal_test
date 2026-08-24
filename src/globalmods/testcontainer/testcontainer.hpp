@@ -76,6 +76,7 @@ class TestLibraryContainer {
         /**
          * 
          */
+        VHLIB_OPTIMAL_FASTFUNC
         verr    CopyAndScale            (uint16_t imageid, uint8_t sclevel);
 
         /**
@@ -86,6 +87,7 @@ class TestLibraryContainer {
         /**
          * 
          */
+        // VHLIB_OPTIMAL_FASTFUNC
         verr    TestImageIteration      (uint16_t imageid, uint8_t levelcs);
 
         /**
