@@ -154,9 +154,9 @@ Full Source Code on GitHub: [https://github.com/vigatron/vhliboptimal_test](http
 
 * CMB32F407HDMIR3 (STM32F407) [GRID 512x512](docs/rev0p8p1/bench_cmb32f407hdmir3_0p8p1_512.txt) | [GRID 256x256](docs/rev0p8p1/bench_cmb32f407hdmir3_0p8p1_256.txt) | [GRID 128x128](docs/rev0p8p1/bench_cmb32f407hdmir3_0p8p1_128.txt)
 
-* WaveShare Core7XXI (STM32F746) [GRID 512x512](log512.txt) | [GRID 256x256](log256.txt) | [GRID 128x128](log128.txt)
+* WaveShare Core7XXI (STM32F746) [GRID 512x512](docs/rev0p8p1/bench_wavesharecore7xxi_0p8p1_512.txt) | [GRID 256x256](docs/rev0p8p1/bench_wavesharecore7xxi_0p8p1_256.txt) | [GRID 128x128](docs/rev0p8p1/bench_wavesharecore7xxi_0p8p1_128.txt)
 
-* CMB32H750HDMIR1 (STM32H750) [GRID 512x512](log512.txt) | [GRID 256x256](log256.txt) | [GRID 128x128](log128.txt)
+* CMB32H750HDMIR1 (STM32H750) [GRID 512x512](docs/rev0p8p1/bench_cmb32h750hdmir1_0p8p1_512.txt) | [GRID 256x256](docs/rev0p8p1/bench_cmb32h750hdmir1_0p8p1_256.txt) | [GRID 128x128](docs/rev0p8p1/bench_cmb32h750hdmir1_0p8p1_128.txt)
 
 
 **rev 0.8.0** Added `zero-allocation` support with `FIXED_GRID` option for `STM32` & `ESP32`
