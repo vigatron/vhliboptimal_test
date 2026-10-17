@@ -1,5 +1,8 @@
 set(STARTUP_FILE        "${APP_STM32_DIR}/platformstm32h750/startup_stm32h750xx.s")
-set(SYS_CORE_DIR        "${APP_STM32_DIR}/platformstm32h750/Core/Src")
+
+set(SYS_CORE_DIR_HDR    "${APP_STM32_DIR}/platformstm32h750/Core/Inc")
+set(SYS_CORE_DIR_SRC    "${APP_STM32_DIR}/platformstm32h750/Core/Src")
+
 set(HAL_DRIVER_DIR      "${CUBEMX_PATH}/Drivers/STM32H7xx_HAL_Driver")
 
 # Includes 750 Related
@@ -78,15 +81,15 @@ set(FreeRTOS_Src
 
 set(STM32_CORE_FILES
 
-    "${SYS_CORE_DIR}/freertos.c"
-    "${SYS_CORE_DIR}/syscalls.c"
-    "${SYS_CORE_DIR}/sysmem.c"
-    "${SYS_CORE_DIR}/systemh750.cpp"
+    "${SYS_CORE_DIR_SRC}/freertos.c"
+    "${SYS_CORE_DIR_SRC}/syscalls.c"
+    "${SYS_CORE_DIR_SRC}/sysmem.c"
+    "${SYS_CORE_DIR_SRC}/systemh750.cpp"
 
-    "${SYS_CORE_DIR}/stm32h7xx_hal_msp.c"
-    "${SYS_CORE_DIR}/stm32h7xx_hal_timebase_tim.c"
-    "${SYS_CORE_DIR}/stm32h7xx_it.c"
+    "${SYS_CORE_DIR_SRC}/stm32h7xx_hal_msp.c"
+    "${SYS_CORE_DIR_SRC}/stm32h7xx_hal_timebase_tim.c"
+    "${SYS_CORE_DIR_SRC}/stm32h7xx_it.c"
 
-    "${SYS_CORE_DIR}/system_stm32h7xx.c"
+    "${SYS_CORE_DIR_SRC}/system_stm32h7xx.c"
 
 )

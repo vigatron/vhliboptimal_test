@@ -5,119 +5,128 @@
 #include "vhliboptimal.hpp"
 #include "log/log.hpp"
 
-#include "timer/vhtimerstamp.hpp"
-#include "timer/timeaverager.hpp"
+#include "vhtimerstamp.hpp"
+#include "vhtimeaverager.hpp"
 
+#ifdef VHLIB_OPTIMAL_DEBUG
+#define VHLIB_OPTIMAL_LOG_LEVEL 3
+#define VHLIB_OPTIMAL_TEST_PASS_COUNT 1
+#else
+#define VHLIB_OPTIMAL_LOG_LEVEL 1
+#endif
 
-class TestLibraryContainer {
+// Default pass count
+#ifndef VHLIB_OPTIMAL_TEST_PASS_COUNT
+#define VHLIB_OPTIMAL_TEST_PASS_COUNT 16
+#endif
 
-    public:
+class TestLibraryContainer
+{
 
-        /**
-         * 
-         */
-        TestLibraryContainer() = default;
+public:
+    /**
+     *
+     */
+    TestLibraryContainer() = default;
 
-        /**
-         * 
-         */
-        verr Init();
+    /**
+     *
+     */
+    verr Init();
 
-        /**
-         * 
-         */
-        verr StartTests();
+    /**
+     *
+     */
+    verr StartTests();
 
-        /**
-         * 
-         */
-        static void CALLBACK_VHLIBOPTIMAL_Border(
-            void *caller,
-            uint8_t cmd,
-            uint8_t dirh, 
-            uint8_t dirv,
-            uint16_t cellx,
-            uint16_t celly);
+    /**
+     *
+     */
+    static void CALLBACK_VHLIBOPTIMAL_Border(
+        void *caller,
+        uint8_t cmd,
+        uint8_t dirh,
+        uint8_t dirv,
+        uint16_t cellx,
+        uint16_t celly);
 
-        /**
-         * 
-         */
-        static void CALLBACK_VHLIBOPTIMAL_Content(
-            void *caller,
-            uint32_t cell1,
-            uint32_t cell2,
-            uint8_t dir);
+    /**
+     *
+     */
+    static void CALLBACK_VHLIBOPTIMAL_Content(
+        void *caller,
+        uint32_t cell1,
+        uint32_t cell2,
+        uint8_t dir);
 
-        /**
-         * 
-         */
-        static void CALLBACK_VHLIBOPTIMAL_Benchmark(
-            void *caller,
-            int cmd,
-            int param);
+    /**
+     *
+     */
+    static void CALLBACK_VHLIBOPTIMAL_Benchmark(
+        void *caller,
+        int cmd,
+        int param);
 
-    private:
+private:
+    // Global variables
+    vhliboptimal::VHLibOptimal detector;
 
-        // Global variables
-        vhliboptimal::VHLibOptimal          detector;
+    // Benchmark: sampling related
+    VHTimerAverager arrtsSampling;
 
-        // Benchmark: sampling related
-        TimerAverager                       arrtsSampling;
+    // Benchmark: scan related
+    VHTimerAverager arrtsScanning;
 
-        // Benchmark: scan related
-        TimerAverager                       arrtsScanning;
+    // Measured when called with callback / IFACE Callbacks
+    VHTimerStamp tsSampling;
 
-        // Measured when called with callback / IFACE Callbacks
-        VHTimerStamp                        tsSampling;
+    // Measured when called with callback / IFACE Callbacks
+    VHTimerStamp tsScanning;
 
-        // Measured when called with callback / IFACE Callbacks
-        VHTimerStamp                        tsScanning;
+    /**
+     *
+     */
+    VHLIB_OPTIMAL_FASTFUNC
+    verr CopyAndScale(uint16_t imageid, uint8_t sclevel);
 
-        /**
-         * 
-         */
-        VHLIB_OPTIMAL_FASTFUNC
-        verr    CopyAndScale            (uint16_t imageid, uint8_t sclevel);
+    /**
+     *
+     */
+    verr TestImageAverage(uint16_t imageid, uint8_t levelcs);
 
-        /**
-         * 
-         */
-        verr    TestImageAverage        (uint16_t imageid, uint8_t levelcs);
+    /**
+     *
+     */
+    // VHLIB_OPTIMAL_FASTFUNC
+    verr TestImageIteration(uint16_t imageid, uint8_t levelcs);
 
-        /**
-         * 
-         */
-        // VHLIB_OPTIMAL_FASTFUNC
-        verr    TestImageIteration      (uint16_t imageid, uint8_t levelcs);
+    /**
+     *
+     */
+    verr CheckResolutions();
 
-        /**
-         * 
-         */
-        verr    CheckResolutions();
+    /**
+     *
+     */
+    void CallbackBorder(
+        uint8_t cmd,
+        uint8_t dirh,
+        uint8_t dirv,
+        uint16_t cellx,
+        uint16_t celly);
 
-        /**
-         * 
-         */
-        void CallbackBorder(
-            uint8_t cmd,
-            uint8_t dirh, 
-            uint8_t dirv,
-            uint16_t cellx,
-            uint16_t celly);
+    /**
+     *
+     */
+    void CallbackContent(
+        uint32_t cell1,
+        uint32_t cell2,
+        uint8_t dir);
 
-        /**
-         * 
-         */
-        void CallbackContent(
-            uint32_t cell1,
-            uint32_t cell2,
-            uint8_t dir);
-
-        /**
-         * 
-         */
-        void CallbackBenchmark(
-            int cmd,
-            int param);
-
+    /**
+     *
+     */
+    void CallbackBenchmark(
+        int cmd,
+        int param);
 };

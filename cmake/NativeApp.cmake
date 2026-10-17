@@ -4,7 +4,6 @@ message(STATUS "Configuring for native build with Qt6")
 add_executable(${PROJECT_NAME}
     src/appnative/main.cpp
 
-    src/globalmods/timer/vhtimerstamp.cpp
     src/globalmods/pics/srcimgdata.cpp
     src/globalmods/sysinfo/sysinfo.cpp
     
@@ -34,14 +33,20 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 target_link_libraries(${PROJECT_NAME} PRIVATE
     vhlib_platform
     vhlib_rle7b
+    vhlib_timerstamp
     vhlib_optimal
 )
+
+#
+target_compile_definitions(vhlib_timerstamp PRIVATE
+    VHPLATFORM_PC
+)
+
 
 # Application Settings
 target_compile_definitions(${PROJECT_NAME} PRIVATE
     VHPLATFORM_PC
     APP_VERSION_SUFFIX="${APP_VERSION_SUFFIX_STR}"
-    VHLIBOPTIMAL_TEST_PASS_COUNT=16
     VHLIBOPTIMAL_TEST_FLTVAL=200
     SAVE_RESULTS=1
 )

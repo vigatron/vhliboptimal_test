@@ -5,7 +5,7 @@ set(ALLOWED_TARGETS "native" "CMB32F407HDM" "STM32F4DISCOVERY" "WAVESHARECORE7XX
 set(BUILD_TARGET "native" CACHE STRING "Select target: ${ALLOWED_TARGETS}")
 set_property(CACHE BUILD_TARGET PROPERTY STRINGS ${ALLOWED_TARGETS})
 
-project(test_lib_optimal VERSION 0.0.7 LANGUAGES C CXX ASM)
+project(test_lib_optimal VERSION 0.0.9 LANGUAGES C CXX ASM)
 
 # set(APP_VERSION_SUFFIX_STR "-beta")
 
@@ -25,7 +25,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 add_subdirectory(src/extmods/vhlibplatform)
 add_subdirectory(src/extmods/vhliboptimal)
 add_subdirectory(src/extmods/vhlibrle7b)
-
+add_subdirectory(src/extmods/vhlibtimerstamp)
 
 
 # ------------------------------------------------------------
@@ -49,6 +49,12 @@ elseif(VHLIB_OPTIMAL_GRID_GIZE STREQUAL "128")
     # 7: 128x128 :  2K Grid : LEVELCS=2
     set(VHLIB_OPTIMAL_GRID_PARAMS VHLIB_OPTIMAL_GRID_FIXED VHLIB_OPTIMAL_GRID_LX=7 VHLIB_OPTIMAL_GRID_LY=7)
 
+elseif(VHLIB_OPTIMAL_GRID_GIZE STREQUAL "64")
+
+    # 6: 64x64 :  512 bytes Grid : LEVELCS=3
+    set(VHLIB_OPTIMAL_GRID_PARAMS VHLIB_OPTIMAL_GRID_FIXED VHLIB_OPTIMAL_GRID_LX=6 VHLIB_OPTIMAL_GRID_LY=6)
+
+
 endif()
 
 
@@ -70,11 +76,9 @@ set(VHLIB_OPTIMAL_DEFS
     # Embedded version
     VHLIB_OPTIMAL_STL=0
 
-    VHLIB_OPTIMAL_LOG_LEVEL=1
     # VHLIB_OPTIMAL_DEBUG
 
 )
-
 
 
 # 2. Наполняем специфичные для платформ флаги кэша
@@ -109,10 +113,23 @@ endif()
 # ----------------------------------------------
 target_compile_definitions(vhlib_optimal PUBLIC ${VHLIB_OPTIMAL_DEFS} )
 
+
 #
 if(BUILD_TARGET STREQUAL "native")
     include(NativeApp)
+
 else()
     include(STM32BoardConfig)
     include(STM32App)
+
+    #
+    target_compile_definitions(vhlib_timerstamp PRIVATE
+        VHPLATFORM_STM32
+    )
+
+    target_include_directories(vhlib_timerstamp PRIVATE
+        ${HAL_DRIVER_DIR}/Inc
+        ${APP_INCLUDE_DIRS}
+    )
+    
 endif()

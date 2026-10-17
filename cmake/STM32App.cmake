@@ -25,7 +25,6 @@ add_executable(${TARGET_ELF}
     ${APP_STM32_DIR}/global.cpp
 
     src/globalmods/sysinfo/sysinfo.cpp
-    src/globalmods/timer/vhtimerstamp.cpp
     src/globalmods/pics/srcimgdata.cpp
     src/globalmods/testcontainer/testcontainer.cpp
 )
@@ -46,22 +45,23 @@ target_include_directories(${TARGET_ELF} PRIVATE
     ${APP_INCLUDE_DIRS}
 )
 
+#
 target_link_libraries(${TARGET_ELF} PRIVATE
     -Wl,--whole-archive
+    vhlib_timerstamp
     vhlib_optimal
     -Wl,--no-whole-archive
     vhlib_platform
     vhlib_rle7b
 )
 
+#
 target_compile_definitions(${TARGET_ELF} PUBLIC
     VHPLATFORM_STM32
     APP_VERSION_SUFFIX="${APP_VERSION_SUFFIX_STR}"
-    VHLIBOPTIMAL_TEST_PASS_COUNT=16
     BUILD_TARGET_NAME=${BUILD_TARGET}
     TARGET_${BUILD_TARGET}
     HSE_VALUE=${HSE_VALUE}
-
 )
 
 # FLASH MCU with st-link or DFU

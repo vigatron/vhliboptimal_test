@@ -154,21 +154,23 @@ verr TestLibraryContainer::TestImageAverage(uint16_t imageid, uint8_t levelcs)
     arrtsSampling.reset();
     arrtsScanning.reset();
 
+    uint8_t passCount = VHLIB_OPTIMAL_TEST_PASS_COUNT;
+
     // Multiple cycles for average measurements values
-    for (int i = 0; i < VHLIBOPTIMAL_TEST_PASS_COUNT; i++)
+    for (int i = 0; i < passCount; i++)
     {
-        printf("# %2d of %d   |", i + 1, VHLIBOPTIMAL_TEST_PASS_COUNT);
+        printf("# %2d of %d   |", i + 1, passCount);
         TestImageIteration(imageid, levelcs);
     }
 
     // Sampling
     int ts_smp_min = arrtsSampling.resultmin();
-    int ts_smp_avg = arrtsSampling.result(VHLIBOPTIMAL_TEST_PASS_COUNT);
+    int ts_smp_avg = arrtsSampling.result(passCount);
     int ts_smp_max = arrtsSampling.resultmax();
 
     // Scanning
     int ts_scn_min = arrtsScanning.resultmin();
-    int ts_scn_avg = arrtsScanning.result(VHLIBOPTIMAL_TEST_PASS_COUNT);
+    int ts_scn_avg = arrtsScanning.result(passCount);
     int ts_scn_max = arrtsScanning.resultmax();
 
     // Summ
