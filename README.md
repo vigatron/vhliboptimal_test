@@ -198,10 +198,10 @@ Initial revision for `PC` and `SBC`
 * vhliboptimal 0.8.1  
 [https://github.com/vigatron/vhliboptimal](https://github.com/vigatron/vhliboptimal)  
 
-* vhlibrle7b 0.1.0
+* vhlibrle7b 0.1.0  
 [https://github.com/vigatron/vhlibrle7b](https://github.com/vigatron/vhlibrle7b)  
 
-* vhlibtimerstamp 0.0.2
+* vhlibtimerstamp 0.0.2  
 [https://github.com/vigatron/vhlibtimerstamp](https://github.com/vigatron/vhlibtimerstamp)  
 
 
