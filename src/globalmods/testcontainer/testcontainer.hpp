@@ -5,8 +5,8 @@
 #include "vhliboptimal.hpp"
 #include "log/log.hpp"
 
-#include "timer/vhtimerstamp.hpp"
-#include "timer/timeaverager.hpp"
+#include "vhtimerstamp.hpp"
+#include "vhtimeaverager.hpp"
 
 #ifdef VHLIB_OPTIMAL_DEBUG
 #define VHLIB_OPTIMAL_LOG_LEVEL 3
@@ -72,10 +72,10 @@ private:
     vhliboptimal::VHLibOptimal detector;
 
     // Benchmark: sampling related
-    TimerAverager arrtsSampling;
+    VHTimerAverager arrtsSampling;
 
     // Benchmark: scan related
-    TimerAverager arrtsScanning;
+    VHTimerAverager arrtsScanning;
 
     // Measured when called with callback / IFACE Callbacks
     VHTimerStamp tsSampling;

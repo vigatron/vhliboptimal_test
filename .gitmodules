@@ -10,3 +10,6 @@
 	path = src/extmods/vhlibrle7b
 	url = https://github.com/vigatron/vhlibrle7b
 	branch = main
+[submodule "src/extmods/vhlibtimerstamp"]
+	path = src/extmods/vhlibtimerstamp
+	url = https://github.com/vigatron/vhlibtimerstamp

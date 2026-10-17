@@ -1,5 +1,8 @@
 set(STARTUP_FILE        "${APP_STM32_DIR}/platformstm32f407/startup_stm32f407xx.s")
-set(SYS_CORE_DIR        "${APP_STM32_DIR}/platformstm32f407/Core/Src")
+
+set(SYS_CORE_DIR_HDR    "${APP_STM32_DIR}/platformstm32f407/Core/Inc")
+set(SYS_CORE_DIR_SRC    "${APP_STM32_DIR}/platformstm32f407/Core/Src")
+
 set(HAL_DRIVER_DIR      "${CUBEMX_PATH}/Drivers/STM32F4xx_HAL_Driver")
 
 # Includes 407 Related
@@ -19,7 +22,6 @@ set(APP_INCLUDE_DIRS
 
     ${CUBEMX_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
     ${CUBEMX_PATH}/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
-
 )
 
 set(USB_User_Src
@@ -72,15 +74,15 @@ set(FreeRTOS_Src
 
 set(STM32_CORE_FILES
 
-    "${SYS_CORE_DIR}/freertos.c"
-    "${SYS_CORE_DIR}/syscalls.c"
-    "${SYS_CORE_DIR}/sysmem.c"
-    "${SYS_CORE_DIR}/systemf407.cpp"
+    "${SYS_CORE_DIR_SRC}/freertos.c"
+    "${SYS_CORE_DIR_SRC}/syscalls.c"
+    "${SYS_CORE_DIR_SRC}/sysmem.c"
+    "${SYS_CORE_DIR_SRC}/systemf407.cpp"
 
-    "${SYS_CORE_DIR}/stm32f4xx_hal_msp.c"
-    "${SYS_CORE_DIR}/stm32f4xx_hal_timebase_tim.c"
-    "${SYS_CORE_DIR}/stm32f4xx_it.c"
+    "${SYS_CORE_DIR_SRC}/stm32f4xx_hal_msp.c"
+    "${SYS_CORE_DIR_SRC}/stm32f4xx_hal_timebase_tim.c"
+    "${SYS_CORE_DIR_SRC}/stm32f4xx_it.c"
 
-    "${SYS_CORE_DIR}/system_stm32f4xx.c"
+    "${SYS_CORE_DIR_SRC}/system_stm32f4xx.c"
 
 )

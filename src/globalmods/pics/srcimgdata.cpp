@@ -64,8 +64,8 @@ verr VHTestImagesArray::unpack(uint16_t imageid, uint8_t * ptrdst, uint16_t dsts
     if(!(imageid >= GetFirstID() && imageid <= GetLastID()))
         return verror(1);
 
-    const uint8_t             * prle        = memblock_data(imageid);
-    const uint32_t              blocksz     = memblock_size(imageid);
+    uint8_t * prle = const_cast<uint8_t*>(memblock_data(imageid));
+    const uint32_t blocksz = memblock_size(imageid);
 
     verr retunpack = rle.unpack(prle, blocksz, ptrdst, dstszmax);
 
@@ -81,11 +81,11 @@ verr VHTestImagesArray::check_memblock(uint16_t blkid) {
     if(!(blkid >= GetFirstID() && blkid <= GetLastID()))
         return verror(1);
 
-    const uint8_t             * prle        = VHTestImagesArray::memblock_data(blkid);
-    const uint32_t              blocksz     = VHTestImagesArray::memblock_size(blkid);
-    const VHRLE7b::sthdr      * phdr        = (const VHRLE7b::sthdr *)prle;
+    uint8_t * prle = const_cast<uint8_t*>(memblock_data(blkid));
+    const uint32_t blocksz = memblock_size(blkid);
+    const VHRLE7b::sthdr * phdr = (const VHRLE7b::sthdr *)prle;
 
-    verr testrle = rle.check(prle, blocksz);
+    verr testrle = rle.checkRLE(prle, blocksz);
     const char * strstat = testrle ? "ERROR" : "OK";
 
     printf("memblock #%d:  %5d bytes  CRC=%4X / Unpacked  %5d bytes CRC=%4X  status=%s\n",

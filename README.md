@@ -1,10 +1,10 @@
-# vhliboptimal_test 0.0.7
+# vhliboptimal_test
 
+![Version](https://img.shields.io/badge/Version-0.0.8-orange.svg)
 ![Language](https://img.shields.io/badge/Language-C%2B%2B17-blue.svg)
 ![CMake](https://img.shields.io/badge/Build-CMake-1f4f9c.svg)
 ![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Cross--platform-lightgrey.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Version](https://img.shields.io/badge/Version-0.0.7-orange.svg)
 ![Author](https://img.shields.io/badge/Author-V01G04A81-brown.svg)
 
 ## Test suite for shape contour detection and image outline recognition
@@ -27,8 +27,11 @@ Full Source Code on GitHub: [https://github.com/vigatron/vhliboptimal_test](http
 | CMB32H750HDMIR1              | STM32H750        | Cortex-M7    | 480 MHz   |
 | ESP32-WROOM-32D              | ESP32-D0WD       | Xtensa LX6   | 240 MHz   |
 
-*Rev 0.0.7 Notes:*
+*Rev 0.0.8 Notes:*
+ `VHTimerStamp` integrated as submodule
 
+*Rev 0.0.7 Notes:*
+ `vhliboptimal` integrated as submodule
 
 Time-critical routines placed in `ITCMRAM` / `IRAM`
 
@@ -151,7 +154,7 @@ Time-critical routines placed in `ITCMRAM` / `IRAM`
 <br>
 
 
-## Benchmark Results
+## vhliboptimal Benchmark Results
 
 
 
@@ -195,10 +198,11 @@ Initial revision for `PC` and `SBC`
 * vhliboptimal 0.8.1  
 [https://github.com/vigatron/vhliboptimal](https://github.com/vigatron/vhliboptimal)  
 
-* vhlibrle7b  0.0.4
+* vhlibrle7b 0.1.0
 [https://github.com/vigatron/vhlibrle7b](https://github.com/vigatron/vhlibrle7b)  
 
-<br>
+* vhlibtimerstamp 0.0.2
+[https://github.com/vigatron/vhlibtimerstamp](https://github.com/vigatron/vhlibtimerstamp)  
 
 
 ### Build & Run

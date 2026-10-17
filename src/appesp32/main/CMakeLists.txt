@@ -2,7 +2,6 @@
 idf_component_register(
     SRCS 
         "mainesp32.cpp"
-        ${CMAKE_SOURCE_DIR}/../../src/globalmods/timer/vhtimerstamp.cpp
         ${CMAKE_SOURCE_DIR}/../../src/globalmods/pics/srcimgdata.cpp
         ${CMAKE_SOURCE_DIR}/../../src/globalmods/sysinfo/sysinfo.cpp
         ${CMAKE_SOURCE_DIR}/../../src/globalmods/testcontainer/testcontainer.cpp
@@ -14,6 +13,7 @@ idf_component_register(
 
         ${CMAKE_SOURCE_DIR}/../extmods/vhlibplatform/src
         ${CMAKE_SOURCE_DIR}/../extmods/vhlibrle7b/src
+        ${CMAKE_SOURCE_DIR}/../extmods/vhlibtimerstamp/src
         ${CMAKE_SOURCE_DIR}/../extmods/vhliboptimal/src
 
         ${CMAKE_SOURCE_DIR}/../globalmods
