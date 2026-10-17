@@ -46,3 +46,24 @@
 
 
 **Main SRAM:** 512 KBytes
+
+---
+
+### ESP32-D0WD Memory Map
+
+| Segment Name | Start Address | Size | Type / Notes |
+| :--- | :--- | :--- | :--- |
+| ROM | 0x40000000 | 448 KB | Bootloader and ROM functions (Read-only) |
+| DROM (Data Flash) | 0x3F400000 | up to 16 MB | External SPI Flash mapped as data (via MMU cache) |
+| IROM (Code Flash) | 0x400D0000 | up to 16 MB | External SPI Flash mapped as executable code (via MMU) |
+| DRAM (Data RAM) | 0x3FF00000 | 320 KB | Internal SRAM (Data bus, heap, `.data`, `.bss`) |
+| IRAM (Instruction RAM)| 0x40080000 | 200 KB | Internal SRAM (Instruction bus, ISRs, `IRAM_ATTR`) |
+| RTC FAST Memory | 0x3FF80000 / 0x400C0000| 8 KB | PRO CPU only, used for deep sleep wake-up code/data |
+| RTC SLOW Memory | 0x50000000 | 8 KB | ULP coprocessor access, data retention during deep sleep |
+| PSRAM (Optional) | 0x3F800000 | up to 8 MB | External SPI RAM (mapped via cache, module dependent, e.g., WROVER) |
+
+**Main SRAM:** 520 KBytes (320 KB DRAM + 200 KB IRAM)
+
+*Note:*  
+The `D0` index in ESP32-D0WD indicates no embedded flash.  
+Code and constants are executed directly from external SPI Flash (XIP) via the hardware MMU and cache.  
